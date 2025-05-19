@@ -1,0 +1,36 @@
+.UserAllData td {}
+
+.UserAllData td {
+    background-color: white;
+    border-bottom: 2px solid #22afa3;
+}
+
+.UserAllData td button {
+    color: white;
+    background-color: #22afa3;
+    width: 102px;
+    height: 30px;
+    margin-top: 8px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+.UserAllData td h3{
+
+    font-size: 14px;
+    font-weight: 600;
+    color: black;
+}
+
+.UserAllData .Role {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+
+
+
+
+

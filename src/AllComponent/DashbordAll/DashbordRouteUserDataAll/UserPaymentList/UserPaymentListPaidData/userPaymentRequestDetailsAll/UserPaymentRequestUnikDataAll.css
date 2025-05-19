@@ -1,0 +1,42 @@
+.AdminSeePaymentRequestDetailsAll .PaymentRequestDetailsUserInvoice .DownloadBtn h3 {
+    color: #8300ff;
+    font-size: 17px;
+    font-weight: 400;
+}
+
+.AdminSeePaymentRequestDetailsAll .PaymentRequestDetailsUserInvoice .DownloadBtn button {
+    background-color: #22afa3;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.AdminSeePaymentRequestDetailsAll .PaymentRequestDetailsUserInvoice .HeadInvoice .Invoice {
+    text-align: center;
+}
+
+.AdminSeePaymentRequestDetailsAll .PaymentRequestDetailsUserInvoice .HeadInvoice .Invoice h3 {
+    font-size: 24px;
+    font-weight: 500;
+    color: black;
+}
+
+.AdminSeePaymentRequestDetailsAll .PaymentRequestDetailsUserInvoice .HeadInvoice .Invoice h4 {
+    font-size: 14px;
+    padding-top: 4px;
+    font-weight: 400;
+    color: black;
+}
+
+
+
+.AdminSeePaymentRequestDetailsAll .PaymentRequestDetailsUserInvoice .AmountAndBankDetails .AmountDetails .Amount {
+    border: 1px solid #cec5c5;
+    padding: 12px 12px;
+}
+
+.AdminSeePaymentRequestDetailsAll .PaymentRequestDetailsUserInvoice .AmountAndBankDetails .BankDetails {
+
+}

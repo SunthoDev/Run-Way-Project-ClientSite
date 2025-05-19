@@ -1,0 +1,29 @@
+.show-Tab {
+    display: block;
+}
+
+.hidden-tab {
+    display: none;
+}
+
+/* ======================== */
+
+.UserPaymentList .PaymentRequest .DataList{
+    color: black;
+    font-size: 20px;
+    font-family: emoji;
+    border-bottom: 2px solid #22afa3;
+    border-radius: 18px;
+    text-align: center;
+    font-weight: 600;
+    margin-top: 24px;
+}
+.UserPaymentList .PaymentRequest .AllApprovedData {
+    background-color: #22afa3;
+    color: white;
+    padding: 8px 18px;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 8px;
+    margin-top: 3px;
+}

@@ -1,0 +1,63 @@
+
+.UserApprovedPendingConsignment .ApprovedPendingConsignment .ApprovedPendingData {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 18px;
+    border-radius: 8px;
+    margin-top: 30px;
+}
+.UserApprovedPendingConsignment .ApprovedPendingConsignment .ApprovedPendingData .One h3 {
+    font-size: 16px;
+    font-weight: 600;
+    padding-top: 3px;
+}
+.UserApprovedPendingConsignment .ApprovedPendingConsignment .ApprovedPendingData .Tow h3 {
+    font-size: 16px;
+    font-weight: 600;
+    padding-top: 3px;
+}
+.UserApprovedPendingConsignment .ApprovedPendingConsignment .ApprovedPendingData .Tow .NotAssigned {
+
+    background-color: #22afa3;
+    color: white;
+    padding: 3px 11px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 8px;
+    margin-top: 3px;
+}
+.UserApprovedPendingConsignment .ApprovedPendingConsignment .ApprovedPendingData .Three h3{
+    font-size: 16px;
+    font-weight: 600;
+    padding-top: 3px;
+}
+
+.UserApprovedPendingConsignment .ApprovedPendingConsignment .ApprovedPendingData .Three .Pending{
+    background-color: #22afa3;
+    color: white;
+    padding: 3px 11px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 8px;
+    margin-top: 3px;
+}
+
+.UserApprovedPendingConsignment .ApprovedPendingConsignment .ApprovedPendingData .Three .Unassigned{
+    background-color: #22afa3;
+    color: white;
+    padding: 3px 11px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 8px;
+    margin-top: 3px;
+}
+
+.UserApprovedPendingConsignment .ApprovedPendingConsignment .ApprovedPendingData .Three .Zero {
+    background-color: #22afa3;
+    color: white;
+    padding: 3px 19px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 8px;
+    margin-top: 3px;
+}
+

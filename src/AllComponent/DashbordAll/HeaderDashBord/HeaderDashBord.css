@@ -1,0 +1,32 @@
+.DashboardNavbar {
+     /* background: radial-gradient(circle, #006092, #3128aa); */
+    background-color: #F6F6F6;
+}
+
+.DashboardNavbar .ProfileIcon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    text-align: center;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    overflow: hidden;
+}
+
+.DashboardNavbar .unknownPaymentApproved {
+    background-color: #22afa3;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+
+.DashboardNavbar .ProfileIcon{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    text-align: center;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    overflow: hidden;
+}

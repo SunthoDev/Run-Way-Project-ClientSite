@@ -1,0 +1,94 @@
+
+.UserApprovedPickupRequest .ApprovedPickupRequest .ApprovedAllData {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 18px;
+    border-radius: 8px;
+    margin-top: 30px;
+    background-color: white;
+}
+.UserApprovedPickupRequest .ApprovedPickupRequest .ApprovedAllData .One .Approved{
+
+    background-color: #22afa3;
+    color: white;
+    padding: 3px 11px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 8px;
+    margin-top: 3px;
+}
+.UserApprovedPickupRequest .ApprovedPickupRequest .ApprovedAllData .One h3 {
+    font-size: 16px;
+    font-weight: 600;
+    padding-top: 3px;
+}
+.UserApprovedPickupRequest .ApprovedPickupRequest .ApprovedAllData .One .PaidNow{
+    background-color: #22afa3;
+    color: white;
+    padding: 3px 11px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 8px;
+    margin-top: 3px;
+}
+
+.UserApprovedPickupRequest .ApprovedPickupRequest .ApprovedAllData .Tow h3 {
+    font-size: 16px;
+    font-weight: 600;
+    padding-top: 3px;
+}
+.UserApprovedPickupRequest .ApprovedPickupRequest .ApprovedAllData .Tow .NotAssigned {
+
+    background-color: #22afa3;
+    color: white;
+    padding: 3px 11px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 8px;
+    margin-top: 3px;
+}
+.UserApprovedPickupRequest .ApprovedPickupRequest .ApprovedAllData .Three h3{
+    font-size: 16px;
+    font-weight: 600;
+    padding-top: 3px;
+}
+
+.UserApprovedPickupRequest .ApprovedPickupRequest .ApprovedAllData .Three .Pending{
+    background-color: #22afa3;
+    color: white;
+    padding: 3px 11px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 8px;
+    margin-top: 3px;
+}
+
+.UserApprovedPickupRequest .ApprovedPickupRequest .ApprovedAllData .Three .ParcelNumber{
+    background-color: #22afa3;
+    color: white;
+    padding: 2px 22px;
+    font-size: 18px;
+    font-weight: 400;
+    border-radius: 8px;
+    margin-left: 13px;
+}
+
+.UserApprovedPickupRequest .ApprovedPickupRequest .ApprovedAllData .Three .Unassigned{
+    background-color: #22afa3;
+    color: white;
+    padding: 3px 11px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 8px;
+    margin-top: 3px;
+}
+
+.UserApprovedPickupRequest .ApprovedPickupRequest .ApprovedAllData .Three .Zero {
+    background-color: #22afa3;
+    color: white;
+    padding: 3px 19px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 8px;
+    margin-top: 3px;
+}
+

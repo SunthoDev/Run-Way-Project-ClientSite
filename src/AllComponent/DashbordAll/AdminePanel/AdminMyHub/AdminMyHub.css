@@ -1,0 +1,10 @@
+.AdminViewPaymentRequestAll .UnPaid .TotalData , .AdminViewPaymentRequestAll .Paid .TotalData {
+    color: black;
+    font-size: 18px;
+    font-weight: 600;
+    border-bottom: 2px solid #22afa3;
+    width: 24%;
+    text-align: center;
+    border-radius: 14px;
+    padding: 8px 0;
+}

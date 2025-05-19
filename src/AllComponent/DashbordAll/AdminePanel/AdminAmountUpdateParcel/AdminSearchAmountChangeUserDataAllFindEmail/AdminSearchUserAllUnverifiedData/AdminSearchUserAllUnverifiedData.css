@@ -1,0 +1,92 @@
+
+.AdminSearchUserAllUnverifiedData .SearchUserAllUnverifiedData .UserAllUnverifiedData {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 18px;
+    border-radius: 8px;
+    margin-top: 30px;
+    background-color: white;
+}
+.AdminSearchUserAllUnverifiedData .SearchUserAllUnverifiedData .UserAllUnverifiedData .One .UserAllUnverifiedData{
+
+    background-color: #22afa3;
+    color: white;
+    padding: 3px 11px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 8px;
+    margin-top: 3px;
+}
+.AdminSearchUserAllUnverifiedData .SearchUserAllUnverifiedData .UserAllUnverifiedData .One .UnverifiedData{
+    background-color: #22afa3;
+    color: white;
+    padding: 3px 11px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 8px;
+    margin-top: 3px;
+}
+.AdminSearchUserAllUnverifiedData .SearchUserAllUnverifiedData .UserAllUnverifiedData .One .Verified {
+    background-color: #22afa3;
+    color: white;
+    padding: 3px 11px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 8px;
+    margin-top: 3px;
+}
+.AdminSearchUserAllUnverifiedData .SearchUserAllUnverifiedData .UserAllUnverifiedData .One h3 {
+    font-size: 16px;
+    font-weight: 600;
+    padding-top: 3px;
+}
+.AdminSearchUserAllUnverifiedData .SearchUserAllUnverifiedData .UserAllUnverifiedData .Tow h3 {
+    font-size: 16px;
+    font-weight: 600;
+    padding-top: 3px;
+}
+.AdminSearchUserAllUnverifiedData .SearchUserAllUnverifiedData .UserAllUnverifiedData .Tow .NotAssigned {
+
+    background-color: #22afa3;
+    color: white;
+    padding: 3px 11px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 8px;
+    margin-top: 3px;
+}
+.AdminSearchUserAllUnverifiedData .SearchUserAllUnverifiedData .UserAllUnverifiedData .Three h3{
+    font-size: 16px;
+    font-weight: 600;
+    padding-top: 3px;
+}
+
+.AdminSearchUserAllUnverifiedData .SearchUserAllUnverifiedData .UserAllUnverifiedData .Three .Pending{
+    background-color: #22afa3;
+    color: white;
+    padding: 3px 11px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 8px;
+    margin-top: 3px;
+}
+
+.AdminSearchUserAllUnverifiedData .SearchUserAllUnverifiedData .UserAllUnverifiedData .Three .Unassigned{
+    background-color: #22afa3;
+    color: white;
+    padding: 3px 11px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 8px;
+    margin-top: 3px;
+}
+
+.AdminSearchUserAllUnverifiedData .SearchUserAllUnverifiedData .UserAllUnverifiedData .Three .Zero {
+    background-color: #22afa3;
+    color: white;
+    padding: 3px 19px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 8px;
+    margin-top: 3px;
+}
+

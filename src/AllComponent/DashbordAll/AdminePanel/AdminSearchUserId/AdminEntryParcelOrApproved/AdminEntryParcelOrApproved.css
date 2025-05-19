@@ -1,0 +1,14 @@
+input {
+    border: 1px solid #cac8c8;
+    padding: 6px 0;
+    border-radius: 6px;
+}
+
+
+.AdminEntryParcelOrApproved .AdminEntryParcel .ApprovedData table .TableHead tr th {
+    color: black;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: sans-serif;
+}
+

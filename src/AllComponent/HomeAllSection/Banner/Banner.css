@@ -1,0 +1,21 @@
+
+.banner {
+    /* background-image: url(/src/assets/BannerImage/banner.png); */
+    background-color: #38B6FF;
+    /* background-size: cover;
+    background-repeat: no-repeat; */
+    /* background-color: #fff; */
+}
+
+
+.banner .trackLocations {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 28px 48px;
+    transform: translateY(50%);
+}
+.banner .trackLocations input {
+    border: 1px solid #38B6FF;
+    padding: 8px 22px;
+    font-weight: 600;
+    font-size: 15px;
+}

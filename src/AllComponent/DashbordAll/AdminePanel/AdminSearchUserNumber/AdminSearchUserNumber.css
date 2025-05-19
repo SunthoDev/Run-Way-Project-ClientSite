@@ -1,0 +1,25 @@
+.AdminSearchUserNumber .UserIdParent .left .img {
+    width: 100px;
+    height: 108px;
+    border-radius: 50%;
+    text-align: center;
+    margin: 1px auto;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    overflow: hidden;
+}
+
+.AdminSearchUserNumber .UserIdParent .right .CurrentBalance {
+    border-radius: 8px;
+    padding: 18px 22px;
+}
+
+
+.AdminSearchUserNumber .UserIdParent .right .CurrentBalance button {
+    color: white;
+    background-color: #956837;
+    padding: 4px 5px;
+    border-radius: 4px;
+    text-align: center;
+    margin-top: 12px;
+    font-weight: 500;
+}

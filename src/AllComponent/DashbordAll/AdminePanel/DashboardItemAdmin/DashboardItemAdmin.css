@@ -1,0 +1,60 @@
+.DashboardItemAdmin input {
+    padding: 12px 14px;
+    font-weight: 500;
+    font-size: 16px;
+    color: black;
+    border: 1px solid #bab6b6; 
+}
+.DashboardItemAdmin .Consignment input {
+    padding: 10px 14px;
+    font-weight: 500;
+    font-size: 16px;
+    color: black;
+    border: 1px solid #bab6b6;
+    border-radius: 5px 0px 0px 5px;
+}
+
+.DashboardItemAdmin select {
+    border: 1px solid #bab6b6;
+    border-radius: 0px 5px 5px 0px;
+    padding: 12px 14px;
+}
+
+
+
+
+
+
+
+
+
+
+.TrackingAllData {
+    
+}
+
+
+
+.TrackingAllData form textarea {
+    resize: none;
+    width: 100%;
+    height: 74px;
+    border: 1px solid #22afa3;
+    border-radius: 8px;
+    margin-top: 18px;
+    font-size: 14px;
+    font-weight: 600;
+    color: black;
+    padding: 8px 22px;
+}
+.TrackingAllData form button {
+    margin-top: 18px;
+    height: 44px;
+    border-radius: 8px;
+    background-color: #22afa3;
+    width: 100%;
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+    font-family: ui-sans-serif;
+}

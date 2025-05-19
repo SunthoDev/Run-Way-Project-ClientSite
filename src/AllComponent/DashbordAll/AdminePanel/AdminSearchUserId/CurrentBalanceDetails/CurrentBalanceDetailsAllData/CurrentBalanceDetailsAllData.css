@@ -1,0 +1,15 @@
+.CurrentBalanceDetailsAllData {
+    border: 1px solid #e0d5d5;
+}
+.CurrentBalanceDetailsAllData th h4 {
+    color: black;
+    font-size: 13px;
+    font-weight: 700;
+}
+.CurrentBalanceDetailsAllData th .status {
+    background-color: #22afa3;
+    color: white;
+    padding: 5px 6px;
+    border-radius: 6px;
+    text-align: center;
+}

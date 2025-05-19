@@ -1,0 +1,83 @@
+.menuParent .NameInformation img {
+    width: 80px;
+    height: 82px;
+    border-radius: 50%;
+    text-align: center;
+    margin: 1px auto;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    overflow: hidden;
+}
+.menuParent .Information h2{
+    font-family: Manrope, -apple-system, "Helvetica Neue", Arial, "Segoe UI", sans-serif;
+}
+
+/* ================================================= */
+/* Route active work Start */
+/* ================================================= */
+.RouteAllParent a .active {
+    /* color: #21147A; */
+}
+
+.menu li>*:not(ul):not(.menu-title):not(details):active,
+.menu li>*:not(ul):not(.menu-title):not(details).active,
+.menu li>details>summary:active {
+    color: rgb(11, 130, 227);
+    background-color: rgb(244, 249, 255);
+}
+/* ================================================= */
+/* Route active work End */
+/* ================================================= */
+
+
+/* ================================================= */
+/* Route hover and design work start */
+/* ================================================= */
+.RouteAllParent li {
+    font-family: Manrope, -apple-system, "Helvetica Neue", Arial, "Segoe UI", sans-serif;
+    font-size: 14px;
+    margin-top: 6px;
+    font-weight: 400;
+    color: rgb(35, 40, 54);
+}
+.RouteAllParent li span {
+    color: black;
+    font-size: 14px;
+    margin-right: 6px;
+}
+.RouteAllParent a {
+    transition: .4s;
+    background-color: transparent;
+    border: none;
+}
+.RouteAllParent a:hover {
+    background-color: rgb(244, 249, 255);
+    color: rgb(35, 40, 54);
+    border: none;
+}
+/* ================================================= */
+/* Route hover and design work end */
+/* ================================================= */
+
+
+/* ===================================== */
+/* Another Work start */
+/* ===================================== */
+
+.menuParent {
+    background-color: #FFFFFF;
+    overflow: overlay;
+}
+.menuParent:-webkit-scrollbar {
+    display: none;
+}
+.menuParent .Dashboard {
+    background-color: rgb(244, 249, 255);
+    color: rgb(11, 130, 227);
+    border-radius: 8px;
+    padding: 4px 0px;
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    margin-bottom: 20px;
+}
+
+

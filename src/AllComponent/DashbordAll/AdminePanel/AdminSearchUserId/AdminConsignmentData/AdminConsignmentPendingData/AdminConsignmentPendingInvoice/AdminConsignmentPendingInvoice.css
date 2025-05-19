@@ -1,0 +1,34 @@
+.AdminSearchStandardParcelUser .PrintAll {
+    background-color: white;
+    /* width: 48%; */
+    width: 300px;
+    margin: 20px auto;
+    padding: 24px 38px;
+    border-radius: 7px;
+    display: none;
+}
+
+
+/* .AdminSearchStandardParcelUser .PrintAll .Prints .barcode svg{} */
+
+
+
+.AdminSearchStandardParcelUser .PrintAll .Prints .Hub {
+    border: 1px solid black;
+    padding: 8px 0px;
+    border-radius: 8px;
+    margin-top: 5px;
+    color: black;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.AdminSearchStandardParcelUser .PrintAll .Prints .Cod {
+    border: 1px solid black;
+    padding: 8px 108px;
+    border-radius: 8px;
+    margin-top: 5px;
+    color: black;
+    font-size: 18px;
+    font-weight: 600;
+}

@@ -1,0 +1,83 @@
+
+.UserAmountUpdateVerifiedData .AmountUpdateVerifiedData .UpdateVerifiedData {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 18px;
+    border-radius: 8px;
+    margin-top: 30px;
+    background-color: white;
+}
+.UserAmountUpdateVerifiedData .AmountUpdateVerifiedData .UpdateVerifiedData .One .UpdateVerifiedData{
+
+    background-color: #22afa3;
+    color: white;
+    padding: 3px 11px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 8px;
+    margin-top: 3px;
+}
+.UserAmountUpdateVerifiedData .AmountUpdateVerifiedData .UpdateVerifiedData .One .Verified {
+    background-color: #22afa3;
+    color: white;
+    padding: 3px 11px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 8px;
+    margin-top: 3px;
+}
+.UserAmountUpdateVerifiedData .AmountUpdateVerifiedData .UpdateVerifiedData .One h3 {
+    font-size: 16px;
+    font-weight: 600;
+    padding-top: 3px;
+}
+.UserAmountUpdateVerifiedData .AmountUpdateVerifiedData .UpdateVerifiedData .Tow h3 {
+    font-size: 16px;
+    font-weight: 600;
+    padding-top: 3px;
+}
+.UserAmountUpdateVerifiedData .AmountUpdateVerifiedData .UpdateVerifiedData .Tow .NotAssigned {
+
+    background-color: #22afa3;
+    color: white;
+    padding: 3px 11px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 8px;
+    margin-top: 3px;
+}
+.UserAmountUpdateVerifiedData .AmountUpdateVerifiedData .UpdateVerifiedData .Three h3{
+    font-size: 16px;
+    font-weight: 600;
+    padding-top: 3px;
+}
+
+.UserAmountUpdateVerifiedData .AmountUpdateVerifiedData .UpdateVerifiedData .Three .Pending{
+    background-color: #22afa3;
+    color: white;
+    padding: 3px 11px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 8px;
+    margin-top: 3px;
+}
+
+.UserAmountUpdateVerifiedData .AmountUpdateVerifiedData .UpdateVerifiedData .Three .Unassigned{
+    background-color: #22afa3;
+    color: white;
+    padding: 3px 11px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 8px;
+    margin-top: 3px;
+}
+
+.UserAmountUpdateVerifiedData .AmountUpdateVerifiedData .UpdateVerifiedData .Three .Zero {
+    background-color: #22afa3;
+    color: white;
+    padding: 3px 19px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 8px;
+    margin-top: 3px;
+}
+

@@ -1,0 +1,132 @@
+.AdminCoveragesDistricts {
+    border: 1px solid rgba(0, 0, 0, .125);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.AdminCoveragesDistricts h2 {
+    border-bottom: 1px solid #c0b5b5;
+    padding: 16px 20px;
+    background-color: #f6f6f6;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.AdminCoveragesDistricts .CoveragesDistricts .TableData .AddButton {
+    padding: 6px 0px;
+    text-align: center;
+    background-color: #22afa3;
+    color: white;
+    border-radius: 6px;
+    padding: 4px 0;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.AdminCoveragesDistricts .CoveragesDistricts .TableData td h4 {
+
+        font-size: 14px;
+        font-weight: 600;
+        color: black;
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.alertContainer {
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.1);
+    text-align: center;
+    visibility: hidden;
+    transition: transform 0.4s, top 0.4s;
+}
+
+.showAlertJs {
+    top: 50%;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 999;
+}
+
+.alertContainer .poup {
+    background-color: #F5F5F5;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    width: 100%;
+    position: relative;
+}
+
+
+.alertContainer .poup .popInfo  h6 {
+    color: #22afa3;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+}
+
+
+
+.alertContainer .poup .popInfo  .UpdateButton {
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    border: 1px solid #22afa3;
+    padding: 5px 16px;
+    border-radius: 8px;
+    transition: .4s;
+    background-color: #22afa3;
+    width: 100%;
+    text-align: center;
+    margin-top: 14px;
+}
+
+
+.removeAlertBtn {
+    border: 2px solid white;
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    border-radius: 50%;
+    line-height: 17px;
+    font-size: 28px;
+}
+

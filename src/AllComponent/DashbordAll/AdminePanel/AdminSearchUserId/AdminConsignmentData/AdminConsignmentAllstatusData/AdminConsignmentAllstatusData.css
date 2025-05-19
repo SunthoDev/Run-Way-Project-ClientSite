@@ -1,0 +1,63 @@
+
+.AdminConsignmentAllstatusData .ConsignmentAllstatusData .AllData {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 18px;
+    border-radius: 8px;
+    margin-top: 30px;
+}
+.AdminConsignmentAllstatusData .ConsignmentAllstatusData .AllData .One h3 {
+    font-size: 16px;
+    font-weight: 600;
+    padding-top: 3px;
+}
+.AdminConsignmentAllstatusData .ConsignmentAllstatusData .AllData .Tow h3 {
+    font-size: 16px;
+    font-weight: 600;
+    padding-top: 3px;
+}
+.AdminConsignmentAllstatusData .ConsignmentAllstatusData .AllData .Tow .NotAssigned {
+
+    background-color: #22afa3;
+    color: white;
+    padding: 3px 11px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 8px;
+    margin-top: 3px;
+}
+.AdminConsignmentAllstatusData .ConsignmentAllstatusData .AllData .Three h3{
+    font-size: 16px;
+    font-weight: 600;
+    padding-top: 3px;
+}
+
+.AdminConsignmentAllstatusData .ConsignmentAllstatusData .AllData .Three .Pending{
+    background-color: #22afa3;
+    color: white;
+    padding: 3px 11px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 8px;
+    margin-top: 3px;
+}
+
+.AdminConsignmentAllstatusData .ConsignmentAllstatusData .AllData .Three .Unassigned{
+    background-color: #22afa3;
+    color: white;
+    padding: 3px 11px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 8px;
+    margin-top: 3px;
+}
+
+.AdminConsignmentAllstatusData .ConsignmentAllstatusData .AllData .Three .Zero {
+    background-color: #22afa3;
+    color: white;
+    padding: 3px 19px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 8px;
+    margin-top: 3px;
+}
+

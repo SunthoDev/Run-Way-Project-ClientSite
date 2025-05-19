@@ -1,0 +1,67 @@
+
+.SingUpParent {
+
+}
+.SingUpParent .SingUp {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.SingUpParent .SingUp .MaineCard{
+
+}
+.SingUpParent .SingUp .MaineCard .Left {
+    /* background-image: url(/src/assets/SingUp/Banner.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: -128px center; */
+    background-color: white;
+}
+.SingUpParent .SingUp .MaineCard .Left .img {
+    width: 100%;
+    /* padding: 0px 84px; */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.SingUpParent .SingUp .MaineCard .Right{
+
+}
+.SingUpParent .SingUp .MaineCard .Right .FromData {
+
+}
+.SingUpParent .SingUp .MaineCard .Right .FromData input {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.SingUpParent .SingUp .MaineCard .Right .FromData select {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+
+.SingUpParent .SingUp .MaineCard .Right .FromData .Register {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    font-family: sans-serif;
+}
+
+.SingUpParent .BackHome {
+    position: absolute;
+    color: black; 
+    width: 82px;
+    height: 35px;
+    -webkit-clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 25% 100%, 0% 50%);
+    clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 25% 100%, 0% 50%);
+    background-color: #22afa3;
+    text-align: center;
+    line-height: 32px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    z-index: 999;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+
+
+
+
+

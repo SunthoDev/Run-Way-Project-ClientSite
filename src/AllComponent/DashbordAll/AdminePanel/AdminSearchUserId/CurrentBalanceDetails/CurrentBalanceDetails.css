@@ -1,0 +1,35 @@
+.AllCurrentBalanceDetails .CurrentBalanceDetails h3 {
+    color: #22afa3;
+    font-size: 21px;
+    font-weight: 600;
+    font-family: auto;
+    padding-bottom: 8px;
+}
+
+.AllCurrentBalanceDetails .CurrentBalanceDetails .BalanceItems {
+    background-color: #f6f6f6;
+    padding: 10px 14px;
+    border-radius: 4px;
+    margin-top: 14px;
+}
+
+.AllCurrentBalanceDetails .CurrentBalanceDetails .ThisAllPaymentData {
+    margin-top: 54px;
+}
+
+.AllCurrentBalanceDetails .CurrentBalanceDetails .ThisAllPaymentData h3 {
+    color: black;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.AllCurrentBalanceDetails .CurrentBalanceDetails .ThisAllPaymentData .table thead {
+    border: 1px solid #e2dede;
+}
+
+.AllCurrentBalanceDetails .CurrentBalanceDetails .ThisAllPaymentData .table thead tr th {
+    color: #22afa3;
+    font-size: 14px;
+    font-weight: 700;
+}

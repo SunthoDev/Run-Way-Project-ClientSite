@@ -1,0 +1,63 @@
+
+.AdminConsignmentPartiallyDeliveredData .ConsignmentPartiallyDeliveredData .PartiallyDeliveredData {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 18px;
+    border-radius: 8px;
+    margin-top: 30px;
+}
+.AdminConsignmentPartiallyDeliveredData .ConsignmentPartiallyDeliveredData .PartiallyDeliveredData .One h3 {
+    font-size: 16px;
+    font-weight: 600;
+    padding-top: 3px;
+}
+.AdminConsignmentPartiallyDeliveredData .ConsignmentPartiallyDeliveredData .PartiallyDeliveredData .Tow h3 {
+    font-size: 16px;
+    font-weight: 600;
+    padding-top: 3px;
+}
+.AdminConsignmentPartiallyDeliveredData .ConsignmentPartiallyDeliveredData .PartiallyDeliveredData .Tow .NotAssigned {
+
+    background-color: #22afa3;
+    color: white;
+    padding: 3px 11px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 8px;
+    margin-top: 3px;
+}
+.AdminConsignmentPartiallyDeliveredData .ConsignmentPartiallyDeliveredData .PartiallyDeliveredData .Three h3{
+    font-size: 16px;
+    font-weight: 600;
+    padding-top: 3px;
+}
+
+.AdminConsignmentPartiallyDeliveredData .ConsignmentPartiallyDeliveredData .PartiallyDeliveredData .Three .Pending{
+    background-color: #22afa3;
+    color: white;
+    padding: 3px 11px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 8px;
+    margin-top: 3px;
+}
+
+.AdminConsignmentPartiallyDeliveredData .ConsignmentPartiallyDeliveredData .PartiallyDeliveredData .Three .Unassigned{
+    background-color: #22afa3;
+    color: white;
+    padding: 3px 11px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 8px;
+    margin-top: 3px;
+}
+
+.AdminConsignmentPartiallyDeliveredData .ConsignmentPartiallyDeliveredData .PartiallyDeliveredData .Three .Zero {
+    background-color: #22afa3;
+    color: white;
+    padding: 3px 19px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 8px;
+    margin-top: 3px;
+}
+

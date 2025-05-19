@@ -1,0 +1,75 @@
+
+.navParent {
+    background-color: white;
+    /* box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px; */
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+}
+
+.navbar .NaveMenu a {
+    color: #343a40;
+    margin: 8px 11px;
+    text-transform: capitalize;
+    font-weight: 600;
+    font-size: 17px;
+    transition: .1s;
+}
+
+.navbar .NaveMenu a:hover{
+    color: #38B6FF;
+}
+
+.navbar .NaveMenu .singUP {
+    border: 1px solid #38B6FF;
+    border-radius: 4px;
+    width: 106px;
+    text-align: center;
+    background-color: #38B6FF;
+    transition: .2s;
+}
+.navbar .NaveMenu .singUP a{
+    color: white;
+}
+.navbar .NaveMenu .singUP:hover a{
+    color: black;
+}
+.navbar .NaveMenu .singUP:hover {
+    background-color: transparent;
+    border: 1px solid #38B6FF;
+}
+
+.navbar .NaveMenu .LogIn {
+    border: 1px solid #38B6FF;
+    border-radius: 4px;
+    width: 106px;
+    text-align: center;
+    margin-right: 22px;
+    transition: .2s;
+}
+.navbar .NaveMenu .LogIn:hover{
+    background-color: #38B6FF;
+    border: 1px solid #38B6FF;
+}
+.navbar .NaveMenu .LogIn:hover a{
+    color: white;
+}
+.navbar .NaveMenu .Dashboard {
+    border: 1px solid #38B6FF;
+    border-radius: 4px;
+    width: 128px;
+    text-align: center;
+    background-color: #38B6FF;
+    transition: .2s;
+}
+.navbar .NaveMenu .Dashboard a{
+    color: white;
+}
+
+.navbar .NaveMenu .Dashboard:hover a{
+    color: black;
+}
+.navbar .NaveMenu .Dashboard:hover{
+    background-color: transparent;
+    border: 1px solid #38B6FF;
+}
+
+

@@ -1,0 +1,64 @@
+.AdminPendingDataShow .PendingData {
+    margin-top: 28px;
+    padding: 14px;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+.AdminPendingDataShow .PendingData  .one h3 , .AdminPendingDataShow .PendingData .Tow h3{
+    color: black;
+    font-size: 16px;
+    font-weight: 600;
+    padding-top: 6px;
+}
+.AdminPendingDataShow .PendingData .Right textarea {
+    resize: none;
+    border: 1px solid #22afa3;
+    border-radius: 6px;
+    margin-top: 10px;
+    padding: 10px 18px;
+    font-weight: 500;
+    font-size: 14px;
+    height: 48px;
+}
+.AdminPendingDataShow .PendingData .Right input {
+    border: 1px solid #22afa3;
+    border-radius: 6px;
+    margin-top: 10px;
+    padding: 10px 18px;
+    font-weight: 500;
+    font-size: 14px;
+}
+.AdminPendingDataShow .PendingData .Right select {
+    border: 1px solid #22afa3;
+    border-radius: 6px;
+    margin-top: 10px;
+    padding: 10px 18px;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.AdminPendingDataShow .PendingData .Right .Weight{
+    border: 1px solid #22afa3;
+    border-radius: 6px;
+    margin-top: 10px;
+    padding: 10px 18px;
+    font-weight: 500;
+    font-size: 14px;
+}
+.AdminPendingDataShow .PendingData .Right .Update {
+    border: 1px solid #22afa3;
+    border-radius: 6px;
+    margin-top: 10px;
+    padding: 10px 18px;
+    font-weight: 500;
+    font-size: 14px;
+    width: 100%;
+    transition: .4s;
+}
+.AdminPendingDataShow .PendingData .Right .Update:hover {
+    border: 1px solid #22afa3;
+    background-color: #22afa3;
+    color: white;
+}
+
+

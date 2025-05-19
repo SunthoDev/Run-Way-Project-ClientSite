@@ -1,0 +1,45 @@
+import React from 'react';
+import "./UserPaymentListPaidData.css"
+import { Link } from 'react-router-dom';
+
+const UserPaymentListPaidData = ({PaidPaymentData}) => {
+    // console.log(PaidPaymentData)
+    let { _id, ReqPaymentID, ReqPay, TotalCodAmount, TotalDeliveryCharge, subTotal, subTotalOnePercentCharge, totalBalanceUser, name, LastName, photo, userId, Address, BusinessName, Phone, ReqUserEmail, userStatus, UserPaymentReqDate, Payment } = PaidPaymentData
+
+    
+    return (
+        <div className='UserPaymentListPaidData'>
+
+            <div className='PaymentListPaidData'>
+
+                <div className="UnPaidAllData grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+
+                    <div className="One">
+                        <h3>ID: #{ReqPaymentID}</h3>
+                        <h3>Amount: {totalBalanceUser}</h3>
+                        {/* <button onClick={() => handlePaymentRequestPaid(_id)} className='PaidNow'>Paid Now</button> */}
+
+                    </div>
+
+                    <div className="Tow">
+                        <h3>{name} {LastName}</h3>
+                        <h3>{Address}</h3>
+                        <h3>{UserPaymentReqDate}</h3>
+                    </div>
+
+                    <div className="Three">
+                        <h3>{Phone}</h3>
+                        <h3>{ReqUserEmail}</h3>
+                        <button className='Pending'>{Payment}</button>
+                        <button className='Pending ml-3'>{ReqPay}</button>
+                        <Link to={`/dashboard/UserPaymentRequestDetailsAll/${_id}`} className='ViewButton'>View</Link>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    );
+};
+
+export default UserPaymentListPaidData;

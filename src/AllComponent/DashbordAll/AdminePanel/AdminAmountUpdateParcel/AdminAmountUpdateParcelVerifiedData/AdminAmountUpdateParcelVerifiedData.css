@@ -1,0 +1,19 @@
+
+.VerifiedData{
+    border: 1px solid red;
+}
+.VerifiedData h3 {
+    color: black;
+    font-size: 17px;
+    font-weight: 600;
+    font-family: fangsong;
+}
+.VerifiedData .View{
+    background-color: #22afa3;
+    color: white;
+    padding: 3px 11px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 8px;
+    margin-top: 3px;
+}

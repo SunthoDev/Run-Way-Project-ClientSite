@@ -1,0 +1,22 @@
+.UserSeePaymentRequestAllPaymentDataShow .PaymentRequestAllPaymentDataShow {
+    border: 1px solid #c6bbbb;
+    margin-top: 20px;
+    padding: 6px;
+}
+.UserSeePaymentRequestAllPaymentDataShow .PaymentRequestAllPaymentDataShow h3 {
+    color: black;
+    font-size: 16px;
+    font-weight: 600;
+}
+.UserSeePaymentRequestAllPaymentDataShow .PaymentRequestAllPaymentDataShow button {
+    background-color: #22afa3;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 12px;
+}
+
+
+
+
+
