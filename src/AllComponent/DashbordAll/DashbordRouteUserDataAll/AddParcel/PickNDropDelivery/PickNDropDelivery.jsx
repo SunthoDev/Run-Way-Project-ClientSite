@@ -243,7 +243,7 @@ const PickNDropDelivery = () => {
                                         }
                                     </select>
                                 </div>
-                                <p className='text-green-600 py-[6px]'>Disable District Field</p>
+                                {/* <p className='text-green-600 py-[6px]'>Disable District Field</p> */}
                                 <div className="grid grid-cols-6 gap-2  items-center">
                                     <h4 className='col-span-2 text-[16px] font-[500] '>Alternative <br /> Phone</h4>
                                     <input className='col-span-4  w-[100%]' type="text" name='AlternativePhone' />

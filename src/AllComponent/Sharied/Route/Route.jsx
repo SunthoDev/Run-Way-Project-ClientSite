@@ -42,6 +42,8 @@ import UserAdmin from "../../DashbordAll/Dashbord/UserAdmin/UserAdmin";
 import UserPaymentRequestUnikDataAll from "../../DashbordAll/DashbordRouteUserDataAll/UserPaymentList/UserPaymentListPaidData/userPaymentRequestDetailsAll/UserPaymentRequestUnikDataAll";
 import PickNDropDelivery from "../../DashbordAll/DashbordRouteUserDataAll/AddParcel/PickNDropDelivery/PickNDropDelivery";
 import ExpressDelivery from "../../DashbordAll/DashbordRouteUserDataAll/AddParcel/ExpressDelivery/ExpressDelivery";
+import API from "../../DashbordAll/DashbordRouteUserDataAll/API/API";
+import PaymentRequest from "../../DashbordAll/DashbordRouteUserDataAll/PaymentRequest/PaymentRequest";
 
 
 let route = createBrowserRouter([
@@ -64,7 +66,8 @@ let route = createBrowserRouter([
       ]
    },
 
-   // DashBord Side admine panel 
+   // Dashboard User Panel
+   // ===============================
 
    {
       path: "dashboard",
@@ -146,6 +149,14 @@ let route = createBrowserRouter([
             element: <UserMyPickupParcel></UserMyPickupParcel>
          },
          {
+            path: "API",
+            element: <API></API>
+         },
+         {
+            path: "PaymentRequest",
+            element: <PaymentRequest></PaymentRequest>
+         },
+         {
             path: "UserTemporeryInvoiceAllStandardData/:id",
             element: <UserTemporeryInvoiceAllStandardData></UserTemporeryInvoiceAllStandardData>,
             loader: ({ params }) => fetch(`http://localhost:5000/StandardDeliveryDataTemporory?StandardParcelId=${params.id}`)
@@ -160,9 +171,9 @@ let route = createBrowserRouter([
 
 
 
-         // ======================================
+         // =============================================================================
          // admin route  
-         // ======================================
+         // =============================================================================
          // http://localhost:5000/
          // http://localhost:5000/
 

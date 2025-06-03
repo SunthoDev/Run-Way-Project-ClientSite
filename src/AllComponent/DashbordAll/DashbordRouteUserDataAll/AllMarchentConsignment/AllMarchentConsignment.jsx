@@ -90,51 +90,193 @@ const AllMarchentConsignment = () => {
 
                         <TabPanel>
                             <div className="AllDataConsignment">
-                                {
-                                    ConsignmentAllData.map(ConsignmentAll => <UserAllStatusConsignmentData key={ConsignmentAll._id} ConsignmentAll={ConsignmentAll}></UserAllStatusConsignmentData>)
-                                }
+
+                                <div className="overflow-x-auto p-4">
+                                    <table className="table table-zebra w-full rounded-xl shadow-md">
+                                        <thead className="bg-base-200 text-base-content">
+                                            <tr>
+                                                <th>Merchant Name</th>
+                                                <th>Parcel ID</th>
+                                                <th>Amount</th>
+                                                <th>Delivery Charge</th>
+                                                <th>Request Date</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            {
+                                                ConsignmentAllData.map(ConsignmentAll => <UserAllStatusConsignmentData key={ConsignmentAll._id} ConsignmentAll={ConsignmentAll}></UserAllStatusConsignmentData>)
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
                             </div>
                         </TabPanel>
                         <TabPanel>
-                            <div className="PendingConsignment">
-                                {
-                                    PendingData.map(ConsignmentPending => <UserApprovedConsignment key={ConsignmentPending._id} ConsignmentPending={ConsignmentPending}></UserApprovedConsignment>)
-                                }
+                            <div className="AllDataConsignment">
+
+                                <div className="overflow-x-auto p-4">
+                                    <table className="table table-zebra w-full rounded-xl shadow-md">
+                                        <thead className="bg-base-200 text-base-content">
+                                            <tr>
+                                                <th>Merchant Name</th>
+                                                <th>Parcel ID</th>
+                                                <th>Amount</th>
+                                                <th>Delivery Charge</th>
+                                                <th>Request Date</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            {
+                                                PendingData.map(ConsignmentPending => <UserApprovedConsignment key={ConsignmentPending._id} ConsignmentPending={ConsignmentPending}></UserApprovedConsignment>)
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
                             </div>
                         </TabPanel>
                         <TabPanel>
-                            <div className="ApprovedPendingData">
-                                {
-                                    ApprovedPendingData.map(ApprovedPending => <UserApprovedPendingConsignment key={ApprovedPending._id} ApprovedPending={ApprovedPending}></UserApprovedPendingConsignment>)
-                                }
+                            <div className="AllDataConsignment">
+
+                                <div className="overflow-x-auto p-4">
+                                    <table className="table table-zebra w-full rounded-xl shadow-md">
+                                        <thead className="bg-base-200 text-base-content">
+                                            <tr>
+                                                <th>Merchant Name</th>
+                                                <th>Parcel ID</th>
+                                                <th>Amount</th>
+                                                <th>Delivery Charge</th>
+                                                <th>Request Date</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            {
+                                                ApprovedPendingData.map(ApprovedPending => <UserApprovedPendingConsignment key={ApprovedPending._id} ApprovedPending={ApprovedPending}></UserApprovedPendingConsignment>)
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+
                             </div>
                         </TabPanel>
                         <TabPanel>
-                            <div className="UserDeliveredData">
-                                {
-                                    DeliveredData.map(DeliveredData => <UserDelivereConsignment key={DeliveredData._id} DeliveredData={DeliveredData}></UserDelivereConsignment>)
-                                }
+                            <div className="AllDataConsignment">
+                                <div className="overflow-x-auto p-4">
+                                    <table className="table table-zebra w-full rounded-xl shadow-md">
+                                        <thead className="bg-base-200 text-base-content">
+                                            <tr>
+                                                <th>Merchant Name</th>
+                                                <th>Parcel ID</th>
+                                                <th>Amount</th>
+                                                <th>Delivery Charge</th>
+                                                <th>Request Date</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            {
+                                                DeliveredData.map(DeliveredData => <UserDelivereConsignment key={DeliveredData._id} DeliveredData={DeliveredData}></UserDelivereConsignment>)
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
                             </div>
                         </TabPanel>
                         <TabPanel>
-                            <div className="UserPartiallyDelivered">
-                                {
-                                    PartiallyDelivered.map(PartiallyDeliveredData => <UserPartiallyDeliveredConsignment key={PartiallyDeliveredData._id} PartiallyDeliveredData={PartiallyDeliveredData}></UserPartiallyDeliveredConsignment>)
-                                }
+                            <div className="AllDataConsignment">
+                                <div className="overflow-x-auto p-4">
+                                    <table className="table table-zebra w-full rounded-xl shadow-md">
+                                        <thead className="bg-base-200 text-base-content">
+                                            <tr>
+                                                <th>Merchant Name</th>
+                                                <th>Parcel ID</th>
+                                                <th>Amount</th>
+                                                <th>Delivery Charge</th>
+                                                <th>Request Date</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            {
+                                                PartiallyDelivered.map(PartiallyDeliveredData => <UserPartiallyDeliveredConsignment key={PartiallyDeliveredData._id} PartiallyDeliveredData={PartiallyDeliveredData}></UserPartiallyDeliveredConsignment>)
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
                             </div>
                         </TabPanel>
                         <TabPanel>
-                            <div className="UserCancelDelivered">
-                                {
-                                    CancelData.map(CancelDelivered => <UserReturnedConsignment key={CancelDelivered._id} CancelDelivered={CancelDelivered}></UserReturnedConsignment>)
-                                }
+                            <div className="AllDataConsignment">
+                                <div className="overflow-x-auto p-4">
+                                    <table className="table table-zebra w-full rounded-xl shadow-md">
+                                        <thead className="bg-base-200 text-base-content">
+                                            <tr>
+                                                <th>Merchant Name</th>
+                                                <th>Parcel ID</th>
+                                                <th>Amount</th>
+                                                <th>Delivery Charge</th>
+                                                <th>Request Date</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            {
+                                                CancelData.map(CancelDelivered => <UserReturnedConsignment key={CancelDelivered._id} CancelDelivered={CancelDelivered}></UserReturnedConsignment>)
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
                             </div>
                         </TabPanel>
                         <TabPanel>
-                            <div className="UserReviewUserData">
-                                {
-                                    ReviewData.map(ReviewUserData => <UserPendingConsignment key={ReviewUserData._id} ReviewUserData={ReviewUserData}></UserPendingConsignment>)
-                                }
+                            <div className="AllDataConsignment">
+                                <div className="overflow-x-auto p-4">
+                                    <table className="table  w-full rounded-xl shadow-md">
+                                        <thead className="bg-base-200 text-base-content">
+                                            <tr>
+                                                <th>Merchant Name</th>
+                                                <th>Parcel ID</th>
+                                                <th>Amount</th>
+                                                <th>Delivery Charge</th>
+                                                <th>Request Date</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            {
+                                                ReviewData.map(ReviewUserData => <UserPendingConsignment key={ReviewUserData._id} ReviewUserData={ReviewUserData}></UserPendingConsignment>)
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
                             </div>
                         </TabPanel>
                     </Tabs>

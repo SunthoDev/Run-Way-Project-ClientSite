@@ -8,81 +8,78 @@ import { useQuery } from '@tanstack/react-query';
 
 const ExpressDelivery = () => {
 
-     let { user, setStandardParcelId } = useContext(AuthContext)
-        let navigate = useNavigate()
-        // console.log(user)
-        // ==============================================================================
-        // find all police station 
-    
-        let [District, setDistrict] = useState("")
-        let handleDistrictData = (e) => {
-            setDistrict(e.target.value)
-        }
-        // Coverage All Police Station Data Find
-        let { refetch, data: AllCoveragesPoliceStation = [] } = useQuery(["CoveragesPoliceStationAll"], async () => {
-            let res = await fetch("http://localhost:5000/CoveragesPoliceStationAll")
-            return res.json()
-        })
-        let DistrictAllPoliceStation = AllCoveragesPoliceStation.filter(PoliceStationAll => PoliceStationAll?.AddDistrict == District)
-    
-        // ==============================================================================
-        // Delivery type selected function
-    
-        const [deliveryType, setDeliveryType] = useState('Home-Delivery');
-    
-        const getLabelClasses = (selected) =>
-            `px-4 py-2 rounded-lg border-2 cursor-pointer transition 
+    let { user, setStandardParcelId } = useContext(AuthContext)
+    let navigate = useNavigate()
+    // console.log(user)
+    // ==============================================================================
+    // find all police station 
+
+    let [District, setDistrict] = useState("")
+    let handleDistrictData = (e) => {
+        setDistrict(e.target.value)
+    }
+    // Coverage All Police Station Data Find
+    let { refetch, data: AllCoveragesPoliceStation = [] } = useQuery(["CoveragesPoliceStationAll"], async () => {
+        let res = await fetch("http://localhost:5000/CoveragesPoliceStationAll")
+        return res.json()
+    })
+    let DistrictAllPoliceStation = AllCoveragesPoliceStation.filter(PoliceStationAll => PoliceStationAll?.AddDistrict == District)
+
+    // ==============================================================================
+    // Delivery type selected function
+
+    const [deliveryType, setDeliveryType] = useState('Home-Delivery');
+
+    const getLabelClasses = (selected) =>
+        `px-4 py-2 rounded-lg border-2 cursor-pointer transition 
              ${selected ? 'bg-black text-white border-white' : 'bg-white text-black border-white'}`;
-    
-        // ==============================================================================
-        //  User Parcel Send Function to database 
-    
-        let handleStandardParcel = (event) => {
-            event.preventDefault()
-            let ExpressName = event.target.ExpressName.value
-            let ExpressPhone = event.target.ExpressPhone.value
-            let ExpressAddress = event.target.ExpressAddress.value
-    
-            let name = event.target.name.value
-            let address = event.target.address.value
-            let policeStation = event.target.policeStation.value
-            let AlternativePhone = event.target.AlternativePhone.value
-            let RecipientEmail = event.target.RecipientEmail.value
-            let number = event.target.number.value
-            let CodAmount = event.target.CodAmount.value
-            let Invoice = event.target.Invoice.value
-            let ItemDescription = event.target.ItemDescription.value
-            let note = event.target.note.value
-            let weight = event.target.weight.value
-            let StandardParcelId = Math.round(Math.random() * 9999999).toString()
-            let date = moment().format("MM/D/YY , hh:mm A")
-    
-            let StandardDeliveryData = { ExpressName,ExpressPhone,ExpressAddress, deliveryType, name, address, District, policeStation, AlternativePhone, RecipientEmail, number, CodAmount, Invoice, ItemDescription, note, weight, StandardEmailUser: user?.email, StandardParcelId, date, DeliveryCharge: "60", status: "Review", Payment: "No", ParcelCategory: "Express" }
-    
-            // console.log(StandardDeliveryData)
-    
-            fetch("http://localhost:5000/StandardDeliveryData", {
-                method: "POST",
-                headers: {
-                    "content-type": "application/json"
-                },
-                body: JSON.stringify(StandardDeliveryData)
+
+    // ==============================================================================
+    //  User Parcel Send Function to database 
+
+    let handleStandardParcel = (event) => {
+        event.preventDefault()
+
+        let name = event.target.name.value
+        let address = event.target.address.value
+        let policeStation = event.target.policeStation.value
+        let AlternativePhone = event.target.AlternativePhone.value
+        let RecipientEmail = event.target.RecipientEmail.value
+        let number = event.target.number.value
+        let CodAmount = event.target.CodAmount.value
+        let Invoice = event.target.Invoice.value
+        let ItemDescription = event.target.ItemDescription.value
+        let note = event.target.note.value
+        let weight = event.target.weight.value
+        let StandardParcelId = Math.round(Math.random() * 9999999).toString()
+        let date = moment().format("MM/D/YY , hh:mm A")
+
+        let StandardDeliveryData = { deliveryType, name, address, District, policeStation, AlternativePhone, RecipientEmail, number, CodAmount, Invoice, ItemDescription, note, weight, StandardEmailUser: user?.email, StandardParcelId, date, DeliveryCharge: "60", status: "Review", Payment: "No", ParcelCategory: "Express" }
+
+        // console.log(StandardDeliveryData)
+
+        fetch("http://localhost:5000/StandardDeliveryData", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(StandardDeliveryData)
+        })
+            .then(res => res.json())
+            .then(data => {
+                navigate("/dashboard/StandardDelivery/StandardSucessInvoice")
+                if (data.insertedId) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Standard Delivery Success',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    setStandardParcelId(StandardParcelId)
+                }
             })
-                .then(res => res.json())
-                .then(data => {
-                    navigate("/dashboard/StandardDelivery/StandardSucessInvoice")
-                    if (data.insertedId) {
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'success',
-                            title: 'Standard Delivery Success',
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
-                        setStandardParcelId(StandardParcelId)
-                    }
-                })
-        }
+    }
 
 
 
@@ -109,19 +106,12 @@ const ExpressDelivery = () => {
 
                     <h2 className='text-black font-[600] text-[20px]'>Add New Parcel (Express Service)</h2>
                     <div className="Horijontal bg-[#d4d2d2] my-[12px] w-[full] h-[1px]"></div>
+                    <h3 className='text-black font-[500] text-[15px]'>PickUp Time for Regular service- 4pm-8pm</h3>
+                    <h4 className='text-[#fdc008] font-[600] text-[13px]'>(Big Size parcels will be picked in Day Time)</h4>
 
                     {/* =================================================== */}
 
                     <form onSubmit={handleStandardParcel} className='StandardFromData'>
-
-                        <h3 className='text-black font-[500] text-[15px]'>Express Address :</h3>
-                        <div className="w-full md:w-[24%]">
-                            <input required className='w-[100%] text-center text-black text-[14px] font-[400] border border-black h-[40px]' type="text" name='ExpressName' placeholder="Enter Your Name" />
-                            <input required className='w-[100%] text-center text-black text-[14px] font-[400] border border-black h-[40px] my-[8px]' type="text" name='ExpressPhone' placeholder="Give Your Phone Number" />
-                            <input required className='w-[100%] text-center text-black text-[14px] font-[400] border border-black h-[40px]' type="text" name='ExpressAddress' placeholder="Give Your address with Thana" />
-                        </div>
-
-                        {/* =================================================== */}
 
                         <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-6">
 
@@ -242,7 +232,7 @@ const ExpressDelivery = () => {
                                         }
                                     </select>
                                 </div>
-                                <p className='text-green-600 py-[6px]'>Disable District Field</p>
+                                {/* <p className='text-green-600 py-[6px]'>Disable District Field</p> */}
                                 <div className="grid grid-cols-6 gap-2  items-center">
                                     <h4 className='col-span-2 text-[16px] font-[500] '>Alternative <br /> Phone</h4>
                                     <input className='col-span-4  w-[100%]' type="text" name='AlternativePhone' />

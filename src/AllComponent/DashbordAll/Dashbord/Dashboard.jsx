@@ -44,7 +44,7 @@ const Dashboard = () => {
             <div className="drawer-side  z-[998]">
                 <label htmlFor="my-drawer-2" className=" drawer-overlay"></label>
 
-                <ul className="menuParent menu px-[12px] pt-[28px] w-90 h-[100%] text-base-content">
+                <ul className="menuParent menu px-[12px] pt-[28px] w-90 hh-[100%] text-base-content">
                     {
                         ad ?
                             <div className='NameInformation mb-[14px]'>
@@ -113,6 +113,8 @@ const Dashboard = () => {
                                 <li> <NavLink to="/dashboard/UserAmountChange"><span><i className="fa fa-money" aria-hidden="true"></i></span> Amount Change</NavLink></li>
                                 <li> <NavLink to="/dashboard/UserAllCancelParcel"><span><i className="fa fa-share-square-o" aria-hidden="true"></i></span> Cancelled Parcels</NavLink></li>
                                 <li> <NavLink to="/dashboard/UserAllPaymentRequestData"><span><i className="fa fa-credit-card" aria-hidden="true"></i></span> Payment List</NavLink></li>
+                                <li> <NavLink to="/dashboard/API"><span><i className="fa fa-credit-card" aria-hidden="true"></i></span>API</NavLink></li>
+                                <li> <NavLink to="/dashboard/PaymentRequest"><span><i className="fa fa-credit-card" aria-hidden="true"></i></span>Payment Request</NavLink></li>
                             </div>
                     }
 

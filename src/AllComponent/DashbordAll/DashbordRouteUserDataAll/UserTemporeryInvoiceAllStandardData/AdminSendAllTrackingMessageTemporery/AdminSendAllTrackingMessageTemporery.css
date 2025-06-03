@@ -2,7 +2,7 @@
 .AllMessageShow h3 {
     font-size: 14px;
     font-weight: 600;
-    color: #22afa3;
+    /* color: #22afa3; */
 }
 .AllMessageShow .Line {
     position: relative;
