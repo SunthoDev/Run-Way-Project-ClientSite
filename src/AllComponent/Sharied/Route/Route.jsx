@@ -44,6 +44,7 @@ import PickNDropDelivery from "../../DashbordAll/DashbordRouteUserDataAll/AddPar
 import ExpressDelivery from "../../DashbordAll/DashbordRouteUserDataAll/AddParcel/ExpressDelivery/ExpressDelivery";
 import API from "../../DashbordAll/DashbordRouteUserDataAll/API/API";
 import PaymentRequest from "../../DashbordAll/DashbordRouteUserDataAll/PaymentRequest/PaymentRequest";
+import AdminCreateHub from "../../DashbordAll/AdminePanel/AdminCreateHub/AdminCreateHub";
 
 
 let route = createBrowserRouter([
@@ -187,38 +188,26 @@ let route = createBrowserRouter([
 
          },
          {
-
             path: "AdminDashboard/AdminSearchUserId/:id",
             element: <AdminSearchUserId></AdminSearchUserId>,
             loader: ({ params }) => fetch(`http://localhost:5000/adminSearchUserId?userId=${params.id}`)
-
          },
          {
             path: "AdminDashboard/AdminSearchUserNumber/:number",
             element: <AdminSearchUserNumber></AdminSearchUserNumber>,
             loader: ({ params }) => fetch(`http://localhost:5000/adminSearchUserNumber?userNumber=${params.number}`)
-
          },
-
          {
             path: "AdminDashboard/AdminSearchStandardParcelId/:id",
             element: <AdminSearchStandardParcelUser></AdminSearchStandardParcelUser>,
             loader: ({ params }) => fetch(`http://localhost:5000/AdminSearchStandardParcelId?StandardParcelId=${params.id}`)
-
          },
          {
-
             path: "AdminDashboard/AdminCurrentBalanceDetails/:email",
             element: <CurrentBalanceDetails></CurrentBalanceDetails>,
             loader: ({ params }) => fetch(`http://localhost:5000/AdminCurrentBalanceAllData?email=${params.email}`)
-
          },
          // =========================
-
-
-
-
-
 
          // ===============TODO
          {
@@ -233,12 +222,6 @@ let route = createBrowserRouter([
             // loader: ({ params }) => fetch(`http://localhost:5000/AdminDataEntryStandardDeliveryData?email=${params.email}`)
          },
          // ===============TODO
-
-
-
-
-
-
 
          // =========================
          {
@@ -256,28 +239,23 @@ let route = createBrowserRouter([
          {
             path: "AdminDashboard/ApprovedParcelRoute",
             element: <ApprovedParcelRoute></ApprovedParcelRoute>
-
          },
          {
             path: "AdminDashboard/AdminAmountUpdateParcel",
             element: <AdminAmountUpdateParcel></AdminAmountUpdateParcel>
-
          },
          {
             path: "AdminDashboard/AdminAmountChangeUserDataFind/:email",
             element: <AdminSearchAmountChangeUserDataAllFindEmail></AdminSearchAmountChangeUserDataAllFindEmail>,
             loader: ({ params }) => fetch(`http://localhost:5000/AdminAmountChangeUserDataFindEmailGet?email=${params.email}`)
-
          },
          {
             path: "AdminDashboard/NewMerchants",
             element: <AdminNewMerchants></AdminNewMerchants>
-
          },
          {
             path: "AdminDashboard/AdminCoveragesDistricts",
             element: <AdminCoveragesDistricts></AdminCoveragesDistricts>
-
          },
          {
             path: "AdminDashboard/AdminCoveragesPoliceStations",
@@ -293,18 +271,22 @@ let route = createBrowserRouter([
             path: "AdminDashboard/AdminPaymentRequestDetailsAll/:id",
             element: <AdminPaymentRequestDetailsAll></AdminPaymentRequestDetailsAll>,
             loader: ({ params }) => fetch(`http://localhost:5000/AdminPaymentDetailsUnikeDatFind/${params.id}`)
-
-         },
-         {
-            path: "AdminDashboard/AdminMyHubRequestAll",
-            element: <AdminMyHub></AdminMyHub>
-
          },
          {
             path: "AdminDashboard/UserTemporeryInvoiceAllStandardData/:id",
             element: <AdminTempororyParcelInvoice></AdminTempororyParcelInvoice>,
             loader: ({ params }) => fetch(`http://localhost:5000/AdminStandardDeliveryDataTemporory?StandardParcelId=${params.id}`)
          },
+         {
+            path: "AdminDashboard/AdminCreateHub",
+            element: <AdminCreateHub></AdminCreateHub>
+         },
+         {
+            path: "AdminDashboard/AdminMyHubRequestAll",
+            element: <AdminMyHub></AdminMyHub>
+         },
+
+
 
 
 

@@ -32,10 +32,8 @@ const DashboardItemsUser = () => {
 
     // console.log(AllDeliveryDataUser  Balance)
 
-
     // All Delivered & PartiallyDelivered payment data find
     let CodAmountPaymentData = AllDeliveryDataUserBalance.filter(PaymentAll => PaymentAll?.Payment == "Yes" && PaymentAll?.status == "Delivered" || PaymentAll?.Payment == "Yes" && PaymentAll?.status == "PartiallyDelivered")
-
     // console.log(CodAmountPaymentData)
 
     // total Cod Amount Balance
@@ -59,9 +57,9 @@ const DashboardItemsUser = () => {
     let totalBalanceUser = subTotal - subTotalOnePercentCharge
     // console.log(totalBalanceUser)
 
-    // ====================================================================================
+    // =========================================================================================================
     // Payment Request user start
-    // ====================================================================================
+    // =================================================
 
     let handleUserPaymentRequest = (event) => {
         event.preventDefault()
@@ -115,47 +113,48 @@ const DashboardItemsUser = () => {
             })
     }
 
-    // ====================================================================================
-    // Payment Request user End
-    // ====================================================================================
-    // ====================================================================================
-    // Pickup Request user Start
-    // ====================================================================================
-    let handlePickupRequestUser = () => {
+    // =========================================================================================================
+    // Pickup Request user Send Start
+    // =================================================
+    // let handlePickupRequestUser = () => {
 
-        let PickupIdUser = Math.round(Math.random() * 99999999).toString()
-        let UserPickupReqDate = moment().format("MM/D/YY , hh:mm A")
+    //     let PickupIdUser = Math.round(Math.random() * 99999999).toString()
+    //     let UserPickupReqDate = moment().format("MM/D/YY , hh:mm A")
 
-        let PickupRequestAllDataPost = { PickupIdUser, UserPickupReqDate, Address, BusinessName, LastName, Phone, PickReqUserEmail: email, name, photo, userId, status: "Pending", PoliceStations, Districts }
+    //     let PickupRequestAllDataPost = { PickupIdUser, UserPickupReqDate, Address, BusinessName, LastName, Phone, PickReqUserEmail: email, name, photo, userId, status: "Pending", PoliceStations, Districts }
 
-        // console.log(PickupRequestAllDataPost)
+    //     // console.log(PickupRequestAllDataPost)
 
-        fetch("http://localhost:5000/UserPickupRequestSend", {
-            method: "POST",
-            headers: {
-                "content-type": "application/json"
-            },
-            body: JSON.stringify(PickupRequestAllDataPost)
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.insertedId) {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Your Pickup Request Is Success',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
+    //     fetch("http://localhost:5000/UserPickupRequestSend", {
+    //         method: "POST",
+    //         headers: {
+    //             "content-type": "application/json"
+    //         },
+    //         body: JSON.stringify(PickupRequestAllDataPost)
+    //     })
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             if (data.insertedId) {
+    //                 Swal.fire({
+    //                     position: 'top-end',
+    //                     icon: 'success',
+    //                     title: 'Your Pickup Request Is Success',
+    //                     showConfirmButton: false,
+    //                     timer: 1500
+    //                 })
 
-                }
-            })
+    //             }
+    //         })
 
-    }
+    // }
 
-    // ====================================================================================
+
+
+
+
+    // =========================================================================================================
     // Pickup Request user End
-    // ====================================================================================
+    // =================================================
 
     const sampleData = [
         {
@@ -196,7 +195,6 @@ const DashboardItemsUser = () => {
         },
     ];
 
-
     // ==================
 
     const data01 = [
@@ -205,7 +203,6 @@ const DashboardItemsUser = () => {
         { name: 'Group C', value: 300 },
         { name: 'Group D', value: 200 },
     ];
-
     const data02 = [
         { name: 'A1', value: 100 },
         { name: 'A2', value: 300 },
@@ -220,8 +217,9 @@ const DashboardItemsUser = () => {
     ];
     const COLORS = ['#8884d8', '#8dd1e1', '#82ca9d', '#ffc658'];
 
-    // (truncate) ayta use lorla (...) ase over text
 
+
+    // (truncate) id i use it css class text will be ->(...)
 
     return (
         <div className='bg-[#F6F6F6]'>
@@ -244,8 +242,7 @@ const DashboardItemsUser = () => {
                                     </div>
                                     <p className="py-[8px] text-[14px] font-[600] text-black">Payment Request</p>
                                 </div>
-                                <div onClick={handlePickupRequestUser} className="h-[160px] p-4 bg-[#1898C7] shadow rounded-[24px]">
-
+                                <div onClick={() => document.getElementById("PickUpRequest").showModal()} className="h-[160px] p-4 bg-[#1898C7] shadow rounded-[24px]">
                                     <div className="items bg-[#F23F83] py-[2px] px-[4px] rounded-[6px]">
                                         <div className="svg">
                                             <svg xmlns="https://www.w3.org/2000/svg" width="56" height="34" viewBox="-25 85 665 436"><path d="M21.474,377.522V117.138c0-14.469,11.729-26.199,26.199-26.199h260.25c14.469,0,26.198,11.73,26.198,26.199v260.385   c0,4.823-3.909,8.733-8.733,8.733H30.207C25.383,386.256,21.474,382.346,21.474,377.522z M231.634,466.724   c0,30.01-24.329,54.338-54.338,54.338c-30.009,0-54.338-24.328-54.338-54.338c0-30.011,24.329-54.338,54.338-54.338   C207.305,412.386,231.634,436.713,231.634,466.724z M204.464,466.724c0-15.005-12.164-27.169-27.169-27.169   s-27.17,12.164-27.17,27.169s12.165,27.17,27.17,27.17S204.464,481.729,204.464,466.724z M130.495,412.385H8.733   c-4.823,0-8.733,3.91-8.733,8.733v26.495c0,4.823,3.91,8.733,8.733,8.733h97.598C108.879,438.862,117.704,423.418,130.495,412.385z    M515.938,466.724c0,30.01-24.329,54.338-54.338,54.338c-30.01,0-54.338-24.328-54.338-54.338   c0-30.011,24.328-54.338,54.338-54.338C491.609,412.385,515.938,436.713,515.938,466.724z M488.77,466.724   c0-15.005-12.165-27.169-27.17-27.169c-15.006,0-27.169,12.164-27.169,27.169s12.164,27.17,27.169,27.17   S488.77,481.729,488.77,466.724z M612,421.118v26.495c0,4.823-3.91,8.733-8.733,8.733h-70.704   c-5.057-34.683-34.906-61.427-70.961-61.427c-36.062,0-65.912,26.745-70.969,61.427H248.261   c-2.549-17.483-11.373-32.928-24.164-43.961h134.994V162.594c0-9.646,7.82-17.466,17.466-17.466h82.445   c23.214,0,44.911,11.531,57.9,30.77l53.15,78.721c7.796,11.547,11.962,25.161,11.962,39.094v118.672h21.253   C608.09,412.385,612,416.295,612,421.118z M523.408,256.635l-42.501-60.393c-1.636-2.324-4.3-3.707-7.142-3.707H407.47   c-4.822,0-8.733,3.91-8.733,8.733v60.393c0,4.824,3.91,8.733,8.733,8.733h108.798C523.342,270.394,527.48,262.421,523.408,256.635z   " fill="#FFFFFF"></path></svg>
@@ -566,12 +563,14 @@ const DashboardItemsUser = () => {
                             <p className="text-dark font-[400] text-[12px]">Date & Time</p>
                             <h4 className="text-black font-[600] text-[14px]">15 Jun 2024 • 6:90PM</h4>
                         </div>
-                        
+
                     </div>
 
                 </div>
 
 
+                {/* ============================================= */}
+                {/* Payment Request Send Modal  */}
                 {/* ============================================= */}
 
                 <div className={`alertContainer rounded-[8px]  px-4  lg:px-0 w-full lg:w-[24%]  ${poup === true && "showAlertJs"}`} >
@@ -602,52 +601,88 @@ const DashboardItemsUser = () => {
 
                 </div>
 
-                {/* ============================================= */}
+                {/* ====================================================================== */}
+                {/* Pickup Request Modal Start */}
+                {/* ====================================================================== */}
+                <dialog id="PickUpRequest" className="modal">
+                    <div className="modal-box bg-white">
+                        <h3 className="font-bold text-lg mb-4">Send Pickup Request</h3>
+                        <form
+                            onSubmit={async (e) => {
+                                e.preventDefault();
+                                const PickupRequest = e.target.PickupRequestType.value;
+                                let PickupIdUser = Math.round(Math.random() * 99999999).toString()
+                                let UserPickupReqDate = moment().format("MM/D/YY , hh:mm A")
+
+                                let AllInfo = {PickupRequestType:PickupRequest, PickupIdUser, UserPickupReqDate, Address, BusinessName, LastName, Phone, PickReqUserEmail: email, name, photo, userId, status: "Pending", PoliceStations, Districts}
+
+                                try {
+                                    const response = await fetch("http://localhost:5000/PickupRequestWithManegeAdminUsers/UserPickupRequestSend", {
+                                        method: "POST",
+                                        headers: {
+                                            "Content-Type": "application/json",
+                                        },
+                                        body: JSON.stringify(AllInfo),
+                                    });
+
+                                    if (!response.ok) {
+                                        throw new Error("Failed to send request");
+                                    }
+
+                                    const result = await response.json();
+                                    // console.log("Success:", result);
+
+                                    Swal.fire({
+                                        icon: "success",
+                                        title: "Pickup Request Sent",
+                                        text: `Your ${PickupRequest} has been submitted successfully!`,
+                                        confirmButtonColor: "#2563eb", // Tailwind 'blue-600'
+                                    });
+
+                                    e.target.reset();
+                                    document.getElementById("PickUpRequest").close();
+
+                                } catch (er) {
+                                    console.error(er);
+                                    Swal.fire({
+                                        icon: "error",
+                                        title: "Oops...",
+                                        text: "Something went wrong while sending request!",
+                                        confirmButtonColor: "#dc2626", // Tailwind 'red-600'
+                                    });
+                                }
+                            }}
+                            className="space-y-4"
+                        >
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text font-medium">Select Delivery Type</span>
+                                </label>
+                                <select name="PickupRequestType" className="select bg-white select-bordered w-full">
+                                    <option>Regular Delivery</option>
+                                    <option>Express Delivery</option>
+                                    <option>Pink N Drop Delivery</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" className="btn btn-primary w-full">
+                                Send Pickup Request
+                            </button>
+                        </form>
+
+                        {/* Close Button */}
+                        <form method="dialog" className="mt-4">
+                            <button className="btn btn-sm btn-ghost absolute right-4 top-4 text-xl">✕</button>
+                        </form>
+                    </div>
+                </dialog>
+
+
+
 
             </div>
-        </div>
+        </div >
     );
 };
 
 export default DashboardItemsUser;
-
-
-// <div className=" bg-white px-[14px] rounded-[6px]">
-//     <div className="child Pick  flex items-center  justify-between ">
-
-//         <div className="items bg-[#F23F83] py-[33px] px-[6px] rounded-[6px]">
-//             <svg xmlns="https://www.w3.org/2000/svg" width="36" height="33" viewBox="0 0 512 512"><path d="M488.399,492h-21.933V173.536c0-14.823-12.06-26.882-26.882-26.882H390.56c-14.823,0-26.882,12.06-26.882,26.882V492    h-55.692V317.825c0-14.823-12.059-26.882-26.882-26.882H232.08c-14.823,0-26.882,12.06-26.882,26.882V492h-55.692v-90.204    c0-14.823-12.06-26.882-26.882-26.882H73.599c-14.823,0-26.882,12.06-26.882,26.882V492H23.601c-5.523,0-10,4.477-10,10    s4.477,10,10,10h464.798c5.523,0,10-4.477,10-10S493.922,492,488.399,492z M129.504,492H66.716v-90.204    c0-3.795,3.087-6.882,6.882-6.882h49.024c3.795,0,6.882,3.087,6.882,6.882V492z M287.985,492h-62.788V317.825    c0-3.795,3.087-6.882,6.882-6.882h49.024c3.794,0,6.882,3.087,6.882,6.882V492z M446.466,492h-62.788V173.536    c0-3.795,3.087-6.882,6.882-6.882h49.024c3.795,0,6.882,3.087,6.882,6.882V492z" fill="#ffffff"></path> <path d="M466.442,10.516c0.14-2.729-0.82-5.504-2.904-7.588c-2.084-2.084-4.859-3.045-7.588-2.904    C455.789,0.017,455.63,0,455.466,0h-60.5c-5.523,0-10,4.477-10,10s4.477,10,10,10h37.357l-98.857,98.858l-37.28-37.28    c-1.875-1.875-4.419-2.929-7.071-2.929c-2.652,0-5.196,1.054-7.071,2.929l-179.769,179.77c-3.905,3.905-3.905,10.237,0,14.143    c1.953,1.951,4.512,2.927,7.071,2.927s5.119-0.976,7.071-2.929L289.115,102.79l37.28,37.28c3.905,3.905,10.237,3.905,14.143,0    L446.466,34.143v33.81c0,5.523,4.477,10,10,10s10-4.477,10-10V11C466.466,10.837,466.449,10.678,466.442,10.516z" fill="#ffffff"></path> <circle cx="75.64" cy="303.31" r="10" fill="#ffffff"></circle></svg>
-//         </div>
-
-//         <h3 className='text-black font-[600] text-[22px]'>{totalBalanceUser}</h3>
-
-//         <div>
-//             <h2 className='font-[600] text-[16px] text-black'>Balance</h2>
-//             <button className='font-[500] bg-[#1fa6d8] text-[15px] text-white round-[4px] py-[2px] px-[5px]'>Check</button>
-//         </div>
-
-//     </div>
-// </div>
-// <div onClick={handlePaymentRequestUser} className="items bg-white px-[14px] rounded-[6px]">
-//     <div className="child Pick bg-[#FA6969] flex items-center py-[28px] rounded-[6px] justify-center gap-5">
-//         <div className="svg">
-//             <svg xmlns="https://www.w3.org/2000/svg" width="45" height="43" viewBox="0 0 890.5 890.5"><path d="M208.1,180.56l355-96.9l-18.8-38c-12.3-24.7-42.3-34.9-67-22.6l-317.8,157.5H208.1z" fill="#FFFFFF"></path> <path d="M673.3,86.46c-4.399,0-8.8,0.6-13.2,1.8l-83.399,22.8L322,180.56h289.1h126l-15.6-57.2    C715.5,101.06,695.3,86.46,673.3,86.46z" fill="#FFFFFF"></path> <path d="M789.2,215.56h-11.4h-15.5h-15.5H628.5H193.8h-57h-48h-8.9H50.1c-15.8,0-29.9,7.3-39.1,18.8c-4.2,5.3-7.4,11.4-9.2,18.1    c-1.1,4.2-1.8,8.6-1.8,13.1v6v57v494.1c0,27.601,22.4,50,50,50h739.1c27.601,0,50-22.399,50-50v-139.5H542.4    c-46.9,0-85-38.1-85-85v-45.8v-15.5v-15.5v-34.4c0-23,9.199-43.899,24.1-59.199c13.2-13.601,30.9-22.801,50.7-25.101    c3.3-0.399,6.7-0.6,10.1-0.6h255.2H813h15.5h10.6v-136.5C839.2,237.96,816.8,215.56,789.2,215.56z" fill="#FFFFFF"></path> <path d="M874.2,449.86c-5-4.6-10.9-8.1-17.5-10.4c-5.101-1.699-10.5-2.699-16.2-2.699h-1.3h-1h-15.5h-55.9H542.4    c-27.601,0-50,22.399-50,50v24.899v15.5v15.5v55.4c0,27.6,22.399,50,50,50h296.8h1.3c5.7,0,11.1-1,16.2-2.7    c6.6-2.2,12.5-5.8,17.5-10.4c10-9.1,16.3-22.3,16.3-36.899v-111.3C890.5,472.16,884.2,458.959,874.2,449.86z M646.8,552.36    c0,13.8-11.2,25-25,25h-16.6c-13.8,0-25-11.2-25-25v-16.6c0-8,3.7-15.101,9.6-19.601c4.3-3.3,9.601-5.399,15.4-5.399h4.2H621.8    c13.8,0,25,11.199,25,25V552.36L646.8,552.36z" fill="#FFFFFF"></path></svg>
-//         </div>
-//         <h2 className='font-[600] text-[16px] text-white'>Payment Request</h2>
-//     </div>
-// </div>
-// <div onClick={handlePickupRequestUser} className="items bg-white px-[14px] rounded-[6px]">
-//     <div className="child Pick bg-[#1898C7] flex items-center py-[33px] rounded-[6px] justify-center gap-5">
-//         <div className="svg">
-//             <svg xmlns="https://www.w3.org/2000/svg" width="56" height="34" viewBox="-25 85 665 436"><path d="M21.474,377.522V117.138c0-14.469,11.729-26.199,26.199-26.199h260.25c14.469,0,26.198,11.73,26.198,26.199v260.385   c0,4.823-3.909,8.733-8.733,8.733H30.207C25.383,386.256,21.474,382.346,21.474,377.522z M231.634,466.724   c0,30.01-24.329,54.338-54.338,54.338c-30.009,0-54.338-24.328-54.338-54.338c0-30.011,24.329-54.338,54.338-54.338   C207.305,412.386,231.634,436.713,231.634,466.724z M204.464,466.724c0-15.005-12.164-27.169-27.169-27.169   s-27.17,12.164-27.17,27.169s12.165,27.17,27.17,27.17S204.464,481.729,204.464,466.724z M130.495,412.385H8.733   c-4.823,0-8.733,3.91-8.733,8.733v26.495c0,4.823,3.91,8.733,8.733,8.733h97.598C108.879,438.862,117.704,423.418,130.495,412.385z    M515.938,466.724c0,30.01-24.329,54.338-54.338,54.338c-30.01,0-54.338-24.328-54.338-54.338   c0-30.011,24.328-54.338,54.338-54.338C491.609,412.385,515.938,436.713,515.938,466.724z M488.77,466.724   c0-15.005-12.165-27.169-27.17-27.169c-15.006,0-27.169,12.164-27.169,27.169s12.164,27.17,27.169,27.17   S488.77,481.729,488.77,466.724z M612,421.118v26.495c0,4.823-3.91,8.733-8.733,8.733h-70.704   c-5.057-34.683-34.906-61.427-70.961-61.427c-36.062,0-65.912,26.745-70.969,61.427H248.261   c-2.549-17.483-11.373-32.928-24.164-43.961h134.994V162.594c0-9.646,7.82-17.466,17.466-17.466h82.445   c23.214,0,44.911,11.531,57.9,30.77l53.15,78.721c7.796,11.547,11.962,25.161,11.962,39.094v118.672h21.253   C608.09,412.385,612,416.295,612,421.118z M523.408,256.635l-42.501-60.393c-1.636-2.324-4.3-3.707-7.142-3.707H407.47   c-4.822,0-8.733,3.91-8.733,8.733v60.393c0,4.824,3.91,8.733,8.733,8.733h108.798C523.342,270.394,527.48,262.421,523.408,256.635z   " fill="#FFFFFF"></path></svg>
-//         </div>
-//         <h2 className='font-[600] text-[16px] text-white'>Pickup Request</h2>
-//     </div>
-// </div>
-// <div className="items bg-white px-[14px] rounded-[6px]">
-//     <div className="child Pick bg-[#A2518E] f py-[28px] rounded-[6px] ">
-//         <h2 className='font-[600] text-center text-[18px] text-white'>Pick N Drop</h2>
-//         <h3 className='font-[600] text-center text-[15px] text-white'>Service</h3>
-//     </div>
-
-// </div>

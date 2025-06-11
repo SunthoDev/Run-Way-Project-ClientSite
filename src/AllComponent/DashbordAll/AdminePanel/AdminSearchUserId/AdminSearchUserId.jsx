@@ -90,24 +90,25 @@ const AdminSearchUserId = () => {
     // =======================================================================
 
     // =======================================================================
-    // Pickup Request Wok User Start
+    // Pickup Request User Data All Find Start
     // =======================================================================
-    let { data: UserPickUpRequestDataAll = [] } = useQuery(["AdminPickupRequestAllDataFindUser"], async () => {
-        let res = await fetch(`http://localhost:5000/AdminPickupRequestAllDataFindUser?email=${email}`)
+    let { data: UserPickUpRequestDataAll = [] } = useQuery(["PickupRequestWithManegeAdminUsers_PickupRequestAllDataFindByEmail"], async () => {
+        let res = await fetch(`http://localhost:5000/PickupRequestWithManegeAdminUsers/PickupRequestAllDataFindByEmail?email=${email}`)
         return res.json()
 
     })
     // console.log(UserPickUpRequestDataAll)
 
     let PickUpAdminApproved = UserPickUpRequestDataAll.filter(PickUpAll => PickUpAll?.status == "Approved")
-
     // console.log(PickUpAdminApproved)
 
+    // =======================================================================
+    // Pickup Request User Data All Find End
+    // =======================================================================
 
 
-    // =======================================================================
-    // Pickup Request Wok User End
-    // =======================================================================
+
+
     // =======================================================================
     // User Hub Selected Start
     // =======================================================================
@@ -330,9 +331,6 @@ const AdminSearchUserId = () => {
                             }
                         </div>
                     </TabPanel>
-
-
-
 
 
 

@@ -5,17 +5,9 @@ import { useQuery } from '@tanstack/react-query';
 
 const AdminCoveragesPoliceStations = () => {
 
-
-    let [poup, setPoup] = useState(false)
-    const clseAlertButton = () => {
-        setPoup(false)
-    }
-    const handleHubAdd = () => {
-        setPoup(true)
-    }
-    // =============================================
-
-    // user data all find use tenStack query 
+    // =========================================================================================
+    // All Coverage Ploce Station Find By Query
+    // =========================================================================================
     let { refetch, data: AllCoveragesPoliceStation = [] } = useQuery(["CoveragesPoliceStationAll"], async () => {
         let res = await fetch("http://localhost:5000/CoveragesPoliceStationAll")
         return res.json()
@@ -23,36 +15,62 @@ const AdminCoveragesPoliceStations = () => {
     })
     // console.log(AllCoveragesPoliceStation)
 
+    // ============================================
+    // Delete Add Coverage Ploce Station
+    // ============================================
 
-    let handleAdminHubAdd = (event) => {
-        event.preventDefault()
-        let AddPoliceStation = event.target.PoliceStation.value
-        let MyHub = event.target.Hub.value
-        let Data = {MyHub}
-        // console.log(Data)
+    const handleDeletePsOfCoverage = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: `Delete hub`,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Yes, delete it!"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
 
-        fetch(`http://localhost:5000/AdminAddHubAndUpdateHub/${AddPoliceStation}`, {
-            method: "PUT",
-            headers: {
-                "content-type": "application/json"
-            },
-            body: JSON.stringify(Data)
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.modifiedCount > 0) {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Add You Hub Success',
-                        showConfirmButton: false,
-                        timer: 1500
+                // Hub request data insert 
+                // =================================
+                try {
+                    let res = await fetch(`http://localhost:5000/DeletedPoliceStationWithOfCoverage/${id}`, {
+                        method: "DELETE",
                     })
+                    let result = await res.json()
 
+                    if (res.ok) {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Deleted!",
+                            text: "The Ploce Station has been deleted.",
+                            timer: 1500,
+                            showConfirmButton: false,
+                        });
+                        await refetch();
+                    }
+                } catch (err) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Error",
+                        text: err.message || "Something went wrong",
+                    });
                 }
-                refetch()
-            })
-    }
+            }
+        });
+    };
+
+
+    // ================================================================================================
+    // Created All Police Station find of Hub
+    // ================================================================================================
+    let { data: AllStationOfHub = [] } = useQuery(["HubManageAdminCreateOrUpdatePs"], async () => {
+        let res = await fetch("http://localhost:5000/HubManageAdminCreateOrUpdatePs/PoliceStationWithOfHub")
+        return res.json()
+    })
+    // console.log(AllStationOfHub)
+
+
 
 
     return (
@@ -66,26 +84,38 @@ const AdminCoveragesPoliceStations = () => {
                         {/* head */}
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>NAME</th>
+                                <th>NUMBER</th>
+                                <th>DISTRICT</th>
+                                <th>POLICE STATIONS</th>
                                 <th>HUB</th>
-                                <th>ADD POLICE STATION</th>
-                                <th>EDIT</th>
+                                <th>DELETE</th>
                             </tr>
                         </thead>
                         <tbody>
 
                             {
-                                AllCoveragesPoliceStation.map(PoliceStationAll =>
+                                AllCoveragesPoliceStation.map((PoliceStationAll, i) =>
 
-                                    <tr className='TableData'>
+                                    <tr className='TableData' key={i}>
 
-                                        <td> <h4>1</h4></td>
+                                        <td> <h4>{i + 1}</h4></td>
+                                        <td> <h4>{PoliceStationAll?.AddDistrict}</h4></td>
                                         <td> <h4>{PoliceStationAll?.AddPoliceStation}</h4></td>
-                                        <td> <h4>{PoliceStationAll?.MyHub ? PoliceStationAll.MyHub : "No Hub"}</h4></td>
+                                        <td>
+                                            {
+                                                (() => {
+                                                    let HubNameData = AllStationOfHub?.find(Station => Station?.PoliceStation === PoliceStationAll?.AddPoliceStation)
+                                                    // console.log(HubNameData)
+                                                    return (
+                                                        <div>
+                                                            <h4>{HubNameData?.HubName ? HubNameData?.HubName : "No add Hub"}</h4>
+                                                        </div>
+                                                    )
+                                                })()
+                                            }
 
-                                        <td> <h3 onClick={handleHubAdd} className="AddButton">ADD HUB</h3></td>
-                                        <td> <h3 className="AddButton">View</h3></td>
+                                        </td>
+                                        <td> <h3 onClick={() => handleDeletePsOfCoverage(PoliceStationAll?._id)} className="AddButton">Delete</h3></td>
 
                                     </tr>
 
@@ -99,42 +129,6 @@ const AdminCoveragesPoliceStations = () => {
                 </div>
 
             </div>
-
-            {/* ============================================= */}
-
-            <div className={`alertContainer rounded-[8px]  px-4  lg:px-0 w-full lg:w-[34%]  ${poup === true && "showAlertJs"}`} >
-
-                <div className="poup ">
-                    <div className="popInfo px-4 py-4 mt-3">
-
-                        <h6>Payment Request</h6>
-
-                        <form onSubmit={handleAdminHubAdd}>
-
-                            <h3 className='mt[24px] pb-[6px] text-black font-[600] text-[16px]'>Police Station</h3>
-                            <select required name='PoliceStation' className="select select-bordered w-[100%] max-w-xs ">
-                                <option disabled selected>Selected Police Station</option>
-                                {
-                                    AllCoveragesPoliceStation.map(PoliceStationAll => <option>{PoliceStationAll.AddPoliceStation}</option>)
-                                }
-
-
-                            </select>
-                            <h3 className='pt[18px] pb-[6px] text-black font-[600] text-[16px]'>Add Hub</h3>
-                            <input required className='w-[100%] px-4' name='Hub' type="text" placeholder='Add Hub' />
-
-
-                            <button type='submit' className='UpdateButton' >Add Now</button>
-
-                        </form>
-
-                    </div>
-                    <button onClick={clseAlertButton} className="removeAlertBtn"><i className="fa fa-times-circle" aria-hidden="true"></i></button>
-                </div>
-
-            </div>
-
-            {/* ============================================= */}
 
 
         </div>

@@ -29,8 +29,8 @@ const UserMyPickupParcel = () => {
     let { role, Address, BusinessName, name, userId, photo, status } = roles
 
     // TODO: Data lode problems late 
-    let { refetch, data: UserPickupRequestData = [] } = useQuery(["UseAllPickupRequestDataGetAll"], async () => {
-        let res = await fetch(`http://localhost:5000/UseAllPickupRequestDataGetAll?email=${user?.email}`)
+    let { refetch, data: UserPickupRequestData = [] } = useQuery(["PickupRequestWithManegeAdminUsers_PickupRequestAllDataFindByEmail"], async () => {
+        let res = await fetch(`http://localhost:5000/PickupRequestWithManegeAdminUsers/PickupRequestAllDataFindByEmail?email=${user?.email}`)
         return res.json()
     })
 
