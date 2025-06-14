@@ -160,7 +160,7 @@ const DashboardItemAdmin = () => {
 
 
             <div className="TrackingAllData mt-8">
-                <h2 className='text-black font-[500] text-center mb-[14px] text-[24px]'>The Admin will Send Message id numberr</h2>
+                <h2 className='text-black font-[500] text-center mb-[14px] text-[24px]'>The Admin will Send Message id number</h2>
                 <form onSubmit={handleSendTrackingMessageAdmin}>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <input name='message1' type="number" placeholder='user number id' />

@@ -1,0 +1,423 @@
+import { useState } from 'react';
+import "./Dispatch.css"
+import { useQuery } from '@tanstack/react-query';
+import Swal from 'sweetalert2';
+import React from "react";
+import moment from "moment";
+
+const Dispatch = () => {
+
+    const [tabState, setTabState] = useState(1);
+
+    // ============================================================================================================
+    // Created All Hub Find
+    // =====================================================
+    let { data: AllHubFind = [] } = useQuery(["HubManageAdminCreateOrUpdatePs_CreatedHubFind"], async () => {
+        let res = await fetch("http://localhost:5000/HubManageAdminCreateOrUpdatePs/CreatedHubFind")
+        return res.json()
+    })
+    // console.log(AllHubFind)
+
+
+
+
+
+
+    return (
+        <div className='AdminViewPaymentRequestAll bg-[#F6F6F6]'>
+            <div className='md:px-4 my-4'>
+
+                {/* ====================================================================== */}
+                {/* (Pending) All PickUp Request Data See */}
+                {/* ====================================================================== */}
+                <div className="bg-white p-6 rounded-xl shadow-md ">
+                    <h3 className='text-black text-[24px] font-[600] text-left pb-4'>Dispatch Working..</h3>
+
+                    {/* Tabs of Dispatch */}
+                    {/* ==================================== */}
+                    <div className="flex border-b border-gray-200 space-x-4 mb-4">
+                        <button onClick={() => setTabState(1)}
+                            className={`px-4 py-2 font-medium text-sm rounded-t-md transition-all duration-200 ${tabState === 1 ? "bg-indigo-600 text-white" : "bg-gray-100 text-gray-700 hover:bg-indigo-100"
+                                }`}
+                        >
+                            Sent
+                        </button>
+
+                        <button onClick={() => setTabState(2)}
+                            className={`px-4 py-2 font-medium text-sm rounded-t-md transition-all duration-200 ${tabState === 2 ? "bg-indigo-600 text-white" : "bg-gray-100 text-gray-700 hover:bg-indigo-100"
+                                }`}
+                        >
+                            Received
+                        </button>
+                    </div>
+
+
+                    {/* Tab Content (Dispatch)*/}
+                    {/* ==================================== */}
+                    <div className="">
+
+                        {/* ==================================== */}
+                        {/* Dispatch (Send) */}
+                        {/* ==================================== */}
+                        {tabState === 1 &&
+                            <div className="flex justify-center">
+                                <div className="w-full bg-white shadow-lg border border-gray-200 rounded-xl p-6">
+                                    <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+                                        Send Dispatch
+                                    </h2>
+
+                                    <form onSubmit={(e) => {
+                                        e.preventDefault()
+                                        const DispatchHubName = e.target.HubName.value;
+                                        const oneDispatchId = e.target.id1.value;
+                                        const twoDispatchId = e.target.id2.value;
+                                        const threeDispatchId = e.target.id3.value;
+                                        const fourDispatchId = e.target.id4.value;
+                                        const fiveDispatchId = e.target.id5.value;
+                                        const sixDispatchId = e.target.id6.value;
+                                        const sevenDispatchId = e.target.id7.value;
+                                        const eightDispatchId = e.target.id8.value;
+                                        const nineDispatchId = e.target.id9.value;
+                                        const tenDispatchId = e.target.id10.value;
+                                        const elevenDispatchId = e.target.id11.value;
+                                        const twelveDispatchId = e.target.id12.value;
+                                        const thirteenDispatchId = e.target.id13.value;
+                                        const fourteenDispatchId = e.target.id14.value;
+                                        const fifteenDispatchId = e.target.id15.value;
+                                        const sixteenDispatchId = e.target.id16.value;
+                                        const seventeenDispatchId = e.target.id17.value;
+                                        const eighteenDispatchId = e.target.id18.value;
+                                        const nineteenDispatchId = e.target.id19.value;
+                                        const twentyDispatchId = e.target.id20.value;
+                                        let date = moment().format("D/MM/YY")
+                                        let time = moment().format("hh:mm A")
+                                        let DispatchId = Math.round(Math.random() * 99999999).toString()
+                                        let TrackingMessage = `Sent to ${DispatchHubName} hub. Dispatch id ${DispatchId}`
+
+                                        // All not empty id push on DispatchParcelAllId array
+                                        // ============================================================= 
+                                        let DispatchParcelAllId = []
+                                        for (let i = 1; i <= 20; i++) {
+                                            let id = e.target[`id${i}`]?.value.trim();
+                                            if (id) {
+                                                DispatchParcelAllId.push(id);
+                                            }
+                                        }
+                                        // Dispatch data post 
+                                        // =======================================================================
+                                        let DispatchDataPost = { DispatchId, TrackingMessage, date, time, DispatchType: "Sent", DispatchHubName, DispatchParcelAllId }
+                                        // console.log(DispatchDataPost)
+
+                                        // Tracking message post of dispatch 
+                                        // =============================================================
+                                        let TrackingMessagePost = []
+
+                                        let TrackingMessages = [
+                                            { userOrderIdTracking: oneDispatchId, TrackingMessage, TrackingDate: date, TrackingTime: time },
+                                            { userOrderIdTracking: twoDispatchId, TrackingMessage, TrackingDate: date, TrackingTime: time },
+                                            { userOrderIdTracking: threeDispatchId, TrackingMessage, TrackingDate: date, TrackingTime: time },
+                                            { userOrderIdTracking: fourDispatchId, TrackingMessage, TrackingDate: date, TrackingTime: time },
+                                            { userOrderIdTracking: fiveDispatchId, TrackingMessage, TrackingDate: date, TrackingTime: time },
+                                            { userOrderIdTracking: sixDispatchId, TrackingMessage, TrackingDate: date, TrackingTime: time },
+                                            { userOrderIdTracking: sevenDispatchId, TrackingMessage, TrackingDate: date, TrackingTime: time },
+                                            { userOrderIdTracking: eightDispatchId, TrackingMessage, TrackingDate: date, TrackingTime: time },
+                                            { userOrderIdTracking: nineDispatchId, TrackingMessage, TrackingDate: date, TrackingTime: time },
+                                            { userOrderIdTracking: tenDispatchId, TrackingMessage, TrackingDate: date, TrackingTime: time },
+                                            { userOrderIdTracking: elevenDispatchId, TrackingMessage, TrackingDate: date, TrackingTime: time },
+                                            { userOrderIdTracking: twelveDispatchId, TrackingMessage, TrackingDate: date, TrackingTime: time },
+                                            { userOrderIdTracking: thirteenDispatchId, TrackingMessage, TrackingDate: date, TrackingTime: time },
+                                            { userOrderIdTracking: fourteenDispatchId, TrackingMessage, TrackingDate: date, TrackingTime: time },
+                                            { userOrderIdTracking: fifteenDispatchId, TrackingMessage, TrackingDate: date, TrackingTime: time },
+                                            { userOrderIdTracking: sixteenDispatchId, TrackingMessage, TrackingDate: date, TrackingTime: time },
+                                            { userOrderIdTracking: seventeenDispatchId, TrackingMessage, TrackingDate: date, TrackingTime: time },
+                                            { userOrderIdTracking: eighteenDispatchId, TrackingMessage, TrackingDate: date, TrackingTime: time },
+                                            { userOrderIdTracking: nineteenDispatchId, TrackingMessage, TrackingDate: date, TrackingTime: time },
+                                            { userOrderIdTracking: twentyDispatchId, TrackingMessage, TrackingDate: date, TrackingTime: time }
+                                        ]
+                                        // All not empty data push  on TrackingMessagePost array
+                                        // ====================================================== 
+                                        for (let Msg of TrackingMessages) {
+                                            if (Msg?.userOrderIdTracking !== "") {
+                                                TrackingMessagePost.push(Msg)
+                                            }
+                                        }
+                                        // console.log(TrackingMessagePost)
+
+
+                                        // Dispatch Send Data Post 
+                                        // ===========================================
+                                        fetch("http://localhost:5000/DispatchAllRequestWithTrackingMessage/AdminDispatchRequestSend", {
+                                            method: "POST",
+                                            headers: {
+                                                "Content-Type": "application/json"
+                                            },
+                                            body: JSON.stringify(DispatchDataPost)
+                                        })
+                                            .then(res => res.json())
+                                            .then(data => {
+                                                if (data.insertedId) {
+                                                    // Dispatch Tracking Data Post 
+                                                    // ===========================================
+                                                    fetch("http://localhost:5000/DispatchAllRequestWithTrackingMessage/AdminTrackingRequestSentOfDispatch", {
+                                                        method: "POST",
+                                                        headers: {
+                                                            "Content-Type": "application/json"
+                                                        },
+                                                        body: JSON.stringify(TrackingMessagePost)
+                                                    })
+                                                        .then(res => res.json())
+                                                        .then(data => {
+                                                            // console.log(data)
+                                                            if (data.insertedCount > 0) {
+                                                                e.target.reset()
+                                                                Swal.fire({
+                                                                    position: 'top-end',
+                                                                    icon: 'success',
+                                                                    title: 'Dispatch Request Success',
+                                                                    showConfirmButton: false,
+                                                                    timer: 1500
+                                                                })
+                                                            }
+                                                        })
+                                                }
+                                            })
+
+                                    }} className="grid grid-cols-7 gap-6">
+                                        {/* Left side - 20 inputs in grid 4 columns (span 4)*/}
+                                        <div className="col-span-4 grid grid-cols-4 gap-4">
+                                            <input name="id1" type="number" text-black placeholder="Id 1" className="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                            <input name="id2" type="number" text-black placeholder="Id 2" className="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                            <input name="id3" type="number" text-black placeholder="Id 3" className="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                            <input name="id4" type="number" text-black placeholder="Id 4" className="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                            <input name="id5" type="number" text-black placeholder="Id 5" className="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                            <input name="id6" type="number" text-black placeholder="Id 6" className="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                            <input name="id7" type="number" text-black placeholder="Id 7" className="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                            <input name="id8" type="number" text-black placeholder="Id 8" className="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                            <input name="id9" type="number" text-black placeholder="Id 9" className="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                            <input name="id10" type="number" text-black placeholder="Id 10" className="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                            <input name="id11" type="number" text-black placeholder="Id 11" className="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                            <input name="id12" type="number" text-black placeholder="Id 12" className="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                            <input name="id13" type="number" text-black placeholder="Id 13" className="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                            <input name="id14" type="number" text-black placeholder="Id 14" className="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                            <input name="id15" type="number" text-black placeholder="Id 15" className="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                            <input name="id16" type="number" text-black placeholder="Id 16" className="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                            <input name="id17" type="number" text-black placeholder="Id 17" className="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                            <input name="id18" type="number" text-black placeholder="Id 18" className="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                            <input name="id19" type="number" text-black placeholder="Id 19" className="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                            <input name="id20" type="number" text-black placeholder="Id 20" className="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+
+                                        </div>
+
+                                        {/* Right side - select picker, submit button*/}
+                                        <div className="col-span-3 space-y-4">
+                                            <select required className="w-full bg-white border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                                name="HubName"
+                                            >
+                                                <option value="">-- Select Hub Name --</option>
+                                                {AllHubFind?.map((hubName, i) => (
+                                                    <option key={i}>
+                                                        {hubName?.NameOfHub}
+                                                    </option>
+                                                ))}
+                                            </select>
+
+                                            {/* Submit button */}
+                                            <button
+                                                type="submit"
+                                                className="bg-blue-500 text-gray-50 px-4 py-2 rounded-md font-semibold shadow-md hover:bg-blue-600 w-full">
+                                                Submit
+                                            </button>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        }
+
+                        {/* ==================================== */}
+                        {/*  Dispatch (Received) */}
+                        {/* ==================================== */}
+
+                        {tabState === 2 &&
+                            <div className="flex justify-center">
+                                <div className="w-full bg-white shadow-lg border border-gray-200 rounded-xl p-6">
+                                    <h2 className="text-2xl font-semibold text-gray-800 mb-4">Received Dispatch</h2>
+
+                                    {/* Main row with left and right side */}
+                                    <form onSubmit={(e) => {
+                                        e.preventDefault()
+                                        const DispatchHubName = e.target.HubName.value;
+                                        const oneDispatchId = e.target.id1.value;
+                                        const twoDispatchId = e.target.id2.value;
+                                        const threeDispatchId = e.target.id3.value;
+                                        const fourDispatchId = e.target.id4.value;
+                                        const fiveDispatchId = e.target.id5.value;
+                                        const sixDispatchId = e.target.id6.value;
+                                        const sevenDispatchId = e.target.id7.value;
+                                        const eightDispatchId = e.target.id8.value;
+                                        const nineDispatchId = e.target.id9.value;
+                                        const tenDispatchId = e.target.id10.value;
+                                        const elevenDispatchId = e.target.id11.value;
+                                        const twelveDispatchId = e.target.id12.value;
+                                        const thirteenDispatchId = e.target.id13.value;
+                                        const fourteenDispatchId = e.target.id14.value;
+                                        const fifteenDispatchId = e.target.id15.value;
+                                        const sixteenDispatchId = e.target.id16.value;
+                                        const seventeenDispatchId = e.target.id17.value;
+                                        const eighteenDispatchId = e.target.id18.value;
+                                        const nineteenDispatchId = e.target.id19.value;
+                                        const twentyDispatchId = e.target.id20.value;
+                                        let date = moment().format("D/MM/YY")
+                                        let time = moment().format("hh:mm A")
+                                        let DispatchId = Math.round(Math.random() * 99999999).toString()
+                                        let TrackingMessage = `Received to ${DispatchHubName} hub.`
+
+                                        // All not empty id push on DispatchParcelAllId array
+                                        // ============================================================= 
+                                        let DispatchParcelAllId = []
+                                        for (let i = 1; i <= 20; i++) {
+                                            let id = e.target[`id${i}`]?.value.trim();
+                                            if (id) {
+                                                DispatchParcelAllId.push(id);
+                                            }
+                                        }
+                                        // Dispatch data post 
+                                        // =======================================================================
+                                        let DispatchDataPost = { DispatchId, TrackingMessage, date, time, DispatchType: "Received", DispatchHubName, DispatchParcelAllId }
+                                        // console.log(DispatchDataPost)
+
+                                        // Tracking message post of dispatch 
+                                        // =============================================================
+                                        let TrackingMessagePost = []
+
+                                        let TrackingMessages = [
+                                            { userOrderIdTracking: oneDispatchId, TrackingMessage, TrackingDate: date, TrackingTime: time },
+                                            { userOrderIdTracking: twoDispatchId, TrackingMessage, TrackingDate: date, TrackingTime: time },
+                                            { userOrderIdTracking: threeDispatchId, TrackingMessage, TrackingDate: date, TrackingTime: time },
+                                            { userOrderIdTracking: fourDispatchId, TrackingMessage, TrackingDate: date, TrackingTime: time },
+                                            { userOrderIdTracking: fiveDispatchId, TrackingMessage, TrackingDate: date, TrackingTime: time },
+                                            { userOrderIdTracking: sixDispatchId, TrackingMessage, TrackingDate: date, TrackingTime: time },
+                                            { userOrderIdTracking: sevenDispatchId, TrackingMessage, TrackingDate: date, TrackingTime: time },
+                                            { userOrderIdTracking: eightDispatchId, TrackingMessage, TrackingDate: date, TrackingTime: time },
+                                            { userOrderIdTracking: nineDispatchId, TrackingMessage, TrackingDate: date, TrackingTime: time },
+                                            { userOrderIdTracking: tenDispatchId, TrackingMessage, TrackingDate: date, TrackingTime: time },
+                                            { userOrderIdTracking: elevenDispatchId, TrackingMessage, TrackingDate: date, TrackingTime: time },
+                                            { userOrderIdTracking: twelveDispatchId, TrackingMessage, TrackingDate: date, TrackingTime: time },
+                                            { userOrderIdTracking: thirteenDispatchId, TrackingMessage, TrackingDate: date, TrackingTime: time },
+                                            { userOrderIdTracking: fourteenDispatchId, TrackingMessage, TrackingDate: date, TrackingTime: time },
+                                            { userOrderIdTracking: fifteenDispatchId, TrackingMessage, TrackingDate: date, TrackingTime: time },
+                                            { userOrderIdTracking: sixteenDispatchId, TrackingMessage, TrackingDate: date, TrackingTime: time },
+                                            { userOrderIdTracking: seventeenDispatchId, TrackingMessage, TrackingDate: date, TrackingTime: time },
+                                            { userOrderIdTracking: eighteenDispatchId, TrackingMessage, TrackingDate: date, TrackingTime: time },
+                                            { userOrderIdTracking: nineteenDispatchId, TrackingMessage, TrackingDate: date, TrackingTime: time },
+                                            { userOrderIdTracking: twentyDispatchId, TrackingMessage, TrackingDate: date, TrackingTime: time }
+                                        ]
+                                        // All not empty data push  on TrackingMessagePost array
+                                        // ====================================================== 
+                                        for (let Msg of TrackingMessages) {
+                                            if (Msg?.userOrderIdTracking !== "") {
+                                                TrackingMessagePost.push(Msg)
+                                            }
+                                        }
+                                        // console.log(TrackingMessagePost)
+
+
+                                        // Dispatch Send Data Post 
+                                        // ===========================================
+                                        fetch("http://localhost:5000/DispatchAllRequestWithTrackingMessage/AdminDispatchRequestSend", {
+                                            method: "POST",
+                                            headers: {
+                                                "Content-Type": "application/json"
+                                            },
+                                            body: JSON.stringify(DispatchDataPost)
+                                        })
+                                            .then(res => res.json())
+                                            .then(data => {
+                                                if (data.insertedId) {
+                                                    // Dispatch Tracking Data Post 
+                                                    // ===========================================
+                                                    fetch("http://localhost:5000/DispatchAllRequestWithTrackingMessage/AdminTrackingRequestSentOfDispatch", {
+                                                        method: "POST",
+                                                        headers: {
+                                                            "Content-Type": "application/json"
+                                                        },
+                                                        body: JSON.stringify(TrackingMessagePost)
+                                                    })
+                                                        .then(res => res.json())
+                                                        .then(data => {
+                                                            // console.log(data)
+                                                            e.target.reset()
+                                                            if (data.insertedCount > 0) {
+                                                                Swal.fire({
+                                                                    position: 'top-end',
+                                                                    icon: 'success',
+                                                                    title: 'Dispatch Request Success',
+                                                                    showConfirmButton: false,
+                                                                    timer: 1500
+                                                                })
+                                                            }
+                                                        })
+                                                }
+                                            })
+
+                                    }} className="grid grid-cols-7 gap-6">
+                                        {/* Left side - 20 inputs in grid 4 columns (span 4)*/}
+                                        <div className="col-span-4 grid grid-cols-4 gap-4">
+                                            <input name="id1" type="number" text-black placeholder="Id 1" className="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                            <input name="id2" type="number" text-black placeholder="Id 2" className="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                            <input name="id3" type="number" text-black placeholder="Id 3" className="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                            <input name="id4" type="number" text-black placeholder="Id 4" className="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                            <input name="id5" type="number" text-black placeholder="Id 5" className="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                            <input name="id6" type="number" text-black placeholder="Id 6" className="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                            <input name="id7" type="number" text-black placeholder="Id 7" className="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                            <input name="id8" type="number" text-black placeholder="Id 8" className="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                            <input name="id9" type="number" text-black placeholder="Id 9" className="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                            <input name="id10" type="number" text-black placeholder="Id 10" className="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                            <input name="id11" type="number" text-black placeholder="Id 11" className="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                            <input name="id12" type="number" text-black placeholder="Id 12" className="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                            <input name="id13" type="number" text-black placeholder="Id 13" className="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                            <input name="id14" type="number" text-black placeholder="Id 14" className="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                            <input name="id15" type="number" text-black placeholder="Id 15" className="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                            <input name="id16" type="number" text-black placeholder="Id 16" className="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                            <input name="id17" type="number" text-black placeholder="Id 17" className="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                            <input name="id18" type="number" text-black placeholder="Id 18" className="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                            <input name="id19" type="number" text-black placeholder="Id 19" className="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                            <input name="id20" type="number" text-black placeholder="Id 20" className="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+
+                                        </div>
+
+                                        {/* Right side - select picker, submit button*/}
+                                        <div className="col-span-3 space-y-4">
+                                            <select required className="w-full bg-white border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                                name="HubName"
+                                            >
+                                                <option value="">-- Select Hub Name --</option>
+                                                {AllHubFind?.map((hubName, i) => (
+                                                    <option key={i}>
+                                                        {hubName?.NameOfHub}
+                                                    </option>
+                                                ))}
+                                            </select>
+
+                                            {/* Submit button */}
+                                            <button
+                                                type="submit"
+                                                className="bg-blue-500 text-gray-50 px-4 py-2 rounded-md font-semibold shadow-md hover:bg-blue-600 w-full">
+                                                Submit
+                                            </button>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default Dispatch;

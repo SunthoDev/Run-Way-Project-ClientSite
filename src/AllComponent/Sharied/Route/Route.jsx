@@ -45,6 +45,7 @@ import ExpressDelivery from "../../DashbordAll/DashbordRouteUserDataAll/AddParce
 import API from "../../DashbordAll/DashbordRouteUserDataAll/API/API";
 import PaymentRequest from "../../DashbordAll/DashbordRouteUserDataAll/PaymentRequest/PaymentRequest";
 import AdminCreateHub from "../../DashbordAll/AdminePanel/AdminCreateHub/AdminCreateHub";
+import Dispatch from "../../DashbordAll/AdminePanel/Dispatch/Dispatch";
 
 
 let route = createBrowserRouter([
@@ -284,6 +285,10 @@ let route = createBrowserRouter([
          {
             path: "AdminDashboard/AdminMyHubRequestAll",
             element: <AdminMyHub></AdminMyHub>
+         },
+         {
+            path: "AdminDashboard/Dispatch",
+            element: <Dispatch></Dispatch>
          },
 
 
