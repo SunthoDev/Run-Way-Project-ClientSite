@@ -43,9 +43,10 @@ import UserPaymentRequestUnikDataAll from "../../DashbordAll/DashbordRouteUserDa
 import PickNDropDelivery from "../../DashbordAll/DashbordRouteUserDataAll/AddParcel/PickNDropDelivery/PickNDropDelivery";
 import ExpressDelivery from "../../DashbordAll/DashbordRouteUserDataAll/AddParcel/ExpressDelivery/ExpressDelivery";
 import API from "../../DashbordAll/DashbordRouteUserDataAll/API/API";
-import PaymentRequest from "../../DashbordAll/DashbordRouteUserDataAll/PaymentRequest/PaymentRequest";
 import AdminCreateHub from "../../DashbordAll/AdminePanel/AdminCreateHub/AdminCreateHub";
 import Dispatch from "../../DashbordAll/AdminePanel/Dispatch/Dispatch";
+import AddBalancePayRequest from "../../DashbordAll/DashbordRouteUserDataAll/AddBalancePayRequest/AddBalancePayRequest";
+import BalanceRequestAllUser from "../../DashbordAll/AdminePanel/BalanceRequestAllUser/BalanceRequestAllUser";
 
 
 let route = createBrowserRouter([
@@ -155,8 +156,8 @@ let route = createBrowserRouter([
             element: <API></API>
          },
          {
-            path: "PaymentRequest",
-            element: <PaymentRequest></PaymentRequest>
+            path: "AddBalancePayRequest",
+            element: <AddBalancePayRequest></AddBalancePayRequest>
          },
          {
             path: "UserTemporeryInvoiceAllStandardData/:id",
@@ -289,6 +290,10 @@ let route = createBrowserRouter([
          {
             path: "AdminDashboard/Dispatch",
             element: <Dispatch></Dispatch>
+         },
+         {
+            path: "AdminDashboard/BalanceRequestAllUser",
+            element: <BalanceRequestAllUser></BalanceRequestAllUser>
          },
 
 
