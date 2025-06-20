@@ -46,9 +46,9 @@ const ExperienceSection = () => {
   };
 
   const stats = [
-    { value: "25K", label: "Logistics Outlets", icon: "🏢" },
-    { value: "150+", label: "Countries Service", icon: "🌍" },
-    { value: "12M+", label: "Deliveries", icon: "📦" },
+    { value: "400+", label: "Logistics Outlets", icon: "🏢" },
+    { value: "64+", label: "Districts Service", icon: "🌍" },
+    { value: "1M+", label: "Deliveries", icon: "📦" },
   ];
 
   return (
@@ -73,9 +73,7 @@ const ExperienceSection = () => {
                 variants={itemVariants}
                 className="text-4xl md:text-5xl font-bold leading-tight"
               >
-                A Legacy of{" "}
-                <span className="gradient-text">Excellence</span> in
-                Transportation
+                Trusted Transport Logistic Company
               </motion.h2>
             </div>
 
@@ -83,17 +81,17 @@ const ExperienceSection = () => {
               variants={itemVariants}
               className="text-gray-600 text-lg leading-relaxed"
             >
-              At Logistip, we are more than just a transportation company – we're
-              your trusted partner in navigating the complexities of logistics and
-              supply chain management.
+
+              Trustereo Courier is a dynamic and customer-centric courier and logistics company based in Bangladesh.
+              We are committed to providing fast, secure, and reliable delivery solutions tailored to meet the unique needs of both individuals and businesses.
             </motion.p>
 
             <motion.p
               variants={itemVariants}
               className="text-gray-700 font-medium text-lg"
             >
-              25 years of experience in the industry, we have built a reputation
-              for excellence, reliability, and exceptional customer service.
+              Leveraging modern technology and a dedicated team,
+              we ensure that every package reaches its destination promptly and safely.
             </motion.p>
 
             <motion.div
@@ -110,7 +108,8 @@ const ExperienceSection = () => {
               <div className="flex items-center gap-3">
                 <span className="text-2xl">📞</span>
                 <span className="font-bold text-xl text-gray-800">
-                  +075 5032 1425
+                  +880 9611-049234
+
                 </span>
               </div>
             </motion.div>
@@ -151,15 +150,15 @@ const ExperienceSection = () => {
         >
           {[
             {
-              src: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+              src: "https://i.ibb.co/p6dJyC4c/Purple-Truck-and-Train-Journey.png",
               alt: "Plane and Truck",
             },
             {
-              src: "https://images.unsplash.com/photo-1519003722824-194d4455a60c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+              src: "https://i.ibb.co/dsqF7dMN/Trustereo-Courier-Delivery-Scene.png",
               alt: "Night Truck",
             },
             {
-              src: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+              src: "https://i.ibb.co/SwTqJ7dn/Trust-cu.png",
               alt: "Logistics Hub",
             },
           ].map((image, index) => (

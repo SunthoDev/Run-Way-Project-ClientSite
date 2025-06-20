@@ -17,19 +17,16 @@ const Footer = () => {
         company: [
             { label: 'About Us', path: '/about' },
             { label: 'Contact Us', path: '/contact' },
-            { label: 'Careers', path: '/careers' },
             { label: 'Blog', path: '/blog' },
         ],
         services: [
             { label: 'Home Delivery', path: '/services/home-delivery' },
             { label: 'Pick and Drop', path: '/services/pick-drop' },
             { label: 'Express Delivery', path: '/services/express' },
-            { label: 'International', path: '/services/international' },
         ],
         earn: [
             { label: 'Become Merchant', path: '/become-merchant' },
             { label: 'Become Rider', path: '/become-rider' },
-            { label: 'Partner With Us', path: '/partner' },
             { label: 'Franchise', path: '/franchise' },
         ],
     };
@@ -58,9 +55,10 @@ const Footer = () => {
                             style={{ maxWidth: '260px', minWidth: '120px' }}
                         />
                         <p className="text-gray-400 mb-6">
-                            Mirpur sharapara Metropiler 324<br />
-                            Runwaycourierbd@gmail.com<br />
-                            Hotline: 01518739639
+                            N/17,Noorjahanroad, Mohammadpur<br />
+                            infotrustereocourier@gmail.com<br />
+                            Hotline: 09611-049234
+
                         </p>
                         <div className="flex space-x-4">
                             <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">
@@ -151,7 +149,7 @@ const Footer = () => {
                 >
                     <div className="flex flex-col md:flex-row justify-between items-center">
                         <p className="text-gray-400 text-sm">
-                            © {new Date().getFullYear()} Runway Courier. All rights reserved.
+                            © {new Date().getFullYear()} Trustereo Courier. All rights reserved.
                         </p>
                         <div className="mt-4 md:mt-0">
                             <img src={google} alt="Google Play" className="h-12" />

@@ -33,9 +33,9 @@ const VideoSlider = () => {
     },
     {
       video: 'https://videos.pexels.com/video-files/6169118/6169118-uhd_2560_1440_25fps.mp4',
-      title: 'Global Shipping',
-      description: 'Send your packages anywhere in the world with our international shipping service.',
-      cta: { text: 'International Shipping', link: '/international' },
+      title: 'Ecommerce Delivery',
+      description: 'Trustereo Courier: Delivering Your Growth Take the First Step Towards Smart Logistics.',
+      cta: { text: 'Ecommerce Delivery', link: '/EcommerceDelivery' },
     },
     {
       video: 'https://videos.pexels.com/video-files/6169119/6169119-uhd_2560_1440_25fps.mp4',

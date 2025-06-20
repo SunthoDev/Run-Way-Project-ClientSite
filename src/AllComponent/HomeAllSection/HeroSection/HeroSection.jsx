@@ -146,18 +146,14 @@ const HeroSection = () => {
                 variants={variants.item}
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
               >
-                Fast & Secure{" "}
-                <span className="gradient-text">Courier Delivery</span>{" "}
-                Across the Nation
+                Trusted Transport Logistic Company
               </motion.h1>
 
               <motion.p
                 variants={variants.item}
                 className="text-gray-600 text-base md:text-lg lg:text-xl leading-relaxed"
               >
-                Experience lightning-fast delivery services with real-time tracking
-                and complete security. Your packages are in safe hands with our
-                professional courier team.
+               With our commitment excellence dedication customer satisfaction, we're here streamline supply chain and drive your business.
               </motion.p>
 
               <motion.div
@@ -167,7 +163,7 @@ const HeroSection = () => {
                 <ActionButton
                   className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 md:px-8 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
                 >
-                  Book Delivery Now
+                  Become a Merchants
                 </ActionButton>
                 <ActionButton
                   className="bg-gradient-to-r from-purple-500 via-pink-500 to-purple-600 text-white px-6 md:px-8 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
@@ -194,7 +190,7 @@ const HeroSection = () => {
             >
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <motion.img
-                  src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                  src="https://i.ibb.co/wFD49Ts5/sourav.png"
                   alt="Courier Delivery Service"
                   className="w-full h-[300px] sm:h-[400px] md:h-[500px] object-cover"
                   loading="lazy"

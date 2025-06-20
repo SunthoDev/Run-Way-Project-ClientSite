@@ -1,0 +1,290 @@
+[
+  {
+    "AddDistrict": "Habiganj",
+    "AddPoliceStation": "Habiganj Sadar"
+  },
+  {
+    "AddDistrict": "Habiganj",
+    "AddPoliceStation": "Chunarughat"
+  },
+  {
+    "AddDistrict": "Habiganj",
+    "AddPoliceStation": "Bahubal"
+  },
+  {
+    "AddDistrict": "Habiganj",
+    "AddPoliceStation": "Nabiganj"
+  },
+  {
+    "AddDistrict": "Habiganj",
+    "AddPoliceStation": "Ajmiriganj"
+  },
+  {
+    "AddDistrict": "Habiganj",
+    "AddPoliceStation": "Baniachang"
+  },
+  {
+    "AddDistrict": "Habiganj",
+    "AddPoliceStation": "Lakhai"
+  },
+  {
+    "AddDistrict": "Habiganj",
+    "AddPoliceStation": "Madhabpur"
+  },
+  {
+    "AddDistrict": "Habiganj",
+    "AddPoliceStation": "Shaistaganj"
+  },
+  {
+    "AddDistrict": "Habiganj",
+    "AddPoliceStation": "Baghbari"
+  },
+  {
+    "AddDistrict": "Sylhet",
+    "AddPoliceStation": "Sylhet Sadar"
+  },
+  {
+    "AddDistrict": "Sylhet",
+    "AddPoliceStation": "Beanibazar"
+  },
+  {
+    "AddDistrict": "Sylhet",
+    "AddPoliceStation": "Bishwanath"
+  },
+  {
+    "AddDistrict": "Sylhet",
+    "AddPoliceStation": "Zakiganj"
+  },
+  {
+    "AddDistrict": "Sylhet",
+    "AddPoliceStation": "Kanaighat"
+  },
+  {
+    "AddDistrict": "Sylhet",
+    "AddPoliceStation": "Golapganj"
+  },
+  {
+    "AddDistrict": "Sylhet",
+    "AddPoliceStation": "Gowainghat"
+  },
+  {
+    "AddDistrict": "Sylhet",
+    "AddPoliceStation": "Companiganj"
+  },
+  {
+    "AddDistrict": "Sylhet",
+    "AddPoliceStation": "Jaintiapur"
+  },
+  {
+    "AddDistrict": "Dhaka",
+    "AddPoliceStation": "Dhanmondi"
+  },
+  {
+    "AddDistrict": "Dhaka",
+    "AddPoliceStation": "Gulshan"
+  },
+  {
+    "AddDistrict": "Dhaka",
+    "AddPoliceStation": "Mohammadpur"
+  },
+  {
+    "AddDistrict": "Dhaka",
+    "AddPoliceStation": "Mirpur"
+  },
+  {
+    "AddDistrict": "Dhaka",
+    "AddPoliceStation": "Tejgaon"
+  },
+  {
+    "AddDistrict": "Dhaka",
+    "AddPoliceStation": "Ramna"
+  },
+  {
+    "AddDistrict": "Dhaka",
+    "AddPoliceStation": "Lalbagh"
+  },
+  {
+    "AddDistrict": "Dhaka",
+    "AddPoliceStation": "Uttara"
+  },
+  {
+    "AddDistrict": "Dhaka",
+    "AddPoliceStation": "Motijheel"
+  },
+  {
+    "AddDistrict": "Dhaka",
+    "AddPoliceStation": "Shahbagh"
+  },
+  {
+    "AddDistrict": "Dhaka",
+    "AddPoliceStation": "Savar"
+  },
+  {
+    "AddDistrict": "Dhaka",
+    "AddPoliceStation": "Keraniganj"
+  },
+  {
+    "AddDistrict": "Chittagong",
+    "AddPoliceStation": "Kotwali"
+  },
+  {
+    "AddDistrict": "Chittagong",
+    "AddPoliceStation": "Panchlaish"
+  },
+  {
+    "AddDistrict": "Chittagong",
+    "AddPoliceStation": "Chandgaon"
+  },
+  {
+    "AddDistrict": "Chittagong",
+    "AddPoliceStation": "Double Mooring"
+  },
+  {
+    "AddDistrict": "Chittagong",
+    "AddPoliceStation": "Pahartali"
+  },
+  {
+    "AddDistrict": "Chittagong",
+    "AddPoliceStation": "Bayezid"
+  },
+  {
+    "AddDistrict": "Chittagong",
+    "AddPoliceStation": "EPZ"
+  },
+  {
+    "AddDistrict": "Chittagong",
+    "AddPoliceStation": "Bakalia"
+  },
+  {
+    "AddDistrict": "Chittagong",
+    "AddPoliceStation": "Patenga"
+  },
+  {
+    "AddDistrict": "Chittagong",
+    "AddPoliceStation": "Anwara"
+  },
+  {
+    "AddDistrict": "Chittagong",
+    "AddPoliceStation": "Sitakunda"
+  },
+  {
+    "AddDistrict": "Rajshahi",
+    "AddPoliceStation": "Boalia"
+  },
+  {
+    "AddDistrict": "Rajshahi",
+    "AddPoliceStation": "Rajpara"
+  },
+  {
+    "AddDistrict": "Rajshahi",
+    "AddPoliceStation": "Shah Makhdum"
+  },
+  {
+    "AddDistrict": "Rajshahi",
+    "AddPoliceStation": "Motihar"
+  },
+  {
+    "AddDistrict": "Rajshahi",
+    "AddPoliceStation": "Paba"
+  },
+  {
+    "AddDistrict": "Rajshahi",
+    "AddPoliceStation": "Godagari"
+  },
+  {
+    "AddDistrict": "Khulna",
+    "AddPoliceStation": "Khalishpur"
+  },
+  {
+    "AddDistrict": "Khulna",
+    "AddPoliceStation": "Daulatpur"
+  },
+  {
+    "AddDistrict": "Khulna",
+    "AddPoliceStation": "Sonadanga"
+  },
+  {
+    "AddDistrict": "Khulna",
+    "AddPoliceStation": "Khan Jahan Ali"
+  },
+  {
+    "AddDistrict": "Khulna",
+    "AddPoliceStation": "Labanchora"
+  },
+  {
+    "AddDistrict": "Khulna",
+    "AddPoliceStation": "Batiaghata"
+  },
+  {
+    "AddDistrict": "Barisal",
+    "AddPoliceStation": "Kotwali"
+  },
+  {
+    "AddDistrict": "Barisal",
+    "AddPoliceStation": "Airport"
+  },
+  {
+    "AddDistrict": "Barisal",
+    "AddPoliceStation": "Banaripara"
+  },
+  {
+    "AddDistrict": "Barisal",
+    "AddPoliceStation": "Gournadi"
+  },
+  {
+    "AddDistrict": "Barisal",
+    "AddPoliceStation": "Hizla"
+  },
+  {
+    "AddDistrict": "Barisal",
+    "AddPoliceStation": "Muladi"
+  },
+  {
+    "AddDistrict": "Rangpur",
+    "AddPoliceStation": "Kotchandpur"
+  },
+  {
+    "AddDistrict": "Rangpur",
+    "AddPoliceStation": "Pirgacha"
+  },
+  {
+    "AddDistrict": "Rangpur",
+    "AddPoliceStation": "Kaunia"
+  },
+  {
+    "AddDistrict": "Rangpur",
+    "AddPoliceStation": "Taraganj"
+  },
+  {
+    "AddDistrict": "Rangpur",
+    "AddPoliceStation": "Badarganj"
+  },
+  {
+    "AddDistrict": "Rangpur",
+    "AddPoliceStation": "Gangachara"
+  },
+  {
+    "AddDistrict": "Mymensingh",
+    "AddPoliceStation": "Kotwali"
+  },
+  {
+    "AddDistrict": "Mymensingh",
+    "AddPoliceStation": "Gafargaon"
+  },
+  {
+    "AddDistrict": "Mymensingh",
+    "AddPoliceStation": "Trishal"
+  },
+  {
+    "AddDistrict": "Mymensingh",
+    "AddPoliceStation": "Bhaluka"
+  },
+  {
+    "AddDistrict": "Mymensingh",
+    "AddPoliceStation": "Ishwarganj"
+  },
+  {
+    "AddDistrict": "Mymensingh",
+    "AddPoliceStation": "Muktagachha"
+  }
+]

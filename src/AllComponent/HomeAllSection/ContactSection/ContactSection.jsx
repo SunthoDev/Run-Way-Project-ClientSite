@@ -46,7 +46,7 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-gray-800">Office Address</h4>
-                    <p className="text-gray-600">265 New Ave, California City - 1001, USA</p>
+                    <p className="text-gray-600">N/17,Noorjahanroad, Mohammadpur</p>
                   </div>
                 </motion.div>
 
@@ -60,7 +60,7 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-gray-800">Email Us</h4>
-                    <p className="text-gray-600">info@logistics.com</p>
+                    <p className="text-gray-600">infotrustereocourier@gmail.com</p>
                   </div>
                 </motion.div>
 
@@ -74,7 +74,7 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-gray-800">Call Us</h4>
-                    <p className="text-gray-600">+0123 2345 56789</p>
+                    <p className="text-gray-600">09611-049234</p>
                   </div>
                 </motion.div>
               </div>

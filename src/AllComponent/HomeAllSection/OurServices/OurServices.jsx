@@ -12,9 +12,9 @@ const OurServices = () => {
     },
     {
       icon: "🌍",
-      title: "International Shipping",
-      description: "Global shipping solutions for your international needs",
-      features: ["Worldwide coverage", "Customs clearance", "Insurance options"]
+      title: "Ecommerce Delivery",
+      description: "Fast & Secure Courier Delivery Across the Nation",
+      features: ["Cash on Delivery", "Daily pickup, no limits", "24/7 Customer Service"]
     },
     {
       icon: "📦",
@@ -73,10 +73,10 @@ const OurServices = () => {
         className="text-center mb-16"
       >
         <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-400">
-          Our Services
+          Trusted Transport Logistic Company 
         </h2>
         <p className="text-gray-600 max-w-2xl mx-auto text-lg">
-          Discover our comprehensive range of courier and logistics services designed to meet your every need
+          With our commitment excellence dedication customer satisfaction, we're here streamline supply chain and drive your business.
         </p>
       </motion.div>
 
@@ -131,17 +131,17 @@ const OurServices = () => {
       >
         <div className="bg-gradient-to-r from-blue-600 to-blue-400 rounded-2xl p-8 md:p-12 max-w-4xl mx-auto">
           <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Ready to Ship?
+            Trustereo Courier: Delivering Your Growth
           </h3>
           <p className="text-white/90 mb-8 text-lg">
-            Get started with our services today and experience the difference
+            Fast, Reliable & Nationwide — Trustereo Courier is Always On Time.
           </p>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="bg-gradient-to-r from-teal-400 to-blue-500 text-white px-8 py-3 rounded-lg font-semibold shadow-lg hover:from-teal-500 hover:to-blue-600 transition"
           >
-            Get Started Now
+            Become a Merchant
           </motion.button>
         </div>
       </motion.div>

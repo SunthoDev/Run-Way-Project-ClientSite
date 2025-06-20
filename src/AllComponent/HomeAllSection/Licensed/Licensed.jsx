@@ -30,7 +30,7 @@ const Licensed = () => {
   };
 
   return (
-    <motion.div 
+    <motion.div
       ref={ref}
       variants={containerVariants}
       initial="hidden"
@@ -40,22 +40,22 @@ const Licensed = () => {
       {/* Decorative borders */}
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-teal-500 to-transparent opacity-20" />
       <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-teal-500 to-transparent opacity-20" />
-      
+
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
             {/* Left Section - Licensed */}
-            <motion.div 
+            <motion.div
               variants={itemVariants}
               className="group relative bg-white/80 backdrop-blur-sm rounded-3xl p-6 md:p-8 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 -translate-x-full group-hover:translate-x-full" />
-              
+
               <div className="flex items-center mb-8">
-                <motion.div 
+                <motion.div
                   className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-teal-100 flex items-center justify-center mr-4 group-hover:rotate-180 transition-transform duration-500"
                 >
-                  <motion.span 
+                  <motion.span
                     className="inline-block w-2.5 h-2.5 md:w-3 md:h-3 bg-teal-500 rounded-full"
                     animate={{ scale: [1, 1.2, 1] }}
                     transition={{ duration: 2, repeat: Infinity }}
@@ -64,17 +64,17 @@ const Licensed = () => {
                 <div>
                   <h3 className="text-teal-600 text-sm font-semibold uppercase tracking-wider">Licensed</h3>
                   <h2 className="text-xl md:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-teal-600 to-blue-600 bg-clip-text text-transparent mt-1">
-                    GPO Certified Courier
+                    Trustereo Courier RJSC Licensed
                   </h2>
                 </div>
               </div>
-              
+
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-br from-teal-100 to-blue-100 rounded-full blur-2xl opacity-50" />
                 <div className="relative w-36 h-36 md:w-48 md:h-48 mx-auto bg-white rounded-full flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300">
-                  <img 
-                    src="https://i.ibb.co/VqG6LzZ/gpo-logo.png" 
-                    alt="GPO Logo" 
+                  <img
+                    src="https://i.ibb.co/Y7Mt2bzq/RJSC-Logo.png"
+                    alt="GPO Logo"
                     className="w-24 h-24 md:w-32 md:h-32 object-contain transform group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
@@ -82,17 +82,17 @@ const Licensed = () => {
             </motion.div>
 
             {/* Right Section - Membership */}
-            <motion.div 
+            <motion.div
               variants={itemVariants}
               className="group relative bg-white/80 backdrop-blur-sm rounded-3xl p-6 md:p-8 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 -translate-x-full group-hover:translate-x-full" />
-              
+
               <div className="flex items-center mb-8">
-                <motion.div 
+                <motion.div
                   className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-blue-100 flex items-center justify-center mr-4 group-hover:rotate-180 transition-transform duration-500"
                 >
-                  <motion.span 
+                  <motion.span
                     className="inline-block w-2.5 h-2.5 md:w-3 md:h-3 bg-blue-500 rounded-full"
                     animate={{ scale: [1, 1.2, 1] }}
                     transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
@@ -107,16 +107,16 @@ const Licensed = () => {
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                
+
 
                 <motion.div
                   whileHover={{ y: -5 }}
                   className="group/card bg-gradient-to-br from-teal-50 to-white rounded-2xl p-6 shadow-md hover:shadow-lg transition-all duration-300"
                 >
                   <div className="w-20 h-20 md:w-24 md:h-24 bg-white rounded-full flex items-center justify-center shadow-sm mb-4 group-hover/card:shadow-md transition-shadow duration-300">
-                    <img 
-                      src="https://i.ibb.co/0jZ8Y6L/ecab-logo.png" 
-                      alt="e-CAB Logo" 
+                    <img
+                      src="https://i.ibb.co/WWC8q9h7/ecab.png"
+                      alt="e-CAB Logo"
                       className="w-14 h-14 md:w-16 md:h-16 object-contain transform group-hover/card:scale-105 transition-transform duration-300"
                     />
                   </div>
@@ -126,8 +126,46 @@ const Licensed = () => {
             </motion.div>
           </div>
         </div>
+
+
+        <div className="mx-auto pt-[100px] max-w-6xl px-4">
+          <h2 className="text-center text-xl md:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-teal-600 to-blue-600 bg-clip-text text-transparent pb-6">
+            E-commerce Delivery Partner
+          </h2>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 items-center justify-center">
+            {[
+              {
+                src: "https://i.ibb.co/qLsZRXzb/Chat-GPT-Image-Jun-16-2025-06-06-28-PM.png",
+                alt: "e-CAB Logo",
+              },
+              {
+                src: "https://i.ibb.co/rBL33s5/Sourav-Shopping-Zone-Logo.png",
+                alt: "Sourav Shopping Zone Logo",
+              },
+              {
+                src: "https://i.ibb.co/B5qfzNrg/zone.png",
+                alt: "Zone Logo",
+              },
+            ].map((img, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-xl shadow-md p-4 flex justify-center items-center h-[160px]"
+              >
+                <img
+                  src={img.src}
+                  alt={img.alt}
+                  className="object-contain h-full w-full"
+                />
+              </div>
+            ))}
+          </div>
+
+        </div>
+
+
       </div>
-    </motion.div>
+    </motion.div >
   );
 };
 
