@@ -52,9 +52,10 @@ const ExpressDelivery = () => {
         let note = event.target.note.value
         let weight = event.target.weight.value
         let StandardParcelId = Math.round(Math.random() * 9999999).toString()
-        let date = moment().format("MM/D/YY , hh:mm A")
+        let date = moment().format("D/MM/YYYY")
+        let time = moment().format("hh:mm A")
 
-        let StandardDeliveryData = { deliveryType, name, address, District, policeStation, AlternativePhone, RecipientEmail, number, CodAmount, Invoice, ItemDescription, note, weight, StandardEmailUser: user?.email, StandardParcelId, date, DeliveryCharge: "60", status: "Review", Payment: "No", ParcelCategory: "Express" }
+        let StandardDeliveryData = { deliveryType, name, address, District, policeStation, AlternativePhone, RecipientEmail, number, CodAmount, Invoice, ItemDescription, note, weight, StandardEmailUser: user?.email, StandardParcelId, date,time, DeliveryCharge: "60", status: "Review", Payment: "No", ParcelCategory: "Express" }
 
         // console.log(StandardDeliveryData)
 

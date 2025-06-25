@@ -55,11 +55,10 @@ const HeaderDashBord = () => {
                 <div className="form-control">
                     {
                         ad ?
-                            <i className="fa text-[26px] font-[600] mr-[10px] fa-comments-o" aria-hidden="true"></i>
+                            <i onClick={() => document.getElementById('AdminSentNotice').showModal()} className="fa text-[26px] font-[600] mr-[10px] fa-comments-o" aria-hidden="true"></i>
                             :
                             <i className="fa text-[22px] font-[600] mr-[10px] fa-bell-o" aria-hidden="true"></i>
                     }
-
                 </div>
 
                 <div className="dropdown dropdown-end">
@@ -100,8 +99,59 @@ const HeaderDashBord = () => {
                     }
 
                 </div>
-
             </div>
+
+
+            {/* =========================================================== */}
+            {/* Admin Send Notice All Us4er And Particle User Start*/}
+            {/* =========================================================== */}
+            {/* Modal */}
+            <dialog id="AdminSentNotice" className="modal">
+                <div className="modal-box w-11/12 max-w-2xl">
+                    <h3 className="font-bold text-lg mb-4 text-center text-white">Send Message Panel</h3>
+
+                    {/* ALL MERCHANT SECTION */}
+                    <div className="mb-6 border-b pb-6">
+                        <h4 className="font-semibold text-white mb-2">📢 Send Message to All Merchants</h4>
+                        <textarea
+                            className="textarea textarea-bordered w-full min-h-[100px]"
+                            placeholder="Write message for all merchants..."
+                        ></textarea>
+                        <button className="btn btn-success mt-3">Send Message</button>
+                    </div>
+
+                    {/* PARTICULAR USER SECTION */}
+                    <div>
+                        <h4 className="font-semibold text-white mb-2">🎯 Send Message to Particular User</h4>
+                        <input
+                            type="text"
+                            placeholder="Enter User ID"
+                            className="input input-bordered w-full mb-2"
+                        />
+                        <textarea
+                            className="textarea textarea-bordered w-full min-h-[100px]"
+                            placeholder="Write message for this user..."
+                        ></textarea>
+                        <button className="btn btn-info mt-3">Send Message</button>
+                    </div>
+
+                    <div className="modal-action">
+                        <form method="dialog">
+                            <button className="btn">Close</button>
+                        </form>
+                    </div>
+                </div>
+            </dialog>
+            {/* =========================================================== */}
+            {/* Admin Send Notice All Us4er And Particle User End*/}
+            {/* =========================================================== */}
+
+
+
+
+
+
+
         </div>
     );
 };

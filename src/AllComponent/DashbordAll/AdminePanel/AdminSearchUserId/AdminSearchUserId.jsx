@@ -26,20 +26,17 @@ const AdminSearchUserId = () => {
     // =======================================================================
     // Consignment Standard Delivery Data Wok Start
     // =======================================================================
-
     let { refetch, data: userOrderStandardParcelData = [] } = useQuery(["AdminConsignmentUserStandardDataFind"], async () => {
         let res = await fetch(`http://localhost:5000/AdminConsignmentUserStandardDataFind?email=${email}`)
         return res.json()
 
     })
-
     // console.log(userOrderStandardParcelData)
+    
 
     // All  data find 
     let ConsignmentAllData = userOrderStandardParcelData.filter(approved => approved?.status == "Pending" || approved?.Payment == "Yes" && approved?.status == "Delivered" || approved?.Payment == "Yes" && approved?.status == "PartiallyDelivered" || approved?.Payment == "Yes" && approved?.status == "Cancel")
-
     // console.log(ConsignmentAllData)
-
 
     // Review data find 
     let ReviewData = userOrderStandardParcelData.filter(Review => Review?.status === "Review")
@@ -66,8 +63,7 @@ const AdminSearchUserId = () => {
     let CancelData = userOrderStandardParcelData.filter(Cancel => Cancel?.status == "Cancel" && Cancel?.Payment == "Yes")
     // console.log(ApprovedPendingData)
 
-    // =======================================================================
-    // Consignment Standard Delivery Data Wok End
+    // =======================================================================z
     // =======================================================================
 
     // =======================================================================

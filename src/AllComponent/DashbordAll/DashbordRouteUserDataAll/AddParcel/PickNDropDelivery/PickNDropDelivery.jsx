@@ -56,9 +56,10 @@ const PickNDropDelivery = () => {
         let note = event.target.note.value
         let weight = event.target.weight.value
         let StandardParcelId = Math.round(Math.random() * 9999999).toString()
-        let date = moment().format("MM/D/YY , hh:mm A")
+        let date = moment().format("D/MM/YYYY")
+        let time = moment().format("hh:mm A")
 
-        let StandardDeliveryData = { PickNDropName,PickNDropPhone,PickNDropAddress, deliveryType, name, address, District, policeStation, AlternativePhone, RecipientEmail, number, CodAmount, Invoice, ItemDescription, note, weight, StandardEmailUser: user?.email, StandardParcelId, date, DeliveryCharge: "60", status: "Review", Payment: "No", ParcelCategory: "PickNDrop" }
+        let StandardDeliveryData = { PickNDropName, PickNDropPhone, PickNDropAddress, deliveryType, name, address, District, policeStation, AlternativePhone, RecipientEmail, number, CodAmount, Invoice, ItemDescription, note, weight, StandardEmailUser: user?.email, StandardParcelId, date, time, DeliveryCharge: "60", status: "Review", Payment: "No", ParcelCategory: "PickNDrop" }
 
         // console.log(StandardDeliveryData)
 
@@ -103,16 +104,13 @@ const PickNDropDelivery = () => {
             </div>
 
             {/* =================================================== */}
-
             <div className='StandardDeliveryParent px-[12px] md:px-4 my-4'>
 
                 <div className="StandardMain bg-white rounded-[8px] p-[28px]">
-
                     <h2 className='text-black font-[600] text-[20px]'>Add New Parcel (Pick N Drop Service)</h2>
                     <div className="Horijontal bg-[#d4d2d2] my-[12px] w-[full] h-[1px]"></div>
 
                     {/* =================================================== */}
-
                     <form onSubmit={handleStandardParcel} className='StandardFromData'>
 
                         <h3 className='text-black font-[500] text-[15px]'>Pickup Address :</h3>
@@ -296,9 +294,7 @@ const PickNDropDelivery = () => {
 
                     </form>
 
-
                 </div>
-
             </div>
         </div>
     );

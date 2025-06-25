@@ -86,6 +86,8 @@ const Dashboard = () => {
                             <li> <NavLink to="/dashboard/AdminDashboard/AdminCreateHub"><span><FaHome></FaHome></span>Create Hub</NavLink></li>
                             <li> <NavLink to="/dashboard/AdminDashboard/AdminMyHubRequestAll"><span><FaHome></FaHome></span> My Hub</NavLink></li>
                             <li> <NavLink to="/dashboard/AdminDashboard/Dispatch"><span><FaHome></FaHome></span>Dispatch</NavLink></li>
+                            <li> <NavLink to="/dashboard/AdminDashboard/DeliveryMonitoring"><span><FaHome></FaHome></span>Delivery Monitoring</NavLink></li>
+                            <li> <NavLink to="/dashboard/AdminDashboard/ReturnParcelMonitoring"><span><FaHome></FaHome></span>Return Parcel Monitoring</NavLink></li>
                             <li> <NavLink to="/dashboard/AdminDashboard/BalanceRequestAllUser"><span><FaHome></FaHome></span>Balance Request Users</NavLink></li>
                             <li> <NavLink to="/dashboard/AdminDashboard/ApprovedParcelRoute"><span><FaWallet></FaWallet></span> Approve Parcel</NavLink></li>
                             <li>
