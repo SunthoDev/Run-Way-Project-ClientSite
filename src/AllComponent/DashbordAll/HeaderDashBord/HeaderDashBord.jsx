@@ -26,6 +26,13 @@ const HeaderDashBord = () => {
     }
 
 
+    const chatMessages = [
+        { from: "user", message: "Hello admin!", date: "2025-06-04 10:30 AM" },
+        { from: "admin", message: "Hello! How can I help you?", date: "2025-06-04 10:32 AM" },
+        { from: "user", message: "I need help with a return request.", date: "2025-06-04 10:33 AM" },
+        { from: "admin", message: "Sure, give me the parcel ID.", date: "2025-06-04 10:34 AM" },
+        { from: "user", message: "Parcel ID is 123456789", date: "2025-06-04 10:35 AM" },
+    ];
 
     return (
         <div className="DashboardNavbar navbar bg-[#F6F6F6] z-50 fixed md:sticky top-0 w-[100%]">
@@ -57,7 +64,7 @@ const HeaderDashBord = () => {
                         ad ?
                             <i onClick={() => document.getElementById('AdminSentNotice').showModal()} className="fa text-[26px] font-[600] mr-[10px] fa-comments-o" aria-hidden="true"></i>
                             :
-                            <i className="fa text-[22px] font-[600] mr-[10px] fa-bell-o" aria-hidden="true"></i>
+                            <i onClick={() => document.getElementById('MyChat').showModal()} className="fa text-[22px] font-[600] mr-[10px] fa-bell-o" aria-hidden="true"></i>
                     }
                 </div>
 
@@ -146,8 +153,45 @@ const HeaderDashBord = () => {
             {/* Admin Send Notice All Us4er And Particle User End*/}
             {/* =========================================================== */}
 
+            {/* =========================================================== */}
+            {/* User See All Message that was game admin Start*/}
+            {/* =========================================================== */}
 
+            {/* Modal */}
+            <dialog id="MyChat" className="modal">
+                <div className="modal-box w-11/12 max-w-[480px]">
+                    <h3 className="font-bold text-lg mb-4 text-center text-white">📢Chat Messages</h3>
 
+                    {/* Chat Body */}
+                    <div className="h-96 overflow-y-auto space-y-4 px-2 bg-cover bg-center"
+                        style={{
+                            backgroundImage: `url('https://images.unsplash.com/photo-1517816428104-797678c7cf0c?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')`,
+                        }}
+                    >
+                        {chatMessages.map((msg, index) => (
+                            <div
+                                key={index}
+                                className={`chat ${index % 2 === 0 ? 'chat-start' : 'chat-end'}`}
+                            >
+                                <div className="chat-bubble bg-gray-100 text-gray-900">
+                                    {msg.message}
+                                    <div className="text-xs text-gray-500 mt-1">{msg.date}</div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Close Button */}
+                    <div className="modal-action">
+                        <form method="dialog">
+                            <button className="btn">Close</button>
+                        </form>
+                    </div>
+                </div>
+            </dialog>
+            {/* =========================================================== */}
+            {/* User See All Message that was game admin End*/}
+            {/* =========================================================== */}
 
 
 
