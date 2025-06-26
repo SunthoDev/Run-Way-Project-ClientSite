@@ -25,7 +25,6 @@ const AddBalancePayRequest = () => {
         let res = await fetch(`http://localhost:5000/BalanceReqUserProcessAdmin/UserAllAddBalanceReqData/${user?.email}`)
         return res.json()
     })
-
     // console.log(BalanceReqAllData)
 
     let PendingBalanceReqAllData = BalanceReqAllData.filter(Pending => Pending.status == "Pending")
@@ -292,8 +291,6 @@ const AddBalancePayRequest = () => {
                         </div>
 
                     </div>
-
-
 
                 </div>
             }

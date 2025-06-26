@@ -1,31 +1,28 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import "./HeaderDashBord.css"
 import logo from "../../../assets/logo/LogoTwo.png"
 import { AuthContext } from '../../AuthoncationAll/AuthProvider/AuthProvider';
 import useRole from '../../../Hook/useRole';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import { useQuery } from '@tanstack/react-query';
+import moment from "moment";
 
 const HeaderDashBord = () => {
 
+    const [roles] = useRole()
+    const ad = roles?.role === "admin"
     let { user, logOutUser } = useContext(AuthContext)
-    // console.log(user)
+    // console.log(roles)
+
     let handelLogOut = () => {
         logOutUser()
             .then(data => { })
             .then(error => { })
     }
-
-    const [roles] = useRole()
-    const ad = roles?.role === "admin"
-
-    // console.log(roles)
-
-
     let handleSendRequest = () => {
         alert("Send Your Request")
     }
-
-
     const chatMessages = [
         { from: "user", message: "Hello admin!", date: "2025-06-04 10:30 AM" },
         { from: "admin", message: "Hello! How can I help you?", date: "2025-06-04 10:32 AM" },
@@ -33,6 +30,20 @@ const HeaderDashBord = () => {
         { from: "admin", message: "Sure, give me the parcel ID.", date: "2025-06-04 10:34 AM" },
         { from: "user", message: "Parcel ID is 123456789", date: "2025-06-04 10:35 AM" },
     ];
+
+    // ============================================================
+    // Admin Send All Notice Data Find
+    // ============================================================
+    let { refetch, data: AllNotice = [] } = useQuery(["NoticeMessageSendAdminToAllUser_AllNoticeData"], async () => {
+        let res = await fetch(`http://localhost:5000/NoticeMessageSendAdminToAllUser/AllNoticeData`)
+        return res.json()
+    })
+    // console.log(AllNotice)
+
+    // Admin Send All My Notice filter here to from notice
+    // ============================================================
+    let MyNotice = AllNotice?.filter(notice => notice?.ID === '' || notice?.ID === roles?.userId)
+    // console.log(MyNotice)
 
     return (
         <div className="DashboardNavbar navbar bg-[#F6F6F6] z-50 fixed md:sticky top-0 w-[100%]">
@@ -108,46 +119,86 @@ const HeaderDashBord = () => {
                 </div>
             </div>
 
-
             {/* =========================================================== */}
             {/* Admin Send Notice All Us4er And Particle User Start*/}
             {/* =========================================================== */}
             {/* Modal */}
             <dialog id="AdminSentNotice" className="modal">
-                <div className="modal-box w-11/12 max-w-2xl">
-                    <h3 className="font-bold text-lg mb-4 text-center text-white">Send Message Panel</h3>
+                <form onSubmit={async (e) => {
+                    e.preventDefault()
+                    let ID = e.target.Id.value
+                    let Message = e.target.Message.value
+                    let date = moment().format("D/MM/YY")
+                    let time = moment().format("hh:mm A")
+                    let allInfo = { ID, Message, date, time }
+                    try {
+                        let res = await fetch("http://localhost:5000/NoticeMessageSendAdminToAllUser/AdminSendNoticeMessage", {
+                            method: "POST",
+                            headers: {
+                                "content-type": "application/json"
+                            },
+                            body: JSON.stringify(allInfo)
+                        })
+                        let result = await res.json()
 
-                    {/* ALL MERCHANT SECTION */}
-                    <div className="mb-6 border-b pb-6">
-                        <h4 className="font-semibold text-white mb-2">📢 Send Message to All Merchants</h4>
-                        <textarea
-                            className="textarea textarea-bordered w-full min-h-[100px]"
-                            placeholder="Write message for all merchants..."
-                        ></textarea>
-                        <button className="btn btn-success mt-3">Send Message</button>
-                    </div>
+                        if (res.ok) {
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Message Request Success.',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            e.target.reset();
+                        }
 
-                    {/* PARTICULAR USER SECTION */}
-                    <div>
-                        <h4 className="font-semibold text-white mb-2">🎯 Send Message to Particular User</h4>
-                        <input
-                            type="text"
-                            placeholder="Enter User ID"
-                            className="input input-bordered w-full mb-2"
-                        />
-                        <textarea
-                            className="textarea textarea-bordered w-full min-h-[100px]"
-                            placeholder="Write message for this user..."
-                        ></textarea>
-                        <button className="btn btn-info mt-3">Send Message</button>
-                    </div>
+                    } catch (error) {
+                        console.error("An error occurred:", error.message);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: error.message || 'Something went wrong!'
+                        });
+                    }
+                }}>
+                    <div className="modal-box w-11/12 max-w-2xl">
+                        <h3 className="font-bold text-lg mb-4 text-center text-white">Send Message Panel</h3>
 
-                    <div className="modal-action">
-                        <form method="dialog">
-                            <button className="btn">Close</button>
-                        </form>
+                        {/* ALL MERCHANT SECTION */}
+                        {/* <div className="mb-6 border-b pb-6">
+                            <h4 className="font-semibold text-white mb-2">📢 Send Message to All Merchants</h4>
+                            <textarea
+                                className="textarea textarea-bordered w-full min-h-[100px]"
+                                placeholder="Write message for all merchants..."
+                            ></textarea>
+                            <button className="btn btn-success mt-3">Send Message</button>
+                        </div> */}
+
+                        {/* PARTICULAR USER SECTION */}
+                        <div>
+                            <h4 className="font-semibold text-white mb-2">🎯 Send Message to Particular User</h4>
+                            <input
+                                name="Id"
+                                type="text"
+                                placeholder="Enter User ID"
+                                className="input input-bordered w-full mb-2"
+                            />
+                            <textarea
+                                name="Message"
+                                required
+                                className="textarea textarea-bordered w-full min-h-[100px]"
+                                placeholder="Write message for this user..."
+                            ></textarea>
+                            <button className="btn btn-info mt-3">Send Message</button>
+                        </div>
+
+                        <div className="modal-action">
+                            <form method="dialog">
+                                <button className="btn">Close</button>
+                            </form>
+                        </div>
                     </div>
-                </div>
+                </form>
             </dialog>
             {/* =========================================================== */}
             {/* Admin Send Notice All Us4er And Particle User End*/}
@@ -156,7 +207,6 @@ const HeaderDashBord = () => {
             {/* =========================================================== */}
             {/* User See All Message that was game admin Start*/}
             {/* =========================================================== */}
-
             {/* Modal */}
             <dialog id="MyChat" className="modal">
                 <div className="modal-box w-11/12 max-w-[480px]">
@@ -168,14 +218,14 @@ const HeaderDashBord = () => {
                             backgroundImage: `url('https://images.unsplash.com/photo-1517816428104-797678c7cf0c?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')`,
                         }}
                     >
-                        {chatMessages.map((msg, index) => (
+                        {MyNotice?.map((msg, index) => (
                             <div
                                 key={index}
                                 className={`chat ${index % 2 === 0 ? 'chat-start' : 'chat-end'}`}
                             >
                                 <div className="chat-bubble bg-gray-100 text-gray-900">
-                                    {msg.message}
-                                    <div className="text-xs text-gray-500 mt-1">{msg.date}</div>
+                                    {msg.Message}
+                                    <div className="text-xs text-gray-500 mt-1">{msg?.date} {msg?.time}</div>
                                 </div>
                             </div>
                         ))}
@@ -193,10 +243,7 @@ const HeaderDashBord = () => {
             {/* User See All Message that was game admin End*/}
             {/* =========================================================== */}
 
-
-
-
-        </div>
+        </div >
     );
 };
 
