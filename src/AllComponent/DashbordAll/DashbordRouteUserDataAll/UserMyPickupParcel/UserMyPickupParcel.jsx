@@ -6,6 +6,7 @@ import UserApprovedPickupRequest from './UserApprovedPickupRequest/UserApprovedP
 import UserPendingPickupRequest from './UserPendingPickupRequest/UserPendingPickupRequest';
 import useRole from '../../../../Hook/useRole';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const UserMyPickupParcel = () => {
 
@@ -68,9 +69,66 @@ const UserMyPickupParcel = () => {
                     <div className={toggle === 1 ? "show-Tab unverifiedData" : "hidden-tab"}>
                         <h2 className='text-black text-[22px] text-center font-[600] mt-14'>Pending Pickup Request Data</h2>
                         <h3 className='DataList w-[100%] md:w-[18%]'>Total Data {PendingPickupRequestData.length}</h3>
+
                         {
                             PendingPickupRequestData.map(PendingData => <UserPendingPickupRequest key={PendingData._id} PendingData={PendingData} refetch={refetch}></UserPendingPickupRequest>)
                         }
+
+                       {/* <div className="">
+                            <div className="overflow-x-auto p-4">
+                                <table className="table  w-full rounded-xl shadow-md">
+                                    <thead className="bg-base-200 text-base-content">
+                                        <tr>
+                                            <th>Merchant Name</th>
+                                            <th>Parcel ID</th>
+                                            <th>Amount</th>
+                                            <th>Delivery Charge</th>
+                                            <th>Request Date</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {
+                                            PendingPickupRequestData?.map(AllData => <tr className="">
+                                                <td>
+                                                    <p className="font-medium text-base text-gray-800">{AllData?.name}</p>
+                                                </td>
+                                                <td>
+                                                    <p className="text-sm text-gray-600">{AllData?.StandardParcelId}</p>
+                                                </td>
+                                                <td>
+                                                    <p className="text-sm font-semibold text-green-600">{AllData?.CodAmount} ৳</p>
+                                                </td>
+                                                <td>
+                                                    <p className="text-sm text-blue-600">{AllData?.DeliveryCharge} ৳</p>
+                                                </td>
+                                                <td>
+                                                    <p className="text-sm text-gray-500">{AllData?.date}</p>
+                                                </td>
+                                                <td>
+                                                    <span
+                                                        className={`badge badge-sm ${AllData?.status === "Approved" ? "badge-success" : AllData?.status === "Rejected" ? "badge-error" : "badge-warning"}`}
+                                                    >
+                                                        {status}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <Link
+                                                        to={`/dashboard/UserTemporeryInvoiceAllStandardData/${AllData?.StandardParcelId}`}
+                                                    >
+                                                        <button className="btn btn-sm btn-outline btn-primary">
+                                                            View
+                                                        </button>
+                                                    </Link>
+                                                </td>
+                                            </tr>)
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div> */}
                     </div>
                     {/* ============================================= */}
                     {/* Approved Data */}
@@ -78,11 +136,63 @@ const UserMyPickupParcel = () => {
                     <div className={toggle === 2 ? "show-Tab unverifiedData" : "hidden-tab"}>
                         <h2 className='text-black text-[22px] text-center font-[600] mt-14'>Approved Pickup Request Data</h2>
                         <h3 className='DataList w-[100%] md:w-[18%]'>Total Data {ApprovedPickupRequestData.length}</h3>
-                        {
-                            ApprovedPickupRequestData.map(ApprovedData => <UserApprovedPickupRequest key={ApprovedData._id} ApprovedData={ApprovedData} refetch={refetch}></UserApprovedPickupRequest>)
-                        }
-                    </div>
+                        <div className="">
+                            <div className="overflow-x-auto p-4">
+                                <table className="table  w-full rounded-xl shadow-md">
+                                    <thead className="bg-base-200 text-base-content">
+                                        <tr>
+                                            <th>Merchant Name</th>
+                                            <th>Parcel ID</th>
+                                            <th>Amount</th>
+                                            <th>Delivery Charge</th>
+                                            <th>Request Date</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {
+                                            ApprovedPickupRequestData?.map(AllData => <tr className="">
+                                                <td>
+                                                    <p className="font-medium text-base text-gray-800">{AllData?.name}</p>
+                                                </td>
+                                                <td>
+                                                    <p className="text-sm text-gray-600">{AllData?.StandardParcelId}</p>
+                                                </td>
+                                                <td>
+                                                    <p className="text-sm font-semibold text-green-600">{AllData?.CodAmount} ৳</p>
+                                                </td>
+                                                <td>
+                                                    <p className="text-sm text-blue-600">{AllData?.DeliveryCharge} ৳</p>
+                                                </td>
+                                                <td>
+                                                    <p className="text-sm text-gray-500">{AllData?.date}</p>
+                                                </td>
+                                                <td>
+                                                    <span
+                                                        className={`badge badge-sm ${AllData?.status === "Approved" ? "badge-success" : AllData?.status === "Rejected" ? "badge-error" : "badge-warning"}`}
+                                                    >
+                                                        {status}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <Link
+                                                        to={`/dashboard/UserTemporeryInvoiceAllStandardData/${AllData?.StandardParcelId}`}
+                                                    >
+                                                        <button className="btn btn-sm btn-outline btn-primary">
+                                                            View
+                                                        </button>
+                                                    </Link>
+                                                </td>
+                                            </tr>)
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
 
+                        </div>
+
+                    </div>
                 </div>
             }
 

@@ -2,8 +2,8 @@ import { useContext } from 'react';
 import "./UserCancelParcelAll.css"
 import { AuthContext } from '../../../AuthoncationAll/AuthProvider/AuthProvider';
 import { useQuery } from '@tanstack/react-query';
-import UserCancelParcelAllDataSee from './UserCancelParcelAllDataSee/UserCancelParcelAllDataSee';
 import useRole from '../../../../Hook/useRole';
+import { Link } from 'react-router-dom';
 
 const UserCancelParcelAll = () => {
 
@@ -25,7 +25,7 @@ const UserCancelParcelAll = () => {
     let CancelData = AllCancelData.filter(Cancel => Cancel?.status == "Cancel" && Cancel?.Payment == "Yes")
 
 
-    console.log(CancelData)
+    // console.log(CancelData)
 
 
     return (
@@ -33,15 +33,60 @@ const UserCancelParcelAll = () => {
             {status == "pending" ?
 
                 <h2 className='text-black font-[700] text-center mt-[40px] text-[34px]'>Please Waite, For Admin Approved</h2>
-
                 :
-
-                <div className='CancelParcelAll '>
-                    <h2 className='text-[18px] font-[600] text-black text-center'>All Cancel Parcel</h2>
-
-                    {
-                        CancelData.map(cancelAllData => <UserCancelParcelAllDataSee key={cancelAllData._id} cancelAllData={cancelAllData} refetch={refetch}></UserCancelParcelAllDataSee>)
-                    }
+                <div className="">
+                    <div className="overflow-x-auto p-4">
+                        <table className="table  w-full rounded-xl shadow-md">
+                            <thead className="bg-base-200 text-base-content">
+                                <tr>
+                                    <th>Merchant Name</th>
+                                    <th>Parcel ID</th>
+                                    <th>Amount</th>
+                                    <th>Delivery Charge</th>
+                                    <th>Request Date</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    CancelData?.map(cancelAllData => <tr className="">
+                                        <td>
+                                            <p className="font-medium text-base text-gray-800">{cancelAllData?.name}</p>
+                                        </td>
+                                        <td>
+                                            <p className="text-sm text-gray-600">{cancelAllData?.StandardParcelId}</p>
+                                        </td>
+                                        <td>
+                                            <p className="text-sm font-semibold text-green-600">{cancelAllData?.CodAmount} ৳</p>
+                                        </td>
+                                        <td>
+                                            <p className="text-sm text-blue-600">{cancelAllData?.DeliveryCharge} ৳</p>
+                                        </td>
+                                        <td>
+                                            <p className="text-sm text-gray-500">{cancelAllData?.date}</p>
+                                        </td>
+                                        <td>
+                                            <span
+                                                className={`badge badge-sm ${cancelAllData?.status === "Approved" ? "badge-success" : cancelAllData?.status === "Rejected" ? "badge-error" : "badge-warning"}`}
+                                            >
+                                                {status}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <Link
+                                                to={`/dashboard/UserTemporeryInvoiceAllStandardData/${cancelAllData?.StandardParcelId}`}
+                                            >
+                                                <button className="btn btn-sm btn-outline btn-primary">
+                                                    View
+                                                </button>
+                                            </Link>
+                                        </td>
+                                    </tr>)
+                                }
+                            </tbody>
+                        </table>
+                    </div>
 
                 </div>
             }

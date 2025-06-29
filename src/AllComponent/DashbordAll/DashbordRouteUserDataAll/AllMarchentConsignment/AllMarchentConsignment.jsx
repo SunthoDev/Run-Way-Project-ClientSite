@@ -92,7 +92,7 @@ const AllMarchentConsignment = () => {
                             <div className="AllDataConsignment">
 
                                 <div className="overflow-x-auto p-4">
-                                    <table className="table table-zebra w-full rounded-xl shadow-md">
+                                    <table className="table w-full rounded-xl shadow-md">
                                         <thead className="bg-base-200 text-base-content">
                                             <tr>
                                                 <th>Merchant Name</th>
@@ -120,7 +120,7 @@ const AllMarchentConsignment = () => {
                             <div className="AllDataConsignment">
 
                                 <div className="overflow-x-auto p-4">
-                                    <table className="table table-zebra w-full rounded-xl shadow-md">
+                                    <table className="table w-full rounded-xl shadow-md">
                                         <thead className="bg-base-200 text-base-content">
                                             <tr>
                                                 <th>Merchant Name</th>
@@ -148,7 +148,7 @@ const AllMarchentConsignment = () => {
                             <div className="AllDataConsignment">
 
                                 <div className="overflow-x-auto p-4">
-                                    <table className="table table-zebra w-full rounded-xl shadow-md">
+                                    <table className="table w-full rounded-xl shadow-md">
                                         <thead className="bg-base-200 text-base-content">
                                             <tr>
                                                 <th>Merchant Name</th>
@@ -174,7 +174,7 @@ const AllMarchentConsignment = () => {
                         <TabPanel>
                             <div className="AllDataConsignment">
                                 <div className="overflow-x-auto p-4">
-                                    <table className="table table-zebra w-full rounded-xl shadow-md">
+                                    <table className="table w-full rounded-xl shadow-md">
                                         <thead className="bg-base-200 text-base-content">
                                             <tr>
                                                 <th>Merchant Name</th>
@@ -201,7 +201,7 @@ const AllMarchentConsignment = () => {
                         <TabPanel>
                             <div className="AllDataConsignment">
                                 <div className="overflow-x-auto p-4">
-                                    <table className="table table-zebra w-full rounded-xl shadow-md">
+                                    <table className="table w-full rounded-xl shadow-md">
                                         <thead className="bg-base-200 text-base-content">
                                             <tr>
                                                 <th>Merchant Name</th>
@@ -228,7 +228,7 @@ const AllMarchentConsignment = () => {
                         <TabPanel>
                             <div className="AllDataConsignment">
                                 <div className="overflow-x-auto p-4">
-                                    <table className="table table-zebra w-full rounded-xl shadow-md">
+                                    <table className="table w-full rounded-xl shadow-md">
                                         <thead className="bg-base-200 text-base-content">
                                             <tr>
                                                 <th>Merchant Name</th>

@@ -287,6 +287,7 @@ const StandardDelivery = () => {
                 </div>
 
             </div>
+            
         </div>
     );
 };
