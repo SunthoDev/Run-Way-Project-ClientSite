@@ -1,21 +1,22 @@
 
-.AdminConsignmentPartiallyDeliveredData .ConsignmentPartiallyDeliveredData .PartiallyDeliveredData {
+.UserCancelParcelAllDataSee .CancelParcelAllDataSee .CancelData {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     padding: 18px;
     border-radius: 8px;
     margin-top: 30px;
+    background-color: white;
 }
-.AdminConsignmentPartiallyDeliveredData .ConsignmentPartiallyDeliveredData .PartiallyDeliveredData .One h3 {
+.UserCancelParcelAllDataSee .CancelParcelAllDataSee .CancelData .One h3 {
     font-size: 16px;
     font-weight: 600;
     padding-top: 3px;
 }
-.AdminConsignmentPartiallyDeliveredData .ConsignmentPartiallyDeliveredData .PartiallyDeliveredData .Tow h3 {
+.UserCancelParcelAllDataSee .CancelParcelAllDataSee .CancelData .Tow h3 {
     font-size: 16px;
     font-weight: 600;
     padding-top: 3px;
 }
-.AdminConsignmentPartiallyDeliveredData .ConsignmentPartiallyDeliveredData .PartiallyDeliveredData .Tow .NotAssigned {
+.UserCancelParcelAllDataSee .CancelParcelAllDataSee .CancelData .Tow .NotAssigned {
 
     background-color: #22afa3;
     color: white;
@@ -25,13 +26,13 @@
     border-radius: 8px;
     margin-top: 3px;
 }
-.AdminConsignmentPartiallyDeliveredData .ConsignmentPartiallyDeliveredData .PartiallyDeliveredData .Three h3{
+.UserCancelParcelAllDataSee .CancelParcelAllDataSee .CancelData .Three h3{
     font-size: 16px;
     font-weight: 600;
     padding-top: 3px;
 }
 
-.AdminConsignmentPartiallyDeliveredData .ConsignmentPartiallyDeliveredData .PartiallyDeliveredData .Three .Pending{
+.UserCancelParcelAllDataSee .CancelParcelAllDataSee .CancelData .Three .Pending{
     background-color: #22afa3;
     color: white;
     padding: 3px 11px;
@@ -41,7 +42,7 @@
     margin-top: 3px;
 }
 
-.AdminConsignmentPartiallyDeliveredData .ConsignmentPartiallyDeliveredData .PartiallyDeliveredData .Three .Unassigned{
+.UserCancelParcelAllDataSee .CancelParcelAllDataSee .CancelData .Three .Unassigned{
     background-color: #22afa3;
     color: white;
     padding: 3px 11px;
@@ -51,7 +52,7 @@
     margin-top: 3px;
 }
 
-.AdminConsignmentPartiallyDeliveredData .ConsignmentPartiallyDeliveredData .PartiallyDeliveredData .Three .Zero {
+.UserCancelParcelAllDataSee .CancelParcelAllDataSee .CancelData .Three .Zero {
     background-color: #22afa3;
     color: white;
     padding: 3px 19px;

@@ -54,9 +54,14 @@ const AdminConsignmentPendingInvoice = () => {
                     </div>
                     <h3 className='text-black text-[14px] font-[700] pt-[6px] text-center'>{name} - 212640</h3>
 
+
+
                     <div className="barcode">
                         <Barcode  value={StandardParcelId} />,
                     </div>
+
+
+
 
                     <div className="flex justify-between items-center mt-2">
                         <div className="QRCode">
@@ -107,7 +112,9 @@ const AdminConsignmentPendingInvoice = () => {
                     <h3 className='text-[16px] font-[500] text-black'>Merchant: <span className="text-white bg-[#17838C] rounded-[7px] py-[6px] px-[13px] text-[16px] font-[500]'">{name}</span></h3>
                     {/* <button className='text-black bg-[#ffc107] py-[6px] px-[13px] text-[16px] rounded-[7px]  font-[500]'>Print</button> */}
 
-                    <ReactToPrint trigger={() => <button className='text-black bg-[#ffc107] py-[6px] px-[13px] text-[16px] rounded-[7px]  font-[500]'>Print</button>} content={() => ref.current}  />
+                    <ReactToPrint trigger={() => <button className='text-black bg-[#ffc107] py-[6px] px-[13px] text-[16px] rounded-[7px]  font-[500]'>Print</button>}
+                        content={() => ref.current}
+                    />
                 </div>
 
                 <div className="flex justify-between mt-2">

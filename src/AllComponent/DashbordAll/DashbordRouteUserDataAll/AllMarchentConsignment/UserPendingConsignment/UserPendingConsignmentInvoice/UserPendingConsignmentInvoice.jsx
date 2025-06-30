@@ -9,7 +9,7 @@ const UserPendingConsignmentInvoice = () => {
     //   console.log(data)
     let { _id, weight, status, policeStation, number, note, name, district, date, address, StandardParcelId, StandardEmailUser, Invoice, CodAmount,DeliveryCharge ,ApprovedDate,ApprovedName,ApprovedOffice} = data
 
-    console.log(data)
+    // console.log(data)
 
     return (
         <div className='AdminSearchStandardParcelUser px-2 md:px-10 py-10'>

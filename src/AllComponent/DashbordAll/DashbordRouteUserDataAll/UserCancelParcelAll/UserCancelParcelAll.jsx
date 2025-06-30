@@ -13,17 +13,14 @@ const UserCancelParcelAll = () => {
 
 
     // TODO: Data lode problems late 
-
     let { refetch, data: AllCancelData = [] } = useQuery(["UseAllCancelStandardData"], async () => {
         let res = await fetch(`http://localhost:5000/UseAllCancelStandardData?email=${user?.email}`)
         return res.json()
     })
-
     // console.log(AllCancelData)
 
     // Partially Delivered data find 
     let CancelData = AllCancelData.filter(Cancel => Cancel?.status == "Cancel" && Cancel?.Payment == "Yes")
-
 
     // console.log(CancelData)
 
@@ -68,9 +65,9 @@ const UserCancelParcelAll = () => {
                                         </td>
                                         <td>
                                             <span
-                                                className={`badge badge-sm ${cancelAllData?.status === "Approved" ? "badge-success" : cancelAllData?.status === "Rejected" ? "badge-error" : "badge-warning"}`}
+                                                className={`badge badge-sm ${cancelAllData?.status === "Cancel" ? "badge-warning" : "badge-warning"}`}
                                             >
-                                                {status}
+                                                {cancelAllData?.status}
                                             </span>
                                         </td>
                                         <td>

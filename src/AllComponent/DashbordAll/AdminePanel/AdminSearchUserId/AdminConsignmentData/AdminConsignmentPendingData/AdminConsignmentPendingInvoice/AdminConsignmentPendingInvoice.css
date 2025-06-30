@@ -7,6 +7,12 @@
     border-radius: 7px;
     display: none;
 }
+
+
+/* .AdminSearchStandardParcelUser .PrintAll .Prints .barcode svg{} */
+
+
+
 .AdminSearchStandardParcelUser .PrintAll .Prints .Hub {
     border: 1px solid black;
     padding: 8px 0px;
@@ -16,6 +22,7 @@
     font-size: 18px;
     font-weight: 600;
 }
+
 .AdminSearchStandardParcelUser .PrintAll .Prints .Cod {
     border: 1px solid black;
     padding: 8px 108px;

@@ -9,24 +9,19 @@ const AdminConsignmentPendingInvoiceUpdate = () => {
 
 
     let [district, setDistrict] = useState("")
-
     let handleDistrictData = (e) => {
         setDistrict(e.target.value)
     }
 
     // Coverage All Police Station Data Find
+    // =========================================================
     let { refetch, data: AllCoveragesPoliceStation = [] } = useQuery(["CoveragesPoliceStationAll"], async () => {
         let res = await fetch("http://localhost:5000/CoveragesPoliceStationAll")
         return res.json()
-
     })
 
     let DistrictAllPoliceStation = AllCoveragesPoliceStation.filter(PoliceStationAll => PoliceStationAll?.AddDistrict == district)
-
-
     // =========================================================
-
-
 
     let data = useLoaderData()
     // console.log(data)
@@ -36,7 +31,6 @@ const AdminConsignmentPendingInvoiceUpdate = () => {
 
     // update Admin user parcel 
     // ____________________________________________
-
     let AdminConsignmentPendingInvoiceUpdate = (event) => {
         event.preventDefault()
         let number = event.target.number.value
@@ -44,7 +38,6 @@ const AdminConsignmentPendingInvoiceUpdate = () => {
         let address = event.target.address.value
 
         let policeStation = event.target.policeStation.value
-
 
         let Invoice = event.target.Invoice.value
         let note = event.target.note.value
@@ -55,7 +48,7 @@ const AdminConsignmentPendingInvoiceUpdate = () => {
         let ConsignmentPendingInvoiceUpdate = { number, name, address, district, policeStation, Invoice, note, weight, Charge, statusUp }
 
 
-        console.log(ConsignmentPendingInvoiceUpdate)
+        // console.log(ConsignmentPendingInvoiceUpdate)
 
 
 
@@ -122,7 +115,7 @@ const AdminConsignmentPendingInvoiceUpdate = () => {
 
     return (
         <div className='ConsignmentPendingInvoiceUpdate'>
-            <div className='PendingInvoiceUpdate px-2 md:px-10 py-10'>
+            <div className='PendingInvoiceUpdate px-2 md:px-8 py-10'>
                 <div className="InvoiceUpdate bg-white rounded-[8px] p-[24px]">
 
                     <h2 className='text-left font-[700] text-black text-[20px] '>Update Consignment - {StandardParcelId} </h2>
@@ -133,15 +126,12 @@ const AdminConsignmentPendingInvoiceUpdate = () => {
                         <h4 className='col-span-2 text-left text-[18px] font-[500] '>{name}</h4>
                     </div>
 
-
-
+                    {/* Admin Update Parcel Data */}
+                    {/* ========================================= */}
 
                     <div className="AdminEntryUserPar mt-6">
-
                         <form onSubmit={AdminConsignmentPendingInvoiceUpdate} className='StandardFromData'>
-
                             <div className="w-[100%] md:w-[50%] mt-[44px]">
-
                                 <div className="grid grid-cols-6 mt-[18px] gap-4  items-center">
                                     <h4 className='col-span-2 text-[16px] font-[500] '>Category</h4>
                                     <div className="col-span-4  md:flex">
@@ -154,7 +144,6 @@ const AdminConsignmentPendingInvoiceUpdate = () => {
 
                                     </div>
                                 </div>
-
                                 <div className="grid grid-cols-6 mt-[18px] gap-4  items-center">
                                     <h4 className='col-span-2 text-[16px] font-[500] '>Email Red only</h4>
                                     <input className='col-span-4  w-[100%]' value={StandardEmailUser} />
@@ -168,19 +157,13 @@ const AdminConsignmentPendingInvoiceUpdate = () => {
                                     <h4 className='col-span-2 text-[16px] font-[500] '>Name</h4>
                                     <input className='col-span-4  w-[100%]' type="text" name='name' defaultValue={name} />
                                 </div>
-
                                 <div className="grid grid-cols-6 mt-[18px] gap-4  items-center">
                                     <h4 className='col-span-2 text-[16px] font-[500] '>Address</h4>
                                     <input className='col-span-4  w-[100%]' type="text" name='address' defaultValue={address} />
                                 </div>
-
-
-
-
-
                                 <div className="grid grid-cols-6 mt-[18px] gap-4  items-center">
                                     <h4 className='col-span-2 text-[16px] font-[500] '>District</h4>
-                                    <select onBlur={handleDistrictData} required className="col-span-4 select select-bordered max-w-xs  text-black text-[14px] font-[600] rounded-[6px]  w-[100%]">
+                                    <select onBlur={handleDistrictData} required className="bg-white col-span-4 select select-bordered max-w-xs  text-black text-[14px] font-[600] rounded-[6px]  w-[100%]">
                                         <option disabled selected>{District}</option>
                                         <option>Habiganj</option>
                                         <option>Bagerhat</option>
@@ -249,82 +232,60 @@ const AdminConsignmentPendingInvoiceUpdate = () => {
                                         <option>Thakurgaon</option>
                                     </select>
                                 </div>
-
                                 <div className="grid grid-cols-6 mt-[18px] gap-4  items-center">
                                     <h4 className='col-span-2 text-[16px] font-[500] '>police Station</h4>
-                                    <select name='policeStation' required className="col-span-4  select select-bordered max-w-xs text-black text-[14px] font-[600] rounded-[6px]  w-[100%]">
+                                    <select name='policeStation' required className="bg-white col-span-4  select select-bordered max-w-xs text-black text-[14px] font-[600] rounded-[6px]  w-[100%]">
                                         <option disabled selected>{policeStation}</option>
                                         {
                                             DistrictAllPoliceStation.map(PoliceStationAll => <option>{PoliceStationAll.AddPoliceStation}</option>)
                                         }
                                     </select>
                                 </div>
-
-
-
-
-
-
-
-
-
                                 <div className="grid grid-cols-6 mt-[18px] gap-4  items-center">
                                     <h4 className='col-span-2 text-[16px] font-[500] '>Invoice#</h4>
                                     <input className='col-span-4  w-[100%]' type="text" name='Invoice' defaultValue={Invoice} />
                                 </div>
-
                                 <div className="grid grid-cols-6 mt-[18px] gap-4  items-center">
                                     <h4 className='col-span-2 text-[16px] font-[500] '>Note</h4>
                                     <input className='col-span-4  w-[100%]' type="text" name='note' defaultValue={note} />
                                 </div>
-
                                 <div className="grid grid-cols-6 mt-[18px] gap-4  items-center">
                                     <h4 className='col-span-2 text-[16px] font-[500] '>Wight(KG)</h4>
                                     <input className='col-span-4  w-[100%]' type="number" name='weight' defaultValue={weight} />
                                 </div>
-
                                 <div className="grid grid-cols-6 mt-[18px] gap-4  items-center">
                                     <h4 className='col-span-2 text-[16px] font-[500] '>Charge</h4>
                                     <input className='col-span-4  w-[100%]' type="text" name='Charge' defaultValue={DeliveryCharge} />
                                 </div>
-
                                 <div className="grid grid-cols-6 mt-[18px] gap-4  items-center">
                                     <h4 className='col-span-2 text-[16px] font-[500] '>Exchange Parcel</h4>
                                     <input type="checkbox" className="checkbox first-line:" />
                                 </div>
-
                                 <div className="grid grid-cols-6 mt-[18px] gap-4  items-center">
                                     <h4 className='col-span-2 text-[16px] font-[500] '>Status</h4>
-
-                                    <select name='statusUp' className="select col-span-4 select-bordered w-[100%] max-w-xs">
+                                    <select name='statusUp' className="bg-white select col-span-4 select-bordered w-[100%] max-w-xs">
                                         <option disabled selected>{status}</option>
                                         <option>Delivered</option>
                                         <option>PartiallyDelivered</option>
                                         <option>Cancel</option>
                                     </select>
-
                                 </div>
-
-
                                 <div className="grid grid-cols-1 md:grid-cols-6 mt-[18px] gap-4  items-center">
                                     <h4 className='col-span-2 text-[16px] font-[500] hidden md:inline-block'></h4>
                                     <button className='col-span-4  bg-[#22A197] color-white text-[14px] text-white font-[600] rounded-[8px] w-[100%] py-[10px]' type='submit'>Submit</button>
 
                                 </div>
-
-                                <div className="grid grid-cols-1 md:grid-cols-6 mt-[18px] gap-4  items-center">
+                                {/* <div className="grid grid-cols-1 md:grid-cols-6 mt-[18px] gap-4  items-center">
                                     <h4 className='col-span-2 text-[16px] font-[500] hidden md:inline-block'></h4>
                                     <button className='col-span-4  bg-[#fa6969] color-white text-[14px] text-white font-[600] rounded-[8px] w-[100%] py-[10px]'>Print</button>
-                                </div>
-
+                                </div> */}
                             </div>
                         </form>
-
                     </div>
 
 
-
-                    {/* Amount Change Data  */}
+                    {/* Admin Change Parcel Amount  */}
+                    {/* ========================================= */}
                     <div className="Horijontal bg-[#d4d2d2] mt-[60px] w-[full] h-[1px]"></div>
 
                     <div className="AmountChange w-[100%] md:w-[50%] mt-[30px]">
@@ -343,13 +304,6 @@ const AdminConsignmentPendingInvoiceUpdate = () => {
                         </form>
 
                     </div>
-
-
-
-
-
-
-
 
                 </div>
             </div>

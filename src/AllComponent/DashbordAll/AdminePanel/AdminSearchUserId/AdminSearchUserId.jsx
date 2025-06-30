@@ -5,13 +5,6 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { AuthContext } from '../../../AuthoncationAll/AuthProvider/AuthProvider';
 import { useQuery } from '@tanstack/react-query';
-import AdminConsignmentPendingData from './AdminConsignmentData/AdminConsignmentPendingData/AdminConsignmentPendingData';
-import AdminConsignmentApprovedPendingData from './AdminConsignmentData/AdminConsignmentApprovedPendingData/AdminConsignmentApprovedPendingData';
-import AdminConsignmentDeliveredData from './AdminConsignmentData/AdminConsignmentDeliveredData/AdminConsignmentDeliveredData';
-import AdminConsignmentPartiallyDeliveredData from './AdminConsignmentData/AdminConsignmentPartiallyDeliveredData/AdminConsignmentPartiallyDeliveredData';
-import AdminConsignmentReturnedCanceleData from './AdminConsignmentData/AdminConsignmentReturnedCanceleData/AdminConsignmentReturnedCanceleData';
-import AdminConsignmentPendingReviewData from './AdminConsignmentData/AdminConsignmentPendingReviewData/AdminConsignmentPendingReviewData';
-import AdminConsignmentAllstatusData from './AdminConsignmentData/AdminConsignmentAllstatusData/AdminConsignmentAllstatusData';
 import AdminPaymentRequesrWork from './AdminPaymentRequesrWork/AdminPaymentRequesrWork';
 import AdminUserConsignmentPickupRequestApproved from './AdminUserConsignmentPickupRequestApproved/AdminUserConsignmentPickupRequestApproved';
 
@@ -114,19 +107,19 @@ const AdminSearchUserId = () => {
         return res.json()
     })
     // console.log(AllStationOfHub)
-    
+
     // User Hub Name Find Here
     // =====================================================
-    let MyHubName = AllStationOfHub.find(hub => hub?.PoliceStation  === PoliceStations)
-     
+    let MyHubName = AllStationOfHub.find(hub => hub?.PoliceStation === PoliceStations)
 
-    console.log(MyHubName)
+
+    // console.log(MyHubName)
     // =======================================================================
     // User Hub Selected End
     // =======================================================================
 
 
-
+{/* <Link to={`/dashboard/AdminDashboard/UserTemporeryInvoiceAllStandardData/${StandardParcelId}`} */}
 
     return (
         <div className='AdminSearchUserIdParent py-8 px-2 md:px-4'>
@@ -182,10 +175,6 @@ const AdminSearchUserId = () => {
                         <h3 className='font-[600] text-[16px] text-center text-[#14BF7D]'>Hub Name: <span className='text-black'>{MyHubName?.HubName ? MyHubName?.HubName : "No Hub "}</span></h3>
                     </div>
 
-
-
-
-
                     <div className="mt-6">
                         <Link onClick={() => (setAdminUserEmailSendDataEntry(email))} to={`/dashboard/AdminDashboard/AdminSearchUserIdDataEntry`} className='font-[600] py-[4px] text-[16px] bg-[#22AFA3] text-white text-center px-4 rounded-[8px]'>Pickup Request</Link>
                     </div>
@@ -199,12 +188,6 @@ const AdminSearchUserId = () => {
                             <option className='text-black font-[500] text-[16px]'>Pending</option>
                         </select>
                     </div>
-
-
-
-
-
-
 
                 </div>
             </div>
@@ -235,62 +218,445 @@ const AdminSearchUserId = () => {
                                 <TabPanel>
                                     <div className="ConsignmentAllStatusData">
                                         <h3 class="DataList w-[100%] md:w-[18%]">Total Data {ConsignmentAllData.length}</h3>
-                                        {
+                                        {/* {
                                             ConsignmentAllData.map(ConsignmentAll => <AdminConsignmentAllstatusData key={ConsignmentAll._id} ConsignmentAll={ConsignmentAll}></AdminConsignmentAllstatusData>)
-                                        }
+                                        } */}
+                                        <div className="">
+                                            <div className="overflow-x-auto p-4">
+                                                <table className="table  w-full rounded-xl shadow-md">
+                                                    <thead className="bg-base-200 text-base-content">
+                                                        <tr>
+                                                            <th>Merchant Name</th>
+                                                            <th>Parcel ID</th>
+                                                            <th>Amount</th>
+                                                            <th>Delivery Charge</th>
+                                                            <th>Request Date</th>
+                                                            <th>Status</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {
+                                                            ConsignmentAllData?.slice().reverse().map(AllData => <tr className="">
+                                                                <td>
+                                                                    <p className="font-medium text-base text-gray-800">{AllData?.name}</p>
+                                                                </td>
+                                                                <td>
+                                                                    <p className="text-sm text-gray-600">{AllData?.StandardParcelId}</p>
+                                                                </td>
+                                                                <td>
+                                                                    <p className="text-sm font-semibold text-green-600">{AllData?.CodAmount} ৳</p>
+                                                                </td>
+                                                                <td>
+                                                                    <p className="text-sm text-blue-600">{AllData?.DeliveryCharge} ৳</p>
+                                                                </td>
+                                                                <td>
+                                                                    <p className="text-sm text-gray-500">{AllData?.date}</p>
+                                                                </td>
+                                                                <td>
+                                                                    <span
+                                                                        className={`badge badge-sm badge-success`}
+                                                                    >
+                                                                        {AllData?.status}
+                                                                    </span>
+                                                                </td>
+                                                                <td>
+                                                                    <Link
+                                                                        to={`/dashboard/UserTemporeryInvoiceAllStandardData/${AllData?.StandardParcelId}`}
+                                                                    >
+                                                                        <button className="btn btn-sm btn-outline btn-primary">
+                                                                            View
+                                                                        </button>
+                                                                    </Link>
+                                                                </td>
+                                                            </tr>)
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </TabPanel>
                                 <TabPanel>
                                     <div className="ConsignmentPendingDataApproved">
                                         <h3 class="DataList w-[100%] md:w-[18%]">Total Data {PendingData.length}</h3>
-                                        {
+                                        {/* {
                                             PendingData.map(ConsignmentPending => <AdminConsignmentPendingData key={ConsignmentPending._id} ConsignmentPending={ConsignmentPending}></AdminConsignmentPendingData>)
-                                        }
+                                        } */}
+                                        <div className="">
+                                            <div className="overflow-x-auto p-4">
+                                                <table className="table  w-full rounded-xl shadow-md">
+                                                    <thead className="bg-base-200 text-base-content">
+                                                        <tr>
+                                                            <th>Merchant Name</th>
+                                                            <th>Parcel ID</th>
+                                                            <th>Amount</th>
+                                                            <th>Delivery Charge</th>
+                                                            <th>Request Date</th>
+                                                            <th>Status</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {
+                                                            PendingData?.slice().reverse().map(AllData => <tr className="">
+                                                                <td>
+                                                                    <p className="font-medium text-base text-gray-800">{AllData?.name}</p>
+                                                                </td>
+                                                                <td>
+                                                                    <p className="text-sm text-gray-600">{AllData?.StandardParcelId}</p>
+                                                                </td>
+                                                                <td>
+                                                                    <p className="text-sm font-semibold text-green-600">{AllData?.CodAmount} ৳</p>
+                                                                </td>
+                                                                <td>
+                                                                    <p className="text-sm text-blue-600">{AllData?.DeliveryCharge} ৳</p>
+                                                                </td>
+                                                                <td>
+                                                                    <p className="text-sm text-gray-500">{AllData?.date}</p>
+                                                                </td>
+                                                                <td>
+                                                                    <span
+                                                                        className={`badge badge-sm badge-success`}
+                                                                    >
+                                                                        {AllData?.status}
+                                                                    </span>
+                                                                </td>
+                                                                <td>
+                                                                    <Link
+                                                                       to={`/dashboard/AdminDashboard/AdminConsignmentPendingInvoice/${AllData?._id}`}
+                                                                    >
+                                                                        <button className="btn btn-sm btn-outline btn-primary">
+                                                                            View
+                                                                        </button>
+                                                                    </Link>
+                                                                </td>
+                                                            </tr>)
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </TabPanel>
                                 <TabPanel>
                                     <div className="ConsignmentApprovedPendingData">
                                         <h3 className='DataList w-[100%] md:w-[18%]'>Total Data {ApprovedPendingData.length}</h3>
-                                        {
+                                        {/* {
                                             ApprovedPendingData.map(ConsignmentApprovedPending => <AdminConsignmentApprovedPendingData key={ConsignmentApprovedPending._id} ConsignmentApprovedPending={ConsignmentApprovedPending} refetch={refetch}></AdminConsignmentApprovedPendingData>)
-                                        }
+                                        } */}
+                                        <div className="">
+                                            <div className="overflow-x-auto p-4">
+                                                <table className="table  w-full rounded-xl shadow-md">
+                                                    <thead className="bg-base-200 text-base-content">
+                                                        <tr>
+                                                            <th>Merchant Name</th>
+                                                            <th>Parcel ID</th>
+                                                            <th>Amount</th>
+                                                            <th>Delivery Charge</th>
+                                                            <th>Request Date</th>
+                                                            <th>Status</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {
+                                                            ApprovedPendingData?.slice().reverse().map(AllData => <tr className="">
+                                                                <td>
+                                                                    <p className="font-medium text-base text-gray-800">{AllData?.name}</p>
+                                                                </td>
+                                                                <td>
+                                                                    <p className="text-sm text-gray-600">{AllData?.StandardParcelId}</p>
+                                                                </td>
+                                                                <td>
+                                                                    <p className="text-sm font-semibold text-green-600">{AllData?.CodAmount} ৳</p>
+                                                                </td>
+                                                                <td>
+                                                                    <p className="text-sm text-blue-600">{AllData?.DeliveryCharge} ৳</p>
+                                                                </td>
+                                                                <td>
+                                                                    <p className="text-sm text-gray-500">{AllData?.date}</p>
+                                                                </td>
+                                                                <td>
+                                                                    <span
+                                                                        className={`badge badge-sm badge-success`}
+                                                                    >
+                                                                        {AllData?.status}
+                                                                    </span>
+                                                                </td>
+                                                                <td>
+                                                                    <Link
+                                                                        to={`/dashboard/UserTemporeryInvoiceAllStandardData/${AllData?.StandardParcelId}`}
+                                                                    >
+                                                                        <button className="btn btn-sm btn-outline btn-primary">
+                                                                            View
+                                                                        </button>
+                                                                    </Link>
+                                                                </td>
+                                                            </tr>)
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </TabPanel>
                                 <TabPanel>
                                     <div className="ConsignmentDeliveredData">
                                         <h3 class="DataList w-[100%] md:w-[18%]">Total Data {DeliveredData.length}</h3>
-                                        {
+                                        {/* {
                                             DeliveredData.map(ConsignmentDeliveredData => <AdminConsignmentDeliveredData key={ConsignmentDeliveredData._id} ConsignmentDeliveredData={ConsignmentDeliveredData}></AdminConsignmentDeliveredData>)
-                                        }
+                                        } */}
+
+                                        <div className="">
+                                            <div className="overflow-x-auto p-4">
+                                                <table className="table  w-full rounded-xl shadow-md">
+                                                    <thead className="bg-base-200 text-base-content">
+                                                        <tr>
+                                                            <th>Merchant Name</th>
+                                                            <th>Parcel ID</th>
+                                                            <th>Amount</th>
+                                                            <th>Delivery Charge</th>
+                                                            <th>Request Date</th>
+                                                            <th>Status</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {
+                                                            DeliveredData?.slice().reverse().map(AllData => <tr className="">
+                                                                <td>
+                                                                    <p className="font-medium text-base text-gray-800">{AllData?.name}</p>
+                                                                </td>
+                                                                <td>
+                                                                    <p className="text-sm text-gray-600">{AllData?.StandardParcelId}</p>
+                                                                </td>
+                                                                <td>
+                                                                    <p className="text-sm font-semibold text-green-600">{AllData?.CodAmount} ৳</p>
+                                                                </td>
+                                                                <td>
+                                                                    <p className="text-sm text-blue-600">{AllData?.DeliveryCharge} ৳</p>
+                                                                </td>
+                                                                <td>
+                                                                    <p className="text-sm text-gray-500">{AllData?.date}</p>
+                                                                </td>
+                                                                <td>
+                                                                    <span
+                                                                        className={`badge badge-sm badge-success`}
+                                                                    >
+                                                                        {AllData?.status}
+                                                                    </span>
+                                                                </td>
+                                                                <td>
+                                                                    <Link
+                                                                        to={`/dashboard/UserTemporeryInvoiceAllStandardData/${AllData?.StandardParcelId}`}
+                                                                    >
+                                                                        <button className="btn btn-sm btn-outline btn-primary">
+                                                                            View
+                                                                        </button>
+                                                                    </Link>
+                                                                </td>
+                                                            </tr>)
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </TabPanel>
                                 <TabPanel>
                                     <div className="ConsignmentPartiallyDelivered">
                                         <h3 class="DataList w-[100%] md:w-[18%]">Total Data {PartiallyDelivered.length}</h3>
-                                        {
+                                        {/* {
                                             PartiallyDelivered.map(ConsignmentPartiallyDeliveredData => <AdminConsignmentPartiallyDeliveredData key={ConsignmentPartiallyDeliveredData._id} ConsignmentPartiallyDeliveredData={ConsignmentPartiallyDeliveredData}></AdminConsignmentPartiallyDeliveredData>)
-                                        }
+                                        } */}
+                                        <div className="">
+                                            <div className="overflow-x-auto p-4">
+                                                <table className="table  w-full rounded-xl shadow-md">
+                                                    <thead className="bg-base-200 text-base-content">
+                                                        <tr>
+                                                            <th>Merchant Name</th>
+                                                            <th>Parcel ID</th>
+                                                            <th>Amount</th>
+                                                            <th>Delivery Charge</th>
+                                                            <th>Request Date</th>
+                                                            <th>Status</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {
+                                                            PartiallyDelivered?.slice().reverse().map(AllData => <tr className="">
+                                                                <td>
+                                                                    <p className="font-medium text-base text-gray-800">{AllData?.name}</p>
+                                                                </td>
+                                                                <td>
+                                                                    <p className="text-sm text-gray-600">{AllData?.StandardParcelId}</p>
+                                                                </td>
+                                                                <td>
+                                                                    <p className="text-sm font-semibold text-green-600">{AllData?.CodAmount} ৳</p>
+                                                                </td>
+                                                                <td>
+                                                                    <p className="text-sm text-blue-600">{AllData?.DeliveryCharge} ৳</p>
+                                                                </td>
+                                                                <td>
+                                                                    <p className="text-sm text-gray-500">{AllData?.date}</p>
+                                                                </td>
+                                                                <td>
+                                                                    <span
+                                                                        className={`badge badge-sm badge-success`}
+                                                                    >
+                                                                        {AllData?.status}
+                                                                    </span>
+                                                                </td>
+                                                                <td>
+                                                                    <Link
+                                                                        to={`/dashboard/UserTemporeryInvoiceAllStandardData/${AllData?.StandardParcelId}`}
+                                                                    >
+                                                                        <button className="btn btn-sm btn-outline btn-primary">
+                                                                            View
+                                                                        </button>
+                                                                    </Link>
+                                                                </td>
+                                                            </tr>)
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </TabPanel>
                                 <TabPanel>
                                     <div className="ConsignmentCancel">
                                         <h3 class="DataList w-[100%] md:w-[18%]">Total Data {CancelData.length}</h3>
-                                        {
+                                        {/* {
                                             CancelData.map(ConsignmentCancelData => <AdminConsignmentReturnedCanceleData key={ConsignmentCancelData._id} ConsignmentCancelData={ConsignmentCancelData}></AdminConsignmentReturnedCanceleData>)
-                                        }
+                                        } */}
+                                        <div className="">
+                                            <div className="overflow-x-auto p-4">
+                                                <table className="table  w-full rounded-xl shadow-md">
+                                                    <thead className="bg-base-200 text-base-content">
+                                                        <tr>
+                                                            <th>Merchant Name</th>
+                                                            <th>Parcel ID</th>
+                                                            <th>Amount</th>
+                                                            <th>Delivery Charge</th>
+                                                            <th>Request Date</th>
+                                                            <th>Status</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {
+                                                            CancelData?.slice().reverse().map(AllData => <tr className="">
+                                                                <td>
+                                                                    <p className="font-medium text-base text-gray-800">{AllData?.name}</p>
+                                                                </td>
+                                                                <td>
+                                                                    <p className="text-sm text-gray-600">{AllData?.StandardParcelId}</p>
+                                                                </td>
+                                                                <td>
+                                                                    <p className="text-sm font-semibold text-green-600">{AllData?.CodAmount} ৳</p>
+                                                                </td>
+                                                                <td>
+                                                                    <p className="text-sm text-blue-600">{AllData?.DeliveryCharge} ৳</p>
+                                                                </td>
+                                                                <td>
+                                                                    <p className="text-sm text-gray-500">{AllData?.date}</p>
+                                                                </td>
+                                                                <td>
+                                                                    <span
+                                                                        className={`badge badge-sm badge-success`}
+                                                                    >
+                                                                        {AllData?.status}
+                                                                    </span>
+                                                                </td>
+                                                                <td>
+                                                                    <Link
+                                                                        to={`/dashboard/UserTemporeryInvoiceAllStandardData/${AllData?.StandardParcelId}`}
+                                                                    >
+                                                                        <button className="btn btn-sm btn-outline btn-primary">
+                                                                            View
+                                                                        </button>
+                                                                    </Link>
+                                                                </td>
+                                                            </tr>)
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </TabPanel>
                                 <TabPanel>
                                     <div className="ConsignmentReview">
                                         <h3 class="DataList w-[100%] md:w-[18%]">Total Data {ReviewData.length}</h3>
-                                        {
+                                        {/* {
                                             ReviewData.map(ConsignmentPendingData => <AdminConsignmentPendingReviewData key={ConsignmentPendingData._id} ConsignmentPendingData={ConsignmentPendingData}></AdminConsignmentPendingReviewData>)
-                                        }
+                                        } */}
+                                        <div className="">
+                                            <div className="overflow-x-auto p-4">
+                                                <table className="table  w-full rounded-xl shadow-md">
+                                                    <thead className="bg-base-200 text-base-content">
+                                                        <tr>
+                                                            <th>Merchant Name</th>
+                                                            <th>Parcel ID</th>
+                                                            <th>Amount</th>
+                                                            <th>Delivery Charge</th>
+                                                            <th>Request Date</th>
+                                                            <th>Status</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {
+                                                            ReviewData?.slice().reverse().map(AllData => <tr className="">
+                                                                <td>
+                                                                    <p className="font-medium text-base text-gray-800">{AllData?.name}</p>
+                                                                </td>
+                                                                <td>
+                                                                    <p className="text-sm text-gray-600">{AllData?.StandardParcelId}</p>
+                                                                </td>
+                                                                <td>
+                                                                    <p className="text-sm font-semibold text-green-600">{AllData?.CodAmount} ৳</p>
+                                                                </td>
+                                                                <td>
+                                                                    <p className="text-sm text-blue-600">{AllData?.DeliveryCharge} ৳</p>
+                                                                </td>
+                                                                <td>
+                                                                    <p className="text-sm text-gray-500">{AllData?.date}</p>
+                                                                </td>
+                                                                <td>
+                                                                    <span
+                                                                        className={`badge badge-sm badge-success`}
+                                                                    >
+                                                                        {AllData?.status}
+                                                                    </span>
+                                                                </td>
+                                                                <td>
+                                                                    <Link
+                                                                        to={`/dashboard/UserTemporeryInvoiceAllStandardData/${AllData?.StandardParcelId}`}
+                                                                    >
+                                                                        <button className="btn btn-sm btn-outline btn-primary">
+                                                                            View
+                                                                        </button>
+                                                                    </Link>
+                                                                </td>
+                                                            </tr>)
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </TabPanel>
-
-
-
                             </Tabs>
                         </div>
                     </TabPanel>

@@ -49,6 +49,7 @@ import AddBalancePayRequest from "../../DashbordAll/DashbordRouteUserDataAll/Add
 import BalanceRequestAllUser from "../../DashbordAll/AdminePanel/BalanceRequestAllUser/BalanceRequestAllUser";
 import DeliveryMonitoring from "../../DashbordAll/AdminePanel/DeliveryMonitoring/DeliveryMonitoring";
 import ReturnParcelMonitoring from "../../DashbordAll/AdminePanel/ReturnParcelMonitoring/ReturnParcelMonitoring";
+import AllReportEverything from "../../DashbordAll/AdminePanel/AllReportEverything/AllReportEverything";
 
 
 let route = createBrowserRouter([
@@ -304,6 +305,10 @@ let route = createBrowserRouter([
          {
             path: "AdminDashboard/ReturnParcelMonitoring",
             element: <ReturnParcelMonitoring></ReturnParcelMonitoring>
+         },
+         {
+            path: "AdminDashboard/AllReportEverything",
+            element: <AllReportEverything></AllReportEverything>
          },
 
 
