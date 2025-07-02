@@ -65,13 +65,12 @@ const DashboardItemsUser = () => {
         event.preventDefault()
 
         let pay = event.target.pay.value
-
         let PaymentIdUser = Math.round(Math.random() * 99999999).toString()
-        let UserPaymentReqDate = moment().format("MM/D/YY , hh:mm A")
-
+        let date = moment().format("D/MM/YYYY")
+        let time = moment().format("hh:mm A")
         let UpdatePaymentId = { PaymentID: PaymentIdUser }
 
-        let paymentRequestAllDataPost = { ReqPaymentID: PaymentIdUser, ReqPay: pay, TotalCodAmount: CodAmountResult, TotalDeliveryCharge: DeliveryChargeResult, subTotal, subTotalOnePercentCharge, totalBalanceUser, name, LastName, photo, userId, Address, BusinessName, Phone, ReqUserEmail: email, userStatus: status, UserPaymentReqDate, Payment: "UnPaid" }
+        let paymentRequestAllDataPost = { ReqPaymentID: PaymentIdUser, ReqPay: pay, TotalCodAmount: CodAmountResult, TotalDeliveryCharge: DeliveryChargeResult, subTotal, subTotalOnePercentCharge, totalBalanceUser, name, LastName, photo, userId, Address, BusinessName, Phone, ReqUserEmail: email, userStatus: status, date, time, Payment: "UnPaid" }
 
 
         fetch(`http://localhost:5000/UserPaymentRequestUpdateAllData/${roles.email}`, {
@@ -572,7 +571,6 @@ const DashboardItemsUser = () => {
                 {/* ============================================= */}
                 {/* Payment Request Send Modal  */}
                 {/* ============================================= */}
-
                 <div className={`alertContainer rounded-[8px]  px-4  lg:px-0 w-full lg:w-[24%]  ${poup === true && "showAlertJs"}`} >
 
                     <div className="poup ">
@@ -612,9 +610,10 @@ const DashboardItemsUser = () => {
                                 e.preventDefault();
                                 const PickupRequest = e.target.PickupRequestType.value;
                                 let PickupIdUser = Math.round(Math.random() * 99999999).toString()
-                                let UserPickupReqDate = moment().format("MM/D/YY , hh:mm A")
+                                let date = moment().format("D/MM/YYYY")
+                                let time = moment().format("hh:mm A")
 
-                                let AllInfo = {PickupRequestType:PickupRequest, PickupIdUser, UserPickupReqDate, Address, BusinessName, LastName, Phone, PickReqUserEmail: email, name, photo, userId, status: "Pending", PoliceStations, Districts}
+                                let AllInfo = { PickupRequestType: PickupRequest, PickupIdUser, date, time, Address, BusinessName, LastName, Phone, PickReqUserEmail: email, name, photo, userId, status: "Pending", PoliceStations, Districts }
 
                                 try {
                                     const response = await fetch("http://localhost:5000/PickupRequestWithManegeAdminUsers/UserPickupRequestSend", {
@@ -676,9 +675,6 @@ const DashboardItemsUser = () => {
                         </form>
                     </div>
                 </dialog>
-
-
-
 
             </div>
         </div >

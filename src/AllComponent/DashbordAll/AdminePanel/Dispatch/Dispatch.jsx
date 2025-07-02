@@ -124,7 +124,7 @@ const Dispatch = () => {
                                         <form onSubmit={(e) => {
                                             e.preventDefault()
                                             const DispatchHubName = e.target.HubName.value;
-                                            let date = moment().format("D/MM/YY")
+                                            let date = moment().format("D/MM/YYYY")
                                             let time = moment().format("hh:mm A")
                                             let DispatchId = Math.round(Math.random() * 99999999).toString()
                                             let TrackingMessage = `Sent to ${DispatchHubName} hub. Dispatch id ${DispatchId}`
@@ -255,7 +255,7 @@ const Dispatch = () => {
                                                 </tr>
                                             </thead>
                                             <tbody className="bg-white divide-y divide-gray-200">
-                                                {DispatchSentData?.map((SentData) =>
+                                                {DispatchSentData?.slice().reverse().map((SentData) =>
                                                     <tr key={SentData?._id}>
                                                         <td className="px-6 py-4 text-sm text-gray-800">{SentData?.date},{SentData?.time}</td>
                                                         <td className="px-6 py-4 text-sm text-gray-800">{SentData?.DispatchType} <br /> Dispatch Id: {SentData?.DispatchId} </td>
@@ -359,7 +359,7 @@ const Dispatch = () => {
                                         <form onSubmit={(e) => {
                                             e.preventDefault()
                                             const DispatchHubName = e.target.HubName.value;
-                                            let date = moment().format("D/MM/YY")
+                                            let date = moment().format("D/MM/YYYY")
                                             let time = moment().format("hh:mm A")
                                             let DispatchId = Math.round(Math.random() * 99999999).toString()
                                             let TrackingMessage = `Received to ${DispatchHubName} hub.`
@@ -487,7 +487,7 @@ const Dispatch = () => {
                                                 </tr>
                                             </thead>
                                             <tbody className="bg-white divide-y divide-gray-200">
-                                                {DispatchReceivedData?.map((ReceivedData) =>
+                                                {DispatchReceivedData?.slice().reverse().map((ReceivedData) =>
                                                     <tr key={ReceivedData?._id}>
                                                         <td className="px-6 py-4 text-sm text-gray-800">{ReceivedData?.date},{ReceivedData?.time}</td>
                                                         <td className="px-6 py-4 text-sm text-gray-800">{ReceivedData?.DispatchType} <br /> Dispatch Id: {ReceivedData?.DispatchId} </td>

@@ -8,11 +8,10 @@ const CurrentBalanceDetails = () => {
     let PaymentBalance = useLoaderData()
     // console.log(PaymentBalance)
 
-
     // All Delivered & PartiallyDelivered payment data find
     let CodAmountPaymentData = PaymentBalance.filter(PaymentAll => PaymentAll?.Payment == "Yes" && PaymentAll?.status == "Delivered" || PaymentAll?.Payment == "Yes" && PaymentAll?.status == "PartiallyDelivered")
 
-    console.log(CodAmountPaymentData)
+    // console.log(CodAmountPaymentData)
 
     // total Cod Amount Balance
     const CodAmountResult = CodAmountPaymentData.reduce((prev, current) => prev + parseInt(current.CodAmount), 0);
