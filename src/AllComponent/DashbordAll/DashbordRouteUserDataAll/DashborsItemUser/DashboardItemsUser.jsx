@@ -60,17 +60,15 @@ const DashboardItemsUser = () => {
     // =========================================================================================================
     // Payment Request user start
     // =================================================
-
     let handleUserPaymentRequest = (event) => {
         event.preventDefault()
-
         let pay = event.target.pay.value
         let PaymentIdUser = Math.round(Math.random() * 99999999).toString()
-        let date = moment().format("D/MM/YYYY")
+        let date = moment().format("MM/DD/YYYY")
         let time = moment().format("hh:mm A")
         let UpdatePaymentId = { PaymentID: PaymentIdUser }
 
-        let paymentRequestAllDataPost = { ReqPaymentID: PaymentIdUser, ReqPay: pay, TotalCodAmount: CodAmountResult, TotalDeliveryCharge: DeliveryChargeResult, subTotal, subTotalOnePercentCharge, totalBalanceUser, name, LastName, photo, userId, Address, BusinessName, Phone, ReqUserEmail: email, userStatus: status, date, time, Payment: "UnPaid" }
+        let paymentRequestAllDataPost = { ReqPaymentID: PaymentIdUser, ReqPay: pay, TotalCodAmount: CodAmountResult, TotalDeliveryCharge: DeliveryChargeResult, subTotal, subTotalOnePercentCharge, totalBalanceUser, name, LastName, photo, userId, Address, BusinessName, PoliceStations, Phone, ReqUserEmail: email, userStatus: status, date, time, Payment: "UnPaid" }
 
 
         fetch(`http://localhost:5000/UserPaymentRequestUpdateAllData/${roles.email}`, {
@@ -112,47 +110,9 @@ const DashboardItemsUser = () => {
             })
     }
 
-    // =========================================================================================================
-    // Pickup Request user Send Start
-    // =================================================
-    // let handlePickupRequestUser = () => {
-
-    //     let PickupIdUser = Math.round(Math.random() * 99999999).toString()
-    //     let UserPickupReqDate = moment().format("MM/D/YY , hh:mm A")
-
-    //     let PickupRequestAllDataPost = { PickupIdUser, UserPickupReqDate, Address, BusinessName, LastName, Phone, PickReqUserEmail: email, name, photo, userId, status: "Pending", PoliceStations, Districts }
-
-    //     // console.log(PickupRequestAllDataPost)
-
-    //     fetch("http://localhost:5000/UserPickupRequestSend", {
-    //         method: "POST",
-    //         headers: {
-    //             "content-type": "application/json"
-    //         },
-    //         body: JSON.stringify(PickupRequestAllDataPost)
-    //     })
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             if (data.insertedId) {
-    //                 Swal.fire({
-    //                     position: 'top-end',
-    //                     icon: 'success',
-    //                     title: 'Your Pickup Request Is Success',
-    //                     showConfirmButton: false,
-    //                     timer: 1500
-    //                 })
-
-    //             }
-    //         })
-
-    // }
-
-
-
-
 
     // =========================================================================================================
-    // Pickup Request user End
+    // Chart all Data Here !!
     // =================================================
 
     const sampleData = [
@@ -610,7 +570,7 @@ const DashboardItemsUser = () => {
                                 e.preventDefault();
                                 const PickupRequest = e.target.PickupRequestType.value;
                                 let PickupIdUser = Math.round(Math.random() * 99999999).toString()
-                                let date = moment().format("D/MM/YYYY")
+                                let date = moment().format("MM/DD/YYYY")
                                 let time = moment().format("hh:mm A")
 
                                 let AllInfo = { PickupRequestType: PickupRequest, PickupIdUser, date, time, Address, BusinessName, LastName, Phone, PickReqUserEmail: email, name, photo, userId, status: "Pending", PoliceStations, Districts }
@@ -677,7 +637,7 @@ const DashboardItemsUser = () => {
                 </dialog>
 
             </div>
-        </div >
+        </div>
     );
 };
 

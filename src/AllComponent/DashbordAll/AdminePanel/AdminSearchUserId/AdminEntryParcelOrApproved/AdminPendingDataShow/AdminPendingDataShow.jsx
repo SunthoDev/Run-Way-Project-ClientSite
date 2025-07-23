@@ -30,7 +30,9 @@ const AdminPendingDataShow = ({ ReviewDataSee, refetch }) => {
 
     let { CodAmount, Invoice, StandardEmailUser, StandardParcelId, address, date, District, name, note, number, policeStation, status, weight, _id } = ReviewDataSee
 
-
+    // ====================================
+    // Admin Update Parcel Data
+    // ====================================
     let handleAdminUpdateUserStandardParcelDataEntry = (event) => {
         event.preventDefault()
         let PoliceStation = event.target.PoliceStation.value
@@ -60,11 +62,12 @@ const AdminPendingDataShow = ({ ReviewDataSee, refetch }) => {
             })
     }
 
-
+    // ====================================
+    // Admin Pending Parcel Data
     // =====================================
     let handlePendingData = (id) => {
 
-        let ApprovedData = { ApprovedOffice: "Corporate office", ApprovedName: roles?.name, PendingDate: moment().format("MM/D/YY , hh:mm A") }
+        let ApprovedData = { ApprovedOffice: "Corporate office", ApprovedName: roles?.name, PendingDate: moment().format("MM/DD/YY , hh:mm A"), AssignRider:"No" }
 
         fetch(`http://localhost:5000/AdminApprovedUserStandardData/${id}`, {
             method: "PUT",

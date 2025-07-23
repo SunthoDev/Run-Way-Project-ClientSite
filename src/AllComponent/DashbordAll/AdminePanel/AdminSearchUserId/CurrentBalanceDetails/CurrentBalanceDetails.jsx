@@ -1,12 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "./CurrentBalanceDetails.css"
-import { useLoaderData } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import { useLoaderData, useParams } from 'react-router-dom';
 import CurrentBalanceDetailsAllData from './CurrentBalanceDetailsAllData/CurrentBalanceDetailsAllData';
+import Swal from 'sweetalert2';
+import moment from 'moment';
 
 const CurrentBalanceDetails = () => {
 
+    let { email } = useParams()
     let PaymentBalance = useLoaderData()
-    // console.log(PaymentBalance)
+    // console.log(email)
+
+    // ===================================================
+    // User Information find for payment Request !!
+    // ===================================================
+    let { refetch, data: userInformationForPayment = [] } = useQuery(["userRoleCheck"], async () => {
+        let res = await fetch(`http://localhost:5000/userRoleCheck/${email}`)
+        return res.json()
+
+    })
+    // console.log(userInformationForPayment)
+    let { _id, Address, BusinessName, LastName, Password, Phone, name, photo, role, status, userId, Districts, PoliceStations, date } = userInformationForPayment
+
+
+    // ===================================================
+    // Send Payment Request Pop-up Start
+    // ===================================================
+    let [poup, setPoup] = useState(false)
+    const clseAlertButton = () => {
+        setPoup(false)
+    }
+    const handlePaymentRequestUser = () => {
+        setPoup(true)
+    }
+
+
+    // ==================================================================================================
+    // User balance Information calculation !!
+    // ===============================================================
 
     // All Delivered & PartiallyDelivered payment data find
     let CodAmountPaymentData = PaymentBalance.filter(PaymentAll => PaymentAll?.Payment == "Yes" && PaymentAll?.status == "Delivered" || PaymentAll?.Payment == "Yes" && PaymentAll?.status == "PartiallyDelivered")
@@ -36,16 +68,74 @@ const CurrentBalanceDetails = () => {
 
 
 
+    // =========================================================================================================
+    // Payment Request send to admin of user start
+    // =================================================
+    let handleUserPaymentRequest = (event) => {
+        event.preventDefault()
+        let pay = event.target.pay.value
+        let PaymentIdUser = Math.round(Math.random() * 99999999).toString()
+        let date = moment().format("MM/DD/YYYY")
+        let time = moment().format("hh:mm A")
+        let UpdatePaymentId = { PaymentID: PaymentIdUser }
+
+        let paymentRequestAllDataPost = {
+            ReqPaymentID: PaymentIdUser, ReqPay: pay, date, time, Payment: "UnPaid",
+            TotalCodAmount: CodAmountResult, TotalDeliveryCharge: DeliveryChargeResult, subTotal, subTotalOnePercentCharge, totalBalanceUser,
+            name, LastName, photo, userId, Address, BusinessName, Phone, ReqUserEmail: userInformationForPayment?.email, userStatus: status,PoliceStations,
+        }
+        // console.log(paymentRequestAllDataPost)
+
+        fetch(`http://localhost:5000/UserPaymentRequestUpdateAllData/${userInformationForPayment?.email}`, {
+            method: "PUT",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(UpdatePaymentId)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    // Post Data  Start
+                    fetch("http://localhost:5000/UserPaymentRequest", {
+                        method: "POST",
+                        headers: {
+                            "content-type": "application/json"
+                        },
+                        body: JSON.stringify(paymentRequestAllDataPost)
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.insertedId) {
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Your Payment Request Is Success',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                            }
+                        })
+                    // Post Data  End
+                }
+                refetch()
+            })
+    }
+
+
+
     return (
         <div className='AllCurrentBalanceDetails'>
 
             <div className='CurrentBalanceDetails bg-white my-8 mx-6 px-6 py-4 rounded-[7px]'>
-                <h3>Balance Details</h3>
+                <div className='flex items-center justify-between pb-2'>
+                    <h3>Balance Details</h3>
+                    <button className="py-2 px-6 rounded-[8px] text-black font-[600]" onClick={handlePaymentRequestUser}>Send a payment request</button>
+                </div>
 
                 <div class="Horijontal bg-black mt-[4px] mb-[20px] w-[full] h-[1px]"></div>
 
                 <div className='BalanceDetailsCalculations'>
-
                     <div className="BalanceItems flex justify-between items-center">
                         <h2 className='text-black text-[18px] font-[600] '>Total Amount Delivered</h2>
                         <h4 className='text-black text-[18px] font-[600] '>{CodAmountResult}</h4>
@@ -67,9 +157,7 @@ const CurrentBalanceDetails = () => {
                         <h2 className='text-black text-[18px] font-[600] '>Total</h2>
                         <h4 className='text-black text-[18px] font-[600] '>{totalBalanceUser}</h4>
                     </div>
-
                 </div>
-
 
                 <div className="ThisAllPaymentData">
                     <h3>Consignment Going to Be Cleared ({CodAmountPaymentData.length})</h3>
@@ -90,8 +178,8 @@ const CurrentBalanceDetails = () => {
                             </thead>
                             <tbody>
                                 {
-                                    CodAmountPaymentData.map(AmountPaymentDataAll=>
-                                <CurrentBalanceDetailsAllData key={AmountPaymentDataAll._id} AmountPaymentDataAll={AmountPaymentDataAll}></CurrentBalanceDetailsAllData>)
+                                    CodAmountPaymentData.map(AmountPaymentDataAll =>
+                                        <CurrentBalanceDetailsAllData key={AmountPaymentDataAll._id} AmountPaymentDataAll={AmountPaymentDataAll}></CurrentBalanceDetailsAllData>)
                                 }
 
 
@@ -104,9 +192,39 @@ const CurrentBalanceDetails = () => {
 
 
                 </div>
+            </div>
 
+            {/* ============================================= */}
+            {/* Payment Request Send Modal  */}
+            {/* ============================================= */}
+            <div className={`alertContainer rounded-[8px]  px-4  lg:px-0 w-full lg:w-[24%]  ${poup === true && "showAlertJs"}`} >
+
+                <div className="poup ">
+                    <div className="popInfo px-4 py-4 mt-3">
+
+                        <h6>Payment Request</h6>
+
+                        <form onSubmit={handleUserPaymentRequest}>
+
+                            <select required name='pay' className="select select-bordered w-full max-w-xs mt-4">
+                                <option disabled selected>Selected Payment Request</option>
+                                <option>Cash</option>
+                                <option>Bank</option>
+                                <option>Nogod</option>
+                                <option>Bkash</option>
+                                <option>Rocket</option>
+                            </select>
+
+                            <button disabled={totalBalanceUser === 0} type='submit' className='UpdateButton' >Send Payment Request</button>
+
+                        </form>
+
+                    </div>
+                    <button onClick={clseAlertButton} className="removeAlertBtn"><i className="fa fa-times-circle" aria-hidden="true"></i></button>
+                </div>
 
             </div>
+
         </div>
     );
 };

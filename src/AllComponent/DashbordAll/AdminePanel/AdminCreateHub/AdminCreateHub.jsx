@@ -132,7 +132,6 @@ const AdminCreateHub = () => {
 
                 {/* Create hub Only */}
                 {/* ================================================== */}
-
                 <div className="w-full max-w-lg bg-white border border-gray-200 shadow-md rounded-xl p-6">
                     <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">
                         Create Admin Hub
@@ -141,10 +140,11 @@ const AdminCreateHub = () => {
                     <form onSubmit={async (e) => {
                         e.preventDefault()
                         const NameOfHub = e.target.HubName.value;
-                        let date = moment().format("MM/D/YY , hh:mm A")
+                        let date = moment().format("MM/DD/YYYY")
+                        let time = moment().format("hh:mm A")
                         // console.log({ NameOfHub, date });
 
-                        let allInfo = { NameOfHub, date }
+                        let allInfo = { NameOfHub, date ,time}
 
                         // Hub request data insert 
                         // =================================
@@ -206,7 +206,6 @@ const AdminCreateHub = () => {
 
                 {/* Add Police-Station With Hub*/}
                 {/* ================================================== */}
-
                 <div className="w-full max-w-lg bg-white border border-gray-200 shadow-md rounded-xl p-6">
                     <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">
                         Add Police Station With Hub
@@ -216,11 +215,12 @@ const AdminCreateHub = () => {
                         e.preventDefault()
                         const PoliceStation = e.target.stationOfHub.value;
                         const HubName = e.target.HubNames.value;
-                        let date = moment().format("MM/D/YY , hh:mm A")
+                        let date = moment().format("MM/DD/YYYY")
+                        let time = moment().format("hh:mm A")
 
                         // console.log({ PoliceStation, HubName, date });
 
-                        let allInfo = { PoliceStation, HubName, date }
+                        let allInfo = { PoliceStation, HubName, date, time }
 
                         // Hub request data insert 
                         // =================================
@@ -328,9 +328,9 @@ const AdminCreateHub = () => {
                                         <td className="px-6 py-4 text-sm text-gray-800">{Hub?.date}</td>
 
                                         <td className="px-6 py-4 text-sm text-gray-800">
-                                            {
+                                            { 
                                                 (() => {
-                                                    const matchedHub = AllStationOfHub.filter(hub => hub.HubName === Hub?.NameOfHub);
+                                                    const matchedHub = AllStationOfHub?.filter(hub => hub.HubName === Hub?.NameOfHub);
 
                                                     // console.log(matchedHub)
 

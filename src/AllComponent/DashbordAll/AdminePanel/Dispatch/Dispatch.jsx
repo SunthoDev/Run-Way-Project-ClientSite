@@ -40,18 +40,18 @@ const Dispatch = () => {
 
 
 
-    
+
     // =====================================================
     // Take Group ids collect together by a enter Start 
     // =====================================================
-    
+
     // Received All Ids together in json array
     // ==========================================
     const [AllId, setIDAll] = useState([]);
     // Received input value
     // ========================
     const [inputValue, setInputValue] = useState("");
-    
+
     const handleKeyDown = (e) => {
         if (e.key === "Enter") {
             e.preventDefault();
@@ -62,17 +62,17 @@ const Dispatch = () => {
             setInputValue("");
         }
     };
-    
+
     // Take id remove from json
     // =====================================================
     const removeTag = (index) => {
         setIDAll(AllId.filter((_, i) => i !== index));
     };
-    
+
     // =====================================================
     // Take Group ids collect together by a enter End
     // =====================================================
-    
+
 
 
     return (
@@ -124,7 +124,7 @@ const Dispatch = () => {
                                         <form onSubmit={(e) => {
                                             e.preventDefault()
                                             const DispatchHubName = e.target.HubName.value;
-                                            let date = moment().format("D/MM/YYYY")
+                                            let date = moment().format("MM/DD/YYYY")
                                             let time = moment().format("hh:mm A")
                                             let DispatchId = Math.round(Math.random() * 99999999).toString()
                                             let TrackingMessage = `Sent to ${DispatchHubName} hub. Dispatch id ${DispatchId}`
@@ -359,14 +359,14 @@ const Dispatch = () => {
                                         <form onSubmit={(e) => {
                                             e.preventDefault()
                                             const DispatchHubName = e.target.HubName.value;
-                                            let date = moment().format("D/MM/YYYY")
+                                            let date = moment().format("MM/DD/YYYY")
                                             let time = moment().format("hh:mm A")
                                             let DispatchId = Math.round(Math.random() * 99999999).toString()
                                             let TrackingMessage = `Received to ${DispatchHubName} hub.`
 
                                             // Dispatch data post 
                                             // ============================================================
-                                            let DispatchDataPost = { DispatchId, TrackingMessage, date, time, DispatchType: "Received", DispatchHubName, DispatchParcelAllId:AllId }
+                                            let DispatchDataPost = { DispatchId, TrackingMessage, date, time, DispatchType: "Received", DispatchHubName, DispatchParcelAllId: AllId }
                                             // console.log(DispatchDataPost)
 
                                             // Tracking message post of dispatch 

@@ -58,7 +58,7 @@ const AddBalancePayRequest = () => {
                             const charge = (amount * 0.015).toFixed(2);
                             const finalAmount = (amount - charge).toFixed(2);
                             const UserEmail = user?.email;
-                            let date = moment().format("D/MM/YYYY")
+                            let date = moment().format("MM/DD/YYYY")
                             let time = moment().format("hh:mm A")
                             // console.log({ trxId, method, amount, charge, finalAmount,UseEmail  });
 

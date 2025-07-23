@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import "./UserAdmin.css"
+import "./CreateRider.css"
 import { useQuery } from '@tanstack/react-query';
-import UserAllData from './UserAllData/UserAllData';
+import CreateRiderDataSee from './CreateRiderDataSee/CreateRiderDataSee';
 import Swal from 'sweetalert2';
 
-const UserAdmin = () => {
+// CreateRider_Access
+
+const CreateRider = () => {
 
     const [tabState, setTabState] = useState(1);
     // =============================================================
@@ -18,12 +20,6 @@ const UserAdmin = () => {
 
     // Filter all Admins Data of This Website 
     // =============================================
-    let AllAdmins = adminAllUsers?.filter(infoData => infoData?.role === "admin")
-    // Filter all Admins Data of This Website 
-    // =============================================
-    let AllSubAdmins = adminAllUsers?.filter(infoData => infoData?.role === "subAdmin")
-    // Filter all Admins Data of This Website 
-    // =============================================
     let AllRider = adminAllUsers?.filter(infoData => infoData?.role === "rider")
     // Filter all Admins Data of This Website 
     // =============================================
@@ -31,26 +27,6 @@ const UserAdmin = () => {
 
 
 
-    // user role Change Click Admin
-    let HandleAdmin = (id) => {
-
-        fetch(`http://localhost:5000/AdminUpdateRoleAdmin/${id}`, {
-            method: "PATCH",
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.modifiedCount > 0) {
-                    Swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: "Your Update Admin has been Success",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                }
-                refetch()
-            })
-    }
     // user role Change Click User
     let handleUser = (id) => {
 
@@ -85,27 +61,6 @@ const UserAdmin = () => {
                         position: "top-end",
                         icon: "success",
                         title: "Your Update Rider has been Success",
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                }
-                refetch()
-            })
-
-    }
-    // user role Change Click SubAdmin
-    let HandleSubAdmin = (id) => {
-
-        fetch(`http://localhost:5000/AdminUpdateRoleSubAdmin/${id}`, {
-            method: "PUT",
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.modifiedCount > 0) {
-                    Swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: "Your Update SubAdmin has been Success",
                         showConfirmButton: false,
                         timer: 1500
                     })
@@ -151,6 +106,8 @@ const UserAdmin = () => {
         });
     }
 
+
+
     return (
         <div className='AdminViewPaymentRequestAll bg-[#F6F6F6]'>
             <div className='md:px-4 my-4'>
@@ -162,25 +119,13 @@ const UserAdmin = () => {
                         className={`px-4 py-2 font-medium text-sm rounded-t-md transition-all duration-200 ${tabState === 1 ? "bg-indigo-600 text-white" : "bg-gray-100 text-gray-700 hover:bg-indigo-100"
                             }`}
                     >
-                        Admin
+                        Users
                     </button>
                     <button onClick={() => setTabState(2)}
                         className={`px-4 py-2 font-medium text-sm rounded-t-md transition-all duration-200 ${tabState === 2 ? "bg-indigo-600 text-white" : "bg-gray-100 text-gray-700 hover:bg-indigo-100"
                             }`}
                     >
-                        Sub Admin
-                    </button>
-                    <button onClick={() => setTabState(3)}
-                        className={`px-4 py-2 font-medium text-sm rounded-t-md transition-all duration-200 ${tabState === 3 ? "bg-indigo-600 text-white" : "bg-gray-100 text-gray-700 hover:bg-indigo-100"
-                            }`}
-                    >
                         Rider
-                    </button>
-                    <button onClick={() => setTabState(4)}
-                        className={`px-4 py-2 font-medium text-sm rounded-t-md transition-all duration-200 ${tabState === 4 ? "bg-indigo-600 text-white" : "bg-gray-100 text-gray-700 hover:bg-indigo-100"
-                            }`}
-                    >
-                        Users
                     </button>
                 </div>
 
@@ -198,16 +143,10 @@ const UserAdmin = () => {
                         </thead>
                         <tbody>
                             {tabState === 1 &&
-                                AllAdmins?.slice().reverse().map(allUser => <UserAllData refetch={refetch} HandleAdmin={HandleAdmin} handleUser={handleUser} HandleRider={HandleRider} HandleSubAdmin={HandleSubAdmin} HandleDelete={HandleDelete} key={allUser._id} allUser={allUser}></UserAllData>)
+                                AllUsers?.slice().reverse().map(allUser => <CreateRiderDataSee refetch={refetch}  handleUser={handleUser} HandleRider={HandleRider} HandleDelete={HandleDelete} key={allUser._id} allUser={allUser}></CreateRiderDataSee>)
                             }
                             {tabState === 2 &&
-                                AllSubAdmins?.slice().reverse().map(allUser => <UserAllData refetch={refetch} HandleAdmin={HandleAdmin} handleUser={handleUser} HandleRider={HandleRider} HandleSubAdmin={HandleSubAdmin} HandleDelete={HandleDelete} key={allUser._id} allUser={allUser}></UserAllData>)
-                            }
-                            {tabState === 3 &&
-                                AllRider?.slice().reverse().map(allUser => <UserAllData refetch={refetch} HandleAdmin={HandleAdmin} handleUser={handleUser} HandleRider={HandleRider} HandleSubAdmin={HandleSubAdmin} HandleDelete={HandleDelete} key={allUser._id} allUser={allUser}></UserAllData>)
-                            }
-                            {tabState === 4 &&
-                                AllUsers?.slice().reverse().map(allUser => <UserAllData refetch={refetch} HandleAdmin={HandleAdmin} handleUser={handleUser} HandleRider={HandleRider} HandleSubAdmin={HandleSubAdmin} HandleDelete={HandleDelete} key={allUser._id} allUser={allUser}></UserAllData>)
+                                AllRider?.slice().reverse().map(allUser => <CreateRiderDataSee refetch={refetch}  handleUser={handleUser} HandleRider={HandleRider} HandleDelete={HandleDelete} key={allUser._id} allUser={allUser}></CreateRiderDataSee>)
                             }
                         </tbody>
                     </table>
@@ -217,4 +156,4 @@ const UserAdmin = () => {
     );
 };
 
-export default UserAdmin;
+export default CreateRider;

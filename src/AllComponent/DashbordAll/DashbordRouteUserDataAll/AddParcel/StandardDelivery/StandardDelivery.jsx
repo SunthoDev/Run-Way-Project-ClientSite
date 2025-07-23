@@ -5,15 +5,19 @@ import Swal from 'sweetalert2';
 import { Link, useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import { useQuery } from '@tanstack/react-query';
+import useRole from '../../../../../Hook/useRole';
 
 
 const StandardDelivery = () => {
 
     let { user, setStandardParcelId } = useContext(AuthContext)
     let navigate = useNavigate()
+    const [roles] = useRole()
     // console.log(user)
+
     // ==============================================================================
     // find all police station 
+    // ==============================================================================
 
     let [District, setDistrict] = useState("")
     let handleDistrictData = (e) => {
@@ -28,16 +32,34 @@ const StandardDelivery = () => {
 
     // ==============================================================================
     // Delivery type selected function
-
+    // ==============================================================================
     const [deliveryType, setDeliveryType] = useState('Home-Delivery');
 
     const getLabelClasses = (selected) =>
         `px-4 py-2 rounded-lg border-2 cursor-pointer transition 
      ${selected ? 'bg-black text-white border-white' : 'bg-white text-black border-white'}`;
 
+
+
+    // ============================================================================================================
+    // All Police Station data. which is add Hub
+    // =====================================================
+    let { data: AllStationOfHub = [] } = useQuery(["HubManageAdminCreateOrUpdatePs_PoliceStationWithOfHub"], async () => {
+        let res = await fetch("http://localhost:5000/HubManageAdminCreateOrUpdatePs/PoliceStationWithOfHub")
+        return res.json()
+    })
+    // console.log(AllStationOfHub)
+
+    // Find my hub to match my police station with hub police station !!
+    // =======================================================================
+    let MyHub = AllStationOfHub?.find(Hub => Hub?.PoliceStation === roles?.PoliceStations)
+    // console.log(MyHub?.HubName)
+    // MyHub:MyHub?.HubName
+
+
     // ==============================================================================
     //  User Parcel Send Function to database 
-
+    // ==============================================================================
     let handleStandardParcel = (event) => {
         event.preventDefault()
         let name = event.target.name.value
@@ -52,10 +74,10 @@ const StandardDelivery = () => {
         let note = event.target.note.value
         let weight = event.target.weight.value
         let StandardParcelId = Math.round(Math.random() * 9999999).toString()
-        let date = moment().format("D/MM/YYYY")
+        let date = moment().format("MM/DD/YYYY")
         let time = moment().format("hh:mm A")
 
-        let StandardDeliveryData = { deliveryType, name, address, District, policeStation, AlternativePhone, RecipientEmail, number, CodAmount, Invoice, ItemDescription, note, weight, StandardEmailUser: user?.email, StandardParcelId, date,time, DeliveryCharge: "60", status: "Review", Payment: "No", ParcelCategory: "Regular" }
+        let StandardDeliveryData = { deliveryType, name, address, District, policeStation, AlternativePhone, RecipientEmail, number, CodAmount, Invoice, ItemDescription, note, weight, StandardEmailUser: user?.email, StandardParcelId, date, time, DeliveryCharge: "60", status: "Review", Payment: "No", ParcelCategory: "Regular", MyHub:MyHub?.HubName,AssignRider:"No"}
 
         // console.log(StandardDeliveryData)
 
@@ -287,7 +309,7 @@ const StandardDelivery = () => {
                 </div>
 
             </div>
-            
+
         </div>
     );
 };

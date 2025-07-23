@@ -55,6 +55,10 @@ let AuthProvider = ({ children }) => {
 
     // Admin user email send Data entry Route fine standard parcel-----------------
     let [UserEmailSendDataEntry, setAdminUserEmailSendDataEntry] = useState("")
+
+    // Admin will be check daily report, that's why date transfer-----------------
+    let [ReportSearchDate, setReportSearchDate] = useState("")
+
     // ===========================================
 
 
@@ -76,7 +80,9 @@ let AuthProvider = ({ children }) => {
         StandardId,
         setStandardParcelId,
         UserEmailSendDataEntry,
-        setAdminUserEmailSendDataEntry
+        setAdminUserEmailSendDataEntry,
+        ReportSearchDate,
+        setReportSearchDate
 
     }
     return (

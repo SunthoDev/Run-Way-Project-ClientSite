@@ -59,7 +59,17 @@ const AdminEntryParcelOrApproved = () => {
          ${selected ? 'bg-black text-white border-white' : 'bg-white text-black border-white'}`;
 
 
-    //    Admin can entry user parcel here then to post database
+    // ============================================================================================================
+    // Created All Hub Find
+    // =====================================================
+    let { data: AllHubFind = [] } = useQuery(["HubManageAdminCreateOrUpdatePs_CreatedHubFind"], async () => {
+        let res = await fetch("http://localhost:5000/HubManageAdminCreateOrUpdatePs/CreatedHubFind")
+        return res.json()
+    })
+    // console.log(AllHubFind)
+
+
+    //  Admin can entry user parcel here then to post database
     // ==================================================================
     let handleAdminEntryStandardParcel = (event) => {
         event.preventDefault()
@@ -74,14 +84,14 @@ const AdminEntryParcelOrApproved = () => {
         let ItemDescription = event.target.ItemDescription.value
         let note = event.target.note.value
         let weight = event.target.weight.value
+        let MyHub = event.target.HubName.value
         let StandardParcelId = Math.round(Math.random() * 9999999).toString()
-        let date = moment().format("D/MM/YYYY")
+        let date = moment().format("MM/DD/YYYY")
         let time = moment().format("hh:mm A")
 
         let AdminEntryStandardDeliveryData = {
-            deliveryType, name, address, District, policeStation, AlternativePhone, RecipientEmail, number, CodAmount, Invoice, ItemDescription, note, weight, StandardEmailUser: UserEmailSendDataEntry, StandardParcelId, date, time, DeliveryCharge: "60", status: "Pending", Payment: "No", ParcelCategory: "Regular",
-            ApprovedOffice: "Corporate office", PendingDate: date, ApprovedName: roles?.name
-
+            deliveryType, name, address, District, policeStation, AlternativePhone, RecipientEmail, number, CodAmount, Invoice, ItemDescription, note, weight, StandardEmailUser: UserEmailSendDataEntry, StandardParcelId, date, time, DeliveryCharge: "60", status: "Pending", Payment: "No", ParcelCategory: "Regular", AssignRider:"No",
+            ApprovedOffice: "Corporate office", PendingDate: date, ApprovedName: roles?.name, MyHub
         }
         // console.log(AdminEntryStandardDeliveryData)
 
@@ -111,12 +121,14 @@ const AdminEntryParcelOrApproved = () => {
     }
 
 
+
+
     return (
         <div className='AdminEntryParcelOrApproved py-8 px-2 md:px-4'>
 
             <div className="AdminEntryParcel py-6 px-4  bg-white rounded-[8px]">
 
-                 {/* ============================================================== */}
+                {/* ============================================================== */}
                 {/* User Pending data show here */}
                 {/* ============================================================== */}
                 <div className="PendingData">
@@ -133,7 +145,6 @@ const AdminEntryParcelOrApproved = () => {
                 <div className='StandardDeliveryParent px-[12px] md:px-4 my-4'>
 
                     <div className="StandardMain bg-white rounded-[8px] p-[28px]">
-
                         <h2 className='text-black font-[600] text-[20px]'>Add New Parcel (Regular Service)</h2>
                         <div className="Horijontal bg-[#d4d2d2] my-[12px] w-[full] h-[1px]"></div>
                         <h3 className='text-black font-[500] text-[15px]'>PickUp Time for Regular service- 4pm-8pm</h3>
@@ -142,7 +153,6 @@ const AdminEntryParcelOrApproved = () => {
                         {/* =================================================== */}
 
                         <form onSubmit={handleAdminEntryStandardParcel} className='StandardFromData'>
-
                             <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-6">
 
                                 <div className="">
@@ -302,6 +312,19 @@ const AdminEntryParcelOrApproved = () => {
                                         <input className='col-span-4  w-[100%]' type="number" name='weight' />
                                     </div>
                                     <div className="grid grid-cols-6 mt-[18px] gap-2  items-center">
+                                        <h4 className='col-span-2 text-[16px] font-[500] '>Hub Name</h4>
+                                        <select required className="col-span-4 w-full bg-white border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                            name="HubName"
+                                        >
+                                            <option value="">-- Select Hub Name --</option>
+                                            {AllHubFind?.map((hubName, i) => (
+                                                <option key={i}>
+                                                    {hubName?.NameOfHub}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                    <div className="grid grid-cols-6 mt-[18px] gap-2  items-center">
                                         <h4 className='col-span-2 text-[16px] font-[500] '>Exchange</h4>
                                         <input type="checkbox" className="checkbox" />
                                     </div>
@@ -310,10 +333,8 @@ const AdminEntryParcelOrApproved = () => {
                                     </div>
 
                                 </div>
-
                             </div>
                         </form>
-
                     </div>
 
                 </div>

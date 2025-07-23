@@ -1,25 +1,27 @@
-import React from 'react';
+import React, { useRef, useEffect, useContext } from 'react';
 import "./AllReportEverything.css";
 import { FaBox, FaMoneyBill, FaTruckLoading, FaUndo, FaShippingFast, FaBan, FaCheckDouble, FaBalanceScale, FaMoneyCheckAlt } from "react-icons/fa";
 import { useQuery } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useReactToPrint } from "react-to-print";
+import { AuthContext } from '../../../AuthoncationAll/AuthProvider/AuthProvider';
 
 const AllReportEverything = () => {
 
-  const [tabState, setTabState] = useState(1);
+  const { setReportSearchDate } = useContext(AuthContext);
   let navigate = useNavigate()
 
   const getTodayFormatted = () => {
     const today = new Date();
-    const dd = String(today.getDate());
+    const dd = String(today.getDate()).padStart(2, "0");
     const mm = String(today.getMonth() + 1).padStart(2, "0"); // Month is 0-based
     const yy = String(today.getFullYear()); // last 2 digits
-    return `${dd}/${mm}/${yy}`; // output: 01/07/25
+    return `${mm}/${dd}/${yy}`; // output: 01/07/25
   };
   const todayDate = getTodayFormatted();
-  console.log(todayDate)
+  // console.log(todayDate)
 
 
   // ============================================================================================================
@@ -228,138 +230,164 @@ const AllReportEverything = () => {
 
 
 
+  // ==========================================================
+  // Print (Report) Options Start
+  // ==========================================================
+  const InvoiceRef = useRef();
+  const handleInvoicePrint = useReactToPrint({
+    content: () => InvoiceRef.current,
+  });
 
 
-
-  const reportData = {
-    totalParcel: 120,
-    totalCod: 54000,
-    deliveryCharge: 7200,
-    pickupPending: 12,
-    pickupApproved: 108,
-    returnPending: 3,
-    returnApproved: 15,
-    todayEntry: 20,
-    dispatchPending: 6,
-    dispatchApproved: 25,
-    deliveryDone: 95,
-    partialParcel: 4,
-    cancelParcel: 5,
-    balancePending: 2,
-    balanceApproved: 7,
-    paymentPending: 3,
-    paymentApproved: 5,
-  };
-
+  // Print (Report) Options Start
+  // ==========================================================
   const cardClass =
     "backdrop-blur-md bg-white/10 text-white p-6 rounded-2xl shadow-lg border border-white/20 hover:scale-[1.02] transition-all duration-300";
 
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-gray-800 text-white py-10 px-4 md:px-20">
-      <h1 className="text-4xl font-bold mb-10 text-center">🚀 Courier Daily Report Panel</h1>
-
-      {/* Total Parcel | Today Total COD with Entry Parcel Show */}
-      {/* ================================================================= */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className={cardClass}>
-          <div className="flex justify-between items-center mb-2">
-            <span className="text-lg font-semibold">Total Parcel</span>
-            <FaBox className="text-2xl text-cyan-400" />
-          </div>
-          <p className="text-3xl font-bold mt-2">{AllParcelData?.length}</p>
-        </div>
-        <div className={cardClass}>
-          <div className="flex justify-between items-center mb-2">
-            <span className="text-lg font-semibold">Total COD</span>
-            <FaMoneyBill className="text-2xl text-green-400" />
-          </div>
-          <p className="text-3xl font-bold mt-2">{CodAmountPaymentData}</p>
-        </div>
-        <div className={cardClass}>
-          <div className="flex justify-between items-center mb-2">
-            <span className="text-lg font-semibold">Today’s Entry Parcel</span>
-            <FaTruckLoading className="text-2xl text-orange-400" />
-          </div>
-          <p className="text-3xl font-bold mt-2">{todayParcelData?.length}</p>
-        </div>
-      </div>
-
-      {/* Total, Pickup Request || Return Parcel -->> (Pending) or (Approved) data Show */}
+      
+      {/* Parcel Search options and print options here */}
       {/* ================================================================================== */}
-      <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className={cardClass}>
-          <h3 className="text-xl font-bold mb-4 text-cyan-300 flex items-center gap-2">
-            <FaTruckLoading /> Pickup Request
-          </h3>
-          <div className="flex justify-between mb-2"><span>Pending:</span><span>{todayPickupRequestPendingData?.length}</span></div>
-          <div className="flex justify-between"><span>Approved:</span><span>{todayPickupRequestApprovedData?.length}</span></div>
-        </div>
-        <div className={cardClass}>
-          <h3 className="text-xl font-bold mb-4 text-pink-400 flex items-center gap-2">
-            <FaUndo /> Return Parcel
-          </h3>
-          <div className="flex justify-between mb-2"><span>Pending:</span><span>{todayReturnParcelPendingData?.length}</span></div>
-          <div className="flex justify-between"><span>Approved:</span><span>{todayReturnParcelApprovedData?.length}</span></div>
+      <div className="flex items-center justify-between pb-2">
+        <button onClick={handleInvoicePrint} className="bg-[#22A197] text-white font-semibold px-4 py-2 rounded">Print Today Report</button>
+
+        <div className="flex items-center gap-2">
+          <form onSubmit={(e) => {
+            e.preventDefault()
+
+            let date = e.target.date.value; // "2025-07-10"
+            const split = date.split('-'); // ["2025", "07", "10"]
+            const formattedDate = `${split[1]}/${split[2]}/${split[0]}`; // "07/10/2025"
+            setReportSearchDate(formattedDate)
+            navigate(`/dashboard/AdminDashboard/SearchAllReport`)
+
+          }}>
+            <input
+              type="date"
+              id="reportDate"
+              className="border border-gray-300 bg-white text-black rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+              name="date"
+            />
+            <button
+              type="submit"
+              className="bg-green-500 text-white px-4 py-2 rounded-md text-sm hover:bg-green-600 transition"
+            >
+              Submit
+            </button>
+          </form>
         </div>
       </div>
 
-      {/* Total, Dispatch Request || Delivery Summary Parcel -->> (Pending) or (Approved) data Show */}
-      {/* ================================================================================================ */}
-      <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className={cardClass}>
-          <h3 className="text-xl font-bold mb-4 text-yellow-300 flex items-center gap-2">
-            <FaShippingFast /> Dispatch Request
-          </h3>
-          <div className="flex justify-between mb-2"><span>Send:</span><span>{todayDispatchParcelSentData?.length}</span></div>
-          <div className="flex justify-between"><span>Received:</span><span>{todayDispatchParcelReceivedData?.length}</span></div>
-        </div>
-        <div className={cardClass}>
-          <h3 className="text-xl font-bold mb-4 text-lime-300 flex items-center gap-2">
-            <FaCheckDouble /> Delivery Summary Parcel
-          </h3>
-          <div className="flex justify-between mb-1"><span>Delivered:</span><span>{DeliveredParcelAll?.length}</span></div>
-          <div className="flex justify-between mb-1"><span>Partially:</span><span>{PartiallyParcelAll?.length}</span></div>
-          <div className="flex justify-between"><span>Cancelled:</span><span>{CancelParcelAll?.length}</span></div>
-        </div>
-      </div>
+      {/* ========================================================================================== */}
 
-      {/* Total, User Balance Request || User Payment Request -->> (Pending) or (Approved) data Show */}
-      {/* ================================================================================================ */}
-      <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className={cardClass}>
-          <h3 className="text-xl font-bold mb-4 text-blue-400 flex items-center gap-2">
-            <FaBalanceScale />User Add Balance Request
-          </h3>
-          <div className="flex justify-between mb-2"><span>Pending:</span><span>{todayAddBalancePendingData?.length}</span></div>
-          <div className="flex justify-between"><span>Approved:</span><span>{todayAddBalanceApprovedData?.length}</span></div>
-        </div>
-        <div className={cardClass}>
-          <h3 className="text-xl font-bold mb-4 text-green-400 flex items-center gap-2">
-            <FaMoneyCheckAlt />User Payment Request Of Parcel
-          </h3>
-          <div className="flex justify-between mb-2"><span>Pending:</span><span>{todayPaymentRequestUnPaidData?.length}</span></div>
-          <div className="flex justify-between"><span>Approved:</span><span>{todayPaymentRequestPaidData?.length}</span></div>
-        </div>
-      </div>
+      <div className="AllReportParent" ref={InvoiceRef}>
+        <h1 className="text-4xl font-bold mb-10 text-center">🚀 Courier Daily Report Panel</h1>
 
-      {/* All Delivered & PartiallyDelivered Balance Details Show Today */}
-      {/* =================================================================== */}
-      <div className="mt-12 bg-white/10 p-6 rounded-xl shadow-lg border border-white/20">
-        <h3 className="text-2xl font-bold mb-4">💰 COD Breakdown</h3>
-        <div className="space-y-2 text-white/90">
-          <div className="flex justify-between"><span>Total COD:</span><span>৳ {CodAmountPaymentData}</span></div>
-          <div className="flex justify-between"><span>Delivery Charge:</span><span className="text-red-400">– ৳ {DeliveryChargeResult}</span></div>
-          <div className="flex justify-between"><span>Subtotal:</span><span>৳ {subTotal}</span></div>
-          <div className="flex justify-between"><span>Cash & Risk Charge (1%):</span><span className="text-red-400">– ৳ {subTotalOnePercentCharge.toFixed(2)}</span></div>
-          <div className="flex justify-between font-bold text-green-300 text-lg pt-2 border-t border-white/20"><span>Grand Total:</span><span>৳ {GrandTotalBalance.toFixed(2)}</span></div>
+        {/* Total Parcel | Today Total COD with Entry Parcel Show */}
+        {/* ================================================================= */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className={cardClass}>
+            <div className="flex justify-between items-center mb-2">
+              <span className="text-lg font-semibold">Total Parcel</span>
+              <FaBox className="text-2xl text-cyan-400" />
+            </div>
+            <p className="text-3xl font-bold mt-2">{AllParcelData?.length}</p>
+          </div>
+          <div className={cardClass}>
+            <div className="flex justify-between items-center mb-2">
+              <span className="text-lg font-semibold">Total COD</span>
+              <FaMoneyBill className="text-2xl text-green-400" />
+            </div>
+            <p className="text-3xl font-bold mt-2">{CodAmountPaymentData}</p>
+          </div>
+          <div className={cardClass}>
+            <div className="flex justify-between items-center mb-2">
+              <span className="text-lg font-semibold">Today’s Entry Parcel</span>
+              <FaTruckLoading className="text-2xl text-orange-400" />
+            </div>
+            <p className="text-3xl font-bold mt-2">{todayParcelData?.length}</p>
+          </div>
         </div>
-      </div>
 
-      {/* Coming soon others fetures */}
-      {/* ========================================== */}
-      <div className="mt-16 text-center text-gray-400 text-sm italic">
-        🔧 More modules like delivery report, hub status, invoice print, and chart analytics coming soon...
+        {/* Total, Pickup Request || Return Parcel -->> (Pending) or (Approved) data Show */}
+        {/* ================================================================================== */}
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className={cardClass}>
+            <h3 className="text-xl font-bold mb-4 text-cyan-300 flex items-center gap-2">
+              <FaTruckLoading /> Pickup Request
+            </h3>
+            <div className="flex justify-between mb-2"><span>Pending:</span><span>{todayPickupRequestPendingData?.length}</span></div>
+            <div className="flex justify-between"><span>Approved:</span><span>{todayPickupRequestApprovedData?.length}</span></div>
+          </div>
+          <div className={cardClass}>
+            <h3 className="text-xl font-bold mb-4 text-pink-400 flex items-center gap-2">
+              <FaUndo /> Return Parcel
+            </h3>
+            <div className="flex justify-between mb-2"><span>Pending:</span><span>{todayReturnParcelPendingData?.length}</span></div>
+            <div className="flex justify-between"><span>Approved:</span><span>{todayReturnParcelApprovedData?.length}</span></div>
+          </div>
+        </div>
+
+        {/* Total, Dispatch Request || Delivery Summary Parcel -->> (Pending) or (Approved) data Show */}
+        {/* ================================================================================================ */}
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className={cardClass}>
+            <h3 className="text-xl font-bold mb-4 text-yellow-300 flex items-center gap-2">
+              <FaShippingFast /> Dispatch Request
+            </h3>
+            <div className="flex justify-between mb-2"><span>Send:</span><span>{todayDispatchParcelSentData?.length}</span></div>
+            <div className="flex justify-between"><span>Received:</span><span>{todayDispatchParcelReceivedData?.length}</span></div>
+          </div>
+          <div className={cardClass}>
+            <h3 className="text-xl font-bold mb-4 text-lime-300 flex items-center gap-2">
+              <FaCheckDouble /> Delivery Summary Parcel
+            </h3>
+            <div className="flex justify-between mb-1"><span>Delivered:</span><span>{DeliveredParcelAll?.length}</span></div>
+            <div className="flex justify-between mb-1"><span>Partially:</span><span>{PartiallyParcelAll?.length}</span></div>
+            <div className="flex justify-between"><span>Cancelled:</span><span>{CancelParcelAll?.length}</span></div>
+          </div>
+        </div>
+
+        {/* Total, User Balance Request || User Payment Request -->> (Pending) or (Approved) data Show */}
+        {/* ================================================================================================ */}
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className={cardClass}>
+            <h3 className="text-xl font-bold mb-4 text-blue-400 flex items-center gap-2">
+              <FaBalanceScale />User Add Balance Request
+            </h3>
+            <div className="flex justify-between mb-2"><span>Pending:</span><span>{todayAddBalancePendingData?.length}</span></div>
+            <div className="flex justify-between"><span>Approved:</span><span>{todayAddBalanceApprovedData?.length}</span></div>
+          </div>
+          <div className={cardClass}>
+            <h3 className="text-xl font-bold mb-4 text-green-400 flex items-center gap-2">
+              <FaMoneyCheckAlt />User Payment Request Of Parcel
+            </h3>
+            <div className="flex justify-between mb-2"><span>Pending:</span><span>{todayPaymentRequestUnPaidData?.length}</span></div>
+            <div className="flex justify-between"><span>Approved:</span><span>{todayPaymentRequestPaidData?.length}</span></div>
+          </div>
+        </div>
+
+        {/* All Delivered & PartiallyDelivered Balance Details Show Today */}
+        {/* =================================================================== */}
+        <div className="mt-12 bg-white/10 p-6 rounded-xl shadow-lg border border-white/20">
+          <h3 className="text-2xl font-bold mb-4">💰 COD Breakdown</h3>
+          <div className="space-y-2 text-white/90">
+            <div className="flex justify-between"><span>Total COD:</span><span>৳ {CodAmountPaymentData}</span></div>
+            <div className="flex justify-between"><span>Delivery Charge:</span><span className="text-red-400">– ৳ {DeliveryChargeResult}</span></div>
+            <div className="flex justify-between"><span>Subtotal:</span><span>৳ {subTotal}</span></div>
+            <div className="flex justify-between"><span>Cash & Risk Charge (1%):</span><span className="text-red-400">– ৳ {subTotalOnePercentCharge.toFixed(2)}</span></div>
+            <div className="flex justify-between font-bold text-green-300 text-lg pt-2 border-t border-white/20"><span>Grand Total:</span><span>৳ {GrandTotalBalance.toFixed(2)}</span></div>
+          </div>
+        </div>
+
+        {/* Coming soon others fetures */}
+        {/* ========================================== */}
+        <div className="mt-16 text-center text-gray-400 text-sm italic">
+          🔧 More modules like delivery report, hub status, invoice print, and chart analytics coming soon...
+        </div>
+
       </div>
     </div>
   );

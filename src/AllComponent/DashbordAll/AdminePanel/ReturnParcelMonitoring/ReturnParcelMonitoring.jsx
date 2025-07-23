@@ -93,7 +93,7 @@ const ReturnParcelMonitoring = () => {
                                 <form onSubmit={(e) => {
                                     e.preventDefault()
                                     const ReturnParcelStatus = e.target.ReturnStatus.value;
-                                    let date = moment().format("D/MM/YYYY")
+                                    let date = moment().format("MM/DD/YYYY")
                                     let time = moment().format("hh:mm A")
                                     let ReturnId = Math.round(Math.random() * 99999999).toString()
                                     let TrackingMessage = `Your parcel return is currently pending and will be processed shortly.
@@ -249,7 +249,10 @@ const ReturnParcelMonitoring = () => {
                                                     <input
                                                         onBlur={(e) => {
                                                             let date = e.target.value
-                                                            let SearchDate = date.split("-").reverse().join("/")
+                                                            let splitDate = date.split("-")
+                                                            let SearchDate = `${splitDate[1]}/${splitDate[2]}/${splitDate[0]}`;
+                                                            // console.log(SearchDate)
+
                                                             setSearchPendingData(ReturnPendingParcelAll?.filter(Date => Date?.date === SearchDate && Date?.ReturnStatus == "Pending"))
                                                         }}
                                                         type="date" className="border border-gray-300 rounded-md px-6 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-green-500"
@@ -404,7 +407,10 @@ const ReturnParcelMonitoring = () => {
                                                     <input
                                                         onBlur={(e) => {
                                                             let date = e.target.value
-                                                            let SearchDate = date.split("-").reverse().join("/")
+                                                            let splitDate = date.split("-")
+                                                            let SearchDate = `${splitDate[1]}/${splitDate[2]}/${splitDate[0]}`;
+                                                            // console.log(SearchDate)
+
                                                             setSearchApprovedData(ReturnApprovedParcelAll?.filter(Date => Date?.date === SearchDate && Date?.ReturnStatus == "Approved"))
                                                         }}
                                                         type="date" className="border border-gray-300 rounded-md px-6 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-green-500"

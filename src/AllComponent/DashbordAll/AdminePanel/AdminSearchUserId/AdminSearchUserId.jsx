@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import "./AdminSearchUserId.css"
 import { Link, useLoaderData } from 'react-router-dom';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
@@ -7,6 +7,8 @@ import { AuthContext } from '../../../AuthoncationAll/AuthProvider/AuthProvider'
 import { useQuery } from '@tanstack/react-query';
 import AdminPaymentRequesrWork from './AdminPaymentRequesrWork/AdminPaymentRequesrWork';
 import AdminUserConsignmentPickupRequestApproved from './AdminUserConsignmentPickupRequestApproved/AdminUserConsignmentPickupRequestApproved';
+import Swal from 'sweetalert2';
+import moment from 'moment';
 
 const AdminSearchUserId = () => {
 
@@ -54,7 +56,7 @@ const AdminSearchUserId = () => {
     let CancelData = userOrderStandardParcelData.filter(Cancel => Cancel?.status == "Cancel" && Cancel?.Payment == "Yes")
     // console.log(ApprovedPendingData)
 
-    // =======================================================================z
+    // =======================================================================
     // =======================================================================
 
     // =======================================================================
@@ -87,16 +89,9 @@ const AdminSearchUserId = () => {
 
     let PickUpAdminApproved = UserPickUpRequestDataAll.filter(PickUpAll => PickUpAll?.status == "Approved")
     // console.log(PickUpAdminApproved)
-
     // =======================================================================
     // Pickup Request User Data All Find End
     // =======================================================================
-
-
-
-
-
-
 
 
     // ========================================================================================================
@@ -111,15 +106,13 @@ const AdminSearchUserId = () => {
     // User Hub Name Find Here
     // =====================================================
     let MyHubName = AllStationOfHub.find(hub => hub?.PoliceStation === PoliceStations)
-
-
     // console.log(MyHubName)
+
     // =======================================================================
     // User Hub Selected End
     // =======================================================================
 
 
-{/* <Link to={`/dashboard/AdminDashboard/UserTemporeryInvoiceAllStandardData/${StandardParcelId}`} */}
 
     return (
         <div className='AdminSearchUserIdParent py-8 px-2 md:px-4'>
@@ -128,7 +121,6 @@ const AdminSearchUserId = () => {
             {/* There are user profile information here */}
             {/* ======================================================== */}
             <div className='UserIdParent grid grid-cols-1 md:grid-cols-7 gap-5'>
-
                 {/* Left information Start*/}
                 {/* ======================================================== */}
                 <div className="left py-6 px-4 col-span-1 md:col-span-2 bg-white rounded-[8px]">
@@ -169,18 +161,16 @@ const AdminSearchUserId = () => {
 
                         </div>
                     </div>
-
                     <div className="md:flex justify-between gap-8 items-center mt-6">
                         <Link onClick={() => (setAdminUserEmailSendDataEntry(email))} to={`/dashboard/AdminDashboard/AdminSearchUserIdDataEntry`} className='font-[600] py-[4px] text-[16px] bg-[#22AFA3] text-white text-center px-4 rounded-[8px]'>Add Parcel</Link>
                         <h3 className='font-[600] text-[16px] text-center text-[#14BF7D]'>Hub Name: <span className='text-black'>{MyHubName?.HubName ? MyHubName?.HubName : "No Hub "}</span></h3>
                     </div>
-
                     <div className="mt-6">
-                        <Link onClick={() => (setAdminUserEmailSendDataEntry(email))} to={`/dashboard/AdminDashboard/AdminSearchUserIdDataEntry`} className='font-[600] py-[4px] text-[16px] bg-[#22AFA3] text-white text-center px-4 rounded-[8px]'>Pickup Request</Link>
+                        <button onClick={() => document.getElementById("PickUpRequestUserSendToAdmin").showModal()} className='font-[600] py-[4px] text-[16px] bg-[#22AFA3] text-white text-center px-4 rounded-[8px]'>Pickup Request</button>
                     </div>
-                    <div className="md:flex justify-between gap-8 items-center mt-6">
-                        <Link onClick={() => (setAdminUserEmailSendDataEntry(email))} to={`/dashboard/AdminDashboard/AdminSearchUserIdDataEntry`} className='font-[600] py-[4px] text-[16px] bg-[#22AFA3] text-white text-center px-4 rounded-[8px]'>Payment Request</Link>
-                    </div>
+                    {/* <div className="md:flex justify-between gap-8 items-center mt-6">
+                        <button className='font-[600] py-[4px] text-[16px] bg-[#22AFA3] text-white text-center px-4 rounded-[8px]'>Payment Request</button>
+                    </div> */}
                     <div className="md:flex justify-between gap-8 items-center mt-6">
                         <select className="select bg-white select-success w-full md:w-[30%] ">
                             <option disabled selected>{status}</option>
@@ -325,7 +315,7 @@ const AdminSearchUserId = () => {
                                                                 </td>
                                                                 <td>
                                                                     <Link
-                                                                       to={`/dashboard/AdminDashboard/AdminConsignmentPendingInvoice/${AllData?._id}`}
+                                                                        to={`/dashboard/AdminDashboard/AdminConsignmentPendingInvoice/${AllData?._id}`}
                                                                     >
                                                                         <button className="btn btn-sm btn-outline btn-primary">
                                                                             View
@@ -678,6 +668,83 @@ const AdminSearchUserId = () => {
                     </TabPanel>
                 </Tabs>
             </div>
+
+            {/* ====================================================================== */}
+            {/* Pickup Request Modal Start */}
+            {/* ====================================================================== */}
+            <dialog id="PickUpRequestUserSendToAdmin" className="modal">
+                <div className="modal-box bg-white">
+                    <h3 className="font-bold text-lg mb-4">Send Pickup Request</h3>
+                    <form
+                        onSubmit={async (e) => {
+                            e.preventDefault();
+                            const PickupRequest = e.target.PickupRequestType.value;
+                            let PickupIdUser = Math.round(Math.random() * 99999999).toString()
+                            let date = moment().format("MM/DD/YYYY")
+                            let time = moment().format("hh:mm A")
+
+                            let AllInfo = { PickupRequestType: PickupRequest, PickupIdUser, date, time, Address, BusinessName, LastName, Phone, PickReqUserEmail: email, name, photo, userId, status: "Pending", PoliceStations, Districts }
+
+                            try {
+                                const response = await fetch("http://localhost:5000/PickupRequestWithManegeAdminUsers/UserPickupRequestSend", {
+                                    method: "POST",
+                                    headers: {
+                                        "Content-Type": "application/json",
+                                    },
+                                    body: JSON.stringify(AllInfo),
+                                });
+
+                                if (!response.ok) {
+                                    throw new Error("Failed to send request");
+                                }
+
+                                const result = await response.json();
+                                // console.log("Success:", result);
+
+                                Swal.fire({
+                                    icon: "success",
+                                    title: "Pickup Request Sent",
+                                    text: `Your ${PickupRequest} has been submitted successfully!`,
+                                    confirmButtonColor: "#2563eb", // Tailwind 'blue-600'
+                                });
+
+                                e.target.reset();
+                                document.getElementById("PickUpRequestUserSendToAdmin").close();
+
+                            } catch (er) {
+                                console.error(er);
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Oops...",
+                                    text: "Something went wrong while sending request!",
+                                    confirmButtonColor: "#dc2626", // Tailwind 'red-600'
+                                });
+                            }
+                        }}
+                        className="space-y-4"
+                    >
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text font-medium">Select Delivery Type</span>
+                            </label>
+                            <select name="PickupRequestType" className="select bg-white select-bordered w-full">
+                                <option>Regular Delivery</option>
+                                <option>Express Delivery</option>
+                                <option>Pink N Drop Delivery</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" className="btn btn-primary w-full">
+                            Send Pickup Request
+                        </button>
+                    </form>
+
+                    {/* Close Button */}
+                    <form method="dialog" className="mt-4">
+                        <button className="btn btn-sm btn-ghost absolute right-4 top-4 text-xl">✕</button>
+                    </form>
+                </div>
+            </dialog>
 
         </div>
     );

@@ -55,6 +55,8 @@ const DeliveryMonitoring = () => {
 
 
 
+
+
     return (
         <div className='AdminViewPaymentRequestAll bg-[#F6F6F6]'>
             <div className='md:px-4 my-4'>
@@ -119,7 +121,11 @@ const DeliveryMonitoring = () => {
                                             <input
                                                 onBlur={(e) => {
                                                     let date = e.target.value
-                                                    let SearchDate = date.split("-").reverse().join("/")
+                                                    // console.log(date)
+                                                    let splitDate = date.split("-")
+                                                    let SearchDate = `${splitDate[1]}/${splitDate[2]}/${splitDate[0]}`;
+                                                    // console.log(SearchDate)
+
                                                     setSearchPendingData(UserAllParcelDataFind?.filter(Date => Date?.date === SearchDate && Date?.status == "Pending"))
                                                 }}
                                                 type="date" className="border border-gray-300 rounded-md px-6 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-green-500"
@@ -210,7 +216,10 @@ const DeliveryMonitoring = () => {
                                             <input
                                                 onBlur={(e) => {
                                                     let date = e.target.value
-                                                    let SearchDate = date.split("-").reverse().join("/")
+                                                    let splitDate = date.split("-")
+                                                    let SearchDate = `${splitDate[1]}/${splitDate[2]}/${splitDate[0]}`;
+                                                    // console.log(SearchDate)
+
                                                     setSearchDeliveredData(UserAllParcelDataFind?.filter(Date => Date?.date === SearchDate && Date?.status == "Delivered" && Date?.Payment == "Yes"))
                                                 }}
                                                 type="date" className="border border-gray-300 rounded-md px-6 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-green-500"
@@ -302,7 +311,10 @@ const DeliveryMonitoring = () => {
                                             <input
                                                 onBlur={(e) => {
                                                     let date = e.target.value
-                                                    let SearchDate = date.split("-").reverse().join("/")
+                                                    let splitDate = date.split("-")
+                                                    let SearchDate = `${splitDate[1]}/${splitDate[2]}/${splitDate[0]}`;
+                                                    // console.log(SearchDate)
+
                                                     setSearchPartiallyData(UserAllParcelDataFind?.filter(Date => Date?.date === SearchDate && Date?.status == "PartiallyDelivered" && Date?.Payment == "Yes"))
                                                 }}
                                                 type="date" className="border border-gray-300 rounded-md px-6 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-green-500"
@@ -394,7 +406,10 @@ const DeliveryMonitoring = () => {
                                             <input
                                                 onBlur={(e) => {
                                                     let date = e.target.value
-                                                    let SearchDate = date.split("-").reverse().join("/")
+                                                     let splitDate = date.split("-")
+                                                    let SearchDate = `${splitDate[1]}/${splitDate[2]}/${splitDate[0]}`;
+                                                    // console.log(SearchDate)
+
                                                     setSearchCancelData(UserAllParcelDataFind?.filter(Date => Date?.date === SearchDate && Date?.status == "Cancel" && Date?.Payment == "Yes"))
                                                 }}
                                                 type="date" className="border border-gray-300 rounded-md px-6 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-green-500"

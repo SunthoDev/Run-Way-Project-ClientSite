@@ -42,7 +42,7 @@ const UserTemporeryInvoiceAllStandardData = () => {
     // ==========================================================
 
     // ==========================================================
-    // Print (Label) Options Start
+    // Print (Invoice) Options Start
     // ==========================================================
     const InvoiceRef = useRef();
 

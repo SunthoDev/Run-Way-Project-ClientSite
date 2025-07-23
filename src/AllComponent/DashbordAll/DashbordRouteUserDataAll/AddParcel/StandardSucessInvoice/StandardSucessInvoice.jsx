@@ -5,11 +5,11 @@ import { useQuery } from '@tanstack/react-query';
 
 const StandardSucessInvoice = () => {
 
-    let { user ,StandardId} = useContext(AuthContext)
+    let { user, StandardId } = useContext(AuthContext)
     // console.log(StandardId)
 
 
-    
+
     let { refetch, data: InVoiceData = [] } = useQuery(["StandardDeliveryData"], async () => {
         let res = await fetch(`http://localhost:5000/StandardDeliveryData?StandardParcelId=${StandardId}`)
         return res.json()
@@ -17,11 +17,11 @@ const StandardSucessInvoice = () => {
     })
 
 
-// console.log(InVoiceData)
+    // console.log(InVoiceData)
 
-let {_id,weight,status,policeStation,number,note,name,district,date,address,StandardParcelId,StandardEmailUser,Invoice,CodAmount}=InVoiceData
+    let { _id, weight, status, policeStation, number, note, name, district, date, address, StandardParcelId, StandardEmailUser, Invoice, CodAmount } = InVoiceData
 
-    
+
     return (
         <div className='AdminSearchStandardParcelUser px-2 md:px-10 py-10'>
 
@@ -63,7 +63,7 @@ let {_id,weight,status,policeStation,number,note,name,district,date,address,Stan
                 <h2 className='text-center bg-[#F3F3F3] text-black text-[20px] font-[600] py-[12px] mt-[44px]'>Note</h2>
                 <h3 className='mt-[26px] text-[16px] font-[500] text-black'>{Invoice}</h3>
             </div>
-            
+
         </div>
     );
 };
