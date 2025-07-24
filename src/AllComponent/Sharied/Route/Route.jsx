@@ -53,6 +53,8 @@ import AllReportEverything from "../../DashbordAll/AdminePanel/AllReportEverythi
 import CreateRider from "../../DashbordAll/AdminePanel/CreateRider/CreateRider";
 import AssignParcel from "../../DashbordAll/AdminePanel/AssignParcel/AssignParcel";
 import SearchAllReport from "../../DashbordAll/AdminePanel/AllReportEverything/SearchAllReport/SearchAllReport";
+import RiderDashboard from "../../DashbordAll/RiderPanelAllWorkHere/RiderDashboard/RiderDashboard";
+import MyParcelRider from "../../DashbordAll/RiderPanelAllWorkHere/MyParcelRider/MyParcelRider";
 
 
 let route = createBrowserRouter([
@@ -82,7 +84,6 @@ let route = createBrowserRouter([
       path: "dashboard",
       element: <PrivateRoute> <Dashboard></Dashboard> </PrivateRoute>,
       children: [
-
          {
             path: "dashboard",
             element: <DashboardItems></DashboardItems>
@@ -325,15 +326,24 @@ let route = createBrowserRouter([
             path: "AdminDashboard/AssignParcel",
             element: <AssignParcel></AssignParcel>
          },
+      ]
+   },
 
-
-
-
-
-
-
-
-
+   // ==================================================================================================
+   // Rider Panel All Work Here!!
+   // ========================================================
+   {
+      path: "dashboard",
+      element: <PrivateRoute> <Dashboard></Dashboard> </PrivateRoute>,
+      children: [
+         {
+            path: "RiderDashboard",
+            element: <RiderDashboard></RiderDashboard>
+         },
+         {
+            path: "MyParcelRider",
+            element: <MyParcelRider></MyParcelRider>
+         },
 
       ]
    },

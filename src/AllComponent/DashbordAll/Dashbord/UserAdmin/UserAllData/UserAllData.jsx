@@ -80,6 +80,7 @@ const UserAllData = ({ allUser, HandleAdmin, handleUser, HandleRider, HandleSubA
                                 const My_Hub_Access = formData.get("My_Hub_Access");
                                 const Dispatch_Access = formData.get("Dispatch_Access");
                                 const Delivery_Monitoring_Access = formData.get("Delivery_Monitoring_Access");
+                                const Assign_Parcel_Access = formData.get("Assign_Parcel_Access");
                                 const ReturnParcel_Monitoring_Access = formData.get("ReturnParcel_Monitoring_Access");
                                 const Balance_Request_Access = formData.get("Balance_Request_Access");
                                 const All_Report_Access = formData.get("All_Report_Access");
@@ -95,6 +96,7 @@ const UserAllData = ({ allUser, HandleAdmin, handleUser, HandleRider, HandleSubA
                                     My_Hub_Access,
                                     Dispatch_Access,
                                     Delivery_Monitoring_Access,
+                                    Assign_Parcel_Access,
                                     ReturnParcel_Monitoring_Access,
                                     Balance_Request_Access,
                                     All_Report_Access,
@@ -160,6 +162,14 @@ const UserAllData = ({ allUser, HandleAdmin, handleUser, HandleRider, HandleSubA
                                 <div>
                                     <label className="block font-semibold mb-1">Delivery Monitoring Access- ({activeUser?.Delivery_Monitoring_Access})</label>
                                     <select name="Delivery_Monitoring_Access" defaultValue="No" className="w-full border border-gray-300 rounded px-3 py-2 bg-gray-700 text-white">
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label className="block font-semibold mb-1">Assign Parcel Access- ({activeUser?.Assign_Parcel_Access})</label>
+                                    <select name="Assign_Parcel_Access" defaultValue="No" className="w-full border border-gray-300 rounded px-3 py-2 bg-gray-700 text-white">
                                         <option value="Yes">Yes</option>
                                         <option value="No">No</option>
                                     </select>

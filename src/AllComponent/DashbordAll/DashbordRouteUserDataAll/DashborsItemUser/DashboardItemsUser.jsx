@@ -57,6 +57,22 @@ const DashboardItemsUser = () => {
     let totalBalanceUser = subTotal - subTotalOnePercentCharge
     // console.log(totalBalanceUser)
 
+    // ============================================================================================================
+    // All Police Station data. which is add Hub
+    // =====================================================
+    let { data: AllStationOfHub = [] } = useQuery(["HubManageAdminCreateOrUpdatePs_PoliceStationWithOfHub"], async () => {
+        let res = await fetch("http://localhost:5000/HubManageAdminCreateOrUpdatePs/PoliceStationWithOfHub")
+        return res.json()
+    })
+    // console.log(AllStationOfHub)
+
+    // Find my hub to match my police station with hub police station !!
+    // =======================================================================
+    let MyHub = AllStationOfHub?.find(Hub => Hub?.PoliceStation === roles?.PoliceStations)
+    // console.log(MyHub?.HubName)
+    // MyHub:MyHub?.HubName
+
+
     // =========================================================================================================
     // Payment Request user start
     // =================================================
@@ -68,7 +84,7 @@ const DashboardItemsUser = () => {
         let time = moment().format("hh:mm A")
         let UpdatePaymentId = { PaymentID: PaymentIdUser }
 
-        let paymentRequestAllDataPost = { ReqPaymentID: PaymentIdUser, ReqPay: pay, TotalCodAmount: CodAmountResult, TotalDeliveryCharge: DeliveryChargeResult, subTotal, subTotalOnePercentCharge, totalBalanceUser, name, LastName, photo, userId, Address, BusinessName, PoliceStations, Phone, ReqUserEmail: email, userStatus: status, date, time, Payment: "UnPaid" }
+        let paymentRequestAllDataPost = { ReqPaymentID: PaymentIdUser, ReqPay: pay, TotalCodAmount: CodAmountResult, TotalDeliveryCharge: DeliveryChargeResult, subTotal, subTotalOnePercentCharge, totalBalanceUser, name, LastName, photo, userId, Address, BusinessName, PoliceStations, Phone, ReqUserEmail: email, userStatus: status, date, time, Payment: "UnPaid", MyHub:MyHub?.HubName }
 
 
         fetch(`http://localhost:5000/UserPaymentRequestUpdateAllData/${roles.email}`, {
@@ -110,47 +126,46 @@ const DashboardItemsUser = () => {
             })
     }
 
-
     // =========================================================================================================
     // Chart all Data Here !!
     // =================================================
 
     const sampleData = [
         {
-            country: 'USA',
-            'hot dog': 120,
-            'burger': 150,
-            'sandwich': 90,
-            'kebab': 110,
-            'fries': 200,
-            'donut': 80,
+            country: 'Dhaka',
+            'Parcel': 120,
+            'Pickup': 150,
+            'Delivery': 90,
+            'Payment': 110,
+            'AddPayment': 200,
+            'Transction': 80,
         },
         {
-            country: 'Germany',
-            'hot dog': 80,
-            'burger': 140,
-            'sandwich': 60,
-            'kebab': 100,
-            'fries': 170,
-            'donut': 60,
+            country: 'Sylhet',
+            'Parcel': 80,
+            'Pickup': 140,
+            'Delivery': 60,
+            'Payment': 100,
+            'AddPayment': 170,
+            'Transction': 60,
         },
         {
-            country: 'France',
-            'hot dog': 100,
-            'burger': 120,
-            'sandwich': 70,
-            'kebab': 90,
-            'fries': 160,
-            'donut': 75,
+            country: 'Chatgram',
+            'Parcel': 100,
+            'Pickup': 120,
+            'Delivery': 70,
+            'Payment': 90,
+            'AddPayment': 160,
+            'Transction': 75,
         },
         {
-            country: 'Japan',
-            'hot dog': 130,
-            'burger': 110,
-            'sandwich': 85,
-            'kebab': 95,
-            'fries': 180,
-            'donut': 85,
+            country: 'Rajshae',
+            'Parcel': 130,
+            'Pickup': 110,
+            'Delivery': 85,
+            'Payment': 95,
+            'AddPayment': 180,
+            'Transction': 85,
         },
     ];
 
@@ -176,9 +191,7 @@ const DashboardItemsUser = () => {
     ];
     const COLORS = ['#8884d8', '#8dd1e1', '#82ca9d', '#ffc658'];
 
-
-
-    // (truncate) id i use it css class text will be ->(...)
+    // (truncate) If i use it css class text will be ->(...)
 
     return (
         <div className='bg-[#F6F6F6]'>
@@ -192,6 +205,7 @@ const DashboardItemsUser = () => {
 
                     <div className="AllRequestDetails md:col-span-2">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+
                             <div className="Dh-[260px]">
                                 <div onClick={handlePaymentRequestUser} className="h-[100px] mb-[8px] p-4 bg-white shadow rounded-[24px]">
                                     <div className="items bg-[#F23F83] py-[2px] px-[4px] rounded-[6px]">
@@ -232,7 +246,7 @@ const DashboardItemsUser = () => {
                     <div className="PickUpHistory md:col-span-3 bg-white h-[268px] w-full rounded-[24px]">
                         <ResponsiveBar
                             data={sampleData}
-                            keys={['hot dog', 'burger', 'sandwich', 'kebab', 'fries', 'donut']}
+                            keys={['Parcel', 'Pickup', 'Delivery', 'Payment', 'AddPayment', 'Transction']}
                             indexBy="country"
                             margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
                             padding={0.3}
@@ -529,7 +543,7 @@ const DashboardItemsUser = () => {
 
 
                 {/* ============================================= */}
-                {/* Payment Request Send Modal  */}
+                {/* Payment Request Send Modal Start */}
                 {/* ============================================= */}
                 <div className={`alertContainer rounded-[8px]  px-4  lg:px-0 w-full lg:w-[24%]  ${poup === true && "showAlertJs"}`} >
 
@@ -560,7 +574,7 @@ const DashboardItemsUser = () => {
                 </div>
 
                 {/* ====================================================================== */}
-                {/* Pickup Request Modal Start */}
+                {/* Pickup Request Send Modal Start */}
                 {/* ====================================================================== */}
                 <dialog id="PickUpRequest" className="modal">
                     <div className="modal-box bg-white">
@@ -573,7 +587,7 @@ const DashboardItemsUser = () => {
                                 let date = moment().format("MM/DD/YYYY")
                                 let time = moment().format("hh:mm A")
 
-                                let AllInfo = { PickupRequestType: PickupRequest, PickupIdUser, date, time, Address, BusinessName, LastName, Phone, PickReqUserEmail: email, name, photo, userId, status: "Pending", PoliceStations, Districts }
+                                let AllInfo = { PickupRequestType: PickupRequest, PickupIdUser, date, time, Address, BusinessName, LastName, Phone, PickReqUserEmail: email, name, photo, userId, status: "Pending", PoliceStations, Districts, MyHub:MyHub?.HubName }
 
                                 try {
                                     const response = await fetch("http://localhost:5000/PickupRequestWithManegeAdminUsers/UserPickupRequestSend", {

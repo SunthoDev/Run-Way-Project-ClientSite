@@ -67,6 +67,21 @@ const CurrentBalanceDetails = () => {
     // console.log(totalBalanceUser)
 
 
+    // ============================================================================================================
+    // All Police Station data. which is add Hub
+    // =====================================================
+    let { data: AllStationOfHub = [] } = useQuery(["HubManageAdminCreateOrUpdatePs_PoliceStationWithOfHub"], async () => {
+        let res = await fetch("http://localhost:5000/HubManageAdminCreateOrUpdatePs/PoliceStationWithOfHub")
+        return res.json()
+    })
+    // console.log(AllStationOfHub)
+
+    // Find my hub to match my police station with hub police station !!
+    // =======================================================================
+    let MyHub = AllStationOfHub?.find(Hub => Hub?.PoliceStation === userInformationForPayment?.PoliceStations)
+    // console.log(MyHub?.HubName)
+    // MyHub:MyHub?.HubName
+
 
     // =========================================================================================================
     // Payment Request send to admin of user start
@@ -82,7 +97,7 @@ const CurrentBalanceDetails = () => {
         let paymentRequestAllDataPost = {
             ReqPaymentID: PaymentIdUser, ReqPay: pay, date, time, Payment: "UnPaid",
             TotalCodAmount: CodAmountResult, TotalDeliveryCharge: DeliveryChargeResult, subTotal, subTotalOnePercentCharge, totalBalanceUser,
-            name, LastName, photo, userId, Address, BusinessName, Phone, ReqUserEmail: userInformationForPayment?.email, userStatus: status,PoliceStations,
+            name, LastName, photo, userId, Address, BusinessName, Phone, ReqUserEmail: userInformationForPayment?.email, userStatus: status,PoliceStations, MyHub:MyHub?.HubName,
         }
         // console.log(paymentRequestAllDataPost)
 

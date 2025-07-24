@@ -15,6 +15,7 @@ const Dashboard = () => {
     let { role, Address, BusinessName, name, userId, photo } = roles
     const ad = roles?.role === "admin"
     const subAdmin = roles?.role === "subAdmin"
+    const Rider = roles?.role === "rider"
     // console.log(roles)
 
     let handelLogOut = () => {
@@ -107,7 +108,7 @@ const Dashboard = () => {
                                     <div className="flex items-center gap-2 text-gray-500 cursor-not-allowed opacity-50"><FaHome /> Delivery Monitoring</div>
                             }
                             {
-                                ad || (subAdmin && roles?.Assign_Parcel === "Yes") ?
+                                ad || (subAdmin && roles?.Assign_Parcel_Access === "Yes") ?
                                     <li> <NavLink to="/dashboard/AdminDashboard/AssignParcel"><span><FaHome></FaHome></span>Assign Parcel</NavLink></li>
                                     :
                                     <div className="flex items-center gap-2 text-gray-500 cursor-not-allowed opacity-50"><FaHome /> Assign Parcel</div>
@@ -161,43 +162,55 @@ const Dashboard = () => {
                             }
                             {
                                 ad || (subAdmin && roles?.AmountUpdate_Parcel_Access === "Yes") ?
-                                <li> <NavLink to="/dashboard/AdminDashboard/AdminAmountUpdateParcel"><span><FaWallet></FaWallet></span> Amount Update Parcel</NavLink></li>
-                                :
-                                <div className="flex items-center gap-2 text-gray-500 cursor-not-allowed opacity-50"><FaHome />Amount Update Parcel</div>
+                                    <li> <NavLink to="/dashboard/AdminDashboard/AdminAmountUpdateParcel"><span><FaWallet></FaWallet></span> Amount Update Parcel</NavLink></li>
+                                    :
+                                    <div className="flex items-center gap-2 text-gray-500 cursor-not-allowed opacity-50"><FaHome />Amount Update Parcel</div>
                             }
                             {
                                 ad || (subAdmin && roles?.New_Merchants_Access === "Yes") ?
-                                <li> <NavLink to="/dashboard/AdminDashboard/NewMerchants"><span><FaWallet></FaWallet></span> New Merchants</NavLink></li>
-                                :
-                                <div className="flex items-center gap-2 text-gray-500 cursor-not-allowed opacity-50"><FaHome />New Merchants</div>
+                                    <li> <NavLink to="/dashboard/AdminDashboard/NewMerchants"><span><FaWallet></FaWallet></span> New Merchants</NavLink></li>
+                                    :
+                                    <div className="flex items-center gap-2 text-gray-500 cursor-not-allowed opacity-50"><FaHome />New Merchants</div>
                             }
                             {
                                 ad || (subAdmin && roles?.User_Access === "Yes") ?
-                                <li> <NavLink to="/dashboard/User"><span><FaWallet></FaWallet></span> users</NavLink></li>
-                                :
-                                <div className="flex items-center gap-2 text-gray-500 cursor-not-allowed opacity-50"><FaHome />Users</div>
+                                    <li> <NavLink to="/dashboard/User"><span><FaWallet></FaWallet></span> users</NavLink></li>
+                                    :
+                                    <div className="flex items-center gap-2 text-gray-500 cursor-not-allowed opacity-50"><FaHome />Users</div>
                             }
                             {
                                 ad || (subAdmin && roles?.CreateRider_Access === "Yes") ?
-                                <li> <NavLink to="/dashboard/AdminDashboard/CreateRider"><span><FaWallet></FaWallet></span> Create Rider</NavLink></li>
-                                :
-                                <div className="flex items-center gap-2 text-gray-500 cursor-not-allowed opacity-50"><FaHome />Create Rider</div>
+                                    <li> <NavLink to="/dashboard/AdminDashboard/CreateRider"><span><FaWallet></FaWallet></span> Create Rider</NavLink></li>
+                                    :
+                                    <div className="flex items-center gap-2 text-gray-500 cursor-not-allowed opacity-50"><FaHome />Create Rider</div>
                             }
                         </div>
-                            :
-                            // User Panel (MERCHENT Panel) all Route 
-                            // ======================================================================
-                            <div className='RouteAllParent'>
-                                <li className='Dashboard'> <NavLink to="/dashboard/dashboard"><span><i className="fa fa-tachometer" aria-hidden="true"></i></span>Dashboard</NavLink></li>
-                                <li> <NavLink to="/dashboard/addParcel"><span><i className="fa fa-circle-o-notch" aria-hidden="true"></i></span> Add Parcel</NavLink></li>
-                                <li> <NavLink to="/dashboard/AllMarchentConsignment"><span><i className="fa fa-gg" aria-hidden="true"></i></span> All Consignments</NavLink></li>
-                                <li> <NavLink to="/dashboard/UserAllPickupRequestData"><span><i className="fa fa-tasks" aria-hidden="true"></i></span> My Pickup Parcel</NavLink></li>
-                                <li> <NavLink to="/dashboard/UserAmountChange"><span><i className="fa fa-money" aria-hidden="true"></i></span> Amount Change</NavLink></li>
-                                <li> <NavLink to="/dashboard/UserAllCancelParcel"><span><i className="fa fa-share-square-o" aria-hidden="true"></i></span> Cancelled Parcels</NavLink></li>
-                                <li> <NavLink to="/dashboard/UserAllPaymentRequestData"><span><i className="fa fa-credit-card" aria-hidden="true"></i></span> Payment List</NavLink></li>
-                                <li> <NavLink to="/dashboard/API"><span><i className="fa fa-credit-card" aria-hidden="true"></i></span>API</NavLink></li>
-                                <li> <NavLink to="/dashboard/AddBalancePayRequest"><span><i className="fa fa-credit-card" aria-hidden="true"></i></span>Balance Request</NavLink></li>
-                            </div>
+                            : Rider ?
+                                // ======================================================================
+                                // User Panel (MARCHENT Panel) all Route 
+                                // ======================================================================
+                                <div className='RouteAllParent'>
+                                    <li className='Dashboard'> <NavLink to="/dashboard/RiderDashboard"><span><i className="fa fa-tachometer" aria-hidden="true"></i></span>Dashboard</NavLink></li>
+                                    <li> <NavLink to="/dashboard/MyParcelRider"><span><i className="fa fa-tachometer" aria-hidden="true"></i></span>My Parcel</NavLink></li>
+
+
+
+                                </div>
+                                :
+                                // ======================================================================
+                                // User Panel (MARCHENT Panel) all Route 
+                                // ======================================================================
+                                <div className='RouteAllParent'>
+                                    <li className='Dashboard'> <NavLink to="/dashboard/dashboard"><span><i className="fa fa-tachometer" aria-hidden="true"></i></span>Dashboard</NavLink></li>
+                                    <li> <NavLink to="/dashboard/addParcel"><span><i className="fa fa-circle-o-notch" aria-hidden="true"></i></span> Add Parcel</NavLink></li>
+                                    <li> <NavLink to="/dashboard/AllMarchentConsignment"><span><i className="fa fa-gg" aria-hidden="true"></i></span> All Consignments</NavLink></li>
+                                    <li> <NavLink to="/dashboard/UserAllPickupRequestData"><span><i className="fa fa-tasks" aria-hidden="true"></i></span> My Pickup Parcel</NavLink></li>
+                                    <li> <NavLink to="/dashboard/UserAmountChange"><span><i className="fa fa-money" aria-hidden="true"></i></span> Amount Change</NavLink></li>
+                                    <li> <NavLink to="/dashboard/UserAllCancelParcel"><span><i className="fa fa-share-square-o" aria-hidden="true"></i></span> Cancelled Parcels</NavLink></li>
+                                    <li> <NavLink to="/dashboard/UserAllPaymentRequestData"><span><i className="fa fa-credit-card" aria-hidden="true"></i></span> Payment List</NavLink></li>
+                                    <li> <NavLink to="/dashboard/API"><span><i className="fa fa-credit-card" aria-hidden="true"></i></span>API</NavLink></li>
+                                    <li> <NavLink to="/dashboard/AddBalancePayRequest"><span><i className="fa fa-credit-card" aria-hidden="true"></i></span>Balance Request</NavLink></li>
+                                </div>
                     }
 
                     {/* others panel */}

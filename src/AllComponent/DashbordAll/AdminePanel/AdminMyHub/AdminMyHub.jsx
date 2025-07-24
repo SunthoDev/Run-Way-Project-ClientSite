@@ -25,14 +25,26 @@ const AdminMyHub = () => {
     // PickUp Request ((Regular Delivery) Approved) Data Filter
     // ==========================================================
     let RegularHubDataApproved = UserApprovedHub?.filter(Type => Type?.PickupRequestType === "Regular Delivery")
+    // =======================================
+    // Search (PICKUP) request search by hub
+    // =======================================
+    let [SearchApprovedRegularRequestData, setSearchApprovedRegularRequestData] = useState([])
 
     // PickUp Request ((Express Delivery) Approved) Data Filter
     // ==========================================================
     let ExpressHubDataApproved = UserApprovedHub?.filter(Type => Type?.PickupRequestType === "Express Delivery")
+    // =======================================
+    // Search (PICKUP) request search by hub
+    // =======================================
+    let [SearchApprovedExpressRequestData, setSearchApprovedExpressRequestData] = useState([])
 
     // PickUp Request ((Pink N Drop Delivery) Approved) Data Filter
     // ============================================================
     let PinkNDropHubDataApproved = UserApprovedHub?.filter(Type => Type?.PickupRequestType === "Pink N Drop Delivery")
+    // =======================================
+    // Search (PICKUP) request search by hub
+    // =======================================
+    let [SearchApprovedPinkNDropRequestData, setSearchApprovedPinkNDropRequestData] = useState([])
 
 
 
@@ -48,15 +60,26 @@ const AdminMyHub = () => {
     // PickUp Request ((Regular Delivery) Pending) Data Filter
     // ==========================================================
     let RegularHubDataPending = UserPendingHub?.filter(Type => Type?.PickupRequestType === "Regular Delivery")
+    // =======================================
+    // Search (PICKUP) request search by hub
+    // =======================================
+    let [SearchPendingRegularRequestData, setSearchPendingRegularRequestData] = useState([])
 
     // PickUp Request ((Express Delivery) Pending) Data Filter
     // ==========================================================
     let ExpressHubDataPending = UserPendingHub?.filter(Type => Type?.PickupRequestType === "Express Delivery")
+    // =======================================
+    // Search (PICKUP) request search by hub
+    // =======================================
+    let [SearchPendingExpressRequestData, setSearchPendingExpressRequestData] = useState([])
 
     // PickUp Request ((Pink N Drop Delivery) Pending) Data Filter
     // ============================================================
     let PinkNDropHubDataPending = UserPendingHub?.filter(Type => Type?.PickupRequestType === "Pink N Drop Delivery")
-
+    // =======================================
+    // Search (PICKUP) request search by hub
+    // =======================================
+    let [SearchPendingPinkNDropRequestData, setSearchPendingPinkNDropRequestData] = useState([])
 
 
     // ========================================================================================================
@@ -67,6 +90,16 @@ const AdminMyHub = () => {
         return res.json()
     })
     // console.log(AllStationOfHub)
+
+    // ============================================================================================================
+    // Created All Hub Find
+    // =====================================================
+    let { data: AllHubFind = [] } = useQuery(["HubManageAdminCreateOrUpdatePs_CreatedHubFind"], async () => {
+        let res = await fetch("http://localhost:5000/HubManageAdminCreateOrUpdatePs/CreatedHubFind")
+        return res.json()
+    })
+    // console.log(AllHubFind)
+
 
 
 
@@ -83,7 +116,7 @@ const AdminMyHub = () => {
 
                     {/* Tabs with Search bar (Pending)*/}
                     {/* ==================================== */}
-                    <div className="flex justify-between items-center mb-6 flex-wrap gap-3">
+                    <div className="mb-6">
                         {/* Tabs */}
                         <div className="flex border-b border-gray-200 space-x-4 mb-4">
                             <button onClick={() => setTabState(1)}
@@ -107,26 +140,6 @@ const AdminMyHub = () => {
                                 Pink N Drop Delivery
                             </button>
                         </div>
-
-                        {/* Search Section (Pending)*/}
-                        {/* ==================================== */}
-                        <div className="flex items-center gap-2">
-                            <select
-                                className="border border-gray-300 rounded-md px-6 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-green-500"
-                            >
-                                <option>Search by Hun name</option>
-                                <option>Kripamoy</option>
-                                <option>Smritit</option>
-                                <option>Shipon</option>
-                                <option>Puja</option>
-                            </select>
-
-                            <button
-                                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md flex items-center gap-1 text-sm"
-                            >
-                                Search
-                            </button>
-                        </div>
                     </div>
 
                     {/* Tab Content (Pending)*/}
@@ -140,7 +153,36 @@ const AdminMyHub = () => {
                         {tabState === 1 &&
                             <div className="flex justify-center">
                                 <div className="w-full bg-white shadow-lg border border-gray-200 rounded-xl p-6">
-                                    <h2 className="text-2xl font-semibold text-gray-800 mb-4">Regular Delivery</h2>
+
+                                    <div className="flex justify-between items-center mb-6 flex-wrap gap-3">
+                                        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Regular Delivery</h2>
+
+                                        {/* Search Section (Pending)*/}
+                                        {/* ==================================== */}
+                                        <div className="flex items-center gap-2">
+                                            <select required className="w-full bg-white border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                                name="stationOfHub"
+                                                onBlur={(e) => {
+                                                    const HubName = e.target.value
+                                                    setSearchPendingRegularRequestData(RegularHubDataPending?.filter(Pending => Pending?.MyHub === HubName))
+                                                }}
+                                            >
+                                                <option value="">-- Select Hub Name --</option>
+                                                {AllHubFind?.map((hubName, i) => (
+                                                    <option key={i}>
+                                                        {hubName?.NameOfHub}
+                                                    </option>
+                                                ))}
+                                            </select>
+
+                                            <button
+                                                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md flex items-center gap-1 text-sm"
+                                            >
+                                                Search
+                                            </button>
+                                        </div>
+                                    </div>
+
                                     <div className="overflow-x-auto">
                                         <table className="min-w-full divide-y divide-gray-200">
                                             <thead className="bg-gray-100">
@@ -155,55 +197,57 @@ const AdminMyHub = () => {
                                                 </tr>
                                             </thead>
                                             <tbody className="bg-white divide-y divide-gray-200">
-                                                {RegularHubDataPending?.map((item, index) => (
-                                                    <tr key={index}>
-                                                        <td className="px-6 py-4 text-sm text-gray-800">
-                                                            {item?.UserPickupReqDate} <br />
+                                                {(SearchPendingRegularRequestData.length > 0 ? SearchPendingRegularRequestData :
+                                                    RegularHubDataPending)?.map((item, index) => (
+                                                        <tr key={index}>
+                                                            <td className="px-6 py-4 text-sm text-gray-800">
+                                                                {item?.UserPickupReqDate} <br />
 
-                                                            <div className="">
-                                                                <form onSubmit={(e) => {
-                                                                    e.preventDefault()
-                                                                    let parcelNumbers = e.target.number.value
-                                                                    let HubData = { parcelNum: parcelNumbers }
-                                                                    // console.log(HubData)
+                                                                <div className="">
+                                                                    <form onSubmit={(e) => {
+                                                                        e.preventDefault()
+                                                                        let parcelNumbers = e.target.number.value
+                                                                        let HubData = { parcelNum: parcelNumbers }
+                                                                        // console.log(HubData)
 
-                                                                    fetch(`http://localhost:5000/PickupRequestWithManegeAdminUsers/AdminApprovedUserPickupRequestData/${item?._id}`, {
-                                                                        method: "PUT",
-                                                                        headers: {
-                                                                            "content-type": "application/json"
-                                                                        },
-                                                                        body: JSON.stringify(HubData)
-                                                                    })
-                                                                        .then(res => res.json())
-                                                                        .then(data => {
-                                                                            if (data.modifiedCount > 0) {
-                                                                                Swal.fire({
-                                                                                    position: 'top-end',
-                                                                                    icon: 'success',
-                                                                                    title: 'Pickup Request Approved Success',
-                                                                                    showConfirmButton: false,
-                                                                                    timer: 1500
-                                                                                })
-                                                                            }
-                                                                            refetch()
+                                                                        fetch(`http://localhost:5000/PickupRequestWithManegeAdminUsers/AdminApprovedUserPickupRequestData/${item?._id}`, {
+                                                                            method: "PUT",
+                                                                            headers: {
+                                                                                "content-type": "application/json"
+                                                                            },
+                                                                            body: JSON.stringify(HubData)
                                                                         })
+                                                                            .then(res => res.json())
+                                                                            .then(data => {
+                                                                                if (data.modifiedCount > 0) {
+                                                                                    Swal.fire({
+                                                                                        position: 'top-end',
+                                                                                        icon: 'success',
+                                                                                        title: 'Pickup Request Approved Success',
+                                                                                        showConfirmButton: false,
+                                                                                        timer: 1500
+                                                                                    })
+                                                                                }
+                                                                                refetch()
+                                                                            })
 
-                                                                }}>
-                                                                    <input name="number" type="number" className='px-2 my-2 text-black font-[600] text-[16px]' />
-                                                                    <br />
-                                                                    <button type="submit" className="bg-[#2BA1BE] py-2 px-4 rounded-[8px] text-[14px] font-[600]">Approved Now</button>
-                                                                </form>
-                                                            </div>
+                                                                    }}>
+                                                                        <input name="number" type="number" className='px-2 my-2 text-black font-[600] text-[16px]' />
+                                                                        <br />
+                                                                        <button type="submit" className="bg-[#2BA1BE] py-2 px-4 rounded-[8px] text-[14px] font-[600]">Approved Now</button>
+                                                                    </form>
+                                                                </div>
 
-                                                        </td>
-                                                        <td className="px-6 py-4 text-sm text-gray-800">{item?.PickupRequestType}</td>
-                                                        <td className="px-6 py-4 text-sm text-gray-800">{item?.name} {item?.LastName}</td>
-                                                        <td className="px-6 py-4 text-sm text-gray-800">{item?.PickReqUserEmail} <br />
-                                                            {item?.PoliceStations}
-                                                        </td>
-                                                        <td className="px-6 py-4 text-sm text-gray-800">{item?.status}</td>
-                                                        <td className="px-6 py-4 text-sm text-gray-800">
-                                                            {(() => {
+                                                            </td>
+                                                            <td className="px-6 py-4 text-sm text-gray-800">{item?.PickupRequestType}</td>
+                                                            <td className="px-6 py-4 text-sm text-gray-800">{item?.name} {item?.LastName}</td>
+                                                            <td className="px-6 py-4 text-sm text-gray-800">{item?.PickReqUserEmail} <br />
+                                                                {item?.PoliceStations}
+                                                            </td>
+                                                            <td className="px-6 py-4 text-sm text-gray-800">{item?.status}</td>
+                                                            <td className="px-6 py-4 text-sm text-gray-800">
+                                                                {/* Show hub dynamicly */}
+                                                                {/* {(() => {
                                                                 let myHub = AllStationOfHub?.find(hub => hub?.PoliceStation === item?.PoliceStations)
 
                                                                 console.log(myHub)
@@ -211,56 +255,57 @@ const AdminMyHub = () => {
                                                                     {myHub?.HubName ? myHub?.HubName : "No Hub "}
                                                                 </div>
                                                             })()
-                                                            }
-                                                        </td>
+                                                            }  */}
+                                                                {item?.MyHub}
+                                                            </td>
 
-                                                        <td className="px-6 py-4">
-                                                            <button
-                                                                onClick={() => {
-                                                                    Swal.fire({
-                                                                        title: "Are you sure?",
-                                                                        text: `Delete hub`,
-                                                                        icon: "warning",
-                                                                        showCancelButton: true,
-                                                                        confirmButtonColor: "#d33",
-                                                                        cancelButtonColor: "#3085d6",
-                                                                        confirmButtonText: "Yes, delete it!"
-                                                                    }).then(async (result) => {
-                                                                        if (result.isConfirmed) {
+                                                            <td className="px-6 py-4">
+                                                                <button
+                                                                    onClick={() => {
+                                                                        Swal.fire({
+                                                                            title: "Are you sure?",
+                                                                            text: `Delete hub`,
+                                                                            icon: "warning",
+                                                                            showCancelButton: true,
+                                                                            confirmButtonColor: "#d33",
+                                                                            cancelButtonColor: "#3085d6",
+                                                                            confirmButtonText: "Yes, delete it!"
+                                                                        }).then(async (result) => {
+                                                                            if (result.isConfirmed) {
 
-                                                                            // Hub request data insert 
-                                                                            // =================================
-                                                                            try {
-                                                                                let res = await fetch(`http://localhost:5000/PickupRequestWithManegeAdminUsers/AdminDeletePickupRequestData/${item?._id}`, {
-                                                                                    method: "DELETE",
-                                                                                })
-                                                                                let result = await res.json()
+                                                                                // Hub request data insert 
+                                                                                // =================================
+                                                                                try {
+                                                                                    let res = await fetch(`http://localhost:5000/PickupRequestWithManegeAdminUsers/AdminDeletePickupRequestData/${item?._id}`, {
+                                                                                        method: "DELETE",
+                                                                                    })
+                                                                                    let result = await res.json()
 
-                                                                                if (res.ok) {
+                                                                                    if (res.ok) {
+                                                                                        Swal.fire({
+                                                                                            icon: "success",
+                                                                                            title: "Deleted!",
+                                                                                            text: "The Pickup Request has been deleted.",
+                                                                                            timer: 1500,
+                                                                                            showConfirmButton: false,
+                                                                                        });
+                                                                                        await refetch();
+                                                                                    }
+                                                                                } catch (err) {
                                                                                     Swal.fire({
-                                                                                        icon: "success",
-                                                                                        title: "Deleted!",
-                                                                                        text: "The Pickup Request has been deleted.",
-                                                                                        timer: 1500,
-                                                                                        showConfirmButton: false,
+                                                                                        icon: "error",
+                                                                                        title: "Error",
+                                                                                        text: err.message || "Something went wrong",
                                                                                     });
-                                                                                    await refetch();
                                                                                 }
-                                                                            } catch (err) {
-                                                                                Swal.fire({
-                                                                                    icon: "error",
-                                                                                    title: "Error",
-                                                                                    text: err.message || "Something went wrong",
-                                                                                });
                                                                             }
-                                                                        }
-                                                                    });
-                                                                }}
-                                                                className="!bg-red-500 !hover:bg-red-600 !text-white text-sm px-4 py-1.5 rounded-md transition"
-                                                            >Delete</button>
-                                                        </td>
-                                                    </tr>
-                                                ))}
+                                                                        });
+                                                                    }}
+                                                                    className="!bg-red-500 !hover:bg-red-600 !text-white text-sm px-4 py-1.5 rounded-md transition"
+                                                                >Delete</button>
+                                                            </td>
+                                                        </tr>
+                                                    ))}
                                             </tbody>
                                         </table>
                                     </div>
@@ -275,7 +320,36 @@ const AdminMyHub = () => {
                         {tabState === 2 &&
                             <div className="flex justify-center">
                                 <div className="w-full bg-white shadow-lg border border-gray-200 rounded-xl p-6">
-                                    <h2 className="text-2xl font-semibold text-gray-800 mb-4">Express Delivery</h2>
+
+                                    <div className="flex justify-between items-center mb-6 flex-wrap gap-3">
+                                        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Express Delivery</h2>
+
+                                        {/* Search Section (Pending)*/}
+                                        {/* ==================================== */}
+                                        <div className="flex items-center gap-2">
+                                            <select required className="w-full bg-white border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                                name="stationOfHub"
+                                                onBlur={(e) => {
+                                                    const HubName = e.target.value
+                                                    setSearchPendingExpressRequestData(ExpressHubDataPending?.filter(Pending => Pending?.MyHub === HubName))
+                                                }}
+                                            >
+                                                <option value="">-- Select Hub Name --</option>
+                                                {AllHubFind?.map((hubName, i) => (
+                                                    <option key={i}>
+                                                        {hubName?.NameOfHub}
+                                                    </option>
+                                                ))}
+                                            </select>
+
+                                            <button
+                                                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md flex items-center gap-1 text-sm"
+                                            >
+                                                Search
+                                            </button>
+                                        </div>
+                                    </div>
+
                                     <div className="overflow-x-auto">
                                         <table className="min-w-full divide-y divide-gray-200">
                                             <thead className="bg-gray-100">
@@ -290,55 +364,56 @@ const AdminMyHub = () => {
                                                 </tr>
                                             </thead>
                                             <tbody className="bg-white divide-y divide-gray-200">
-                                                {ExpressHubDataPending?.map((item, index) => (
-                                                    <tr key={index}>
-                                                        <td className="px-6 py-4 text-sm text-gray-800">
-                                                            {item?.UserPickupReqDate} <br />
+                                                {(SearchPendingExpressRequestData.length > 0 ? SearchPendingExpressRequestData :
+                                                    ExpressHubDataPending)?.map((item, index) => (
+                                                        <tr key={index}>
+                                                            <td className="px-6 py-4 text-sm text-gray-800">
+                                                                {item?.UserPickupReqDate} <br />
 
-                                                            <div className="">
-                                                                <form onSubmit={(e) => {
-                                                                    e.preventDefault()
-                                                                    let parcelNumbers = e.target.number.value
-                                                                    let HubData = { parcelNum: parcelNumbers }
-                                                                    // console.log(HubData)
+                                                                <div className="">
+                                                                    <form onSubmit={(e) => {
+                                                                        e.preventDefault()
+                                                                        let parcelNumbers = e.target.number.value
+                                                                        let HubData = { parcelNum: parcelNumbers }
+                                                                        // console.log(HubData)
 
-                                                                    fetch(`http://localhost:5000/PickupRequestWithManegeAdminUsers/AdminApprovedUserPickupRequestData/${item?._id}`, {
-                                                                        method: "PUT",
-                                                                        headers: {
-                                                                            "content-type": "application/json"
-                                                                        },
-                                                                        body: JSON.stringify(HubData)
-                                                                    })
-                                                                        .then(res => res.json())
-                                                                        .then(data => {
-                                                                            if (data.modifiedCount > 0) {
-                                                                                Swal.fire({
-                                                                                    position: 'top-end',
-                                                                                    icon: 'success',
-                                                                                    title: 'Pickup Request Approved Success',
-                                                                                    showConfirmButton: false,
-                                                                                    timer: 1500
-                                                                                })
-                                                                            }
-                                                                            refetch()
+                                                                        fetch(`http://localhost:5000/PickupRequestWithManegeAdminUsers/AdminApprovedUserPickupRequestData/${item?._id}`, {
+                                                                            method: "PUT",
+                                                                            headers: {
+                                                                                "content-type": "application/json"
+                                                                            },
+                                                                            body: JSON.stringify(HubData)
                                                                         })
+                                                                            .then(res => res.json())
+                                                                            .then(data => {
+                                                                                if (data.modifiedCount > 0) {
+                                                                                    Swal.fire({
+                                                                                        position: 'top-end',
+                                                                                        icon: 'success',
+                                                                                        title: 'Pickup Request Approved Success',
+                                                                                        showConfirmButton: false,
+                                                                                        timer: 1500
+                                                                                    })
+                                                                                }
+                                                                                refetch()
+                                                                            })
 
-                                                                }}>
-                                                                    <input name="number" type="number" className='px-2 my-2 text-black font-[600] text-[16px]' />
-                                                                    <br />
-                                                                    <button type="submit" className="bg-[#2BA1BE] py-2 px-4 rounded-[8px] text-[14px] font-[600]">Approved Now</button>
-                                                                </form>
-                                                            </div>
+                                                                    }}>
+                                                                        <input name="number" type="number" className='px-2 my-2 text-black font-[600] text-[16px]' />
+                                                                        <br />
+                                                                        <button type="submit" className="bg-[#2BA1BE] py-2 px-4 rounded-[8px] text-[14px] font-[600]">Approved Now</button>
+                                                                    </form>
+                                                                </div>
 
-                                                        </td>
-                                                        <td className="px-6 py-4 text-sm text-gray-800">{item?.PickupRequestType}</td>
-                                                        <td className="px-6 py-4 text-sm text-gray-800">{item?.name} {item?.LastName}</td>
-                                                        <td className="px-6 py-4 text-sm text-gray-800">{item?.PickReqUserEmail} <br />
-                                                            {item?.PoliceStations}
-                                                        </td>
-                                                        <td className="px-6 py-4 text-sm text-gray-800">{item?.status}</td>
-                                                        <td className="px-6 py-4 text-sm text-gray-800">
-                                                            {(() => {
+                                                            </td>
+                                                            <td className="px-6 py-4 text-sm text-gray-800">{item?.PickupRequestType}</td>
+                                                            <td className="px-6 py-4 text-sm text-gray-800">{item?.name} {item?.LastName}</td>
+                                                            <td className="px-6 py-4 text-sm text-gray-800">{item?.PickReqUserEmail} <br />
+                                                                {item?.PoliceStations}
+                                                            </td>
+                                                            <td className="px-6 py-4 text-sm text-gray-800">{item?.status}</td>
+                                                            <td className="px-6 py-4 text-sm text-gray-800">
+                                                                {/* {(() => {
                                                                 let myHub = AllStationOfHub?.find(hub => hub?.PoliceStation === item?.PoliceStations)
 
                                                                 console.log(myHub)
@@ -346,56 +421,57 @@ const AdminMyHub = () => {
                                                                     {myHub?.HubName ? myHub?.HubName : "No Hub "}
                                                                 </div>
                                                             })()
-                                                            }
-                                                        </td>
+                                                            } */}
+                                                                {item?.MyHub}
+                                                            </td>
 
-                                                        <td className="px-6 py-4">
-                                                            <button
-                                                                onClick={() => {
-                                                                    Swal.fire({
-                                                                        title: "Are you sure?",
-                                                                        text: `Delete hub`,
-                                                                        icon: "warning",
-                                                                        showCancelButton: true,
-                                                                        confirmButtonColor: "#d33",
-                                                                        cancelButtonColor: "#3085d6",
-                                                                        confirmButtonText: "Yes, delete it!"
-                                                                    }).then(async (result) => {
-                                                                        if (result.isConfirmed) {
+                                                            <td className="px-6 py-4">
+                                                                <button
+                                                                    onClick={() => {
+                                                                        Swal.fire({
+                                                                            title: "Are you sure?",
+                                                                            text: `Delete hub`,
+                                                                            icon: "warning",
+                                                                            showCancelButton: true,
+                                                                            confirmButtonColor: "#d33",
+                                                                            cancelButtonColor: "#3085d6",
+                                                                            confirmButtonText: "Yes, delete it!"
+                                                                        }).then(async (result) => {
+                                                                            if (result.isConfirmed) {
 
-                                                                            // Hub request data insert 
-                                                                            // =================================
-                                                                            try {
-                                                                                let res = await fetch(`http://localhost:5000/PickupRequestWithManegeAdminUsers/AdminDeletePickupRequestData/${item?._id}`, {
-                                                                                    method: "DELETE",
-                                                                                })
-                                                                                let result = await res.json()
+                                                                                // Hub request data insert 
+                                                                                // =================================
+                                                                                try {
+                                                                                    let res = await fetch(`http://localhost:5000/PickupRequestWithManegeAdminUsers/AdminDeletePickupRequestData/${item?._id}`, {
+                                                                                        method: "DELETE",
+                                                                                    })
+                                                                                    let result = await res.json()
 
-                                                                                if (res.ok) {
+                                                                                    if (res.ok) {
+                                                                                        Swal.fire({
+                                                                                            icon: "success",
+                                                                                            title: "Deleted!",
+                                                                                            text: "The Pickup Request has been deleted.",
+                                                                                            timer: 1500,
+                                                                                            showConfirmButton: false,
+                                                                                        });
+                                                                                        await refetch();
+                                                                                    }
+                                                                                } catch (err) {
                                                                                     Swal.fire({
-                                                                                        icon: "success",
-                                                                                        title: "Deleted!",
-                                                                                        text: "The Pickup Request has been deleted.",
-                                                                                        timer: 1500,
-                                                                                        showConfirmButton: false,
+                                                                                        icon: "error",
+                                                                                        title: "Error",
+                                                                                        text: err.message || "Something went wrong",
                                                                                     });
-                                                                                    await refetch();
                                                                                 }
-                                                                            } catch (err) {
-                                                                                Swal.fire({
-                                                                                    icon: "error",
-                                                                                    title: "Error",
-                                                                                    text: err.message || "Something went wrong",
-                                                                                });
                                                                             }
-                                                                        }
-                                                                    });
-                                                                }}
-                                                                className="!bg-red-500 !hover:bg-red-600 !text-white text-sm px-4 py-1.5 rounded-md transition"
-                                                            >Delete</button>
-                                                        </td>
-                                                    </tr>
-                                                ))}
+                                                                        });
+                                                                    }}
+                                                                    className="!bg-red-500 !hover:bg-red-600 !text-white text-sm px-4 py-1.5 rounded-md transition"
+                                                                >Delete</button>
+                                                            </td>
+                                                        </tr>
+                                                    ))}
                                             </tbody>
                                         </table>
                                     </div>
@@ -410,7 +486,35 @@ const AdminMyHub = () => {
                         {tabState === 3 &&
                             <div className="flex justify-center">
                                 <div className="w-full bg-white shadow-lg border border-gray-200 rounded-xl p-6">
-                                    <h2 className="text-2xl font-semibold text-gray-800 mb-4">Pink N Drop Delivery</h2>
+
+                                    <div className="flex justify-between items-center mb-6 flex-wrap gap-3">
+                                        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Pink N Drop Delivery</h2>
+                                        {/* Search Section (Pending)*/}
+                                        {/* ==================================== */}
+                                        <div className="flex items-center gap-2">
+                                            <select required className="w-full bg-white border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                                name="stationOfHub"
+                                                onBlur={(e) => {
+                                                    const HubName = e.target.value
+                                                    setSearchPendingPinkNDropRequestData(PinkNDropHubDataPending?.filter(Pending => Pending?.MyHub === HubName))
+                                                }}
+                                            >
+                                                <option value="">-- Select Hub Name --</option>
+                                                {AllHubFind?.map((hubName, i) => (
+                                                    <option key={i}>
+                                                        {hubName?.NameOfHub}
+                                                    </option>
+                                                ))}
+                                            </select>
+
+                                            <button
+                                                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md flex items-center gap-1 text-sm"
+                                            >
+                                                Search
+                                            </button>
+                                        </div>
+                                    </div>
+
                                     <div className="overflow-x-auto">
                                         <table className="min-w-full divide-y divide-gray-200">
                                             <thead className="bg-gray-100">
@@ -425,55 +529,56 @@ const AdminMyHub = () => {
                                                 </tr>
                                             </thead>
                                             <tbody className="bg-white divide-y divide-gray-200">
-                                                {PinkNDropHubDataPending?.map((item, index) => (
-                                                    <tr key={index}>
-                                                        <td className="px-6 py-4 text-sm text-gray-800">
-                                                            {item?.UserPickupReqDate} <br />
+                                                {(SearchPendingPinkNDropRequestData.length > 0 ? SearchPendingPinkNDropRequestData :
+                                                    PinkNDropHubDataPending)?.map((item, index) => (
+                                                        <tr key={index}>
+                                                            <td className="px-6 py-4 text-sm text-gray-800">
+                                                                {item?.UserPickupReqDate} <br />
 
-                                                            <div className="">
-                                                                <form onSubmit={(e) => {
-                                                                    e.preventDefault()
-                                                                    let parcelNumbers = e.target.number.value
-                                                                    let HubData = { parcelNum: parcelNumbers }
-                                                                    // console.log(HubData)
+                                                                <div className="">
+                                                                    <form onSubmit={(e) => {
+                                                                        e.preventDefault()
+                                                                        let parcelNumbers = e.target.number.value
+                                                                        let HubData = { parcelNum: parcelNumbers }
+                                                                        // console.log(HubData)
 
-                                                                    fetch(`http://localhost:5000/PickupRequestWithManegeAdminUsers/AdminApprovedUserPickupRequestData/${item?._id}`, {
-                                                                        method: "PUT",
-                                                                        headers: {
-                                                                            "content-type": "application/json"
-                                                                        },
-                                                                        body: JSON.stringify(HubData)
-                                                                    })
-                                                                        .then(res => res.json())
-                                                                        .then(data => {
-                                                                            if (data.modifiedCount > 0) {
-                                                                                Swal.fire({
-                                                                                    position: 'top-end',
-                                                                                    icon: 'success',
-                                                                                    title: 'Pickup Request Approved Success',
-                                                                                    showConfirmButton: false,
-                                                                                    timer: 1500
-                                                                                })
-                                                                            }
-                                                                            refetch()
+                                                                        fetch(`http://localhost:5000/PickupRequestWithManegeAdminUsers/AdminApprovedUserPickupRequestData/${item?._id}`, {
+                                                                            method: "PUT",
+                                                                            headers: {
+                                                                                "content-type": "application/json"
+                                                                            },
+                                                                            body: JSON.stringify(HubData)
                                                                         })
+                                                                            .then(res => res.json())
+                                                                            .then(data => {
+                                                                                if (data.modifiedCount > 0) {
+                                                                                    Swal.fire({
+                                                                                        position: 'top-end',
+                                                                                        icon: 'success',
+                                                                                        title: 'Pickup Request Approved Success',
+                                                                                        showConfirmButton: false,
+                                                                                        timer: 1500
+                                                                                    })
+                                                                                }
+                                                                                refetch()
+                                                                            })
 
-                                                                }}>
-                                                                    <input name="number" type="number" className='px-2 my-2 text-black font-[600] text-[16px]' />
-                                                                    <br />
-                                                                    <button type="submit" className="bg-[#2BA1BE] py-2 px-4 rounded-[8px] text-[14px] font-[600]">Approved Now</button>
-                                                                </form>
-                                                            </div>
+                                                                    }}>
+                                                                        <input name="number" type="number" className='px-2 my-2 text-black font-[600] text-[16px]' />
+                                                                        <br />
+                                                                        <button type="submit" className="bg-[#2BA1BE] py-2 px-4 rounded-[8px] text-[14px] font-[600]">Approved Now</button>
+                                                                    </form>
+                                                                </div>
 
-                                                        </td>
-                                                        <td className="px-6 py-4 text-sm text-gray-800">{item?.PickupRequestType}</td>
-                                                        <td className="px-6 py-4 text-sm text-gray-800">{item?.name} {item?.LastName}</td>
-                                                        <td className="px-6 py-4 text-sm text-gray-800">{item?.PickReqUserEmail} <br />
-                                                            {item?.PoliceStations}
-                                                        </td>
-                                                        <td className="px-6 py-4 text-sm text-gray-800">{item?.status}</td>
-                                                        <td className="px-6 py-4 text-sm text-gray-800">
-                                                            {(() => {
+                                                            </td>
+                                                            <td className="px-6 py-4 text-sm text-gray-800">{item?.PickupRequestType}</td>
+                                                            <td className="px-6 py-4 text-sm text-gray-800">{item?.name} {item?.LastName}</td>
+                                                            <td className="px-6 py-4 text-sm text-gray-800">{item?.PickReqUserEmail} <br />
+                                                                {item?.PoliceStations}
+                                                            </td>
+                                                            <td className="px-6 py-4 text-sm text-gray-800">{item?.status}</td>
+                                                            <td className="px-6 py-4 text-sm text-gray-800">
+                                                                {/* {(() => {
                                                                 let myHub = AllStationOfHub?.find(hub => hub?.PoliceStation === item?.PoliceStations)
 
                                                                 console.log(myHub)
@@ -481,56 +586,57 @@ const AdminMyHub = () => {
                                                                     {myHub?.HubName ? myHub?.HubName : "No Hub "}
                                                                 </div>
                                                             })()
-                                                            }
-                                                        </td>
+                                                            } */}
+                                                                {item?.MyHub}
+                                                            </td>
 
-                                                        <td className="px-6 py-4">
-                                                            <button
-                                                                onClick={() => {
-                                                                    Swal.fire({
-                                                                        title: "Are you sure?",
-                                                                        text: `Delete hub`,
-                                                                        icon: "warning",
-                                                                        showCancelButton: true,
-                                                                        confirmButtonColor: "#d33",
-                                                                        cancelButtonColor: "#3085d6",
-                                                                        confirmButtonText: "Yes, delete it!"
-                                                                    }).then(async (result) => {
-                                                                        if (result.isConfirmed) {
+                                                            <td className="px-6 py-4">
+                                                                <button
+                                                                    onClick={() => {
+                                                                        Swal.fire({
+                                                                            title: "Are you sure?",
+                                                                            text: `Delete hub`,
+                                                                            icon: "warning",
+                                                                            showCancelButton: true,
+                                                                            confirmButtonColor: "#d33",
+                                                                            cancelButtonColor: "#3085d6",
+                                                                            confirmButtonText: "Yes, delete it!"
+                                                                        }).then(async (result) => {
+                                                                            if (result.isConfirmed) {
 
-                                                                            // Hub request data insert 
-                                                                            // =================================
-                                                                            try {
-                                                                                let res = await fetch(`http://localhost:5000/PickupRequestWithManegeAdminUsers/AdminDeletePickupRequestData/${item?._id}`, {
-                                                                                    method: "DELETE",
-                                                                                })
-                                                                                let result = await res.json()
+                                                                                // Hub request data insert 
+                                                                                // =================================
+                                                                                try {
+                                                                                    let res = await fetch(`http://localhost:5000/PickupRequestWithManegeAdminUsers/AdminDeletePickupRequestData/${item?._id}`, {
+                                                                                        method: "DELETE",
+                                                                                    })
+                                                                                    let result = await res.json()
 
-                                                                                if (res.ok) {
+                                                                                    if (res.ok) {
+                                                                                        Swal.fire({
+                                                                                            icon: "success",
+                                                                                            title: "Deleted!",
+                                                                                            text: "The Pickup Request has been deleted.",
+                                                                                            timer: 1500,
+                                                                                            showConfirmButton: false,
+                                                                                        });
+                                                                                        await refetch();
+                                                                                    }
+                                                                                } catch (err) {
                                                                                     Swal.fire({
-                                                                                        icon: "success",
-                                                                                        title: "Deleted!",
-                                                                                        text: "The Pickup Request has been deleted.",
-                                                                                        timer: 1500,
-                                                                                        showConfirmButton: false,
+                                                                                        icon: "error",
+                                                                                        title: "Error",
+                                                                                        text: err.message || "Something went wrong",
                                                                                     });
-                                                                                    await refetch();
                                                                                 }
-                                                                            } catch (err) {
-                                                                                Swal.fire({
-                                                                                    icon: "error",
-                                                                                    title: "Error",
-                                                                                    text: err.message || "Something went wrong",
-                                                                                });
                                                                             }
-                                                                        }
-                                                                    });
-                                                                }}
-                                                                className="!bg-red-500 !hover:bg-red-600 !text-white text-sm px-4 py-1.5 rounded-md transition"
-                                                            >Delete</button>
-                                                        </td>
-                                                    </tr>
-                                                ))}
+                                                                        });
+                                                                    }}
+                                                                    className="!bg-red-500 !hover:bg-red-600 !text-white text-sm px-4 py-1.5 rounded-md transition"
+                                                                >Delete</button>
+                                                            </td>
+                                                        </tr>
+                                                    ))}
                                             </tbody>
                                         </table>
                                     </div>
@@ -539,7 +645,6 @@ const AdminMyHub = () => {
                         }
 
                     </div>
-
                 </div>
 
                 {/* ====================================================================== */}
@@ -575,26 +680,6 @@ const AdminMyHub = () => {
                                 Pink N Drop Delivery
                             </button>
                         </div>
-
-                        {/* Search Section (Pending)*/}
-                        {/* ==================================== */}
-                        <div className="flex items-center gap-2">
-                            <select
-                                className="border border-gray-300 rounded-md px-6 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-green-500"
-                            >
-                                <option>Search by Hun name</option>
-                                <option>Kripamoy</option>
-                                <option>Smritit</option>
-                                <option>Shipon</option>
-                                <option>Puja</option>
-                            </select>
-
-                            <button
-                                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md flex items-center gap-1 text-sm"
-                            >
-                                Search
-                            </button>
-                        </div>
                     </div>
 
                     {/* Tab Content (Approved)*/}
@@ -608,7 +693,34 @@ const AdminMyHub = () => {
                         {tabState === 1 &&
                             <div className="flex justify-center">
                                 <div className="w-full bg-white shadow-lg border border-gray-200 rounded-xl p-6">
-                                    <h2 className="text-2xl font-semibold text-gray-800 mb-4">Regular Delivery</h2>
+
+                                    <div className="flex justify-between items-center mb-6 flex-wrap gap-3">
+                                        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Regular Delivery</h2>
+                                        {/* Search Section (Approved)*/}
+                                        {/* ==================================== */}
+                                        <div className="flex items-center gap-2">
+                                            <select required className="w-full bg-white border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                                name="stationOfHub"
+                                                onBlur={(e) => {
+                                                    const HubName = e.target.value
+                                                    setSearchApprovedRegularRequestData(RegularHubDataApproved?.filter(Pending => Pending?.MyHub === HubName))
+                                                }}
+                                            >
+                                                <option value="">-- Select Hub Name --</option>
+                                                {AllHubFind?.map((hubName, i) => (
+                                                    <option key={i}>
+                                                        {hubName?.NameOfHub}
+                                                    </option>
+                                                ))}
+                                            </select>
+
+                                            <button
+                                                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md flex items-center gap-1 text-sm"
+                                            >
+                                                Search
+                                            </button>
+                                        </div>
+                                    </div>
                                     <div className="overflow-x-auto">
                                         <table className="min-w-full divide-y divide-gray-200">
                                             <thead className="bg-gray-100">
@@ -623,7 +735,8 @@ const AdminMyHub = () => {
                                                 </tr>
                                             </thead>
                                             <tbody className="bg-white divide-y divide-gray-200">
-                                                {RegularHubDataApproved?.map((item, index) => (
+                                                { (SearchApprovedRegularRequestData.length > 0 ? SearchApprovedRegularRequestData :
+                                                RegularHubDataApproved)?.map((item, index) => (
                                                     <tr key={index}>
                                                         <td className="px-6 py-4 text-sm text-gray-800">
                                                             {item?.UserPickupReqDate} <br />
@@ -659,7 +772,7 @@ const AdminMyHub = () => {
                                                         <td className="px-6 py-4 text-sm text-gray-800">{item?.PickReqUserEmail}</td>
                                                         <td className="px-6 py-4 text-sm text-gray-800">{item?.status}</td>
                                                         <td className="px-6 py-4 text-sm text-gray-800">
-                                                            {(() => {
+                                                            {/* {(() => {
                                                                 let myHub = AllStationOfHub?.find(hub => hub?.PoliceStation === item?.PoliceStations)
 
                                                                 console.log(myHub)
@@ -667,7 +780,8 @@ const AdminMyHub = () => {
                                                                     {myHub?.HubName ? myHub?.HubName : "No Hub "}
                                                                 </div>
                                                             })()
-                                                            }
+                                                            } */}
+                                                             {item?.MyHub}
                                                         </td>
 
                                                         <td className="px-6 py-4">
@@ -731,7 +845,34 @@ const AdminMyHub = () => {
                         {tabState === 2 &&
                             <div className="flex justify-center">
                                 <div className="w-full bg-white shadow-lg border border-gray-200 rounded-xl p-6">
-                                    <h2 className="text-2xl font-semibold text-gray-800 mb-4">Express Delivery</h2>
+
+                                    <div className="flex justify-between items-center mb-6 flex-wrap gap-3">
+                                        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Express Delivery</h2>
+                                        {/* Search Section (Approved)*/}
+                                        {/* ==================================== */}
+                                        <div className="flex items-center gap-2">
+                                            <select required className="w-full bg-white border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                                name="stationOfHub"
+                                                onBlur={(e) => {
+                                                    const HubName = e.target.value
+                                                    setSearchApprovedExpressRequestData(ExpressHubDataApproved?.filter(Pending => Pending?.MyHub === HubName))
+                                                }}
+                                            >
+                                                <option value="">-- Select Hub Name --</option>
+                                                {AllHubFind?.map((hubName, i) => (
+                                                    <option key={i}>
+                                                        {hubName?.NameOfHub}
+                                                    </option>
+                                                ))}
+                                            </select>
+
+                                            <button
+                                                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md flex items-center gap-1 text-sm"
+                                            >
+                                                Search
+                                            </button>
+                                        </div>
+                                    </div>
                                     <div className="overflow-x-auto">
                                         <table className="min-w-full divide-y divide-gray-200">
                                             <thead className="bg-gray-100">
@@ -746,7 +887,8 @@ const AdminMyHub = () => {
                                                 </tr>
                                             </thead>
                                             <tbody className="bg-white divide-y divide-gray-200">
-                                                {ExpressHubDataApproved?.map((item, index) => (
+                                                { (SearchApprovedExpressRequestData.length > 0 ? SearchApprovedExpressRequestData :
+                                                ExpressHubDataApproved)?.map((item, index) => (
                                                     <tr key={index}>
                                                         <td className="px-6 py-4 text-sm text-gray-800">
                                                             {item?.UserPickupReqDate} <br />
@@ -782,7 +924,7 @@ const AdminMyHub = () => {
                                                         <td className="px-6 py-4 text-sm text-gray-800">{item?.PickReqUserEmail}</td>
                                                         <td className="px-6 py-4 text-sm text-gray-800">{item?.status}</td>
                                                         <td className="px-6 py-4 text-sm text-gray-800">
-                                                            {(() => {
+                                                            {/* {(() => {
                                                                 let myHub = AllStationOfHub?.find(hub => hub?.PoliceStation === item?.PoliceStations)
 
                                                                 console.log(myHub)
@@ -790,7 +932,8 @@ const AdminMyHub = () => {
                                                                     {myHub?.HubName ? myHub?.HubName : "No Hub "}
                                                                 </div>
                                                             })()
-                                                            }
+                                                            } */}
+                                                             {item?.MyHub}
                                                         </td>
 
                                                         <td className="px-6 py-4">
@@ -854,7 +997,34 @@ const AdminMyHub = () => {
                         {tabState === 3 &&
                             <div className="flex justify-center">
                                 <div className="w-full bg-white shadow-lg border border-gray-200 rounded-xl p-6">
-                                    <h2 className="text-2xl font-semibold text-gray-800 mb-4">Pink N Drop Delivery</h2>
+
+                                    <div className="flex justify-between items-center mb-6 flex-wrap gap-3">
+                                        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Pink N Drop Delivery</h2>
+                                        {/* Search Section (Approved)*/}
+                                        {/* ==================================== */}
+                                        <div className="flex items-center gap-2">
+                                            <select required className="w-full bg-white border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                                name="stationOfHub"
+                                                onBlur={(e) => {
+                                                    const HubName = e.target.value
+                                                    setSearchApprovedPinkNDropRequestData(PinkNDropHubDataApproved?.filter(Pending => Pending?.MyHub === HubName))
+                                                }}
+                                            >
+                                                <option value="">-- Select Hub Name --</option>
+                                                {AllHubFind?.map((hubName, i) => (
+                                                    <option key={i}>
+                                                        {hubName?.NameOfHub}
+                                                    </option>
+                                                ))}
+                                            </select>
+
+                                            <button
+                                                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md flex items-center gap-1 text-sm"
+                                            >
+                                                Search
+                                            </button>
+                                        </div>
+                                    </div>
                                     <div className="overflow-x-auto">
                                         <table className="min-w-full divide-y divide-gray-200">
                                             <thead className="bg-gray-100">
@@ -869,7 +1039,8 @@ const AdminMyHub = () => {
                                                 </tr>
                                             </thead>
                                             <tbody className="bg-white divide-y divide-gray-200">
-                                                {PinkNDropHubDataApproved?.map((item, index) => (
+                                                { (SearchApprovedPinkNDropRequestData.length > 0 ? SearchApprovedPinkNDropRequestData :
+                                                PinkNDropHubDataApproved)?.map((item, index) => (
                                                     <tr key={index}>
                                                         <td className="px-6 py-4 text-sm text-gray-800">
                                                             {item?.UserPickupReqDate} <br />
@@ -905,7 +1076,7 @@ const AdminMyHub = () => {
                                                         <td className="px-6 py-4 text-sm text-gray-800">{item?.PickReqUserEmail}</td>
                                                         <td className="px-6 py-4 text-sm text-gray-800">{item?.status}</td>
                                                         <td className="px-6 py-4 text-sm text-gray-800">
-                                                            {(() => {
+                                                            {/* {(() => {
                                                                 let myHub = AllStationOfHub?.find(hub => hub?.PoliceStation === item?.PoliceStations)
 
                                                                 console.log(myHub)
@@ -913,7 +1084,8 @@ const AdminMyHub = () => {
                                                                     {myHub?.HubName ? myHub?.HubName : "No Hub "}
                                                                 </div>
                                                             })()
-                                                            }
+                                                            } */}
+                                                            {item?.MyHub}
                                                         </td>
                                                         <td className="px-6 py-4">
                                                             <button
@@ -970,10 +1142,8 @@ const AdminMyHub = () => {
                         }
 
                     </div>
-
                 </div>
-
-
+                
             </div>
         </div>
     );

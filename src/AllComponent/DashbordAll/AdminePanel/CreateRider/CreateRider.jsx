@@ -52,7 +52,7 @@ const CreateRider = () => {
     let HandleRider = (id) => {
 
         fetch(`http://localhost:5000/AdminUpdateRoleRider/${id}`, {
-            method: "PATCH",
+            method: "PUT",
         })
             .then(res => res.json())
             .then(data => {
