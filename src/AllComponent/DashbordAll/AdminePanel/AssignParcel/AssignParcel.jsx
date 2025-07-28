@@ -45,15 +45,44 @@ const AssignParcel = () => {
     // console.log(HubSearchPendingData)
 
 
+    // ========================================================================================================
+    // All User Find for filter hub rider !!
+    // =============================================
+    // user data all find use tenStack query 
+    let { data: adminAllUsers = [] } = useQuery(["users"], async () => {
+        let res = await fetch("http://localhost:5000/users")
+        return res.json()
+
+    })
+
+    // ========================================================================================================
+    // All rider Show of select Hub
+    // =============================================
+    const [activeAllRider, setActiveAllRider] = useState([]);
+
+    // Open the modal a set data on useState
+    // =============================================
+    const handleAssignRider = (SelectHubName) => {
+
+        // filter all user for found all hub rider 
+        // ==============================================
+        let ThisHubAllRider = adminAllUsers?.filter(AllRider => AllRider?.MyHubRider === SelectHubName)
+        setActiveAllRider(ThisHubAllRider);
+
+        // setState complete হওয়ার পর modal open করো
+        setTimeout(() => {
+            document.getElementById("ParcelAssignToRider").showModal();
+        }, 50);
+    };
 
 
     return (
         <div className='AdminViewPaymentRequestAll bg-[#F6F6F6]'>
             <div className='md:px-4 my-4'>
-
                 {/* ====================================================================== */}
                 {/* Delivery monitoring | all dat show here
                 {/* ====================================================================== */}
+
                 <div className="bg-white p-6 rounded-xl shadow-md  mt-10">
 
                     <h3 className='text-black text-[24px] font-[600] text-left pb-4'>Assign Parcel</h3>
@@ -185,9 +214,44 @@ const AssignParcel = () => {
                                                                 </span>
                                                             </td>
                                                             <td>
-                                                                <button className="btn btn-sm btn-outline btn-primary">
-                                                                    Assign Rider
-                                                                </button>
+                                                                {
+                                                                    (() => {
+
+                                                                        return (
+                                                                            <div className="relative inline-block text-left z-20">
+                                                                                <div className="dropdown dropdown-left">
+                                                                                    <button
+                                                                                        tabIndex={0}
+                                                                                        role="button"
+                                                                                        className="btn btn-sm btn-outline btn-primary">
+                                                                                        Assign Rider
+                                                                                    </button>
+                                                                                    <ul
+                                                                                        tabIndex={0}
+                                                                                        className="dropdown-content menu absolute mt-2 right-0 bg-white rounded-md shadow-lg w-60 p-2 space-y-1 border border-gray-200 z-[100]"
+                                                                                    >
+                                                                                        {AllHubFind?.length > 0 ? (
+                                                                                            AllHubFind.map((hubName, i) => (
+                                                                                                <li key={i} className="">
+                                                                                                    <div className="flex justify-between items-center px-2 py-1 rounded hover:bg-gray-100 transition">
+                                                                                                        <span className="text-sm text-gray-700">{hubName?.NameOfHub}</span>
+
+                                                                                                        <button onClick={() => handleAssignRider(hubName?.NameOfHub)} className="btn btn-sm btn-outline btn-primary">Rider</button>
+
+                                                                                                    </div>
+                                                                                                </li>
+                                                                                            ))
+                                                                                        ) : (
+                                                                                            <li>
+                                                                                                <div className="px-2 py-1 text-sm text-gray-400">No Hub found</div>
+                                                                                            </li>
+                                                                                        )}
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div>
+                                                                        );
+                                                                    })()
+                                                                }
                                                             </td>
                                                             <td>
                                                                 <Link
@@ -208,7 +272,100 @@ const AssignParcel = () => {
                         }
                     </div>
                 </div>
+
             </div>
+            {/* ========================================================== */}
+            {/* Rider Hub Access Update Start  */}
+            {/* ========================================================== */}
+            {activeAllRider && (
+                <dialog id="ParcelAssignToRider" className="modal"
+                    key={activeAllRider._id}
+                >
+                    <div className="modal-box w-full max-w-2xl text-white bg-gray-900">
+                        <h3 className="font-bold text-xl mb-4">🔐 Send Hub Access to Rider</h3>
+                        <form
+                            method="dialog"
+                            onSubmit={(e) => {
+                                e.preventDefault();
+                                const formData = new FormData(e.target);
+                                // আলাদা আলাদা ভ্যারিয়েবল হিসেবে ডাটা নিচ্ছি
+                                const HubNameUp = formData.get("HubNameUp");
+
+                                let allInfo = {
+                                    HubNameUp,
+                                }
+
+                                fetch(`http://localhost:5000/AdminUpdateRiderHubName/${activeUser?._id}`, {
+                                    method: "PATCH",
+                                    headers: {
+                                        "content-type": "application/json"
+                                    },
+                                    body: JSON.stringify(allInfo)
+                                })
+                                    .then(res => res.json())
+                                    .then(data => {
+                                        console.log(data)
+                                        if (data.modifiedCount > 0) {
+                                            Swal.fire({
+                                                position: "top-end",
+                                                icon: "success",
+                                                title: "Rider hub name update is successful",
+                                                showConfirmButton: false,
+                                                timer: 1500
+                                            })
+                                        }
+                                        refetch()
+                                        setActiveUser(null)
+                                        document.getElementById("ParcelAssignToRider").close();
+                                    })
+                            }}
+                        >
+                            <div className="gap-4">
+                                {activeAllRider?.map(rider => (
+                                    <div
+                                        key={rider?._id}
+                                        className="flex items-center justify-between border border-gray-200 rounded-xl shadow-md p-4 mb-4 bg-white backdrop-blur-md transition hover:shadow-lg"
+                                    >
+                                        {/* Name and Number */}
+                                            <p className="text-lg font-semibold text-gray-800">{rider?.name} {rider?.LastName}</p>
+                                            <p className="text-sm text-gray-600">{rider?.email}</p>
+                                            <p className="text-sm text-gray-600">{rider?.Phone}</p>
+                                        
+                                        {/* Assign Button */}
+                                        <button
+                                            className="bg-blue-600 hover:bg-blue-700 text-white text-sm px-5 py-2 rounded-full shadow-md transition duration-150"
+                                        >
+                                            Assign Him
+                                        </button>
+                                    </div>
+
+                                ))}
+                                {/* <div>
+                                    <label className="block font-semibold mb-1">Save Here</label>
+                                    <button type="submit" className="btn btn-primary ml-2">
+                                        ✅ Save Access
+                                    </button>
+                                </div> */}
+                            </div>
+                        </form>
+
+                        <div className="modal-action mt-6 flex justify-end">
+                            <button
+                                onClick={() => {
+                                    document.getElementById("ParcelAssignToRider").close()
+                                    setActiveUser(null)
+                                }}
+                                className="btn bg-gray-300 text-black"
+                            >
+                                ❌ Cancel
+                            </button>
+                        </div>
+                    </div>
+                </dialog>
+            )}
+            {/* ========================================================== */}
+            {/* Rider Hub Access Update Start End  */}
+            {/* ========================================================== */}
         </div>
     );
 };

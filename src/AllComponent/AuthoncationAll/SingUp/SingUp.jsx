@@ -80,7 +80,7 @@ const SingUp = () => {
             return
         }
         let allData = { BusinessName, FirstName, LastName, Districts, PoliceStations, Address, Phone, Email, Password, confirmPassword, date }
-        console.log(allData)
+        // console.log(allData)
 
         createUser(Email, Password)
             .then(result => {

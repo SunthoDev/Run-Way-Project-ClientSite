@@ -71,7 +71,7 @@ const CreateRiderDataSee = ({ allUser, handleUser, HandleRider, HandleDelete, re
             </td>
 
             {/* ========================================================== */}
-            {/* Send A Route Access to Sub-Admin Start  */}
+            {/* Rider Hub Access Update Start  */}
             {/* ========================================================== */}
             {activeUser && (
                 <dialog id="RiderHubAccess" className="modal"
@@ -155,7 +155,7 @@ const CreateRiderDataSee = ({ allUser, handleUser, HandleRider, HandleDelete, re
                 </dialog>
             )}
             {/* ========================================================== */}
-            {/* Send A Route Access to Sub-Admin End  */}
+            {/* Rider Hub Access Update Start End  */}
             {/* ========================================================== */}
         </tr >
     );
