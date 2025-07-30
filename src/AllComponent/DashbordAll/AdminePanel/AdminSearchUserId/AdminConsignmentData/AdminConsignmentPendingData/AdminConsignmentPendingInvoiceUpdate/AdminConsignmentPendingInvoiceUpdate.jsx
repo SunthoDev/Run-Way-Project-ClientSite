@@ -273,7 +273,6 @@ const AdminConsignmentPendingInvoiceUpdate = () => {
                                 <div className="grid grid-cols-1 md:grid-cols-6 mt-[18px] gap-4  items-center">
                                     <h4 className='col-span-2 text-[16px] font-[500] hidden md:inline-block'></h4>
                                     <button className='col-span-4  bg-[#22A197] color-white text-[14px] text-white font-[600] rounded-[8px] w-[100%] py-[10px]' type='submit'>Submit</button>
-
                                 </div>
                                 {/* <div className="grid grid-cols-1 md:grid-cols-6 mt-[18px] gap-4  items-center">
                                     <h4 className='col-span-2 text-[16px] font-[500] hidden md:inline-block'></h4>

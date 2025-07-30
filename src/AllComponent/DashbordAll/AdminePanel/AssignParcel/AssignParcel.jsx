@@ -2,7 +2,8 @@ import { useState } from 'react';
 import "./AssignParcel.css"
 import { useQuery } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
-import { Link } from 'react-router-dom';
+import moment from "moment";
+import { Link, useNavigate } from 'react-router-dom';
 
 const AssignParcel = () => {
 
@@ -52,22 +53,23 @@ const AssignParcel = () => {
     let { data: adminAllUsers = [] } = useQuery(["users"], async () => {
         let res = await fetch("http://localhost:5000/users")
         return res.json()
-
     })
 
     // ========================================================================================================
     // All rider Show of select Hub
     // =============================================
     const [activeAllRider, setActiveAllRider] = useState([]);
+    const [ParcelId, setParcelId] = useState("");
 
     // Open the modal a set data on useState
     // =============================================
-    const handleAssignRider = (SelectHubName) => {
+    const handleAssignRider = (SelectHubName, ParcelID) => {
 
         // filter all user for found all hub rider 
         // ==============================================
         let ThisHubAllRider = adminAllUsers?.filter(AllRider => AllRider?.MyHubRider === SelectHubName)
         setActiveAllRider(ThisHubAllRider);
+        setParcelId(ParcelID);
 
         // setState complete হওয়ার পর modal open করো
         setTimeout(() => {
@@ -78,6 +80,7 @@ const AssignParcel = () => {
 
     return (
         <div className='AdminViewPaymentRequestAll bg-[#F6F6F6]'>
+
             <div className='md:px-4 my-4'>
                 {/* ====================================================================== */}
                 {/* Delivery monitoring | all dat show here
@@ -139,7 +142,7 @@ const AssignParcel = () => {
                                 <div className="w-full bg-white shadow-lg border border-gray-200 rounded-xl p-6">
 
                                     <div className="flex justify-between items-center pb-4">
-                                        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Pending Parcel</h2>
+                                        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Pending Parcel: {PendingParcelAll?.length}</h2>
                                         {/* Search Section (Pending)*/}
                                         {/* ==================================== */}
                                         <div className="flex items-center gap-2">
@@ -236,7 +239,7 @@ const AssignParcel = () => {
                                                                                                     <div className="flex justify-between items-center px-2 py-1 rounded hover:bg-gray-100 transition">
                                                                                                         <span className="text-sm text-gray-700">{hubName?.NameOfHub}</span>
 
-                                                                                                        <button onClick={() => handleAssignRider(hubName?.NameOfHub)} className="btn btn-sm btn-outline btn-primary">Rider</button>
+                                                                                                        <button onClick={() => handleAssignRider(hubName?.NameOfHub, ParcelAll?.StandardParcelId)} className="btn btn-sm btn-outline btn-primary">Rider</button>
 
                                                                                                     </div>
                                                                                                 </li>
@@ -271,81 +274,104 @@ const AssignParcel = () => {
                             </div>
                         }
                     </div>
-                </div>
 
+                </div>
             </div>
+
             {/* ========================================================== */}
-            {/* Rider Hub Access Update Start  */}
+            {/* Rider Hub Access Modal Update Start  */}
             {/* ========================================================== */}
+
             {activeAllRider && (
                 <dialog id="ParcelAssignToRider" className="modal"
                     key={activeAllRider._id}
                 >
                     <div className="modal-box w-full max-w-2xl text-white bg-gray-900">
-                        <h3 className="font-bold text-xl mb-4">🔐 Send Hub Access to Rider</h3>
+                        <h3 className="font-bold text-xl mb-4">🔐 Assign Parcel to Rider</h3>
                         <form
-                            method="dialog"
-                            onSubmit={(e) => {
-                                e.preventDefault();
-                                const formData = new FormData(e.target);
-                                // আলাদা আলাদা ভ্যারিয়েবল হিসেবে ডাটা নিচ্ছি
-                                const HubNameUp = formData.get("HubNameUp");
-
-                                let allInfo = {
-                                    HubNameUp,
-                                }
-
-                                fetch(`http://localhost:5000/AdminUpdateRiderHubName/${activeUser?._id}`, {
-                                    method: "PATCH",
-                                    headers: {
-                                        "content-type": "application/json"
-                                    },
-                                    body: JSON.stringify(allInfo)
-                                })
-                                    .then(res => res.json())
-                                    .then(data => {
-                                        console.log(data)
-                                        if (data.modifiedCount > 0) {
-                                            Swal.fire({
-                                                position: "top-end",
-                                                icon: "success",
-                                                title: "Rider hub name update is successful",
-                                                showConfirmButton: false,
-                                                timer: 1500
-                                            })
-                                        }
-                                        refetch()
-                                        setActiveUser(null)
-                                        document.getElementById("ParcelAssignToRider").close();
-                                    })
-                            }}
-                        >
+                            method="dialog">
                             <div className="gap-4">
                                 {activeAllRider?.map(rider => (
                                     <div
                                         key={rider?._id}
                                         className="flex items-center justify-between border border-gray-200 rounded-xl shadow-md p-4 mb-4 bg-white backdrop-blur-md transition hover:shadow-lg"
                                     >
-                                        {/* Name and Number */}
-                                            <p className="text-lg font-semibold text-gray-800">{rider?.name} {rider?.LastName}</p>
-                                            <p className="text-sm text-gray-600">{rider?.email}</p>
-                                            <p className="text-sm text-gray-600">{rider?.Phone}</p>
-                                        
-                                        {/* Assign Button */}
+                                        <p className="text-lg font-semibold text-gray-800">{rider?.name} {rider?.LastName}</p>
+                                        <p className="text-sm text-gray-600">{rider?.email}</p>
+                                        <p className="text-sm text-gray-600">{rider?.Phone}</p>
                                         <button
+                                            onClick={() => {
+                                                let date = moment().format("MM/DD/YYYY")
+                                                let time = moment().format("hh:mm A")
+                                                let TrackingMessage = `Your parcel has been successfully assigned to a rider. The rider will collect your parcel shortly and begin the delivery process.`
+
+                                                let TrackingMessagePost = {
+                                                    userOrderIdTracking: ParcelId,
+                                                    TrackingMessage,
+                                                    TrackingDate: date,
+                                                    TrackingTime: time
+                                                };
+                                                let AssignPArcelPostToRider = {
+                                                    RiderEmail: rider?.email,
+                                                    RiderPhone: rider?.Phone,
+                                                    RiderName: rider?.name,
+                                                    RiderUserId: rider?.userId,
+                                                    ParcelIdForRider: ParcelId,
+                                                    CategoryAssign: "Parcel",
+                                                }
+                                                // console.log(AssignPArcelPostToRider)
+                                                fetch("http://localhost:5000/AdminAllAssignParcelHere/InsertAssignParcelToRider", {
+                                                    method: "POST",
+                                                    headers: {
+                                                        "Content-Type": "application/json"
+                                                    },
+                                                    body: JSON.stringify(AssignPArcelPostToRider)
+                                                })
+                                                    .then(res => res.json())
+                                                    .then(data => {
+                                                        if (data.insertedId) {
+                                                            // Return Tracking Data Post 
+                                                            // ===========================================
+                                                            fetch("http://localhost:5000/AdminAllAssignParcelHere/AdminTrackingRequestSentOfAssignRider", {
+                                                                method: "POST",
+                                                                headers: {
+                                                                    "Content-Type": "application/json"
+                                                                },
+                                                                body: JSON.stringify(TrackingMessagePost)
+                                                            })
+                                                                .then(res => res.json())
+                                                                .then(data => {
+                                                                    // console.log(data)
+                                                                    if (data.insertedId) {
+                                                                        // Parcel Assign Rider status up (Yes)
+                                                                        // =======================================
+                                                                        fetch(`http://localhost:5000/AdminAllAssignParcelHere/ParcelAssignStatusUpdateYes/${ParcelId}`, {
+                                                                            method: "PATCH",
+                                                                        })
+                                                                            .then(res => res.json())
+                                                                            .then(data => {
+                                                                                if (data.modifiedCount > 0) {
+                                                                                    Swal.fire({
+                                                                                        position: 'top-end',
+                                                                                        icon: 'success',
+                                                                                        title: 'Parcel Assign Successful',
+                                                                                        showConfirmButton: false,
+                                                                                        timer: 1500
+                                                                                    })
+                                                                                }
+                                                                            })
+                                                                    }
+                                                                })
+                                                        }
+                                                    })
+                                            }}
                                             className="bg-blue-600 hover:bg-blue-700 text-white text-sm px-5 py-2 rounded-full shadow-md transition duration-150"
                                         >
-                                            Assign Him
+                                            ✅ Assign Him
                                         </button>
                                     </div>
 
                                 ))}
-                                {/* <div>
-                                    <label className="block font-semibold mb-1">Save Here</label>
-                                    <button type="submit" className="btn btn-primary ml-2">
-                                        ✅ Save Access
-                                    </button>
-                                </div> */}
                             </div>
                         </form>
 
@@ -363,6 +389,7 @@ const AssignParcel = () => {
                     </div>
                 </dialog>
             )}
+
             {/* ========================================================== */}
             {/* Rider Hub Access Update Start End  */}
             {/* ========================================================== */}
