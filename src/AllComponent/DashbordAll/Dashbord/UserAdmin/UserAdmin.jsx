@@ -142,12 +142,9 @@ const UserAdmin = () => {
                             })
                         }
                         console.log(data)
-
                         refetch()
                     })
-
             }
-
         });
     }
 

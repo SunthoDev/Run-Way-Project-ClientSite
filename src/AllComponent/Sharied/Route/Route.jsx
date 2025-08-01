@@ -55,6 +55,9 @@ import AssignParcel from "../../DashbordAll/AdminePanel/AssignParcel/AssignParce
 import SearchAllReport from "../../DashbordAll/AdminePanel/AllReportEverything/SearchAllReport/SearchAllReport";
 import RiderDashboard from "../../DashbordAll/RiderPanelAllWorkHere/RiderDashboard/RiderDashboard";
 import MyParcelRider from "../../DashbordAll/RiderPanelAllWorkHere/MyParcelRider/MyParcelRider";
+import HubInformation from "../../DashbordAll/AdminePanel/HubInformation/HubInformation";
+import ParcelInfoOfRider from "../../DashbordAll/RiderPanelAllWorkHere/ParcelInfoOfRider/ParcelInfoOfRider";
+import RiderCODAmountRequest from "../../DashbordAll/AdminePanel/RiderCODAmountRequest/RiderCODAmountRequest";
 
 
 let route = createBrowserRouter([
@@ -326,6 +329,14 @@ let route = createBrowserRouter([
             path: "AdminDashboard/AssignParcel",
             element: <AssignParcel></AssignParcel>
          },
+         {
+            path: "AdminDashboard/HubInformation",
+            element: <HubInformation></HubInformation>
+         },
+         {
+            path: "AdminDashboard/RiderCODAmountRequest",
+            element: <RiderCODAmountRequest></RiderCODAmountRequest>
+         },
       ]
    },
 
@@ -338,11 +349,15 @@ let route = createBrowserRouter([
       children: [
          {
             path: "RiderDashboard",
-            element: <RiderDashboard></RiderDashboard>
+            element: <PrivateRoute> <RiderDashboard></RiderDashboard> </PrivateRoute>
          },
          {
             path: "MyParcelRider",
-            element: <MyParcelRider></MyParcelRider>
+            element: <PrivateRoute> <MyParcelRider></MyParcelRider> </PrivateRoute>
+         },
+         {
+            path: "ParcelInfoOfRider",
+            element: <PrivateRoute> <ParcelInfoOfRider></ParcelInfoOfRider> </PrivateRoute>
          },
 
       ]

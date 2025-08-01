@@ -351,6 +351,7 @@ const AssignParcel = () => {
                                                                             .then(res => res.json())
                                                                             .then(data => {
                                                                                 if (data.modifiedCount > 0) {
+                                                                                    refetch()
                                                                                     Swal.fire({
                                                                                         position: 'top-end',
                                                                                         icon: 'success',

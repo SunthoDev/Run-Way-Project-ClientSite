@@ -9,6 +9,7 @@ import useRole from '../../../../Hook/useRole';
 const MyParcelRider = () => {
 
     const [tabState, setTabState] = useState(1);
+    const [IsLoading, setIsLoading] = useState(false);
     const [roles] = useRole()
     const ad = roles?.role === "admin"
 
@@ -27,8 +28,6 @@ const MyParcelRider = () => {
     // ===============================================================
     let MyAssignParcel = RiderAssignDataAll?.filter(parcel => parcel?.RiderEmail === roles?.email && parcel?.CategoryAssign === "Parcel")
     // console.log(MyAssignParcel)
-
-
 
 
     // ===========================================================================================================
@@ -72,6 +71,7 @@ const MyParcelRider = () => {
 
     return (
         <div className='MyParcelRiderPArent bg-[#F6F6F6]'>
+            
             <div className='md:px-4 my-4'>
 
                 <div className="bg-white p-6 rounded-xl shadow-md  mt-10">
@@ -168,9 +168,11 @@ const MyParcelRider = () => {
 
                     </div>
                 </div>
+
             </div>
+
             {/* ========================================================== */}
-            {/* (PARCEL-MODAL) Parcel DEtails Show Bellow Start */}
+            {/* (PARCEL-MODAL) Parcel Details Show Bellow Start */}
             {/* ========================================================== */}
 
             {AssignParcelDetails && (
@@ -262,19 +264,52 @@ const MyParcelRider = () => {
                             <h2 className="text-lg font-bold text-white mb-4 text-center">📦 Update Parcel Delivery Status</h2>
                             <form onSubmit={(event) => {
                                 event.preventDefault()
+                                setIsLoading(true)
                                 let parcelStatus = event.target.statusUp.value
                                 let date = moment().format("MM/DD/YYYY")
                                 let time = moment().format("hh:mm A")
                                 let TrackingMessage = `🚚 Delivery complete. We hope you enjoy your package!`
 
+                                // Parcel Delivery Tracking message send
+                                // ========================================
                                 let TrackingMessagePost = {
                                     userOrderIdTracking: AssignParcelDetails?.StandardParcelId,
                                     TrackingMessage,
                                     TrackingDate: date,
                                     TrackingTime: time
                                 };
+
+                                // Parcel Delivery Status Update
+                                // ======================================
                                 let ParcelStatusUpToRider = { parcelStatus }
 
+                                // Rider Delivery History Data
+                                // ======================================
+                                let RiderDeliveryHistoryDate = {
+                                    RiderEmail: roles?.roles,
+                                    RiderID: roles?.userId,
+                                    RiderFirstName: roles?.name,
+                                    RiderLastName: roles?.LastName,
+                                    ParcelId: AssignParcelDetails?.StandardParcelId,
+                                    ParcelDistrict: AssignParcelDetails?.District,
+                                    ParcelPoliceStation: AssignParcelDetails?.policeStation,
+                                    ParcelMyHub: AssignParcelDetails?.MyHub,
+                                    ParcelWeight: AssignParcelDetails?.weight,
+                                    ParcelCod: AssignParcelDetails?.CodAmount,
+                                    date,
+                                    time,
+                                }
+
+                                // Parcel COD Balance Increase Rider Balance
+                                // ===================================================
+                                let ParcelCodBalance = {
+                                    ParcelCod: Math.floor(Number(AssignParcelDetails?.CodAmount) || 0)
+                                };
+
+
+                                // ===================================================
+                                // Parcel Status Update, When rider approved parcel
+                                // ===================================================
                                 fetch(`http://localhost:5000/AdminAllAssignParcelHere/RiderParcelDeliveryStatusUpdate/${AssignParcelDetails?._id}`, {
                                     method: "PATCH",
                                     headers: {
@@ -285,9 +320,9 @@ const MyParcelRider = () => {
                                     .then(res => res.json())
                                     .then(data => {
                                         if (data.modifiedCount > 0) {
-
-                                            // Return Tracking Data Post 
-                                            // ===========================================
+                                            // ===============================================
+                                            // Rider after Delivery Tracking Message Send 
+                                            // ===============================================
                                             fetch("http://localhost:5000/AdminAllAssignParcelHere/AdminTrackingRequestSentOfAssignRider", {
                                                 method: "POST",
                                                 headers: {
@@ -299,30 +334,62 @@ const MyParcelRider = () => {
                                                 .then(data => {
                                                     // console.log(data)
                                                     if (data.insertedId) {
-                                                        // Assign Parcel Request Delete After, change parcel status to rider
-                                                        // =====================================================
-                                                        fetch(`http://localhost:5000/AdminAllAssignParcelHere/DeleteAssignParcel/${AssignRequestIdFoDeleteRequest}`, {
-                                                            method: "DELETE",
+                                                        // ===========================================
+                                                        // Rider Delivery parcel (History) post
+                                                        // ===========================================
+                                                        fetch("http://localhost:5000/AdminAllAssignParcelHere/ParcelDeliveryHistoryOfRider", {
+                                                            method: "POST",
+                                                            headers: {
+                                                                "Content-Type": "application/json"
+                                                            },
+                                                            body: JSON.stringify(RiderDeliveryHistoryDate)
                                                         })
                                                             .then(res => res.json())
                                                             .then(data => {
-                                                                if (data.deletedCount > 0) {
-                                                                    refetch()
-                                                                    document.getElementById("MyAssignParcelDetailsShow").close()
-                                                                    Swal.fire({
-                                                                        position: 'top-end',
-                                                                        icon: 'success',
-                                                                        title: 'Parcel delivery Successful',
-                                                                        showConfirmButton: false,
-                                                                        timer: 1500
-                                                                    })
-                                                                }
                                                                 // console.log(data)
+                                                                if (data.insertedId) {
+
+                                                                    // =============================================
+                                                                    // Parcel (COD) Amount Will Be Pluse Rider Balance..
+                                                                    // =============================================
+                                                                    fetch(`http://localhost:5000/AdminAllAssignParcelHere/ParcelCODAmountIncreaseRiderBalance/${roles?.email}`, {
+                                                                        method: "PUT",
+                                                                        headers: {
+                                                                            "content-type": "application/json"
+                                                                        },
+                                                                        body: JSON.stringify(ParcelCodBalance)
+                                                                    })
+                                                                        .then(res => res.json())
+                                                                        .then(data => {
+                                                                            if (data.modifiedCount > 0) {
+                                                                                // Assign Parcel Request Delete After, change parcel status and others to rider..
+                                                                                // ===============================
+                                                                                fetch(`http://localhost:5000/AdminAllAssignParcelHere/DeleteAssignParcel/${AssignRequestIdFoDeleteRequest}`, {
+                                                                                    method: "DELETE",
+                                                                                })
+                                                                                    .then(res => res.json())
+                                                                                    .then(data => {
+                                                                                        if (data.deletedCount > 0) {
+                                                                                            refetch()
+                                                                                            setIsLoading(false)
+                                                                                            document.getElementById("MyAssignParcelDetailsShow").close()
+                                                                                            Swal.fire({
+                                                                                                position: 'top-end',
+                                                                                                icon: 'success',
+                                                                                                title: 'Parcel delivery Successful',
+                                                                                                showConfirmButton: false,
+                                                                                                timer: 1500
+                                                                                            })
+                                                                                        }
+                                                                                        // console.log(data)
+                                                                                    })
+                                                                            }
+                                                                        })
+                                                                }
                                                             })
                                                     }
                                                 })
                                         }
-                                        refetch()
                                     })
                             }}>
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-center">
@@ -340,15 +407,15 @@ const MyParcelRider = () => {
                                     </select>
 
                                     <button
+                                        disabled={IsLoading}
                                         type="submit"
                                         className="bg-[#22A197] text-white text-[14px] font-semibold rounded-[8px] w-full py-[10px]"
                                     >
-                                        ✅ Submit
+                                        {IsLoading ? "Loading ..." : "✅ Submit"}
                                     </button>
                                 </div>
                             </form>
                         </div>
-
 
                         <div className="modal-action mt-8 flex justify-end">
                             <button
@@ -364,9 +431,8 @@ const MyParcelRider = () => {
                 </dialog>
             )}
 
-
             {/* ========================================================== */}
-            {/* (PARCEL-MODAL) Parcel DEtails Show Bellow End  */}
+            {/* (PARCEL-MODAL) Parcel Details Show Bellow End  */}
             {/* ========================================================== */}
         </div>
     );

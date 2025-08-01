@@ -78,64 +78,78 @@ const Dashboard = () => {
                     {/* ==================================================== */}
 
                     {
-                        // Admin Panel (Admin Panel) all Route 
+                        // Admin Panel & Sub-Admin Panel (Admin Panel) all Route 
                         // ======================================================================
                         ad || subAdmin ? <div className='RouteAllParent'>
                             <li className='Dashboard'> <Link to="/dashboard/AdminDashboard">Dashboard</Link></li>
 
                             {
+                                ad || (subAdmin && roles?.Hub_Information_Access === "Yes") ?
+                                    <li> <NavLink to="/dashboard/AdminDashboard/HubInformation"><span><FaHome></FaHome></span>Hub Information</NavLink></li>
+                                    :
+                                    <div className="hidden flex items-center gap-2 text-gray-500 cursor-not-allowed opacity-50"><FaHome />Hub Information</div>
+                            }
+                            {
+                                ad || (subAdmin && roles?.Rider_CODAmount_Request_Access === "Yes") ?
+                                    <li> <NavLink to="/dashboard/AdminDashboard/RiderCODAmountRequest"><span><FaHome></FaHome></span>Rider CODAmount Request</NavLink></li>
+                                    :
+                                    <div className="hidden flex items-center gap-2 text-gray-500 cursor-not-allowed opacity-50"><FaHome />Rider CODAmount Request</div>
+                            }
+
+
+                            {
                                 ad || (subAdmin && roles?.Create_Hub_Access === "Yes") ?
                                     <li> <NavLink to="/dashboard/AdminDashboard/AdminCreateHub"><span><FaHome></FaHome></span>Create Hub</NavLink></li>
                                     :
-                                    <div className="flex items-center gap-2 text-gray-500 cursor-not-allowed opacity-50"><FaHome />Create Hub</div>
+                                    <div className="hidden flex items-center gap-2 text-gray-500 cursor-not-allowed opacity-50"><FaHome />Create Hub</div>
                             }
                             {
                                 ad || (subAdmin && roles?.My_Hub_Access === "Yes") ?
                                     <li> <NavLink to="/dashboard/AdminDashboard/AdminMyHubRequestAll"><span><FaHome></FaHome></span> My Hub</NavLink></li>
                                     :
-                                    <div className="flex items-center gap-2 text-gray-500 cursor-not-allowed opacity-50"><FaHome /> My Hub</div>
+                                    <div className="hidden flex items-center gap-2 text-gray-500 cursor-not-allowed opacity-50"><FaHome /> My Hub</div>
                             }
                             {
                                 ad || (subAdmin && roles?.Dispatch_Access === "Yes") ?
                                     <li> <NavLink to="/dashboard/AdminDashboard/Dispatch"><span><FaHome></FaHome></span>Dispatch</NavLink></li>
                                     :
-                                    <div className="flex items-center gap-2 text-gray-500 cursor-not-allowed opacity-50"><FaHome /> Dispatch</div>
+                                    <div className="hidden flex items-center gap-2 text-gray-500 cursor-not-allowed opacity-50"><FaHome /> Dispatch</div>
                             }
                             {
                                 ad || (subAdmin && roles?.Delivery_Monitoring_Access === "Yes") ?
                                     <li> <NavLink to="/dashboard/AdminDashboard/DeliveryMonitoring"><span><FaHome></FaHome></span>Delivery Monitoring</NavLink></li>
                                     :
-                                    <div className="flex items-center gap-2 text-gray-500 cursor-not-allowed opacity-50"><FaHome /> Delivery Monitoring</div>
+                                    <div className="hidden flex items-center gap-2 text-gray-500 cursor-not-allowed opacity-50"><FaHome /> Delivery Monitoring</div>
                             }
                             {
                                 ad || (subAdmin && roles?.Assign_Parcel_Access === "Yes") ?
                                     <li> <NavLink to="/dashboard/AdminDashboard/AssignParcel"><span><FaHome></FaHome></span>Assign Parcel</NavLink></li>
                                     :
-                                    <div className="flex items-center gap-2 text-gray-500 cursor-not-allowed opacity-50"><FaHome /> Assign Parcel</div>
+                                    <div className="hidden flex items-center gap-2 text-gray-500 cursor-not-allowed opacity-50"><FaHome /> Assign Parcel</div>
                             }
                             {
                                 ad || (subAdmin && roles?.ReturnParcel_Monitoring_Access === "Yes") ?
                                     <li> <NavLink to="/dashboard/AdminDashboard/ReturnParcelMonitoring"><span><FaHome></FaHome></span>Return Parcel Monitoring</NavLink></li>
                                     :
-                                    <div className="flex items-center gap-2 text-gray-500 cursor-not-allowed opacity-50"><FaHome /> Return Parcel Monitoring</div>
+                                    <div className="hidden flex items-center gap-2 text-gray-500 cursor-not-allowed opacity-50"><FaHome /> Return Parcel Monitoring</div>
                             }
                             {
                                 ad || (subAdmin && roles?.Balance_Request_Access === "Yes") ?
                                     <li> <NavLink to="/dashboard/AdminDashboard/BalanceRequestAllUser"><span><FaHome></FaHome></span>Balance Request Users</NavLink></li>
                                     :
-                                    <div className="flex items-center gap-2 text-gray-500 cursor-not-allowed opacity-50"><FaHome /> Balance Request Users</div>
+                                    <div className="hidden flex items-center gap-2 text-gray-500 cursor-not-allowed opacity-50"><FaHome /> Balance Request Users</div>
                             }
                             {
                                 ad || (subAdmin && roles?.All_Report_Access === "Yes") ?
                                     <li> <NavLink to="/dashboard/AdminDashboard/AllReportEverything"><span><FaHome></FaHome></span>All Report</NavLink></li>
                                     :
-                                    <div className="flex items-center gap-2 text-gray-500 cursor-not-allowed opacity-50"><FaHome /> All Report</div>
+                                    <div className="hidden flex items-center gap-2 text-gray-500 cursor-not-allowed opacity-50"><FaHome /> All Report</div>
                             }
                             {
                                 ad || (subAdmin && roles?.Approved_Parcel_Access === "Yes") ?
                                     <li> <NavLink to="/dashboard/AdminDashboard/ApprovedParcelRoute"><span><FaWallet></FaWallet></span> Approve Parcel</NavLink></li>
                                     :
-                                    <div className="flex items-center gap-2 text-gray-500 cursor-not-allowed opacity-50"><FaHome /> Approve Parcel</div>
+                                    <div className="hidden flex items-center gap-2 text-gray-500 cursor-not-allowed opacity-50"><FaHome /> Approve Parcel</div>
                             }
                             {
                                 ad || (subAdmin && roles?.Coverage_Access === "Yes") ?
@@ -152,46 +166,47 @@ const Dashboard = () => {
                                         </div>
                                     </li>
                                     :
-                                    <div className="flex items-center gap-2 text-gray-500 cursor-not-allowed opacity-50"><FaHome /> Coverages</div>
+                                    <div className="hidden flex items-center gap-2 text-gray-500 cursor-not-allowed opacity-50"><FaHome /> Coverages</div>
                             }
                             {
                                 ad || (subAdmin && roles?.View_Payment_Access === "Yes") ?
                                     <li> <NavLink to="/dashboard/AdminDashboard/AdminViewPaymentRequestAll"><span><FaWallet></FaWallet></span> View Payments</NavLink></li>
                                     :
-                                    <div className="flex items-center gap-2 text-gray-500 cursor-not-allowed opacity-50"><FaHome /> View Payments</div>
+                                    <div className="hidden flex items-center gap-2 text-gray-500 cursor-not-allowed opacity-50"><FaHome /> View Payments</div>
                             }
                             {
                                 ad || (subAdmin && roles?.AmountUpdate_Parcel_Access === "Yes") ?
                                     <li> <NavLink to="/dashboard/AdminDashboard/AdminAmountUpdateParcel"><span><FaWallet></FaWallet></span> Amount Update Parcel</NavLink></li>
                                     :
-                                    <div className="flex items-center gap-2 text-gray-500 cursor-not-allowed opacity-50"><FaHome />Amount Update Parcel</div>
+                                    <div className="hidden flex items-center gap-2 text-gray-500 cursor-not-allowed opacity-50"><FaHome />Amount Update Parcel</div>
                             }
                             {
                                 ad || (subAdmin && roles?.New_Merchants_Access === "Yes") ?
                                     <li> <NavLink to="/dashboard/AdminDashboard/NewMerchants"><span><FaWallet></FaWallet></span> New Merchants</NavLink></li>
                                     :
-                                    <div className="flex items-center gap-2 text-gray-500 cursor-not-allowed opacity-50"><FaHome />New Merchants</div>
+                                    <div className="hidden flex items-center gap-2 text-gray-500 cursor-not-allowed opacity-50"><FaHome />New Merchants</div>
                             }
                             {
                                 ad || (subAdmin && roles?.User_Access === "Yes") ?
                                     <li> <NavLink to="/dashboard/User"><span><FaWallet></FaWallet></span> users</NavLink></li>
                                     :
-                                    <div className="flex items-center gap-2 text-gray-500 cursor-not-allowed opacity-50"><FaHome />Users</div>
+                                    <div className="hidden flex items-center gap-2 text-gray-500 cursor-not-allowed opacity-50"><FaHome />Users</div>
                             }
                             {
                                 ad || (subAdmin && roles?.CreateRider_Access === "Yes") ?
                                     <li> <NavLink to="/dashboard/AdminDashboard/CreateRider"><span><FaWallet></FaWallet></span> Create Rider</NavLink></li>
                                     :
-                                    <div className="flex items-center gap-2 text-gray-500 cursor-not-allowed opacity-50"><FaHome />Create Rider</div>
+                                    <div className="hidden flex items-center gap-2 text-gray-500 cursor-not-allowed opacity-50"><FaHome />Create Rider</div>
                             }
                         </div>
                             : Rider ?
                                 // ======================================================================
-                                // User Panel (MARCHENT Panel) all Route 
+                                // User Panel (Rider Panel) all Route 
                                 // ======================================================================
                                 <div className='RouteAllParent'>
                                     <li className='Dashboard'> <NavLink to="/dashboard/RiderDashboard"><span><i className="fa fa-tachometer" aria-hidden="true"></i></span>Dashboard</NavLink></li>
                                     <li> <NavLink to="/dashboard/MyParcelRider"><span><i className="fa fa-tachometer" aria-hidden="true"></i></span>My Parcel</NavLink></li>
+                                    <li> <NavLink to="/dashboard/ParcelInfoOfRider"><span><i className="fa fa-tachometer" aria-hidden="true"></i></span>Parcel Info</NavLink></li>
 
 
 
