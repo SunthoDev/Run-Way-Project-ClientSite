@@ -12,7 +12,7 @@ import QRCode from "react-qr-code";
 
 
 import Barcode from 'react-barcode';
-import useScanDetection from 'use-scan-detection';
+// import useScanDetection from 'use-scan-detection';
 
 
 
@@ -25,11 +25,11 @@ const AdminConsignmentPendingInvoice = () => {
 
 
 
-    const [value, setValue] = useState("no scane your bar code");
-    useScanDetection({
-        onComplete: setValue,
-        minLength: 13 // EAN13
-    });
+    // const [value, setValue] = useState("no scane your bar code");
+    // useScanDetection({
+    //     onComplete: setValue,
+    //     minLength: 13 // EAN13
+    // });
 
 
     return (

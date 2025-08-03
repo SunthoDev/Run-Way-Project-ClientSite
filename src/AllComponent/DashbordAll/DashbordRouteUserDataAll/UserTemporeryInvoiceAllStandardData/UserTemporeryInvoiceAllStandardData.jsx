@@ -11,8 +11,7 @@ import moment from 'moment';
 import { useReactToPrint } from "react-to-print";
 import QRCodeStyling from "qr-code-styling";
 import Barcode from 'react-barcode';
-import useScanDetection from 'use-scan-detection';
-import { h2 } from 'framer-motion/client';
+// import useScanDetection from 'use-scan-detection';
 
 
 const UserTemporeryInvoiceAllStandardData = () => {
@@ -103,11 +102,11 @@ const UserTemporeryInvoiceAllStandardData = () => {
     // =========================================================================================================
     // Detected bar code scan data
     // ==========================================================
-    const [value, setValue] = useState("no scane your bar code");
-    useScanDetection({
-        onComplete: setValue,
-        minLength: 13 // EAN13
-    });
+    // const [value, setValue] = useState("no scane your bar code");
+    // useScanDetection({
+    //     onComplete: setValue,
+    //     minLength: 13 // EAN13
+    // });
 
 
 
