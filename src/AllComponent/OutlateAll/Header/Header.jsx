@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import "./Header.css"
 import { Link, Navigate, NavLink } from 'react-router-dom';
-import logo from "../../../assets/logo/logo.png"
+import logo from "../../../assets/logo/Logo.png"
 import { AuthContext } from '../../AuthoncationAll/AuthProvider/AuthProvider';
 import useRole from '../../../Hook/useRole';
 import { motion, AnimatePresence } from 'framer-motion';

@@ -3,7 +3,7 @@ import "./AdminPaymentRequestDetailsAll.css"
 import { useLoaderData } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import moment from 'moment';
-import logo from "../../../../../../assets/logo/logo.png"
+import logo from "../../../../../../assets/logo/LogoTwo.png"
 import UserPaymentRequestAllPaymentDataShow from '../UserPaymentRequestAllPaymentDataShow/UserPaymentRequestAllPaymentDataShow';
 
 

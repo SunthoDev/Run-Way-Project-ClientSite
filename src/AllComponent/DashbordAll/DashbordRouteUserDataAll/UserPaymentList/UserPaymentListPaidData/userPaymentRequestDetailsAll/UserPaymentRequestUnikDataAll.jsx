@@ -2,7 +2,7 @@ import React from 'react';
 import "./UserPaymentRequestUnikDataAll.css"
 import { useLoaderData } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import logo from "../../../../../../assets/logo/logo.png"
+import logo from "../../../../../../assets/logo/LogoTwo.png"
 import moment from 'moment';
 import UserSeeAllPaymentRequestDelivaryData from '../UserSeeAllPaymentRequestDelivary/UserSeeAllPaymentRequestDelivaryData';
 
