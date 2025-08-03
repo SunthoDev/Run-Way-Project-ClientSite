@@ -207,7 +207,7 @@ const Dashboard = () => {
                                     <li className='Dashboard'> <NavLink to="/dashboard/RiderDashboard"><span><i className="fa fa-tachometer" aria-hidden="true"></i></span>Dashboard</NavLink></li>
                                     <li> <NavLink to="/dashboard/MyParcelRider"><span><i className="fa fa-tachometer" aria-hidden="true"></i></span>My Parcel</NavLink></li>
                                     <li> <NavLink to="/dashboard/ParcelInfoOfRider"><span><i className="fa fa-tachometer" aria-hidden="true"></i></span>Parcel Info</NavLink></li>
-
+                                    <li> <NavLink to="/dashboard/ParcelDeliveryHistory"><span><i className="fa fa-tachometer" aria-hidden="true"></i></span>Parcel History</NavLink></li>
 
 
                                 </div>

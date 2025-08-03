@@ -150,6 +150,7 @@ const RiderCODAmountRequest = () => {
                                                     <th className="px-6 py-3 text-left font-semibold text-gray-700">Address</th>
                                                     <th className="px-6 py-3 text-left font-semibold text-gray-700">Amount</th>
                                                     <th className="px-6 py-3 text-left font-semibold text-gray-700">Status</th>
+                                                    <th className="px-6 py-3 text-left font-semibold text-gray-700">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody className="bg-white divide-y divide-gray-100">
@@ -161,6 +162,43 @@ const RiderCODAmountRequest = () => {
                                                             <td className="px-6 py-4 text-gray-800 font-medium">{ParcelRequestCOD?.CODReqAddress}</td>
                                                             <td className="px-6 py-4 text-gray-800 font-medium">{ParcelRequestCOD?.ParcelTotalCODAmountOfRider}</td>
                                                             <td className="px-6 py-4 text-gray-800 font-medium">{ParcelRequestCOD?.status}</td>
+                                                            <td className="px-6 py-4 text-gray-800 font-medium">
+                                                                <button
+                                                                    onClick={async () => {
+                                                                        const result = await Swal.fire({
+                                                                            title: "Are you sure?",
+                                                                            text: "You won't be able to revert this!",
+                                                                            icon: "warning",
+                                                                            showCancelButton: true,
+                                                                            confirmButtonColor: "#3085d6",
+                                                                            cancelButtonColor: "#d33",
+                                                                            confirmButtonText: "Yes, delete it!"
+                                                                        });
+
+                                                                        if (result.isConfirmed) {
+                                                                            const res = await fetch(`http://localhost:5000/AdminAllAssignParcelHere/AdminRiderParcelCodeReqAmountDelete/${ParcelRequestCOD?._id}`, {
+                                                                                method: "DELETE",
+                                                                            });
+                                                                            const data = await res.json();
+
+                                                                            if (data.deletedCount > 0) {
+                                                                                await Swal.fire({
+                                                                                    position: "top-end",
+                                                                                    icon: "success",
+                                                                                    title: "Parcel COD request has been deleted successfully",
+                                                                                    showConfirmButton: false,
+                                                                                    timer: 1500
+                                                                                });
+
+                                                                                refetch(); // Make sure `refetch` is a valid function in your component
+                                                                            }
+                                                                        }
+                                                                    }}
+                                                                    className="btn btn-sm btn-outline btn-primary"
+                                                                >
+                                                                    Delete
+                                                                </button>
+                                                            </td>
                                                         </tr>
                                                     ))
                                                 }

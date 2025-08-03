@@ -12,17 +12,15 @@ import { useReactToPrint } from "react-to-print";
 import QRCodeStyling from "qr-code-styling";
 import Barcode from 'react-barcode';
 import useScanDetection from 'use-scan-detection';
-
+import { h2 } from 'framer-motion/client';
 
 
 const UserTemporeryInvoiceAllStandardData = () => {
 
     let InVoiceData = useLoaderData()
-
     // console.log(InVoiceData)
 
     let { AlternativePhone, CodAmount, DeliveryCharge, District, Invoice, ItemDescription, ParcelCategory, Payment, RecipientEmail, StandardEmailUser, StandardParcelId, address, date, deliveryType, name, note, number, policeStation, status, weight, _id } = InVoiceData
-
 
 
     // =============================================
@@ -41,7 +39,8 @@ const UserTemporeryInvoiceAllStandardData = () => {
 
     // ==========================================================
 
-    // ==========================================================
+
+    // =========================================================================================================
     // Print (Invoice) Options Start
     // ==========================================================
     const InvoiceRef = useRef();
@@ -50,7 +49,7 @@ const UserTemporeryInvoiceAllStandardData = () => {
         content: () => InvoiceRef.current,
     });
 
-    // ==========================================================
+    // =========================================================================================================
     // Print (Label) Options Start
     // ==========================================================
     const LabelRef = useRef();
@@ -59,7 +58,7 @@ const UserTemporeryInvoiceAllStandardData = () => {
         content: () => LabelRef.current,
     });
 
-    // ==========================================================
+    // =========================================================================================================
     // Making Qe code Here
     // ==========================================================
     const qrCode = new QRCodeStyling({
@@ -101,7 +100,7 @@ const UserTemporeryInvoiceAllStandardData = () => {
         }
     }, []);
 
-    // ==========================================================
+    // =========================================================================================================
     // Detected bar code scan data
     // ==========================================================
     const [value, setValue] = useState("no scane your bar code");
@@ -109,6 +108,34 @@ const UserTemporeryInvoiceAllStandardData = () => {
         onComplete: setValue,
         minLength: 13 // EAN13
     });
+
+
+
+
+    // =========================================================================================================
+    // Parcel Assign Rider Information
+    // =======================================================================
+    // Assign Parcel All Data Find Here !!  (PARCEL) (PICKUP) (RETURN)
+    // =======================================================================
+    let { data: RiderAssignDataAll = [] } = useQuery(["AdminAllAssignParcelHere_AllAssignParcelFindToHere"], async () => {
+        let res = await fetch(`http://localhost:5000/AdminAllAssignParcelHere/AllAssignParcelFindToHere`)
+        return res.json()
+
+    })
+    // console.log(RiderAssignDataAll)
+
+    // ===============================================================
+    // This Parcel Rider Find
+    // ===============================================================
+    let ParcelRiderFind = RiderAssignDataAll?.find(parcel => parcel?.CategoryAssign === "Parcel" && parcel?.ParcelIdForRider === StandardParcelId)
+    console.log(ParcelRiderFind)
+
+
+
+
+
+
+
 
 
 
@@ -270,8 +297,8 @@ const UserTemporeryInvoiceAllStandardData = () => {
                             <p><strong>Created at:</strong> {date}</p>
                             <p><strong>Id:</strong> {StandardParcelId}</p>
                             <p><strong>Invoice:</strong> {Invoice === "" ? "N/A" : Invoice}</p>
-                            <p><strong>Tracking Code:</strong> 3C7ADD84D</p>
-                            <p><strong>Tracking Link:</strong> <a href="https://trustereo-courire.com.bd/t/3C7ADD84D" className="text-blue-600 underline">https://trustereo-courire.bd/t/3C7ADD84D</a></p>
+                            {/* <p><strong>Tracking Code:</strong> 3C7ADD84D</p> */}
+                            {/* <p><strong>Tracking Link:</strong> <a href="https://trustereo-courire.com.bd/t/3C7ADD84D" className="text-blue-600 underline">https://trustereo-courire.bd/t/3C7ADD84D</a></p> */}
                         </div>
 
                         {/* Right Side Info */}
@@ -298,23 +325,40 @@ const UserTemporeryInvoiceAllStandardData = () => {
                     </div>
 
                     {/* Item & Note */}
-                    <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-700 bg-gray-100 rounded-lg overflow-hidden shadow-md">
+                    <div className="mt-6 grid grid-cols-1 md:grid-cols-2 items-center gap-4 text-sm text-gray-700 bg-gray-100 rounded-lg overflow-hidden shadow-md">
                         <div className="py-4 px-4 text-center">
                             <h4 className="font-semibold text-gray-800 text-base mb-2">Note</h4>
-                            <p className="text-gray-700">RANGPUR OFFICE CC SHOURAV -</p>
+                            <p className="text-gray-700">{note}</p>
                         </div>
-                        <div className="py-4 px-4">
-                            <h4 className="font-semibold text-gray-800 text-base text-center md:text-left">Assigned to</h4>
-                            <div className="flex flex-col md:flex-row items-center gap-4 mt-3 md:justify-start justify-center">
-                                <img src="https://i.ibb.co/kX7XnCQ/avatar.png" alt="staff" className="w-12 h-12 rounded-full border border-gray-300 shadow-sm" />
-                                <div className="text-center md:text-left">
-                                    <p className="text-black font-semibold text-sm">Bagerhat Office ID</p>
-                                    <p className="text-gray-600 text-sm">📞 01321230753</p>
-                                    <p className="text-gray-600 text-sm">Hub: Bagerhat</p>
-                                    <p className="text-gray-600 text-sm">Hub Contact: 01321-230753</p>
-                                </div>
-                            </div>
-                        </div>
+
+                        {/* ========================================== */}
+                        {/* Assign Rider Information Show */}
+                        {/* ========================================== */}
+                        {
+                            InVoiceData?.status === "Pending" && InVoiceData?.AssignRider === "No" ?
+                                <h2 className="text-center text-base font-medium text-orange-500">
+                                    Your parcel is currently pending assignment to a rider. Please wait.
+                                </h2> :
+                                InVoiceData?.status === "Pending" && InVoiceData?.AssignRider === "Yes" ?
+
+                                    <div className="py-4 px-4">
+                                        <h4 className="font-semibold text-gray-800 text-base text-center md:text-left">Assigned to - {ParcelRiderFind?.RiderName}</h4>
+                                        <div className="flex flex-col md:flex-row items-center gap-4 mt-3 md:justify-start justify-center">
+                                            <img src="https://i.ibb.co/kX7XnCQ/avatar.png" alt="staff" className="w-12 h-12 rounded-full border border-gray-300 shadow-sm" />
+                                            <div className="text-center md:text-left">
+                                                <p className="text-black font-semibold text-sm">Rider Name: {ParcelRiderFind?.RiderName}</p>
+                                                <p className="text-gray-800 font-bold text-sm">📞 {ParcelRiderFind?.RiderPhone}</p>
+                                                {/* <p className="text-gray-600 text-sm">Hub: Bagerhat</p>
+                                    <p className="text-gray-600 text-sm">Hub Contact: 01321-230753</p> */}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    :
+                                    <h2 className="text-center text-lg font-semibold text-green-600">
+                                        Your parcel has already been delivered successfully!
+                                    </h2>
+                        }
+
                     </div>
                 </div>
 

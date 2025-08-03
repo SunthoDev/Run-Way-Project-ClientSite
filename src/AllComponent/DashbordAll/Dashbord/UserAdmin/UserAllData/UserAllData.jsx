@@ -91,6 +91,9 @@ const UserAllData = ({ allUser, HandleAdmin, handleUser, HandleRider, HandleSubA
                                 const New_Merchants_Access = formData.get("New_Merchants_Access");
                                 const User_Access = formData.get("User_Access");
                                 const CreateRider_Access = formData.get("CreateRider_Access");
+                                const Hub_Information_Access = formData.get("Hub_Information_Access");
+                                const Rider_CODAmount_Request_Access = formData.get("Rider_CODAmount_Request_Access");
+
                                 let allInfo = {
                                     Create_Hub_Access,
                                     My_Hub_Access,
@@ -107,6 +110,8 @@ const UserAllData = ({ allUser, HandleAdmin, handleUser, HandleRider, HandleSubA
                                     New_Merchants_Access,
                                     User_Access,
                                     CreateRider_Access,
+                                    Hub_Information_Access,
+                                    Rider_CODAmount_Request_Access,
                                 }
 
                                 fetch(`http://localhost:5000/AdminSentRoutAccessToSubAdmin/${activeUser?._id}`, {
@@ -135,6 +140,22 @@ const UserAllData = ({ allUser, HandleAdmin, handleUser, HandleRider, HandleSubA
                             }}
                         >
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label className="block font-semibold mb-1">Hub Information Access- ({activeUser?.Hub_Information_Access})</label>
+                                    <select name="Hub_Information_Access" defaultValue="No" className="w-full border border-gray-300 rounded px-3 py-2 bg-gray-700 text-white">
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label className="block font-semibold mb-1">Rider CODAmount Request Access- ({activeUser?.Rider_CODAmount_Request_Access})</label>
+                                    <select name="Rider_CODAmount_Request_Access" defaultValue="No" className="w-full border border-gray-300 rounded px-3 py-2 bg-gray-700 text-white">
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+
                                 <div>
                                     <label className="block font-semibold mb-1">Create Hub Access- ({activeUser?.Create_Hub_Access})</label>
                                     <select name="Create_Hub_Access" defaultValue="No" className="w-full border border-gray-300 rounded px-3 py-2 bg-gray-700 text-white">

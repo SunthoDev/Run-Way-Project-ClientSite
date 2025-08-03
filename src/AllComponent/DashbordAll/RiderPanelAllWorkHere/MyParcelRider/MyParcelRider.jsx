@@ -283,7 +283,7 @@ const MyParcelRider = () => {
                                 // ======================================
                                 let ParcelStatusUpToRider = { parcelStatus }
 
-                                // Rider Delivery History Data
+                                // Rider Parcel Delivery History Data
                                 // ======================================
                                 let RiderDeliveryHistoryDate = {
                                     RiderEmail: roles?.roles,

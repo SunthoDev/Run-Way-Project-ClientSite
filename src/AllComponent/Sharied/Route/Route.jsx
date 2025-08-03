@@ -58,6 +58,7 @@ import MyParcelRider from "../../DashbordAll/RiderPanelAllWorkHere/MyParcelRider
 import HubInformation from "../../DashbordAll/AdminePanel/HubInformation/HubInformation";
 import ParcelInfoOfRider from "../../DashbordAll/RiderPanelAllWorkHere/ParcelInfoOfRider/ParcelInfoOfRider";
 import RiderCODAmountRequest from "../../DashbordAll/AdminePanel/RiderCODAmountRequest/RiderCODAmountRequest";
+import ParcelDeliveryHistory from "../../DashbordAll/RiderPanelAllWorkHere/ParcelDeliveryHistory/ParcelDeliveryHistory";
 
 
 let route = createBrowserRouter([
@@ -358,6 +359,10 @@ let route = createBrowserRouter([
          {
             path: "ParcelInfoOfRider",
             element: <PrivateRoute> <ParcelInfoOfRider></ParcelInfoOfRider> </PrivateRoute>
+         },
+         {
+            path: "ParcelDeliveryHistory",
+            element: <PrivateRoute> <ParcelDeliveryHistory></ParcelDeliveryHistory> </PrivateRoute>
          },
 
       ]
