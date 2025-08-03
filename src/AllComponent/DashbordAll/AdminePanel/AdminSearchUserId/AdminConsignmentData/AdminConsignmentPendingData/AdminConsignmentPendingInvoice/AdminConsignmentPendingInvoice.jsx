@@ -4,7 +4,7 @@ import { useLoaderData } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import ReactToPrint from 'react-to-print';
 import moment from 'moment';
-import logo from "../../../../../../../assets/logo/logo.png"
+import logo from "../../../../../../../assets/logo/LogoTwo.png"
 
 // import ReactDOM from "react-dom";
 import QRCode from "react-qr-code";
