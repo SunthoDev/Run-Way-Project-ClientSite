@@ -15,7 +15,7 @@ import Licensed from '../HomeAllSection/Licensed/Licensed';
 const Home = () => {
     return (
         <div>
-            <VideoSlider />
+            {/* <VideoSlider /> */}
             {/* <Banner />  Test Component */}
 
             {/* <Hero />   */} {/*Test Component*/}
