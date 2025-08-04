@@ -28,23 +28,23 @@ const Header = () => {
     const navlinks = [
         {
             path: "/",
-            label: "Home"
+            label: "Homexx"
         },
         {
             path: "/services",
-            label: "Services"
+            label: "Servicesxx"
         },
         {
             path: "/tracking",
-            label: "Track Package"
+            label: "Track Packagexx"
         },
         {
             path: "/about",
-            label: "About Us"
+            label: "About Usxx"
         },
         {
             path: "/contact",
-            label: "Contact"
+            label: "Contactxx"
         }
     ];
 
