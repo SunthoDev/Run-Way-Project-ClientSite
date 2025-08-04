@@ -17,7 +17,7 @@ const MyParcelRider = () => {
     // Assign Parcel All Data Find Here !!  (PARCEL) (PICKUP) (RETURN)
     // =======================================================================
     let { refetch, data: RiderAssignDataAll = [] } = useQuery(["AdminAllAssignParcelHere_AllAssignParcelFindToHere"], async () => {
-        let res = await fetch(`http://localhost:5000/AdminAllAssignParcelHere/AllAssignParcelFindToHere`)
+        let res = await fetch(`https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/AllAssignParcelFindToHere`)
         return res.json()
 
     })
@@ -34,7 +34,7 @@ const MyParcelRider = () => {
     // User All Category Parcel Data Find Here !! (PARCEL)
     // =======================================================================
     let { data: UserAllParcelDataFind = [] } = useQuery(["AdminAllStandardDeliveryDataFindAmountChange"], async () => {
-        let res = await fetch(`http://localhost:5000/AdminAllStandardDeliveryDataFindAmountChange`)
+        let res = await fetch(`https://server.trustereocourier.com.bd/AdminAllStandardDeliveryDataFindAmountChange`)
         return res.json()
 
     })
@@ -310,7 +310,7 @@ const MyParcelRider = () => {
                                 // ===================================================
                                 // Parcel Status Update, When rider approved parcel
                                 // ===================================================
-                                fetch(`http://localhost:5000/AdminAllAssignParcelHere/RiderParcelDeliveryStatusUpdate/${AssignParcelDetails?._id}`, {
+                                fetch(`https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/RiderParcelDeliveryStatusUpdate/${AssignParcelDetails?._id}`, {
                                     method: "PATCH",
                                     headers: {
                                         "content-type": "application/json"
@@ -323,7 +323,7 @@ const MyParcelRider = () => {
                                             // ===============================================
                                             // Rider after Delivery Tracking Message Send 
                                             // ===============================================
-                                            fetch("http://localhost:5000/AdminAllAssignParcelHere/AdminTrackingRequestSentOfAssignRider", {
+                                            fetch("https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/AdminTrackingRequestSentOfAssignRider", {
                                                 method: "POST",
                                                 headers: {
                                                     "Content-Type": "application/json"
@@ -337,7 +337,7 @@ const MyParcelRider = () => {
                                                         // ===========================================
                                                         // Rider Delivery parcel (History) post
                                                         // ===========================================
-                                                        fetch("http://localhost:5000/AdminAllAssignParcelHere/ParcelDeliveryHistoryOfRider", {
+                                                        fetch("https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/ParcelDeliveryHistoryOfRider", {
                                                             method: "POST",
                                                             headers: {
                                                                 "Content-Type": "application/json"
@@ -352,7 +352,7 @@ const MyParcelRider = () => {
                                                                     // =============================================
                                                                     // Parcel (COD) Amount Will Be Pluse Rider Balance..
                                                                     // =============================================
-                                                                    fetch(`http://localhost:5000/AdminAllAssignParcelHere/ParcelCODAmountIncreaseRiderBalance/${roles?.email}`, {
+                                                                    fetch(`https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/ParcelCODAmountIncreaseRiderBalance/${roles?.email}`, {
                                                                         method: "PUT",
                                                                         headers: {
                                                                             "content-type": "application/json"
@@ -364,7 +364,7 @@ const MyParcelRider = () => {
                                                                             if (data.modifiedCount > 0) {
                                                                                 // Assign Parcel Request Delete After, change parcel status and others to rider..
                                                                                 // ===============================
-                                                                                fetch(`http://localhost:5000/AdminAllAssignParcelHere/DeleteAssignParcel/${AssignRequestIdFoDeleteRequest}`, {
+                                                                                fetch(`https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/DeleteAssignParcel/${AssignRequestIdFoDeleteRequest}`, {
                                                                                     method: "DELETE",
                                                                                 })
                                                                                     .then(res => res.json())

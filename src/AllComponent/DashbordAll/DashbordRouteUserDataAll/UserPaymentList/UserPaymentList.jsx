@@ -29,7 +29,7 @@ const UserPaymentList = () => {
 
     // TODO: Data lode problems late 
     let { refetch, data: UserPaymentRequestDataAll = [] } = useQuery(["UseAllPaymentRequestDataGetAll"], async () => {
-        let res = await fetch(`http://localhost:5000/UseAllPaymentRequestDataGetAll?email=${user?.email}`)
+        let res = await fetch(`https://server.trustereocourier.com.bd/UseAllPaymentRequestDataGetAll?email=${user?.email}`)
         return res.json()
     })
     // console.log(UserPaymentRequestDataAll)

@@ -15,7 +15,7 @@ const UserPaymentRequestUnikDataAll = () => {
 
     // find request user paid Delivery data all
     let { data: userALlPaidDeliveryDataFind = [] } = useQuery(["AdminPaymentRequestSendUserEmailFindAllDeliveryData"], async () => {
-        let res = await fetch(`http://localhost:5000/AdminPaymentRequestSendUserEmailFindAllDeliveryData?email=${ReqUserEmail}`)
+        let res = await fetch(`https://server.trustereocourier.com.bd/AdminPaymentRequestSendUserEmailFindAllDeliveryData?email=${ReqUserEmail}`)
         return res.json()
 
     })

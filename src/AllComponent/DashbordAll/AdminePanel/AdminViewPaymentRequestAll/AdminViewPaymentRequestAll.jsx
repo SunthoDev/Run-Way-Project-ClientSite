@@ -9,7 +9,7 @@ const AdminViewPaymentRequestAll = () => {
 
     // user data all find use tenStack query 
     let { refetch, data: PaymentRequestDataAll = [] } = useQuery(["AdminAllPaymentRequestData"], async () => {
-        let res = await fetch("http://localhost:5000/AdminAllPaymentRequestData")
+        let res = await fetch("https://server.trustereocourier.com.bd/AdminAllPaymentRequestData")
         return res.json()
 
     })
@@ -124,7 +124,7 @@ const AdminViewPaymentRequestAll = () => {
                                                             <td className="px-6 py-4">
                                                                 <button
                                                                     onClick={() => {
-                                                                        fetch(`http://localhost:5000/AdminPaidUserPaymentRequestData/${Payment?._id}`, {
+                                                                        fetch(`https://server.trustereocourier.com.bd/AdminPaidUserPaymentRequestData/${Payment?._id}`, {
                                                                             method: "PATCH",
                                                                         })
                                                                             .then(res => res.json())

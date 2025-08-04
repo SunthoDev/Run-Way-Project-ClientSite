@@ -15,7 +15,7 @@ const ParcelDeliveryHistory = () => {
     // Rider Parcel Delivery History !!
     // =======================================================================
     let { refetch, data: RiderParcelDeliveryHistoryAll = [] } = useQuery(["AdminAllAssignParcelHere_ParcelDeliveryHistoryAllDataFind"], async () => {
-        let res = await fetch(`http://localhost:5000/AdminAllAssignParcelHere/ParcelDeliveryHistoryAllDataFind`)
+        let res = await fetch(`https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/ParcelDeliveryHistoryAllDataFind`)
         return res.json()
 
     })

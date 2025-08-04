@@ -17,7 +17,7 @@ let useRole = () => {
         enabled: !loading && !!user?.email,
 
         queryFn: async () => {
-            const response = await fetch(`http://localhost:5000/userRoleCheck/${user?.email}`);
+            const response = await fetch(`https://server.trustereocourier.com.bd/userRoleCheck/${user?.email}`);
             // console.log(response)
             let data = await response.json();
             return data

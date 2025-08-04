@@ -11,7 +11,7 @@ const UserApprovedPickupRequest = ({ ApprovedData }) => {
     // ================================================
     // user data all find use tenStack query 
     let { refetch, data: AllCoveragesPoliceStation = [] } = useQuery(["CoveragesPoliceStationAll"], async () => {
-        let res = await fetch("http://localhost:5000/CoveragesPoliceStationAll")
+        let res = await fetch("https://server.trustereocourier.com.bd/CoveragesPoliceStationAll")
         return res.json()
 
     })

@@ -11,7 +11,7 @@ const AdminAmountUpdateParcelUnverifiedData = ({AmountUnverifiedData,refetch}) =
     let handleAmountUpdateVerified = (id) => {
         // console.log(id)
 
-        fetch(`http://localhost:5000/AdminAmountChangeDataVerified/${_id}`, {
+        fetch(`https://server.trustereocourier.com.bd/AdminAmountChangeDataVerified/${_id}`, {
             method: "PATCH",
         })
             .then(res => res.json())

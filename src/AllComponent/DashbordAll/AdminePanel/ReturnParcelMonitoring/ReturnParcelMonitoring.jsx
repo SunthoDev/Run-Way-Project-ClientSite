@@ -15,7 +15,7 @@ const ReturnParcelMonitoring = () => {
     // User All Category Parcel Data Find
     // =======================================================================
     let { refetch, data: ReturnAllParcelRequestData = [] } = useQuery(["ReturnParcelRequestWithTrackingMessage_AllReturnParcelRequestData"], async () => {
-        let res = await fetch(`http://localhost:5000/ReturnParcelRequestWithTrackingMessage/AllReturnParcelRequestData`)
+        let res = await fetch(`https://server.trustereocourier.com.bd/ReturnParcelRequestWithTrackingMessage/AllReturnParcelRequestData`)
         return res.json()
 
     })
@@ -115,7 +115,7 @@ const ReturnParcelMonitoring = () => {
 
                                     // Return Parcel Data Post
                                     // ===========================================
-                                    fetch("http://localhost:5000/ReturnParcelRequestWithTrackingMessage/UserReturnRequestSend", {
+                                    fetch("https://server.trustereocourier.com.bd/ReturnParcelRequestWithTrackingMessage/UserReturnRequestSend", {
                                         method: "POST",
                                         headers: {
                                             "Content-Type": "application/json"
@@ -127,7 +127,7 @@ const ReturnParcelMonitoring = () => {
                                             if (data.insertedId) {
                                                 // Return Tracking Data Post 
                                                 // ===========================================
-                                                fetch("http://localhost:5000/ReturnParcelRequestWithTrackingMessage/AdminTrackingRequestSentOfReturnParcel", {
+                                                fetch("https://server.trustereocourier.com.bd/ReturnParcelRequestWithTrackingMessage/AdminTrackingRequestSentOfReturnParcel", {
                                                     method: "POST",
                                                     headers: {
                                                         "Content-Type": "application/json"
@@ -349,7 +349,7 @@ const ReturnParcelMonitoring = () => {
                                                                                     if (result.isConfirmed) {
                                                                                         try {
                                                                                             const res = await fetch(
-                                                                                                `http://localhost:5000/ReturnParcelRequestWithTrackingMessage/AdminDeleteReqOfReturnParcel/${ParcelAll?._id}`,
+                                                                                                `https://server.trustereocourier.com.bd/ReturnParcelRequestWithTrackingMessage/AdminDeleteReqOfReturnParcel/${ParcelAll?._id}`,
                                                                                                 {
                                                                                                     method: "DELETE",
                                                                                                 }
@@ -501,7 +501,7 @@ const ReturnParcelMonitoring = () => {
                                                                                     if (result.isConfirmed) {
                                                                                         try {
                                                                                             const res = await fetch(
-                                                                                                `http://localhost:5000/ReturnParcelRequestWithTrackingMessage/AdminDeleteReqOfReturnParcel/${ParcelAll?._id}`,
+                                                                                                `https://server.trustereocourier.com.bd/ReturnParcelRequestWithTrackingMessage/AdminDeleteReqOfReturnParcel/${ParcelAll?._id}`,
                                                                                                 {
                                                                                                     method: "DELETE",
                                                                                                 }

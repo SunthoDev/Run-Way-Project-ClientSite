@@ -10,7 +10,7 @@ const HubInformation = () => {
     // All Hub Information Data !!
     // =====================================================
     let { refetch, data: AllHubInformationData = [] } = useQuery(["HubInformationAll_AllHubInformationData"], async () => {
-        let res = await fetch("http://localhost:5000/HubInformationAll/AllHubInformationData")
+        let res = await fetch("https://server.trustereocourier.com.bd/HubInformationAll/AllHubInformationData")
         return res.json()
     })
 
@@ -38,7 +38,7 @@ const HubInformation = () => {
                     // Hub information request data insert 
                     // =================================
                     try {
-                        let res = await fetch("http://localhost:5000/HubInformationAll/PostHubInformation", {
+                        let res = await fetch("https://server.trustereocourier.com.bd/HubInformationAll/PostHubInformation", {
                             method: "POST",
                             headers: {
                                 "Content-Type": "application/json"
@@ -171,7 +171,7 @@ const HubInformation = () => {
                                                     }).then((result) => {
                                                         if (result.isConfirmed) {
 
-                                                            fetch(`http://localhost:5000/HubInformationAll/DeleteHubInformation/${HubInformation?._id}`, {
+                                                            fetch(`https://server.trustereocourier.com.bd/HubInformationAll/DeleteHubInformation/${HubInformation?._id}`, {
                                                                 method: "DELETE",
                                                             })
                                                                 .then(res => res.json())

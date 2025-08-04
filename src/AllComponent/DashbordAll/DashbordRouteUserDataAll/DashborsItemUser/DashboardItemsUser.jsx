@@ -26,7 +26,7 @@ const DashboardItemsUser = () => {
     let { Address, BusinessName, LastName, Phone, email, name, photo, status, userId, PoliceStations, Districts } = roles
 
     let { refetch, data: AllDeliveryDataUserBalance = [] } = useQuery(["UserTotalBalanceFindDeliveryAllData"], async () => {
-        let res = await fetch(`http://localhost:5000/UserTotalBalanceFindDeliveryAllData?email=${roles.email}`)
+        let res = await fetch(`https://server.trustereocourier.com.bd/UserTotalBalanceFindDeliveryAllData?email=${roles.email}`)
         return res.json()
     })
 
@@ -61,7 +61,7 @@ const DashboardItemsUser = () => {
     // All Police Station data. which is add Hub
     // =====================================================
     let { data: AllStationOfHub = [] } = useQuery(["HubManageAdminCreateOrUpdatePs_PoliceStationWithOfHub"], async () => {
-        let res = await fetch("http://localhost:5000/HubManageAdminCreateOrUpdatePs/PoliceStationWithOfHub")
+        let res = await fetch("https://server.trustereocourier.com.bd/HubManageAdminCreateOrUpdatePs/PoliceStationWithOfHub")
         return res.json()
     })
     // console.log(AllStationOfHub)
@@ -87,7 +87,7 @@ const DashboardItemsUser = () => {
         let paymentRequestAllDataPost = { ReqPaymentID: PaymentIdUser, ReqPay: pay, TotalCodAmount: CodAmountResult, TotalDeliveryCharge: DeliveryChargeResult, subTotal, subTotalOnePercentCharge, totalBalanceUser, name, LastName, photo, userId, Address, BusinessName, PoliceStations, Phone, ReqUserEmail: email, userStatus: status, date, time, Payment: "UnPaid", MyHub:MyHub?.HubName }
 
 
-        fetch(`http://localhost:5000/UserPaymentRequestUpdateAllData/${roles.email}`, {
+        fetch(`https://server.trustereocourier.com.bd/UserPaymentRequestUpdateAllData/${roles.email}`, {
             method: "PUT",
             headers: {
                 "content-type": "application/json"
@@ -99,7 +99,7 @@ const DashboardItemsUser = () => {
                 if (data.modifiedCount > 0) {
 
                     // Post Data  Start
-                    fetch("http://localhost:5000/UserPaymentRequest", {
+                    fetch("https://server.trustereocourier.com.bd/UserPaymentRequest", {
                         method: "POST",
                         headers: {
                             "content-type": "application/json"
@@ -590,7 +590,7 @@ const DashboardItemsUser = () => {
                                 let AllInfo = { PickupRequestType: PickupRequest, PickupIdUser, date, time, Address, BusinessName, LastName, Phone, PickReqUserEmail: email, name, photo, userId, status: "Pending", PoliceStations, Districts, MyHub:MyHub?.HubName }
 
                                 try {
-                                    const response = await fetch("http://localhost:5000/PickupRequestWithManegeAdminUsers/UserPickupRequestSend", {
+                                    const response = await fetch("https://server.trustereocourier.com.bd/PickupRequestWithManegeAdminUsers/UserPickupRequestSend", {
                                         method: "POST",
                                         headers: {
                                             "Content-Type": "application/json",

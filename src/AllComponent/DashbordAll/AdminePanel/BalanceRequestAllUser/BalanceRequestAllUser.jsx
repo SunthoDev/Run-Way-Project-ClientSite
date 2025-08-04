@@ -15,7 +15,7 @@ const BalanceRequestAllUser = () => {
     // All Add Balanced Request Data Find
     // =================================================
     let { refetch, data: BalanceReqAllData = [] } = useQuery(["BalanceReqUserProcessAdmin_AllAddBalanceRequestDataGet"], async () => {
-        let res = await fetch(`http://localhost:5000/BalanceReqUserProcessAdmin/AllAddBalanceRequestDataGet`)
+        let res = await fetch(`https://server.trustereocourier.com.bd/BalanceReqUserProcessAdmin/AllAddBalanceRequestDataGet`)
         return res.json()
     })
     // console.log(BalanceReqAllData)
@@ -110,7 +110,7 @@ const BalanceRequestAllUser = () => {
                                                                     }).then(async (result) => {
                                                                         if (result.isConfirmed) {
                                                                             try {
-                                                                                let res = await fetch(`http://localhost:5000/BalanceReqUserProcessAdmin/AdminDeleteUserAddBalanceReqData/${item?._id}`, {
+                                                                                let res = await fetch(`https://server.trustereocourier.com.bd/BalanceReqUserProcessAdmin/AdminDeleteUserAddBalanceReqData/${item?._id}`, {
                                                                                     method: "DELETE",
                                                                                 })
                                                                                 let result = await res.json()
@@ -146,7 +146,7 @@ const BalanceRequestAllUser = () => {
                                                             <br />
                                                             <button onClick={async () => {
                                                                 try {
-                                                                    let res = await fetch(`http://localhost:5000/BalanceReqUserProcessAdmin/AdminApprovedUserAddBalanceReqData/${item?._id}`, {
+                                                                    let res = await fetch(`https://server.trustereocourier.com.bd/BalanceReqUserProcessAdmin/AdminApprovedUserAddBalanceReqData/${item?._id}`, {
                                                                         method: "PATCH",
                                                                     });
                                                                     let result = await res.json();
@@ -226,7 +226,7 @@ const BalanceRequestAllUser = () => {
                                                                     }).then(async (result) => {
                                                                         if (result.isConfirmed) {
                                                                             try {
-                                                                                let res = await fetch(`http://localhost:5000/BalanceReqUserProcessAdmin/AdminDeleteUserAddBalanceReqData/${item?._id}`, {
+                                                                                let res = await fetch(`https://server.trustereocourier.com.bd/BalanceReqUserProcessAdmin/AdminDeleteUserAddBalanceReqData/${item?._id}`, {
                                                                                     method: "DELETE",
                                                                                 })
                                                                                 let result = await res.json()
@@ -262,7 +262,7 @@ const BalanceRequestAllUser = () => {
                                                             <br />
                                                             <button onClick={async () => {
                                                                 try {
-                                                                    let res = await fetch(`http://localhost:5000/BalanceReqUserProcessAdmin/AdminPendingUserAddBalanceReqData/${item?._id}`, {
+                                                                    let res = await fetch(`https://server.trustereocourier.com.bd/BalanceReqUserProcessAdmin/AdminPendingUserAddBalanceReqData/${item?._id}`, {
                                                                         method: "PATCH",
                                                                     });
                                                                     let result = await res.json();

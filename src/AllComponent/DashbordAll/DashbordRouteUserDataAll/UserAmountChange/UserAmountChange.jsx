@@ -29,7 +29,7 @@ const UserAmountChange = () => {
 
     // TODO: Data lode problems late 
     let { refetch, data: UserAmountChange = [] } = useQuery(["UseAllAmountChangeDataGet"], async () => {
-        let res = await fetch(`http://localhost:5000/UseAllAmountChangeDataGet?email=${user?.email}`)
+        let res = await fetch(`https://server.trustereocourier.com.bd/UseAllAmountChangeDataGet?email=${user?.email}`)
         return res.json()
     })
 

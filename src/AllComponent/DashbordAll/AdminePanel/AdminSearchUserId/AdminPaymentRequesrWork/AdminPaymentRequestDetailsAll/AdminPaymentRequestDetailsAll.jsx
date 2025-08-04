@@ -16,7 +16,7 @@ const AdminPaymentRequestDetailsAll = () => {
 
     // find request user,, user Details Information User Collection
     let { refetch, data: requestUserUserInformationFind = [] } = useQuery(["AdminPaymentRequestSendUserInformationGet"], async () => {
-        let res = await fetch(`http://localhost:5000/AdminPaymentRequestSendUserInformationGet?email=${ReqUserEmail}`)
+        let res = await fetch(`https://server.trustereocourier.com.bd/AdminPaymentRequestSendUserInformationGet?email=${ReqUserEmail}`)
         return res.json()
 
     })
@@ -28,7 +28,7 @@ const AdminPaymentRequestDetailsAll = () => {
 
     // find request user paid Delivery data all
     let { data: userALlDeliveryDataFind = [] } = useQuery(["AdminPaymentRequestSendUserEmailFindAllDeliveryData"], async () => {
-        let res = await fetch(`http://localhost:5000/AdminPaymentRequestSendUserEmailFindAllDeliveryData?email=${ReqUserEmail}`)
+        let res = await fetch(`https://server.trustereocourier.com.bd/AdminPaymentRequestSendUserEmailFindAllDeliveryData?email=${ReqUserEmail}`)
         return res.json()
 
     })

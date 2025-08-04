@@ -27,7 +27,7 @@ const UserTemporeryInvoiceAllStandardData = () => {
     // =============================================
     // Admin is get all tracking data 
     let { refetch, data: AllTrackingData = [] } = useQuery(["AllTrackingData"], async () => {
-        let res = await fetch("http://localhost:5000/AllTrackingData")
+        let res = await fetch("https://server.trustereocourier.com.bd/AllTrackingData")
         return res.json()
 
     })
@@ -117,7 +117,7 @@ const UserTemporeryInvoiceAllStandardData = () => {
     // Assign Parcel All Data Find Here !!  (PARCEL) (PICKUP) (RETURN)
     // =======================================================================
     let { data: RiderAssignDataAll = [] } = useQuery(["AdminAllAssignParcelHere_AllAssignParcelFindToHere"], async () => {
-        let res = await fetch(`http://localhost:5000/AdminAllAssignParcelHere/AllAssignParcelFindToHere`)
+        let res = await fetch(`https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/AllAssignParcelFindToHere`)
         return res.json()
 
     })

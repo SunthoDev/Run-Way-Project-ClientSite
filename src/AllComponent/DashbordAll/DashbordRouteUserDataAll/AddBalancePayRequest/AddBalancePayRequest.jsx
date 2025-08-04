@@ -22,7 +22,7 @@ const AddBalancePayRequest = () => {
     // My All Add Balanced Request Data Find
     // =================================================
     let { refetch, data: BalanceReqAllData = [] } = useQuery(["BalanceReqUserProcessAdmin_UserAllAddBalanceReqData"], async () => {
-        let res = await fetch(`http://localhost:5000/BalanceReqUserProcessAdmin/UserAllAddBalanceReqData/${user?.email}`)
+        let res = await fetch(`https://server.trustereocourier.com.bd/BalanceReqUserProcessAdmin/UserAllAddBalanceReqData/${user?.email}`)
         return res.json()
     })
     // console.log(BalanceReqAllData)
@@ -68,7 +68,7 @@ const AddBalancePayRequest = () => {
                             // Payment request data insert 
                             // =================================
                             try {
-                                let res = await fetch("http://localhost:5000/BalanceReqUserProcessAdmin/userSendAddBalanceReq", {
+                                let res = await fetch("https://server.trustereocourier.com.bd/BalanceReqUserProcessAdmin/userSendAddBalanceReq", {
                                     method: "POST",
                                     headers: {
                                         "content-type": "application/json"
@@ -212,7 +212,7 @@ const AddBalancePayRequest = () => {
                                                                         }).then(async (result) => {
                                                                             if (result.isConfirmed) {
                                                                                 try {
-                                                                                    let res = await fetch(`http://localhost:5000/BalanceReqUserProcessAdmin/AdminDeleteUserAddBalanceReqData/${item?._id}`, {
+                                                                                    let res = await fetch(`https://server.trustereocourier.com.bd/BalanceReqUserProcessAdmin/AdminDeleteUserAddBalanceReqData/${item?._id}`, {
                                                                                         method: "DELETE",
                                                                                     })
                                                                                     let result = await res.json()

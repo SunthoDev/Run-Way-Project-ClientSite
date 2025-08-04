@@ -8,7 +8,7 @@ const AdminNewMerchants = () => {
     const [tabState, setTabState] = useState(1);
 
     let { refetch, data: users = [] } = useQuery(["users"], async () => {
-        let res = await fetch("http://localhost:5000/users")
+        let res = await fetch("https://server.trustereocourier.com.bd/users")
         return res.json()
 
     })
@@ -131,7 +131,7 @@ const AdminNewMerchants = () => {
                                                             <td className="px-6 py-4">
                                                                 <button
                                                                     onClick={() => {
-                                                                        fetch(`http://localhost:5000/AdminApprovedNewUser/${User?._id}`, {
+                                                                        fetch(`https://server.trustereocourier.com.bd/AdminApprovedNewUser/${User?._id}`, {
                                                                             method: "PATCH",
                                                                         })
                                                                             .then(res => res.json())

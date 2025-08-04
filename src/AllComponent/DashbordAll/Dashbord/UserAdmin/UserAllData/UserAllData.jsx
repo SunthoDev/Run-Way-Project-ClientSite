@@ -114,7 +114,7 @@ const UserAllData = ({ allUser, HandleAdmin, handleUser, HandleRider, HandleSubA
                                     Rider_CODAmount_Request_Access,
                                 }
 
-                                fetch(`http://localhost:5000/AdminSentRoutAccessToSubAdmin/${activeUser?._id}`, {
+                                fetch(`https://server.trustereocourier.com.bd/AdminSentRoutAccessToSubAdmin/${activeUser?._id}`, {
                                     method: "PATCH",
                                     headers: {
                                         "content-type": "application/json"

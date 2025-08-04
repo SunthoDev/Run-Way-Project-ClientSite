@@ -16,7 +16,7 @@ const AdminCoveragesDistricts = () => {
 
     // user data all find use tenStack query 
     let { refetch, data: AllCoveragesDistricts = [] } = useQuery(["CoveragesDistrictsAll"], async () => {
-        let res = await fetch("http://localhost:5000/CoveragesDistrictsAll")
+        let res = await fetch("https://server.trustereocourier.com.bd/CoveragesDistrictsAll")
         return res.json()
 
     })
@@ -30,7 +30,7 @@ const AdminCoveragesDistricts = () => {
         let Data={AddDistrict,AddPoliceStation}
         // console.log(Data)
 
-        fetch("http://localhost:5000/AdminAddPoliceStationCoverage",{
+        fetch("https://server.trustereocourier.com.bd/AdminAddPoliceStationCoverage",{
             method: "POST",
             headers: {
                 "content-type": "application/json"

@@ -11,7 +11,7 @@ const StandardSucessInvoice = () => {
 
 
     let { refetch, data: InVoiceData = [] } = useQuery(["StandardDeliveryData"], async () => {
-        let res = await fetch(`http://localhost:5000/StandardDeliveryData?StandardParcelId=${StandardId}`)
+        let res = await fetch(`https://server.trustereocourier.com.bd/StandardDeliveryData?StandardParcelId=${StandardId}`)
         return res.json()
 
     })

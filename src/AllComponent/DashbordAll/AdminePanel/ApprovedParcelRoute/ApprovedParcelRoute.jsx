@@ -10,7 +10,7 @@ const ApprovedParcelRoute = () => {
     // Admin all standard delivery data find 
     // ===========================================================
     let { refetch, data: AllParcelData = [] } = useQuery(["AdminAllStandardDeliveryDataFind"], async () => {
-        let res = await fetch("http://localhost:5000/AdminAllStandardDeliveryDataFind")
+        let res = await fetch("https://server.trustereocourier.com.bd/AdminAllStandardDeliveryDataFind")
         return res.json()
 
     })
@@ -25,7 +25,7 @@ const ApprovedParcelRoute = () => {
     // Created All Hub Find
     // =====================================================
     let { data: AllHubFind = [] } = useQuery(["HubManageAdminCreateOrUpdatePs_CreatedHubFind"], async () => {
-        let res = await fetch("http://localhost:5000/HubManageAdminCreateOrUpdatePs/CreatedHubFind")
+        let res = await fetch("https://server.trustereocourier.com.bd/HubManageAdminCreateOrUpdatePs/CreatedHubFind")
         return res.json()
     })
     // console.log(AllHubFind)
@@ -137,7 +137,7 @@ const ApprovedParcelRoute = () => {
                                                         </Link>
                                                         <br />
                                                         <button onClick={() => {
-                                                            fetch(`http://localhost:5000/AdminApprovedParcelStandardDataYesPayment/${ParcelAll?._id}`, {
+                                                            fetch(`https://server.trustereocourier.com.bd/AdminApprovedParcelStandardDataYesPayment/${ParcelAll?._id}`, {
                                                                 method: "PATCH",
                                                             })
                                                                 .then(res => res.json())

@@ -10,7 +10,7 @@ const AdminMyHub = () => {
     // PickUp Request All Data Find
     // ============================================
     let { refetch, data: HubRequestDataAll = [] } = useQuery(["PickupRequestWithManegeAdminUsers_AllPickupRequestData"], async () => {
-        let res = await fetch("http://localhost:5000/PickupRequestWithManegeAdminUsers/AllPickupRequestData")
+        let res = await fetch("https://server.trustereocourier.com.bd/PickupRequestWithManegeAdminUsers/AllPickupRequestData")
         return res.json()
     })
     // console.log(HubRequestDataAll)
@@ -86,7 +86,7 @@ const AdminMyHub = () => {
     // Created All Police Station find of Hub
     // =====================================================
     let { data: AllStationOfHub = [] } = useQuery(["HubManageAdminCreateOrUpdatePs_PoliceStationWithOfHub"], async () => {
-        let res = await fetch("http://localhost:5000/HubManageAdminCreateOrUpdatePs/PoliceStationWithOfHub")
+        let res = await fetch("https://server.trustereocourier.com.bd/HubManageAdminCreateOrUpdatePs/PoliceStationWithOfHub")
         return res.json()
     })
     // console.log(AllStationOfHub)
@@ -95,7 +95,7 @@ const AdminMyHub = () => {
     // Created All Hub Find
     // =====================================================
     let { data: AllHubFind = [] } = useQuery(["HubManageAdminCreateOrUpdatePs_CreatedHubFind"], async () => {
-        let res = await fetch("http://localhost:5000/HubManageAdminCreateOrUpdatePs/CreatedHubFind")
+        let res = await fetch("https://server.trustereocourier.com.bd/HubManageAdminCreateOrUpdatePs/CreatedHubFind")
         return res.json()
     })
     // console.log(AllHubFind)
@@ -209,7 +209,7 @@ const AdminMyHub = () => {
                                                                         let HubData = { parcelNum: parcelNumbers }
                                                                         // console.log(HubData)
 
-                                                                        fetch(`http://localhost:5000/PickupRequestWithManegeAdminUsers/AdminApprovedUserPickupRequestData/${item?._id}`, {
+                                                                        fetch(`https://server.trustereocourier.com.bd/PickupRequestWithManegeAdminUsers/AdminApprovedUserPickupRequestData/${item?._id}`, {
                                                                             method: "PUT",
                                                                             headers: {
                                                                                 "content-type": "application/json"
@@ -275,7 +275,7 @@ const AdminMyHub = () => {
                                                                                 // Hub request data insert 
                                                                                 // =================================
                                                                                 try {
-                                                                                    let res = await fetch(`http://localhost:5000/PickupRequestWithManegeAdminUsers/AdminDeletePickupRequestData/${item?._id}`, {
+                                                                                    let res = await fetch(`https://server.trustereocourier.com.bd/PickupRequestWithManegeAdminUsers/AdminDeletePickupRequestData/${item?._id}`, {
                                                                                         method: "DELETE",
                                                                                     })
                                                                                     let result = await res.json()
@@ -376,7 +376,7 @@ const AdminMyHub = () => {
                                                                         let HubData = { parcelNum: parcelNumbers }
                                                                         // console.log(HubData)
 
-                                                                        fetch(`http://localhost:5000/PickupRequestWithManegeAdminUsers/AdminApprovedUserPickupRequestData/${item?._id}`, {
+                                                                        fetch(`https://server.trustereocourier.com.bd/PickupRequestWithManegeAdminUsers/AdminApprovedUserPickupRequestData/${item?._id}`, {
                                                                             method: "PUT",
                                                                             headers: {
                                                                                 "content-type": "application/json"
@@ -441,7 +441,7 @@ const AdminMyHub = () => {
                                                                                 // Hub request data insert 
                                                                                 // =================================
                                                                                 try {
-                                                                                    let res = await fetch(`http://localhost:5000/PickupRequestWithManegeAdminUsers/AdminDeletePickupRequestData/${item?._id}`, {
+                                                                                    let res = await fetch(`https://server.trustereocourier.com.bd/PickupRequestWithManegeAdminUsers/AdminDeletePickupRequestData/${item?._id}`, {
                                                                                         method: "DELETE",
                                                                                     })
                                                                                     let result = await res.json()
@@ -541,7 +541,7 @@ const AdminMyHub = () => {
                                                                         let HubData = { parcelNum: parcelNumbers }
                                                                         // console.log(HubData)
 
-                                                                        fetch(`http://localhost:5000/PickupRequestWithManegeAdminUsers/AdminApprovedUserPickupRequestData/${item?._id}`, {
+                                                                        fetch(`https://server.trustereocourier.com.bd/PickupRequestWithManegeAdminUsers/AdminApprovedUserPickupRequestData/${item?._id}`, {
                                                                             method: "PUT",
                                                                             headers: {
                                                                                 "content-type": "application/json"
@@ -606,7 +606,7 @@ const AdminMyHub = () => {
                                                                                 // Hub request data insert 
                                                                                 // =================================
                                                                                 try {
-                                                                                    let res = await fetch(`http://localhost:5000/PickupRequestWithManegeAdminUsers/AdminDeletePickupRequestData/${item?._id}`, {
+                                                                                    let res = await fetch(`https://server.trustereocourier.com.bd/PickupRequestWithManegeAdminUsers/AdminDeletePickupRequestData/${item?._id}`, {
                                                                                         method: "DELETE",
                                                                                     })
                                                                                     let result = await res.json()
@@ -744,7 +744,7 @@ const AdminMyHub = () => {
                                                                 <h4 className="py-4 text-sm text-gray-800">Total Parcel : {item?.parcelNum}</h4>
                                                                 <button type="submit" className="bg-[#2BA1BE] py-2 px-4 rounded-[8px] text-[14px] font-[600]"
                                                                     onClick={() => {
-                                                                        fetch(`http://localhost:5000/PickupRequestWithManegeAdminUsers/AdminPendingUserPickupRequestData/${item?._id}`, {
+                                                                        fetch(`https://server.trustereocourier.com.bd/PickupRequestWithManegeAdminUsers/AdminPendingUserPickupRequestData/${item?._id}`, {
                                                                             method: "PATCH",
                                                                         })
                                                                             .then(res => res.json())
@@ -800,7 +800,7 @@ const AdminMyHub = () => {
                                                                             // Hub request data insert 
                                                                             // =================================
                                                                             try {
-                                                                                let res = await fetch(`http://localhost:5000/PickupRequestWithManegeAdminUsers/AdminDeletePickupRequestData/${item?._id}`, {
+                                                                                let res = await fetch(`https://server.trustereocourier.com.bd/PickupRequestWithManegeAdminUsers/AdminDeletePickupRequestData/${item?._id}`, {
                                                                                     method: "DELETE",
                                                                                 })
                                                                                 let result = await res.json()
@@ -896,7 +896,7 @@ const AdminMyHub = () => {
                                                                 <h4 className="py-4 text-sm text-gray-800">Total Parcel : {item?.parcelNum}</h4>
                                                                 <button type="submit" className="bg-[#2BA1BE] py-2 px-4 rounded-[8px] text-[14px] font-[600]"
                                                                     onClick={() => {
-                                                                        fetch(`http://localhost:5000/PickupRequestWithManegeAdminUsers/AdminPendingUserPickupRequestData/${item?._id}`, {
+                                                                        fetch(`https://server.trustereocourier.com.bd/PickupRequestWithManegeAdminUsers/AdminPendingUserPickupRequestData/${item?._id}`, {
                                                                             method: "PATCH",
                                                                         })
                                                                             .then(res => res.json())
@@ -952,7 +952,7 @@ const AdminMyHub = () => {
                                                                             // Hub request data insert 
                                                                             // =================================
                                                                             try {
-                                                                                let res = await fetch(`http://localhost:5000/PickupRequestWithManegeAdminUsers/AdminDeletePickupRequestData/${item?._id}`, {
+                                                                                let res = await fetch(`https://server.trustereocourier.com.bd/PickupRequestWithManegeAdminUsers/AdminDeletePickupRequestData/${item?._id}`, {
                                                                                     method: "DELETE",
                                                                                 })
                                                                                 let result = await res.json()
@@ -1048,7 +1048,7 @@ const AdminMyHub = () => {
                                                                 <h4 className="py-4 text-sm text-gray-800">Total Parcel : {item?.parcelNum}</h4>
                                                                 <button type="submit" className="bg-[#2BA1BE] py-2 px-4 rounded-[8px] text-[14px] font-[600]"
                                                                     onClick={() => {
-                                                                        fetch(`http://localhost:5000/PickupRequestWithManegeAdminUsers/AdminPendingUserPickupRequestData/${item?._id}`, {
+                                                                        fetch(`https://server.trustereocourier.com.bd/PickupRequestWithManegeAdminUsers/AdminPendingUserPickupRequestData/${item?._id}`, {
                                                                             method: "PATCH",
                                                                         })
                                                                             .then(res => res.json())
@@ -1103,7 +1103,7 @@ const AdminMyHub = () => {
                                                                             // Hub request data insert 
                                                                             // =================================
                                                                             try {
-                                                                                let res = await fetch(`http://localhost:5000/PickupRequestWithManegeAdminUsers/AdminDeletePickupRequestData/${item?._id}`, {
+                                                                                let res = await fetch(`https://server.trustereocourier.com.bd/PickupRequestWithManegeAdminUsers/AdminDeletePickupRequestData/${item?._id}`, {
                                                                                     method: "DELETE",
                                                                                 })
                                                                                 let result = await res.json()
