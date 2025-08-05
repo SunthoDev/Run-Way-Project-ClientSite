@@ -199,71 +199,70 @@ const SingUp = () => {
                                 defaultValue=""
                             >
                                 <option disabled selected>Selected District</option>
-                                <option>Habiganj</option>
-                                <option>Bagerhat</option>
-                                <option>Bandarban</option>
-                                <option>Barguna</option>
-                                <option>Barishal</option>
-                                <option>Bhola</option>
                                 <option>Bogra</option>
-                                <option>Brahmanbaria</option>
-                                <option>Chandpur</option>
-                                <option>Chapainawabganj</option>
-                                <option>Chittagong</option>
-                                <option>Chuadanga</option>
-                                <option>Cox's Bazar</option>
-                                <option>Cumilla</option>
-                                <option>Dhaka City</option>
-                                <option>Dhaka Sub-Urban</option>
-                                <option>Dinajpur</option>
-                                <option>Faridpur</option>
-                                <option>Feni</option>
-                                <option>Gaibandha</option>
-                                <option>Gazipur</option>
-                                <option>Gopalganj</option>
-                                <option>Jamalpur</option>
-                                <option>Jashore</option>
-                                <option>Jhalokati</option>
-                                <option>Jhenaidah</option>
-                                <option>Joypurhat</option>
-                                <option>Khagrachori</option>
-                                <option>Khulna</option>
+                                <option>Habiganj</option>
+                                <option>Sylhet</option>
+                                <option>Chattogram</option>
                                 <option>Kishoreganj</option>
-                                <option>Kurigram</option>
-                                <option>Kustia</option>
-                                <option>Lalmonirhat</option>
-                                <option>Laxmipur</option>
-                                <option>Madaripur</option>
-                                <option>Magura</option>
-                                <option>Manikganj</option>
-                                <option>Meherpur</option>
-                                <option>Moulvibazar</option>
+                                <option>Lakshmipur</option>
+                                <option>Pabna</option>
+                                <option>Pirojpur</option>
+                                <option>Shariatpur</option>
+                                <option>Thakurgaon</option>
+                                <option>Joypurhat</option>
                                 <option>Munshiganj</option>
-                                <option>Mymenshingh</option>
-                                <option>Naogaon</option>
-                                <option>Narail</option>
-                                <option>Narayanganj</option>
-                                <option>Narshindi</option>
-                                <option>Natore</option>
-                                <option>Netrokona</option>
+                                <option>Rangamati</option>
+                                <option>Bandarban</option>
+                                <option>Dinajpur</option>
+                                <option>Mymensingh</option>
                                 <option>Nilphamari</option>
                                 <option>Noakhali</option>
-                                <option>Pabna</option>
-                                <option>Panchgarh</option>
-                                <option>Patuakhali</option>
-                                <option>Pirojpur</option>
                                 <option>Rajbari</option>
-                                <option>Rajshahi</option>
-                                <option>Rangamati</option>
-                                <option>Rangpur</option>
-                                <option>Shariatpur</option>
-                                <option>Shatkhira</option>
+                                <option>Chuadanga</option>
+                                <option>Jhalokati</option>
+                                <option>Narsingdi</option>
+                                <option>Jashore</option>
+                                <option>Manikganj</option>
                                 <option>Sherpur</option>
                                 <option>Sirajganj</option>
+                                <option>Gopalganj</option>
+                                <option>Jamalpur</option>
+                                <option>Khagrachhari</option>
+                                <option>Naogaon</option>
+                                <option>Narayanganj</option>
+                                <option>Panchagarh</option>
+                                <option>Chandpur</option>
+                                <option>Cox's Bazar</option>
+                                <option>Gaibandha</option>
+                                <option>Rajshahi</option>
+                                <option>Bagerhat</option>
+                                <option>Feni</option>
+                                <option>Magura</option>
                                 <option>Sunamganj</option>
-                                <option>Sylhet</option>
+                                <option>Barishal</option>
+                                <option>Cumilla</option>
+                                <option>Madaripur</option>
+                                <option>Chapainawabganj</option>
+                                <option>Khulna</option>
+                                <option>Moulvibazar</option>
+                                <option>Natore</option>
+                                <option>Rangpur</option>
+                                <option>Satkhira</option>
+                                <option>Dhaka</option>
                                 <option>Tangail</option>
-                                <option>Thakurgaon</option>
+                                <option>Lalmonirhat</option>
+                                <option>Meherpur</option>
+                                <option>Gazipur</option>
+                                <option>Kurigram</option>
+                                <option>Netrokona</option>
+                                <option>Barguna</option>
+                                <option>Kushtia</option>
+                                <option>Patuakhali</option>
+                                <option>Bhola</option>
+                                <option>Brahmanbaria</option>
+                                <option>Faridpur</option>
+                                <option>Jhenaidah</option>
+                                <option>Narail</option>
                             </select>
                             {/* {errors.district && (
                                 <p className="text-xs text-red-500 mt-1">District is required</p>
