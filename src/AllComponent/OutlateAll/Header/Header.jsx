@@ -121,12 +121,12 @@ const Header = () => {
                         transition={{ duration: 0.5 }}
                     >
                         <Link to="/" className="flex items-center">
-                            {/* <img
+                            <img
                                 src={logo}
                                 alt="Logo"
                                 className="h-24 w-auto md:h-28 lg:h-32 max-h-32 min-h-20 transition-all duration-300 object-contain"
                                 style={{ maxWidth: '300px', minWidth: '140px' }}
-                            /> */}
+                            />
                         </Link>
                     </motion.div>
 
