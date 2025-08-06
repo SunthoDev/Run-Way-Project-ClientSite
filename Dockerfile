@@ -24,9 +24,10 @@ RUN rm /etc/nginx/conf.d/default.conf
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Copy built files from Vite (dist) to nginx html folder
-COPY dist /usr/share/nginx/html
+COPY --from=builder /app/dist /usr/share/nginx/html
 
 # Expose port
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
+
