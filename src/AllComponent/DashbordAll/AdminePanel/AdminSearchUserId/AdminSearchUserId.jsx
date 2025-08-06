@@ -203,7 +203,6 @@ const AdminSearchUserId = () => {
                                     <Tab> <span className="text-black font-[600] text-[16px]">Cancel</span> </Tab>
                                     <Tab> <span className="text-black font-[600] text-[16px]">In Reviewed</span> </Tab>
                                 </TabList>
-
                                 <TabPanel>
                                     <div className="ConsignmentAllStatusData">
                                         <h3 class="DataList w-[100%] md:w-[18%]">Total Data {ConsignmentAllData.length}</h3>

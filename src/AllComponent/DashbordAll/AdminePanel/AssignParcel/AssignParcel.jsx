@@ -19,6 +19,10 @@ const AssignParcel = () => {
     })
     // console.log(UserAllParcelDataFind)
 
+    // Review data find 
+    // =============================
+    let ReviewData = UserAllParcelDataFind.filter(Review => Review?.status === "Review")
+
     // ========================================
     // Parcel Filter Pending Status Data
     // ========================================
@@ -102,6 +106,12 @@ const AssignParcel = () => {
                                     }`}
                             >
                                 Pending Parcel
+                            </button>
+                            <button onClick={() => setTabState(2)}
+                                className={`px-4 py-2 font-medium text-sm rounded-t-md transition-all duration-200 ${tabState === 2 ? "bg-indigo-600 text-white" : "bg-gray-100 text-gray-700 hover:bg-indigo-100"
+                                    }`}
+                            >
+                                In Review
                             </button>
                         </div>
 
@@ -273,6 +283,68 @@ const AssignParcel = () => {
                                 </div>
                             </div>
                         }
+
+                        {/* ============================================ */}
+                        {/* Parcel (In Review) Type category data show */}
+                        {/* ============================================ */}
+                        {tabState === 2 &&
+                            <div className="">
+                                <div className="overflow-x-auto p-4">
+                                    <table className="table  w-full rounded-xl shadow-md">
+                                        <thead className="bg-base-200 text-base-content">
+                                            <tr>
+                                                <th>Merchant Name</th>
+                                                <th>Parcel ID</th>
+                                                <th>Amount</th>
+                                                <th>Delivery Charge</th>
+                                                <th>Request Date</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {
+                                                ReviewData?.slice().reverse().map(AllData => <tr className="">
+                                                    <td>
+                                                        <p className="font-medium text-base text-gray-800">{AllData?.name}</p>
+                                                    </td>
+                                                    <td>
+                                                        <p className="text-sm text-gray-600">{AllData?.StandardParcelId}</p>
+                                                    </td>
+                                                    <td>
+                                                        <p className="text-sm font-semibold text-green-600">{AllData?.CodAmount} ৳</p>
+                                                    </td>
+                                                    <td>
+                                                        <p className="text-sm text-blue-600">{AllData?.DeliveryCharge} ৳</p>
+                                                    </td>
+                                                    <td>
+                                                        <p className="text-sm text-gray-500">{AllData?.date}</p>
+                                                    </td>
+                                                    <td>
+                                                        <span
+                                                            className={`badge badge-sm badge-success`}
+                                                        >
+                                                            {AllData?.status}
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <Link
+                                                            to={`/dashboard/UserTemporeryInvoiceAllStandardData/${AllData?.StandardParcelId}`}
+                                                        >
+                                                            <button className="btn btn-sm btn-outline btn-primary">
+                                                                View
+                                                            </button>
+                                                        </Link>
+                                                    </td>
+                                                </tr>)
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        }
+
                     </div>
 
                 </div>

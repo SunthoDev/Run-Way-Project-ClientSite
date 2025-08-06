@@ -127,7 +127,7 @@ const UserTemporeryInvoiceAllStandardData = () => {
     // This Parcel Rider Find
     // ===============================================================
     let ParcelRiderFind = RiderAssignDataAll?.find(parcel => parcel?.CategoryAssign === "Parcel" && parcel?.ParcelIdForRider === StandardParcelId)
-    console.log(ParcelRiderFind)
+    // console.log(ParcelRiderFind)
 
 
 
@@ -334,7 +334,8 @@ const UserTemporeryInvoiceAllStandardData = () => {
                         {/* Assign Rider Information Show */}
                         {/* ========================================== */}
                         {
-                            InVoiceData?.status === "Pending" && InVoiceData?.AssignRider === "No" ?
+                            InVoiceData?.status === "Pending" && InVoiceData?.AssignRider === "No" ||
+                            InVoiceData?.status === "Review" && InVoiceData?.AssignRider === "No" ?
                                 <h2 className="text-center text-base font-medium text-orange-500">
                                     Your parcel is currently pending assignment to a rider. Please wait.
                                 </h2> :
