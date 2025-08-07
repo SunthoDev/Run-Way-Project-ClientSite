@@ -134,10 +134,6 @@ const UserTemporeryInvoiceAllStandardData = () => {
 
 
 
-
-
-
-
     return (
         <div className='UserTemporeryInvoiceAllStandardData bg-white min-h-screen px-4 md:px-10 py-6'>
 

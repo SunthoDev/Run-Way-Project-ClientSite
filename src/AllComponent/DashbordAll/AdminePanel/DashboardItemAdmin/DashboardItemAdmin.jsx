@@ -51,7 +51,7 @@ const DashboardItemAdmin = () => {
         let TrackingDate = moment().format("MM/D/YY , hh:mm A")
 
         let TrackingMessage = event.target.MessageTracking.value
-        let allMessageValue = { mes1, mes2, mes3, mes4, mes5, mes6, mes7, mes8, mes9, mes10,mes11,mes12,mes13,mes14,mes15,mes16,mes17,mes18,TrackingMessage,TrackingDate}
+        let allMessageValue = { mes1, mes2, mes3, mes4, mes5, mes6, mes7, mes8, mes9, mes10, mes11, mes12, mes13, mes14, mes15, mes16, mes17, mes18, TrackingMessage, TrackingDate }
         // console.log(allMessageValue)
 
         fetch("https://server.trustereocourier.com.bd/AdminTrackingSendMessage", {
@@ -84,11 +84,12 @@ const DashboardItemAdmin = () => {
 
     return (
         <div className='DashboardItemAdmin px-2 md:px-10 py-10'>
-
             <div className="DashboardItem bg-white p-[28px] rounded-[8px]  grid grid-cols-1 md:grid-cols-2 gap-5">
 
+                {/* search Parcel ID !! */}
+                {/* =================================================================== */}
                 <div className="item">
-                    <h3 className='text-[17px] font-[500] text-black mb-[8px]'>Search Consignment ID</h3>
+                    <h3 className='text-[17px] font-[500] text-black mb-[8px]'>Search Parcel ID</h3>
                     <div className="relative">
                         <input onBlur={handleAdminStandardParcelIdFind} className='w-[100%]' placeholder='type only customer id here' type="text" />
 
@@ -100,7 +101,9 @@ const DashboardItemAdmin = () => {
                         </Link>
                     </div>
                 </div>
-                
+
+                {/* search User ID !! */}
+                {/* =================================================================== */}
                 <div className="item">
                     <h3 className='text-[17px] font-[500] text-black mb-[8px]'>Search User ID</h3>
                     <div className="relative">
@@ -111,8 +114,10 @@ const DashboardItemAdmin = () => {
                             </button>
                         </Link>
                     </div>
-
                 </div>
+
+                {/* search Tracking ID !! */}
+                {/* =================================================================== */}
                 <div className="item">
                     <h3 className='text-[17px] font-[500] text-black mb-[8px]'>Search Tracking ID</h3>
                     <div className="relative">
@@ -123,6 +128,9 @@ const DashboardItemAdmin = () => {
                     </div>
 
                 </div>
+
+                {/* search Tracking ID !! */}
+                {/* =================================================================== */}
                 <div className="item">
                     <h3 className='text-[17px] font-[500] text-black mb-[8px]'>Search Tracking ID</h3>
                     <div className="relative">
@@ -136,6 +144,8 @@ const DashboardItemAdmin = () => {
             </div>
 
 
+            {/* Consignment Parcel search by number !! */}
+            {/* =================================================================== */}
             <div className="Consignment bg-white p-[28px] rounded-[8px]  flex mt-8">
 
                 <div className="relative w-[100%]">
@@ -155,9 +165,10 @@ const DashboardItemAdmin = () => {
                 </select>
 
             </div>
+
             {/* =================================================================== */}
-
-
+            {/* Send Tracking Message To bellow !! */}
+            {/* =================================================================== */}
 
             <div className="TrackingAllData mt-8">
                 <h2 className='text-black font-[500] text-center mb-[14px] text-[24px]'>The Admin will Send Message id number</h2>

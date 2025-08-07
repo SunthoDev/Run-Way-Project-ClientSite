@@ -4,9 +4,11 @@ import { useQuery } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
 import moment from "moment";
 import { Link, useNavigate } from 'react-router-dom';
+import useRole from '../../../../Hook/useRole';
 
 const AssignParcel = () => {
 
+    const [roles] = useRole()
     const [tabState, setTabState] = useState(1);
 
     // ===========================================================================================================
@@ -184,7 +186,6 @@ const AssignParcel = () => {
                                                     <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Parcel ID</th>
                                                     <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Address / P.s</th>
                                                     <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Amount / Delivery Charge</th>
-                                                    {/* <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Request Date</th> */}
                                                     <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Status</th>
                                                     <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Action</th>
                                                     <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Assign Rider</th>
@@ -293,36 +294,39 @@ const AssignParcel = () => {
                                     <table className="table  w-full rounded-xl shadow-md">
                                         <thead className="bg-base-200 text-base-content">
                                             <tr>
-                                                <th>Merchant Name</th>
-                                                <th>Parcel ID</th>
-                                                <th>Amount</th>
-                                                <th>Delivery Charge</th>
-                                                <th>Request Date</th>
-                                                <th>Status</th>
+                                                <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Merchant Name</th>
+                                                <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Parcel ID</th>
+                                                <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Address / P.s</th>
+                                                <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Amount / Delivery Charge</th>
+                                                <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Status</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {
                                                 ReviewData?.slice().reverse().map(AllData => <tr className="">
+
                                                     <td>
                                                         <p className="font-medium text-base text-gray-800">{AllData?.name}</p>
+                                                        <p className="text-sm text-gray-600">{AllData?.number}</p>
+                                                        <p className="text-sm text-black">MyHub: {AllData?.MyHub}</p>
                                                     </td>
                                                     <td>
-                                                        <p className="text-sm text-gray-600">{AllData?.StandardParcelId}</p>
+                                                        <p className="text-sm text-gray-600">Parcel Category: {AllData?.ParcelCategory}</p>
+                                                        <p className="text-sm text-gray-800 font-medium">Parcel Id: {AllData?.StandardParcelId}</p>
                                                     </td>
                                                     <td>
-                                                        <p className="text-sm font-semibold text-green-600">{AllData?.CodAmount} ৳</p>
+                                                        <p className="text-sm text-gray-600">{AllData?.address}</p>
+                                                        <p className="text-sm text-gray-800 font-medium">P.s: {AllData?.policeStation}</p>
                                                     </td>
                                                     <td>
-                                                        <p className="text-sm text-blue-600">{AllData?.DeliveryCharge} ৳</p>
-                                                    </td>
-                                                    <td>
-                                                        <p className="text-sm text-gray-500">{AllData?.date}</p>
+                                                        <p className="text-sm font-semibold text-green-600">Amount: {AllData?.CodAmount} ৳</p>
+                                                        <p className="text-sm text-blue-600">Delivery Charge: {AllData?.DeliveryCharge} ৳</p>
+                                                        <p className="text-sm text-gray-500">{AllData?.date}, {AllData?.time} </p>
                                                     </td>
                                                     <td>
                                                         <span
-                                                            className={`badge badge-sm badge-success`}
+                                                            className={`badge badge-sm ${AllData?.status === "Pending" && "badge-success"}`}
                                                         >
                                                             {AllData?.status}
                                                         </span>
@@ -335,6 +339,34 @@ const AssignParcel = () => {
                                                                 View
                                                             </button>
                                                         </Link>
+                                                        <button className="btn btn-sm btn-outline btn-primary"
+                                                            onClick={() => {
+                                                                let ApprovedData = { ApprovedOffice: "Corporate office", ApprovedName: roles?.name, PendingDate: moment().format("MM/DD/YY , hh:mm A"), AssignRider: "No" }
+
+                                                                fetch(`https://server.trustereocourier.com.bd/AdminApprovedUserStandardData/${AllData?._id}`, {
+                                                                    method: "PUT",
+                                                                    headers: {
+                                                                        "content-type": "application/json"
+                                                                    },
+                                                                    body: JSON.stringify(ApprovedData)
+                                                                })
+                                                                    .then(res => res.json())
+                                                                    .then(data => {
+                                                                        if (data.modifiedCount > 0) {
+                                                                            Swal.fire({
+                                                                                position: 'top-end',
+                                                                                icon: 'success',
+                                                                                title: 'Parcel Pending Success',
+                                                                                showConfirmButton: false,
+                                                                                timer: 1500
+                                                                            })
+                                                                        }
+                                                                        refetch()
+                                                                    })
+                                                            }}
+                                                        >
+                                                            Pending
+                                                        </button>
                                                     </td>
                                                 </tr>)
                                             }
@@ -346,7 +378,6 @@ const AssignParcel = () => {
                         }
 
                     </div>
-
                 </div>
             </div>
 

@@ -1,86 +1,150 @@
-
-
-.StandardDeliveryParent .trackingMessageShow  {
+.StandardMain .trackingMessageShow {
     /* background-color: aliceblue; */
     margin: 0 auto;
     text-align: center;
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.alertContainer {
-    position: absolute;
-    top: 0%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.1);
-    text-align: center;
-    visibility: hidden;
-    transition: transform 0.4s, top 0.4s;
-}
-
-.showAlertJs {
-    top: 50%;
-    visibility: visible;
-    transform: translate(-50%, -50%) scale(1);
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    z-index: 999;
-}
-
-.alertContainer .poup {
-    background-color: #F5F5F5;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    width: 100%;
-    position: relative;
-}
-
-
-.alertContainer .poup .popInfo  h6 {
-    color: #22afa3;
-    font-size: 20px;
-    font-weight: 500;
-    text-align: center;
-}
-
-
-
-.alertContainer .poup .popInfo  .UpdateButton {
-    color: white;
-    font-size: 20px;
-    font-weight: 600;
-    border: 1px solid #FA5D6F;
-    padding: 8px 16px;
+.AdminSearchStandardParcelUserParent .PrintAll {
+    background-color: #ffffff;
+    width: 300px;
+    margin: 20px auto;
+    padding: 20px 24px;
     border-radius: 8px;
-    transition: .4s;
-    background-color: #FA5D6F;
-    width: 100%;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+    color: #000;
+}
+
+.AdminSearchStandardParcelUserParent .PrintAll .Prints h3 {
+    margin-bottom: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #000;
+}
+
+.AdminSearchStandardParcelUserParent .PrintAll .Prints .Hub {
+    border: 1px solid #000;
+    padding: 6px 0;
+    border-radius: 6px;
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: 600;
     text-align: center;
-    margin-top: 14px;
+}
+
+.AdminSearchStandardParcelUserParent .PrintAll .Prints .Cod {
+    border: 1px solid #000;
+    padding: 8px 20px;
+    border-radius: 6px;
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.AdminSearchStandardParcelUserParent .PrintAll .Prints .barcode,
+.AdminSearchStandardParcelUserParent .PrintAll .Prints .QRCode {
+    display: flex;
+    justify-content: center;
+    margin-top: 6px;
+    margin-bottom: 8px;
+}
+
+.AdminSearchStandardParcelUserParent .PrintAll .Prints .footer-logo {
+    margin-top: 8px;
+    text-align: center;
+}
+
+.AdminSearchStandardParcelUserParent .PrintAll .Prints .footer-logo img {
+    width: 80px;
+    margin: 0 auto;
+}
+
+.AdminSearchStandardParcelUserParent .PrintAll .Prints .footer-logo p {
+    font-size: 10px;
+    margin-top: 2px;
+    color: #333;
 }
 
 
-.removeAlertBtn {
-    border: 2px solid white;
-    position: absolute;
-    top: 22px;
-    right: 22px;
-    border-radius: 50%;
-    line-height: 17px;
-    font-size: 28px;
+/* =============================================== */
+ /* (Label) Print media options css  */
+ /* =============================================== */
+@media print {
+    body {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    .PrintAll {
+        background-color: #ffffff !important;
+        color: #000 !important;
+        /* box-shadow: none !important; */
+        width: 300px !important;
+        /* margin: 0 auto !important; */
+        font-family: 'Arial', sans-serif !important;
+        /* ============= */
+        margin: 20px 40px;
+        padding: 20px 24px !important;
+        border-radius: 8px !important;
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .PrintAll .Cod {
+        border: 1px solid #000 !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        font-weight: 700 !important;
+        font-size: 14px !important;
+        padding: 6px 20px !important;
+    }
+
+    .PrintAll img {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+
+    /* Hide everything else if needed */
+    body * {
+        visibility: hidden;
+    }
+    .PrintAll,
+    .PrintAll * {
+        visibility: visible;
+    }
+    .PrintAll {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+}
+
+
+/* =============================================== */
+ /* (Invoice) Print media options css  */
+ /* =============================================== */
+@media print {
+    body {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    .InvoiceALl {
+        font-family: 'Arial', sans-serif !important;
+        margin: 20px 40px;
+    }
+    /* Hide everything else if needed */
+    body * {
+        visibility: hidden;
+    }
+    .InvoiceALl,
+    .InvoiceALl * {
+        visibility: visible;
+    }
+    .InvoiceALl {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
 }

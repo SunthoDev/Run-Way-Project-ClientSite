@@ -66,8 +66,7 @@ const AdminPendingDataShow = ({ ReviewDataSee, refetch }) => {
     // Admin Pending Parcel Data
     // =====================================
     let handlePendingData = (id) => {
-
-        let ApprovedData = { ApprovedOffice: "Corporate office", ApprovedName: roles?.name, PendingDate: moment().format("MM/DD/YY , hh:mm A"), AssignRider:"No" }
+        let ApprovedData = { ApprovedOffice: "Corporate office", ApprovedName: roles?.name, PendingDate: moment().format("MM/DD/YY , hh:mm A"), AssignRider: "No" }
 
         fetch(`https://server.trustereocourier.com.bd/AdminApprovedUserStandardData/${id}`, {
             method: "PUT",
@@ -94,15 +93,9 @@ const AdminPendingDataShow = ({ ReviewDataSee, refetch }) => {
 
 
 
-
-
-
-
     return (
         <div className='AdminPendingDataShow'>
             <div className="PendingData grid grid-cols-1 md:grid-cols-7 gap-5 items-center">
-
-
 
                 <div className="Left cols-span-1 md:col-span-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5 items-center">
@@ -118,9 +111,7 @@ const AdminPendingDataShow = ({ ReviewDataSee, refetch }) => {
                                 <button onClick={() => handlePendingData(_id)} className="bg-green-600 text-white py-1 px-2 rounded-[4px]">Pending</button>
 
                             </div>
-
                         </div>
-
                         <div className="Tow">
                             <h3>{roles.name} {roles.LastName}</h3>
                             <h3>{roles.Address}</h3>
@@ -141,71 +132,70 @@ const AdminPendingDataShow = ({ ReviewDataSee, refetch }) => {
 
                         <select onBlur={handleDistrictData} required className="col-span-4 select select-bordered max-w-xs  text-black text-[14px] font-[600] rounded-[6px]  w-[100%]">
                             <option disabled selected>{District}</option>
-                            <option>Habiganj</option>
-                            <option>Bagerhat</option>
-                            <option>Bandarban</option>
-                            <option>Barguna</option>
-                            <option>Barishal</option>
-                            <option>Bhola</option>
                             <option>Bogra</option>
-                            <option>Brahmanbaria</option>
-                            <option>Chandpur</option>
-                            <option>Chapainawabganj</option>
-                            <option>Chittagong</option>
-                            <option>Chuadanga</option>
-                            <option>Cox's Bazar</option>
-                            <option>Cumilla</option>
-                            <option>Dhaka City</option>
-                            <option>Dhaka Sub-Urban</option>
-                            <option>Dinajpur</option>
-                            <option>Faridpur</option>
-                            <option>Feni</option>
-                            <option>Gaibandha</option>
-                            <option>Gazipur</option>
-                            <option>Gopalganj</option>
-                            <option>Jamalpur</option>
-                            <option>Jashore</option>
-                            <option>Jhalokati</option>
-                            <option>Jhenaidah</option>
-                            <option>Joypurhat</option>
-                            <option>Khagrachori</option>
-                            <option>Khulna</option>
+                            <option>Habiganj</option>
+                            <option>Sylhet</option>
+                            <option>Chattogram</option>
                             <option>Kishoreganj</option>
-                            <option>Kurigram</option>
-                            <option>Kustia</option>
-                            <option>Lalmonirhat</option>
-                            <option>Laxmipur</option>
-                            <option>Madaripur</option>
-                            <option>Magura</option>
-                            <option>Manikganj</option>
-                            <option>Meherpur</option>
-                            <option>Moulvibazar</option>
+                            <option>Lakshmipur</option>
+                            <option>Pabna</option>
+                            <option>Pirojpur</option>
+                            <option>Shariatpur</option>
+                            <option>Thakurgaon</option>
+                            <option>Joypurhat</option>
                             <option>Munshiganj</option>
-                            <option>Mymenshingh</option>
-                            <option>Naogaon</option>
-                            <option>Narail</option>
-                            <option>Narayanganj</option>
-                            <option>Narshindi</option>
-                            <option>Natore</option>
-                            <option>Netrokona</option>
+                            <option>Rangamati</option>
+                            <option>Bandarban</option>
+                            <option>Dinajpur</option>
+                            <option>Mymensingh</option>
                             <option>Nilphamari</option>
                             <option>Noakhali</option>
-                            <option>Pabna</option>
-                            <option>Panchgarh</option>
-                            <option>Patuakhali</option>
-                            <option>Pirojpur</option>
                             <option>Rajbari</option>
-                            <option>Rajshahi</option>
-                            <option>Rangamati</option>
-                            <option>Rangpur</option>
-                            <option>Shariatpur</option>
-                            <option>Shatkhira</option>
+                            <option>Chuadanga</option>
+                            <option>Jhalokati</option>
+                            <option>Narsingdi</option>
+                            <option>Jashore</option>
+                            <option>Manikganj</option>
                             <option>Sherpur</option>
                             <option>Sirajganj</option>
+                            <option>Gopalganj</option>
+                            <option>Jamalpur</option>
+                            <option>Khagrachhari</option>
+                            <option>Naogaon</option>
+                            <option>Narayanganj</option>
+                            <option>Panchagarh</option>
+                            <option>Chandpur</option>
+                            <option>Cox's Bazar</option>
+                            <option>Gaibandha</option>
+                            <option>Rajshahi</option>
+                            <option>Bagerhat</option>
+                            <option>Feni</option>
+                            <option>Magura</option>
                             <option>Sunamganj</option>
-                            <option>Sylhet</option>
+                            <option>Barishal</option>
+                            <option>Cumilla</option>
+                            <option>Madaripur</option>
+                            <option>Chapainawabganj</option>
+                            <option>Khulna</option>
+                            <option>Moulvibazar</option>
+                            <option>Natore</option>
+                            <option>Rangpur</option>
+                            <option>Satkhira</option>
+                            <option>Dhaka</option>
                             <option>Tangail</option>
-                            <option>Thakurgaon</option>
+                            <option>Lalmonirhat</option>
+                            <option>Meherpur</option>
+                            <option>Gazipur</option>
+                            <option>Kurigram</option>
+                            <option>Netrokona</option>
+                            <option>Barguna</option>
+                            <option>Kushtia</option>
+                            <option>Patuakhali</option>
+                            <option>Bhola</option>
+                            <option>Brahmanbaria</option>
+                            <option>Faridpur</option>
+                            <option>Jhenaidah</option>
+                            <option>Narail</option>
                         </select>
 
                         <select name='PoliceStation' required className="col-span-4  select select-bordered max-w-xs text-black text-[14px] font-[600] rounded-[6px]  w-[100%]">
@@ -214,7 +204,7 @@ const AdminPendingDataShow = ({ ReviewDataSee, refetch }) => {
                                 DistrictAllPoliceStation.map(PoliceStationAll => <option>{PoliceStationAll.AddPoliceStation}</option>)
                             }
                         </select>
-                        
+
                         <div className="grid grid-cols-2 gap-4">
                             <h2 className='Weight'>Weight</h2>
                             <input required type="text" className='w-[100%]' defaultValue={weight} name='Weight' />
