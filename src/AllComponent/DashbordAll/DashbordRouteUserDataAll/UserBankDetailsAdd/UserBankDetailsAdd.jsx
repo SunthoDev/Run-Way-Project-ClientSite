@@ -4,6 +4,11 @@ import Swal from 'sweetalert2';
 import { useLoaderData } from 'react-router-dom';
 import useRole from '../../../../Hook/useRole';
 
+
+// http://localhost:5173/dashboard/UserAddBankDetails/43770885
+
+
+
 const UserBankDetailsAdd = () => {
 
     let BankDetailsAddUserData = useLoaderData()
@@ -15,7 +20,6 @@ const UserBankDetailsAdd = () => {
 
     let handleBankInformationAddUser = (event) => {
         event.preventDefault()
-
         let BankName = event.target.bankName.value
         let AccountName = event.target.accountName.value
         let AccountNumber = event.target.accountNumber.value
@@ -26,9 +30,7 @@ const UserBankDetailsAdd = () => {
         let NagadNo = event.target.nagadNum.value
 
         let allBankInformationData = { BankName, AccountName, AccountNumber, BranchName, RoutingNo, BakashNo, RocketNo, NagadNo }
-
         // console.log(allBankInformationData)
-
 
         fetch(`https://server.trustereocourier.com.bd/UserBankDetailsAddAndUpdate/${_id}`, {
             method: "PUT",
@@ -50,12 +52,7 @@ const UserBankDetailsAdd = () => {
                     })
                 }
             })
-
-
     }
-
-
-
 
 
     return (
@@ -63,54 +60,54 @@ const UserBankDetailsAdd = () => {
             {status == "pending" ?
 
                 <h2 className='text-black font-[700] text-center mt-[40px] text-[34px]'>Please Waite, For Admin Approved</h2>
-
                 :
-
                 <div className='UserBankDetailsAdd bg-white mx-2 md:mx-6 p-8 my-4 rounded-[8px]'>
                     <h3 className='text-black font-[600] text-center text-[20px] mb-4'>Add Payment Information {name}{LastName}. ID: #{userId}</h3>
-                    <div className='BankDetailsAdd w-[100%] md:w-[34%]'>
-                        <form onSubmit={handleBankInformationAddUser}>
-                            <h3 className='mb-[24px]'>Bank Account Information</h3>
-                            <div className="Bank">
-                                <h3>Bank Name</h3>
-                                <input required defaultValue={BankDetailsAddUserData?.BankName ? BankDetailsAddUserData.BankName : "Please Add Your Bank Name"} name='bankName' className='w-[100%]' type="text" />
-                            </div>
-                            <div className="Bank">
-                                <h3>Account Name</h3>
-                                <input required defaultValue={BankDetailsAddUserData?.AccountName ? BankDetailsAddUserData.AccountName : "Please Add Your Account Name"} name='accountName' className='w-[100%]' type="text" />
-                            </div>
-                            <div className="Bank">
-                                <h3>Account Number</h3>
-                                <input required defaultValue={BankDetailsAddUserData?.AccountNumber ? BankDetailsAddUserData.AccountNumber : "Please Add Your Account Number"} name='accountNumber' className='w-[100%]' type="text" />
-                            </div>
-                            <div className="Bank">
-                                <h3>Branch Name</h3>
-                                <input required defaultValue={BankDetailsAddUserData?.BranchName ? BankDetailsAddUserData.BranchName : "Please Add Your Branch Name"} name='branchName' className='w-[100%]' type="text" />
-                            </div>
-                            <div className="Bank">
-                                <h3>Routing No</h3>
-                                <input required defaultValue={BankDetailsAddUserData?.RoutingNo ? BankDetailsAddUserData.RoutingNo : "Please Add Your Routing No"} name='routingNo' className='w-[100%]' type="text" />
-                            </div>
-
-                            <h3 className='mt-[24px] mb-[24px]'>Mobile Financial Account</h3>
-                            <div className="Bank">
-                                <h3>Bkash Number</h3>
-                                <input required defaultValue={BankDetailsAddUserData?.BakashNo ? BankDetailsAddUserData.BakashNo : "Please Add Your Bakash Number"} name='bkashNum' className='w-[100%]' type="text" />
-                            </div>
-                            <div className="Bank">
-                                <h3>Rocket Number</h3>
-                                <input required defaultValue={BankDetailsAddUserData?.RocketNo ? BankDetailsAddUserData.RocketNo : "Please Add Your Rocket Number"} name='rocketNum' className='w-[100%]' type="text" />
-                            </div>
-                            <div className="Bank">
-                                <h3>Nagad Number</h3>
-                                <input required defaultValue={BankDetailsAddUserData?.NagadNo ? BankDetailsAddUserData.NagadNo : "Please Add Your Nogod Number"} name='nagadNum' className='w-[100%]' type="text" />
+                    <div className='BankDetailsAdd w-[100%] md:w-[80%] mx-auto'>
+                        <form onSubmit={handleBankInformationAddUser} className="text-black font-[600] px-2 md:flex justify-between gap-6">
+                            <div className="">
+                                <h3 className='mb-[14px] text-center'>Bank Account Information</h3>
+                                <div className="Bank">
+                                    <h3>Bank Name</h3>
+                                    <input defaultValue={BankDetailsAddUserData?.BankName ? BankDetailsAddUserData.BankName : ""} name='bankName' className='text-black font-[600] px-2 w-[100%]' type="text" />
+                                </div>
+                                <div className="Bank">
+                                    <h3>Account Name</h3>
+                                    <input defaultValue={BankDetailsAddUserData?.AccountName ? BankDetailsAddUserData.AccountName : ""} name='accountName' className='text-black font-[600] px-2 w-[100%]' type="text" />
+                                </div>
+                                <div className="Bank">
+                                    <h3>Account Number</h3>
+                                    <input defaultValue={BankDetailsAddUserData?.AccountNumber ? BankDetailsAddUserData.AccountNumber : ""} name='accountNumber' className='text-black font-[600] px-2 w-[100%]' type="text" />
+                                </div>
+                                <div className="Bank">
+                                    <h3>Branch Name</h3>
+                                    <input defaultValue={BankDetailsAddUserData?.BranchName ? BankDetailsAddUserData.BranchName : ""} name='branchName' className='text-black font-[600] px-2 w-[100%]' type="text" />
+                                </div>
+                                <div className="Bank">
+                                    <h3>Routing No</h3>
+                                    <input defaultValue={BankDetailsAddUserData?.RoutingNo ? BankDetailsAddUserData.RoutingNo : ""} name='routingNo' className='text-black font-[600] px-2 w-[100%]' type="text" />
+                                </div>
                             </div>
 
-                            <button className='Submit' type='submit'>Add Bank Details</button>
+                            <div className="mt-[24px] md:mt-0">
+                                <h3 className='mb-[14px]'>Mobile Financial Account</h3>
+                                <div className="Bank">
+                                    <h3>Bkash Number</h3>
+                                    <input defaultValue={BankDetailsAddUserData?.BakashNo ? BankDetailsAddUserData.BakashNo : ""} name='bkashNum' className='text-black font-[600] px-2 w-[100%]' type="text" />
+                                </div>
+                                <div className="Bank">
+                                    <h3>Rocket Number</h3>
+                                    <input defaultValue={BankDetailsAddUserData?.RocketNo ? BankDetailsAddUserData.RocketNo : ""} name='rocketNum' className='text-black font-[600] px-2 w-[100%]' type="text" />
+                                </div>
+                                <div className="Bank">
+                                    <h3>Nagad Number</h3>
+                                    <input defaultValue={BankDetailsAddUserData?.NagadNo ? BankDetailsAddUserData.NagadNo : ""} name='nagadNum' className='text-black font-[600] px-2 w-[100%]' type="text" />
+                                </div>
+                                <button className='Submit' type='submit'>Add Bank Details</button>
+
+                            </div>
 
                         </form>
-
-
                     </div>
                 </div>
             }

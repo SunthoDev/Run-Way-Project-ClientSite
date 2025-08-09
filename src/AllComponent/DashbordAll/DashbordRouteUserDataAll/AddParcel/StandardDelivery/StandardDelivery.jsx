@@ -77,7 +77,10 @@ const StandardDelivery = () => {
         let date = moment().format("MM/DD/YYYY")
         let time = moment().format("hh:mm A")
 
-        let StandardDeliveryData = { deliveryType, name, address, District, policeStation, AlternativePhone, RecipientEmail, number, CodAmount, Invoice, ItemDescription, note, weight, StandardEmailUser: user?.email, StandardParcelId, date, time, DeliveryCharge: "60", status: "Review", Payment: "No", ParcelCategory: "Regular", MyHub: MyHub?.HubName, AssignRider: "No" }
+        let StandardDeliveryData = { 
+            ParcelEntryFirstName:roles?.name,ParcelEntryLastName:roles?.LastName,ParcelEntryAddress:roles?.Address,
+            ParcelEntryPhone:roles?.Phone,
+            deliveryType, name, address, District, policeStation, AlternativePhone, RecipientEmail, number, CodAmount, Invoice, ItemDescription, note, weight, StandardEmailUser: user?.email, StandardParcelId, date, time, DeliveryCharge: "60", status: "Review", Payment: "No", ParcelCategory: "Regular", MyHub: MyHub?.HubName, AssignRider: "No" }
 
         // console.log(StandardDeliveryData)
 

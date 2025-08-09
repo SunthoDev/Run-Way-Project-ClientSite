@@ -1,11 +1,12 @@
 import React, { useRef, useState, useEffect } from 'react';
 import "./UserTemporeryInvoiceAllStandardData.css"
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import AdminSendAllTrackingMessageTemporery from './AdminSendAllTrackingMessageTemporery/AdminSendAllTrackingMessageTemporery';
 import logo from "../../../../assets/logo/LogoTwo.png"
 import IconLogo from "../../../../assets/logo/IconLogo.png"
 import moment from 'moment';
+import useRole from '../../../../Hook/useRole';
 // ==========================================
 // import ReactToPrint from 'react-to-print';
 import { useReactToPrint } from "react-to-print";
@@ -13,13 +14,16 @@ import QRCodeStyling from "qr-code-styling";
 import Barcode from 'react-barcode';
 // import useScanDetection from 'use-scan-detection';
 
-
 const UserTemporeryInvoiceAllStandardData = () => {
 
     let InVoiceData = useLoaderData()
+    const [roles] = useRole()
+    const ad = roles?.role === "admin"
     // console.log(InVoiceData)
 
-    let { AlternativePhone, CodAmount, DeliveryCharge, District, Invoice, ItemDescription, ParcelCategory, Payment, RecipientEmail, StandardEmailUser, StandardParcelId, address, date, deliveryType, name, note, number, policeStation, status, weight, _id } = InVoiceData
+    let {
+        ParcelEntryFirstName, ParcelEntryLastName, ParcelEntryAddress, ParcelEntryPhone,
+        AlternativePhone, CodAmount, DeliveryCharge, District, Invoice, ItemDescription, ParcelCategory, Payment, RecipientEmail, StandardEmailUser, StandardParcelId, address, date, deliveryType, name, note, number, policeStation, status, weight, _id } = InVoiceData
 
 
     // =============================================
@@ -63,7 +67,7 @@ const UserTemporeryInvoiceAllStandardData = () => {
     const qrCode = new QRCodeStyling({
         width: 120,
         height: 120,
-        data: `http://localhost:5173/dashboard/UserTemporeryInvoiceAllStandardData/{InVoiceData?.StandardParcelId}`,
+        data: `https://trustereocourier.com.bd/dashboard/UserTemporeryInvoiceAllStandardData/{InVoiceData?.StandardParcelId}`,
         image: IconLogo,
         dotsOptions: {
             gradient: {
@@ -132,15 +136,12 @@ const UserTemporeryInvoiceAllStandardData = () => {
 
 
 
-
-
     return (
         <div className='UserTemporeryInvoiceAllStandardData bg-white min-h-screen px-4 md:px-10 py-6'>
 
             {/* ============================================================================ */}
             {/* Print (Invoice) Options Start */}
             {/* ============================================================================ */}
-
             <div className="InvoiceALl hidden print:block w-[600px] mx-auto rounded-[4px] p-4 bg-white text-black font-sans border border-gray-200 shadow-md" ref={InvoiceRef}>
 
                 <div className="border-b border-purple-700 pb-[12px]">
@@ -152,7 +153,7 @@ const UserTemporeryInvoiceAllStandardData = () => {
                     </div>
                     <div className="flex justify-end text-sm mt-2">
                         <div>
-                            <p className="font-semibold text-right">Invoice # 1001</p>
+                            <p className="font-semibold text-right">Invoice # {Math.round(Math.random() * 99999999).toString()}</p>
                             <p className="text-right">{moment().format("P: DD/MM/YY hh:mm A")}</p>
                         </div>
                     </div>
@@ -162,23 +163,22 @@ const UserTemporeryInvoiceAllStandardData = () => {
                     <div className="">
                         <div className="text-sm">
                             <p className="font-semibold text-[16px] pb-[2px]">Bill to</p>
-                            <p>Billionaire Gold</p>
-                            <p>UY48350681</p>
-                            <p>Rangpur kat ft.rood</p>
+                            <p>{InVoiceData?.ParcelEntryFirstName} {InVoiceData?.ParcelEntryLastName}</p>
+                            <p>{InVoiceData?.ParcelEntryPhone}</p>
+                            <p>{InVoiceData?.ParcelEntryAddress}</p>
                         </div>
 
                         <div className="text-sm mt-2">
                             <p className="font-semibold text-[16px] pb-[2px]">Ship to</p>
-                            <p className="font-semibold">SharouZ</p>
+                            <p className="font-semibold">{InVoiceData?.name}</p>
                         </div>
                     </div>
 
                     <div className="text-sm">
                         <p className="font-semibold mt-4 text-[16px] pb-[2px]">Ship to</p>
-                        <p className="font-semibold">SharouZ</p>
-                        <p>+88042465265</p>
-                        <p>Pessan bag dadu majtir malik</p>
-                        <p>bagamat sador</p>
+                        <p>{InVoiceData?.name}</p>
+                        <p>{InVoiceData?.number}</p>
+                        <p>{InVoiceData?.address}</p>
                     </div>
                 </div>
 
@@ -194,35 +194,34 @@ const UserTemporeryInvoiceAllStandardData = () => {
                         </thead>
                         <tbody>
                             <tr className="border-t">
-                                <td className="py-2 px-3 border">Parcel</td>
+                                <td className="py-2 px-3 border">{InVoiceData?.ItemDescription}</td>
                                 <td className="py-2 px-3 border">
                                     {/* #50623829 */}
                                     <div className="flex justify-center mx-auto">
                                         <Barcode value={StandardParcelId} width={2} height={30} fontSize={10} />
                                     </div>
                                 </td>
-                                <td className="py-2 px-3 border">COD:</td>
-                                <td className="py-2 px-3 border">0 BDT</td>
+                                <td className="py-2 px-3 border">COD: {InVoiceData?.CodAmount}</td>
+                                <td className="py-2 px-3 border">{InVoiceData?.CodAmount} BDT</td>
                             </tr>
                             <tr>
                                 <td colSpan="3" className="py-2 px-3 font-bold text-right border">Total</td>
-                                <td className="py-2 px-3 font-bold border">0 BDT</td>
+                                <td className="py-2 px-3 font-bold border">{InVoiceData?.CodAmount} BDT</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
-                <p className="text-sm mt-4">Note: BANBAR IP OFFICE SC SHORAU IT</p>
+                <p className="text-sm mt-4">Note: {note?.InVoiceData}</p>
 
-                <p className="text-sm text-right mt-2">Prepared by Fazle Eliar</p>
+                <p className="text-sm text-right mt-2">Prepared by Trustereocourier.com</p>
 
             </div>
 
             {/* ============================================================================ */}
             {/* Print (Label) Options Start */}
             {/* ============================================================================ */}
-
-            <div className="PrintAll hidden print:block text-black mb-10" ref={LabelRef}>
+            {/* <div className="PrintAll hidden print:block text-black mb-10 w-[288px] h-[288px]" ref={LabelRef}>
                 <div className="Prints">
                     <div className="text-[10px] text-right font-medium">
                         {moment().format("P: DD/MM/YY hh:mm A")}
@@ -263,24 +262,63 @@ const UserTemporeryInvoiceAllStandardData = () => {
                     </div>
 
                     <div className="mt-2 text-center text-[10px]">
-                        <p>trustereo-courire.bd</p>
+                        <p>https://trustereocourier.com.bd/</p>
+                    </div>
+                </div>
+            </div> */}
+
+            <div className="PrintAll hidden print:block text-black mb-10 w-[288px] h-[288px]" ref={LabelRef}>
+                <div className="Prints">
+                    <div className="flex justify-between items-center">
+                        <div className="w-[60px]">
+                            <img className="w-full" src={logo} alt="logo" />
+                        </div>
+                        <div>
+                            <p className="mt-1 text-center text-[10px]">https://trustereocourier.com.bd</p>
+                            <h4 className="text-[10px] text-right font-medium">{moment().format("P: DD/MM/YY hh:mm A")}</h4>
+                        </div>
+                    </div>
+                    <h3 className="flex justify-between items-center mt-1">
+                        <div className="text-center text-[10px]">
+                            <p className="text-left">Merchant Number: {ParcelEntryPhone}</p>
+                            <p className="text-left">Invoice: {Invoice}</p>
+                            <p className="text-left">Parcel ID: {StandardParcelId}</p>
+                            <p className="text-left">D.Type: {deliveryType}</p>
+                            <p className="text-left">Weight : {weight} KG</p>
+                            <p className="text-left">Cod : {CodAmount}</p>
+                        </div>
+                        <div ref={refQR} className="" />
+                    </h3>
+
+                    <div className="flex justify-center mx-auto">
+                        <Barcode value={StandardParcelId} width={2} height={30} fontSize={10} />
+                    </div>
+
+                    <div className="border border-black rounded-md px-2 py-1 text-[12px] leading-tight">
+                        <p><strong>Name :</strong> {name}</p>
+                        <p><strong>Phone :</strong> {number}</p>
+                        <p><strong>Address :</strong> {address}</p>
                     </div>
                 </div>
             </div>
 
             {/* ============================================================================ */}
-
+            {/* Parcel Invoice Details All Here  */}
+            {/* ============================================================================ */}
             <div className="">
 
                 {/* Top Action Bar */}
                 <div className="flex flex-wrap justify-end gap-3 mb-6">
-                    {/* <button className="bg-[#00b87c] text-white font-semibold px-4 py-2 rounded">Open Support Ticket</button> */}
+
                     <button onClick={handleInvoicePrint} className="bg-[#0abef2] text-white font-semibold px-4 py-2 rounded">Invoice</button>
-
-                    {/* <ReactToPrint trigger={() => <button className="bg-[#22A197] text-white font-semibold px-4 py-2 rounded">Label</button>} content={() => ref.current} /> */}
-
                     <button onClick={handleLabelPrint} className="bg-[#22A197] text-white font-semibold px-4 py-2 rounded">Label</button>
-                    {/* <button className="bg-gray-500 text-white font-semibold px-4 py-2 rounded">Edit</button> */}
+                    {/* If is it a admin panel then can be edit */}
+                    {
+                        ad &&
+                        <Link to={`/dashboard/ParcelDataUpdate/${StandardParcelId}`}>
+                            <button className="bg-[#22A197] text-white font-semibold px-4 py-2 rounded">Edit</button>
+                        </Link>
+                    }
 
                 </div>
 
@@ -331,7 +369,7 @@ const UserTemporeryInvoiceAllStandardData = () => {
                         {/* ========================================== */}
                         {
                             InVoiceData?.status === "Pending" && InVoiceData?.AssignRider === "No" ||
-                            InVoiceData?.status === "Review" && InVoiceData?.AssignRider === "No" ?
+                                InVoiceData?.status === "Review" && InVoiceData?.AssignRider === "No" ?
                                 <h2 className="text-center text-base font-medium text-orange-500">
                                     Your parcel is currently pending assignment to a rider. Please wait.
                                 </h2> :
@@ -361,7 +399,8 @@ const UserTemporeryInvoiceAllStandardData = () => {
             </div>
 
             {/* ============================================================================ */}
-
+            {/* All Tracking Information Here !! */}
+            {/* ============================================================================ */}
             <h2 className='mt-[64px] mb-[12px] text-[#17838C] text-center text-[20px] font-[500] '>Tracking Updates</h2>
             <div className="Horijontal bg-[#17838C] my-[12px] w-[full] h-[1px] mb-[24px]"></div>
 

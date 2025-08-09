@@ -167,9 +167,11 @@ const AdminSearchUserId = () => {
                     <div className="mt-6">
                         <button onClick={() => document.getElementById("PickUpRequestUserSendToAdmin").showModal()} className='font-[600] py-[4px] text-[16px] bg-[#22AFA3] text-white text-center px-4 rounded-[8px]'>Pickup Request</button>
                     </div>
-                    {/* <div className="md:flex justify-between gap-8 items-center mt-6">
-                        <button className='font-[600] py-[4px] text-[16px] bg-[#22AFA3] text-white text-center px-4 rounded-[8px]'>Payment Request</button>
-                    </div> */}
+                    <div className="md:flex justify-between gap-8 items-center mt-6">
+                        <Link to={`/dashboard/UserAddBankDetails/${AdminFineUserProfileId?.userId}`}>
+                            <button className='font-[600] py-[4px] text-[16px] bg-[#22AFA3] text-white text-center px-4 rounded-[8px]'>Add Bank Details</button>
+                        </Link>
+                    </div>
                     <div className="md:flex justify-between gap-8 items-center mt-6">
                         <select className="select bg-white select-success w-full md:w-[30%] ">
                             <option disabled selected>{status}</option>
@@ -681,7 +683,7 @@ const AdminSearchUserId = () => {
                             let date = moment().format("MM/DD/YYYY")
                             let time = moment().format("hh:mm A")
 
-                            let AllInfo = { PickupRequestType: PickupRequest, PickupIdUser, date, time, Address, BusinessName, LastName, Phone, PickReqUserEmail: email, name, photo, userId, status: "Pending", PoliceStations, Districts, MyHub:MyHubName?.HubName }
+                            let AllInfo = { PickupRequestType: PickupRequest, PickupIdUser, date, time, Address, BusinessName, LastName, Phone, PickReqUserEmail: email, name, photo, userId, status: "Pending", PoliceStations, Districts, MyHub: MyHubName?.HubName }
 
                             try {
                                 const response = await fetch("https://server.trustereocourier.com.bd/PickupRequestWithManegeAdminUsers/UserPickupRequestSend", {

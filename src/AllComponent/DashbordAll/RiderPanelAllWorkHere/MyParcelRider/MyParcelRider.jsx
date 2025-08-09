@@ -71,11 +71,9 @@ const MyParcelRider = () => {
 
     return (
         <div className='MyParcelRiderPArent bg-[#F6F6F6]'>
-            
             <div className='md:px-4 my-4'>
 
                 <div className="bg-white p-6 rounded-xl shadow-md  mt-10">
-
                     <h3 className='text-black text-[24px] font-[600] text-left pb-4'>My All Assign Parcel</h3>
 
                     {/* Tabs with Different type of category parcel*/}
@@ -161,14 +159,8 @@ const MyParcelRider = () => {
                             </div>
                         }
 
-
-
-
-
-
                     </div>
                 </div>
-
             </div>
 
             {/* ========================================================== */}

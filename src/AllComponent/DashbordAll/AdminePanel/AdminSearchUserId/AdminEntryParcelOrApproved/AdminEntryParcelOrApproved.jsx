@@ -90,6 +90,8 @@ const AdminEntryParcelOrApproved = () => {
         let time = moment().format("hh:mm A")
 
         let AdminEntryStandardDeliveryData = {
+            ParcelEntryFirstName:roles?.name,ParcelEntryLastName:roles?.LastName,ParcelEntryAddress:roles?.Address,
+            ParcelEntryPhone:roles?.Phone,
             deliveryType, name, address, District, policeStation, AlternativePhone, RecipientEmail, number, CodAmount, Invoice, ItemDescription, note, weight, StandardEmailUser: UserEmailSendDataEntry, StandardParcelId, date, time, DeliveryCharge: "60", status: "Pending", Payment: "No", ParcelCategory: "Regular", AssignRider: "No",
             ApprovedOffice: "Corporate office", PendingDate: date, ApprovedName: roles?.name, MyHub
         }

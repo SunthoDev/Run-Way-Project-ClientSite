@@ -10,7 +10,7 @@ const UserPaymentRequestUnikDataAll = () => {
     let userPaymentRequestData = useLoaderData()
     // console.log(userPaymentRequestData)
 
-    let { _id, ReqPaymentID, ReqPay, TotalCodAmount, TotalDeliveryCharge, subTotal, subTotalOnePercentCharge, totalBalanceUser, name, LastName, photo, userId, Address, BusinessName, Phone, ReqUserEmail, userStatus, UserPaymentReqDate, Payment } = userPaymentRequestData
+    let { _id, ReqPaymentID, ReqPay, TotalCodAmount, TotalDeliveryCharge, subTotal, subTotalOnePercentCharge, totalBalanceUser, name, LastName, photo, userId, Address, BusinessName, Phone, ReqUserEmail, userStatus, date,time, Payment } = userPaymentRequestData
 
 
     // find request user paid Delivery data all
@@ -28,106 +28,88 @@ const UserPaymentRequestUnikDataAll = () => {
 
 
     return (
-        <div className='AdminSeePaymentRequestDetailsAll mx-2 md:mx-4 rounded-[6px] my-4 bg-white px-2 md:px-6 py-10'>
+        <div className=''>
+            <button
+                className="mx-4 my-4 px-5 py-2 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg shadow-md transition duration-300 ease-in-out"
+            >📥 Download Excel</button>
+            
+            {/* ============================================ */}
+            {/* Payment Details All Here!! */}
+            {/* ============================================ */}
+            <div className='AdminSeePaymentRequestDetailsAll mx-2 md:mx-4 rounded-[6px] my-4 bg-white px-2 md:px-6 py-10'>
+                <div className="PaymentRequestDetailsUserInvoice">
 
-            <div className="PaymentRequestDetailsUserInvoice">
-
-                <div className="DownloadBtn md:flex gap-5 w-[100%] md:w-[28%] ml-auto items-center justify-center">
-                    <h3>{Payment}</h3>
-                    <button>Edit</button>
-                    <button className="ml-4 md:ml-0">Download Excel</button>
-                </div>
-
-                <div className="HeadInvoice w-[100%] md:w-[62%] md:flex justify-between mt-6">
-                    <div className="img w-[42%] md:w-[22%] mx-auto md:mx-0">
-                        <img className='w-[100%]' src={logo} alt="img" />
-                    </div>
-                    <div className="Invoice text-center mt-2 md:mt-0">
-                        <h3>INVOICE</h3>
-                        <h4>Date: {UserPaymentReqDate}</h4>
-                        <h4>ID: #{ReqPaymentID}</h4>
-                    </div>
-                </div>
-
-                <div class="Horijontal bg-[#d4d2d2] mt-[20px]  w-[full] h-[1px]"></div>
-
-                <div className="AmountAndBankDetails  mt-6">
-
-                    <div className="AmountDetails ">
-
-                        <div className="Amount flex justify-between items-center">
-                            <h3 className='text-black font-[600] text-[16px]'>Total Amount Delivered</h3>
-                            <h3 className='text-black font-[600] text-[16px]'>{TotalCodAmount}</h3>
-                        </div>
-                        <div className="Amount flex justify-between items-center">
-                            <h3 className='text-black font-[600] text-[16px]'>Due Bills</h3>
-                            <h3 className='text-black font-[600] text-[16px]'>{TotalDeliveryCharge}</h3>
-                        </div>
-                        <div className="Amount flex justify-between items-center">
-                            <h3 className='text-black font-[600] text-[16px]'>Sub-Total</h3>
-                            <h3 className='text-black font-[600] text-[16px]'>{subTotal}</h3>
-                        </div>
-                        <div className="Amount flex justify-between items-center">
-                            <h3 className='text-black font-[600] text-[16px]'>Cash & Risk Handling Charge(1%)</h3>
-                            <h3 className='text-black font-[600] text-[16px]'>{subTotalOnePercentCharge}</h3>
-                        </div>
-                        <div className="Amount flex justify-between items-center">
-                            <h3 className='text-black font-[600] text-[16px]'>Total</h3>
-                            <h3 className='text-black font-[600] text-[16px]'>{totalBalanceUser}</h3>
-                        </div>
-
-                        <div className="">
-                            <h4 className='text-black font-[500] text-[14px] pt-2'>Created at: 2023-04-27 06:24:36 PM Created By: Rahmat ullah - 22</h4>
-                            <h4 className='text-black font-[500] text-[14px] pt-2'>Last Updated at: 2023-05-07 06:11:56 PM</h4>
-                            <h4 className='text-black font-[500] text-[14px] pt-2'>Ready at: 2023-04-29 10:55 AM</h4>
-                            <h4 className='text-black font-[500] text-[14px] pt-2'>Paid at: 2023-05-07 06:11 PM Paid By: Rahmat ullah - 22</h4>
-                        </div>
-
+                    {/* Paid Badge  */}
+                    {/* ============================ */}
+                    <div className="DownloadBtn md:flex gap-5 w-[100%] md:w-[28%] ml-auto items-center justify-center">
+                        <button>{Payment}</button>
                     </div>
 
-                    {/* <div className="BankDetails ">
+                    {/* Invoice Details  */}
+                    {/* ============================ */}
+                    <div className="HeadInvoice w-[100%] md:w-[54%] md:flex justify-between mt-6">
+                        <div className="img w-[42%] md:w-[22%] mx-auto md:mx-0">
+                            <img className='w-[100%]' src={logo} alt="img" />
+                        </div>
+                        <div className="Invoice text-center mt-2 md:mt-0">
+                            <h3>INVOICE</h3>
+                            <h4>Date: {date}</h4>
+                            <h4>ID: #{ReqPaymentID}</h4>
+                        </div>
+                    </div>
 
-                        <h3 className='text-black font-[600] text-[16px]'>Requested Withdrawal Method: <span className='font-[700]'>{ReqPay}</span></h3>
-                        <div className="">
-                            <h3 className='text-black font-[700] text-[16px] pt-2'>Bank Details:</h3>
-                            <div className="ml-6">
-                                <h3 className='text-black font-[600] text-[16px] pt-2'>Bank Name: {UserInformation?.BankName ? UserInformation?.BankName : "User Not Add Bank Name"} </h3>
-                                <h3 className='text-black font-[600] text-[16px] pt-2'>Branch: {UserInformation?.BranchName ? UserInformation?.BranchName : "User Not Add Branch Name"}</h3>
-                                <h3 className='text-black font-[600] text-[16px] pt-2'>Routing No: {UserInformation?.RoutingNo ? UserInformation?.RoutingNo : "User Not Add Routing No"}</h3>
-                                <h3 className='text-black font-[600] text-[16px] pt-2'>Account Holder: {UserInformation?.AccountName ? UserInformation?.AccountName : "User Not Add Account Holder"}</h3>
-                                <h3 className='text-black font-[600] text-[16px] pt-2'>Bank Account Number: {UserInformation?.AccountNumber ? UserInformation?.AccountNumber : "User Not Add Bank Account Number"}</h3>
+                    <div class="Horijontal bg-[#d4d2d2] mt-[20px]  w-[full] h-[1px]"></div>
+
+                    {/* Payment Details  */}
+                    {/* ============================ */}
+                    <div className="AmountAndBankDetails  mt-6">
+                        <div className="AmountDetails ">
+                            <div className="Amount flex justify-between items-center">
+                                <h3 className='text-black font-[600] text-[16px]'>Total Amount Delivered</h3>
+                                <h3 className='text-black font-[600] text-[16px]'>{TotalCodAmount}</h3>
+                            </div>
+                            <div className="Amount flex justify-between items-center">
+                                <h3 className='text-black font-[600] text-[16px]'>Due Bills</h3>
+                                <h3 className='text-black font-[600] text-[16px]'>{TotalDeliveryCharge}</h3>
+                            </div>
+                            <div className="Amount flex justify-between items-center">
+                                <h3 className='text-black font-[600] text-[16px]'>Sub-Total</h3>
+                                <h3 className='text-black font-[600] text-[16px]'>{subTotal}</h3>
+                            </div>
+                            <div className="Amount flex justify-between items-center">
+                                <h3 className='text-black font-[600] text-[16px]'>Cash & Risk Handling Charge(1%)</h3>
+                                <h3 className='text-black font-[600] text-[16px]'>{subTotalOnePercentCharge}</h3>
+                            </div>
+                            <div className="Amount flex justify-between items-center">
+                                <h3 className='text-black font-[600] text-[16px]'>Total</h3>
+                                <h3 className='text-black font-[600] text-[16px]'>{totalBalanceUser}</h3>
+                            </div>
+                            <div className="">
+                                <h4 className='text-black font-[500] text-[14px] pt-2'>Created at:{date},{time}. Created By: {name} {LastName}</h4>
+                                <h4 className='text-black font-[500] text-[14px] pt-2'>Paid at:{userPaymentRequestData?.PaidDate},{userPaymentRequestData?.PaidTime}. Paid By: {userPaymentRequestData?.PaidPersonName}</h4>
                             </div>
                         </div>
-                        <h3 className='text-black font-[600] text-[16px] pt-2'>bKash: {UserInformation?.BakashNo ? UserInformation?.BakashNo : "User Not Add Bakash Number"}</h3>
-                        <h3 className='text-black font-[600] text-[16px] pt-2'>Rocket: {UserInformation?.RocketNo ? UserInformation?.RocketNo : "User Not Add Rocket Number"}</h3>
-                        <h3 className='text-black font-[600] text-[16px] pt-2'>Nagad: {UserInformation?.NagadNo ? UserInformation?.NagadNo : "User Not Add Nogod Number"}</h3>
-
-                    </div> */}
-
-                </div>
-
-                <div className="PaymentRequestUserAllPaymentStandardOrderData mt-14">
-
-                    <div className="text-center">
-                        <h4 className='text-[22px] font-[600] text-black'>Cleared Consignments ({userPaidAllDeliveryData.length})</h4>
-                        <h4 className='text-[16px] pt-1 font-[600] text-black'>Cleared Amount: {TotalCodAmount} Tk</h4>
-
                     </div>
 
-                    <div className="RequestUserAllPaymentStandardOrderData">
-
-                        {
-                            userPaidAllDeliveryData.map(PaymentStandardDataAll => <UserSeeAllPaymentRequestDelivaryData key={PaymentStandardDataAll._id} PaymentStandardDataAll={PaymentStandardDataAll}></UserSeeAllPaymentRequestDelivaryData>)
-                        }
+                    {/* Parcel Information of Payments */}
+                    {/* ======================================== */}
+                    <div className="PaymentRequestUserAllPaymentStandardOrderData mt-14">
+                        <div className="text-center">
+                            <h4 className='text-[22px] font-[600] text-black'>Cleared Consignments ({userPaidAllDeliveryData.length})</h4>
+                            <h4 className='text-[16px] pt-1 font-[600] text-black'>Cleared Amount: {TotalCodAmount} Tk</h4>
+                        </div>
+                        <div className="RequestUserAllPaymentStandardOrderData">
+                            {
+                                userPaidAllDeliveryData.map(PaymentStandardDataAll => <UserSeeAllPaymentRequestDelivaryData key={PaymentStandardDataAll._id} PaymentStandardDataAll={PaymentStandardDataAll}></UserSeeAllPaymentRequestDelivaryData>)
+                            }
+                        </div>
+                        <h4 className='mt-3 text-black font-[600]'>Printed at: {moment().format("MM/D/YY , hh:mm A")}</h4>
                     </div>
 
-                    <h4 className='mt-3 text-black font-[600]'>Printed at: {moment().format("MM/D/YY , hh:mm A")}</h4>
-
                 </div>
-
             </div>
 
-        </div >
+        </div>
     );
 };
 

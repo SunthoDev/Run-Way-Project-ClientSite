@@ -8,7 +8,7 @@ import done from '../../../../assets/IconAll/done.png';
 import celebration from '../../../../assets/IconAll/celebration.gif';
 import { ResponsiveBar } from '@nivo/bar';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const DashboardItemsUser = () => {
 
@@ -22,6 +22,7 @@ const DashboardItemsUser = () => {
     // ===================================================
 
     const [roles] = useRole()
+    const navigate = useNavigate()
     // console.log(roles)
     let { Address, BusinessName, LastName, Phone, email, name, photo, status, userId, PoliceStations, Districts } = roles
 
@@ -84,7 +85,74 @@ const DashboardItemsUser = () => {
         let time = moment().format("hh:mm A")
         let UpdatePaymentId = { PaymentID: PaymentIdUser }
 
-        let paymentRequestAllDataPost = { ReqPaymentID: PaymentIdUser, ReqPay: pay, TotalCodAmount: CodAmountResult, TotalDeliveryCharge: DeliveryChargeResult, subTotal, subTotalOnePercentCharge, totalBalanceUser, name, LastName, photo, userId, Address, BusinessName, PoliceStations, Phone, ReqUserEmail: email, userStatus: status, date, time, Payment: "UnPaid", MyHub:MyHub?.HubName }
+        let paymentRequestAllDataPost = {
+            ReqPaymentID: PaymentIdUser, ReqPay: pay,
+            TotalCodAmount: CodAmountResult, TotalDeliveryCharge: DeliveryChargeResult, subTotal, subTotalOnePercentCharge, totalBalanceUser,
+            name, LastName, photo, userId, Address, BusinessName, PoliceStations, Phone, ReqUserEmail: email, userStatus: status, date, time, Payment: "UnPaid", MyHub: MyHub?.HubName
+        }
+        // Check user bank information add or not 
+        if (pay === "Bkash") {
+            if (!roles?.BakashNo) {
+                Swal.fire({
+                    icon: "warning",
+                    title: "Missing Information",
+                    text: `Please add your ${pay} number first!`,
+                }).then(() => {
+                    navigate(`/dashboard/UserAddBankDetails/${roles?.userId}`);
+                });
+                return;
+            }
+        }
+        // Check user bank information add or not 
+        if (pay === "Nogod") {
+            if (!roles?.NagadNo) {
+                Swal.fire({
+                    icon: "warning",
+                    title: "Missing Information",
+                    text: `Please add your ${pay} number first!`,
+                }).then(() => {
+                    navigate(`/dashboard/UserAddBankDetails/${roles?.userId}`);
+                });
+                return;
+            }
+        }
+        // Check user bank information add or not 
+        if (pay === "Rocket") {
+            if (!roles?.RocketNo) {
+                Swal.fire({
+                    icon: "warning",
+                    title: "Missing Information",
+                    text: `Please add your ${pay} number first!`,
+                }).then(() => {
+                    navigate(`/dashboard/UserAddBankDetails/${roles?.userId}`);
+                });
+                return;
+            }
+        }
+        // Check user bank information add or not 
+        if (pay === "Cash" || pay === "Bank") {
+            if (
+                !roles?.BankName ||
+                !roles?.AccountName ||
+                !roles?.AccountNumber ||
+                !roles?.BranchName ||
+                !roles?.RoutingNo
+            ) {
+                Swal.fire({
+                    icon: "warning",
+                    title: "Missing Information",
+                    text: `Please add your bank details first!`,
+                }).then(() => {
+                    navigate(`/dashboard/UserAddBankDetails/${roles?.userId}`);
+                });
+                return;
+            }
+        }
+
+
+
+
+
 
 
         fetch(`https://server.trustereocourier.com.bd/UserPaymentRequestUpdateAllData/${roles.email}`, {
@@ -546,12 +614,9 @@ const DashboardItemsUser = () => {
                 {/* Payment Request Send Modal Start */}
                 {/* ============================================= */}
                 <div className={`alertContainer rounded-[8px]  px-4  lg:px-0 w-full lg:w-[24%]  ${poup === true && "showAlertJs"}`} >
-
                     <div className="poup ">
                         <div className="popInfo px-4 py-4 mt-3">
-
                             <h6>Payment Request</h6>
-
                             <form onSubmit={handleUserPaymentRequest}>
 
                                 <select required name='pay' className="select select-bordered w-full max-w-xs mt-4">
@@ -564,9 +629,7 @@ const DashboardItemsUser = () => {
                                 </select>
 
                                 <button disabled={totalBalanceUser === 0} type='submit' className='UpdateButton' >Send Payment Request</button>
-
                             </form>
-
                         </div>
                         <button onClick={clseAlertButton} className="removeAlertBtn"><i className="fa fa-times-circle" aria-hidden="true"></i></button>
                     </div>
@@ -587,7 +650,7 @@ const DashboardItemsUser = () => {
                                 let date = moment().format("MM/DD/YYYY")
                                 let time = moment().format("hh:mm A")
 
-                                let AllInfo = { PickupRequestType: PickupRequest, PickupIdUser, date, time, Address, BusinessName, LastName, Phone, PickReqUserEmail: email, name, photo, userId, status: "Pending", PoliceStations, Districts, MyHub:MyHub?.HubName }
+                                let AllInfo = { PickupRequestType: PickupRequest, PickupIdUser, date, time, Address, BusinessName, LastName, Phone, PickReqUserEmail: email, name, photo, userId, status: "Pending", PoliceStations, Districts, MyHub: MyHub?.HubName }
 
                                 try {
                                     const response = await fetch("https://server.trustereocourier.com.bd/PickupRequestWithManegeAdminUsers/UserPickupRequestSend", {

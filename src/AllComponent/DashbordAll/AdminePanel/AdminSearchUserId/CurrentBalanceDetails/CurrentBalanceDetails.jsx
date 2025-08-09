@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "./CurrentBalanceDetails.css"
 import { useQuery } from '@tanstack/react-query';
-import { useLoaderData, useParams } from 'react-router-dom';
+import { useLoaderData, useNavigate, useParams } from 'react-router-dom';
 import CurrentBalanceDetailsAllData from './CurrentBalanceDetailsAllData/CurrentBalanceDetailsAllData';
 import Swal from 'sweetalert2';
 import moment from 'moment';
@@ -10,6 +10,7 @@ const CurrentBalanceDetails = () => {
 
     let { email } = useParams()
     let PaymentBalance = useLoaderData()
+    let navigate =useNavigate()
     // console.log(email)
 
     // ===================================================
@@ -95,11 +96,69 @@ const CurrentBalanceDetails = () => {
         let UpdatePaymentId = { PaymentID: PaymentIdUser }
 
         let paymentRequestAllDataPost = {
-            ReqPaymentID: PaymentIdUser, ReqPay: pay, date, time, Payment: "UnPaid",
+            ReqPaymentID: PaymentIdUser, ReqPay: pay,
             TotalCodAmount: CodAmountResult, TotalDeliveryCharge: DeliveryChargeResult, subTotal, subTotalOnePercentCharge, totalBalanceUser,
-            name, LastName, photo, userId, Address, BusinessName, Phone, ReqUserEmail: userInformationForPayment?.email, userStatus: status,PoliceStations, MyHub:MyHub?.HubName,
+            name, LastName, photo, userId, Address, BusinessName, PoliceStations, Phone, ReqUserEmail: email, userStatus: status, date, time, Payment: "UnPaid", MyHub: MyHub?.HubName
         }
-        // console.log(paymentRequestAllDataPost)
+        // Check user bank information add or not 
+        if (pay === "Bkash") {
+            if (!userInformationForPayment?.BakashNo) {
+                Swal.fire({
+                    icon: "warning",
+                    title: "Missing Information",
+                    text: `Please add your ${pay} number first!`,
+                }).then(() => {
+                    navigate(`/dashboard/UserAddBankDetails/${userInformationForPayment?.userId}`);
+                });
+                return;
+            }
+        }
+        // Check user bank information add or not 
+        if (pay === "Nogod") {
+            if (!userInformationForPayment?.NagadNo) {
+                Swal.fire({
+                    icon: "warning",
+                    title: "Missing Information",
+                    text: `Please add your ${pay} number first!`,
+                }).then(() => {
+                    navigate(`/dashboard/UserAddBankDetails/${userInformationForPayment?.userId}`);
+                });
+                return;
+            }
+        }
+        // Check user bank information add or not 
+        if (pay === "Rocket") {
+            if (!userInformationForPayment?.RocketNo) {
+                Swal.fire({
+                    icon: "warning",
+                    title: "Missing Information",
+                    text: `Please add your ${pay} number first!`,
+                }).then(() => {
+                    navigate(`/dashboard/UserAddBankDetails/${userInformationForPayment?.userId}`);
+                });
+                return;
+            }
+        }
+        // Check user bank information add or not 
+        if (pay === "Cash" || pay === "Bank") {
+            if (
+                !userInformationForPayment?.BankName ||
+                !userInformationForPayment?.AccountName ||
+                !userInformationForPayment?.AccountNumber ||
+                !userInformationForPayment?.BranchName ||
+                !userInformationForPayment?.RoutingNo
+            ) {
+                Swal.fire({
+                    icon: "warning",
+                    title: "Missing Information",
+                    text: `Please add your bank details first!`,
+                }).then(() => {
+                    navigate(`/dashboard/UserAddBankDetails/${userInformationForPayment?.userId}`);
+                });
+                return;
+            }
+        }
+
 
         fetch(`https://server.trustereocourier.com.bd/UserPaymentRequestUpdateAllData/${userInformationForPayment?.email}`, {
             method: "PUT",

@@ -2,10 +2,15 @@ import React, { useState } from 'react';
 import "./AdminViewPaymentRequestAll.css"
 import { useQuery } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
+import moment from 'moment';
+import useRole from '../../../../Hook/useRole';
 
 const AdminViewPaymentRequestAll = () => {
 
     const [tabState, setTabState] = useState(1);
+    const [roles] = useRole()
+    const ad = roles?.role === "admin"
 
     // user data all find use tenStack query 
     let { refetch, data: PaymentRequestDataAll = [] } = useQuery(["AdminAllPaymentRequestData"], async () => {
@@ -124,8 +129,17 @@ const AdminViewPaymentRequestAll = () => {
                                                             <td className="px-6 py-4">
                                                                 <button
                                                                     onClick={() => {
+                                                                        let PaidDate = moment().format("MM/DD/YY")
+                                                                        let PaidTime = moment().format("hh:mm A")
+                                                                        let paidDetails = {
+                                                                            PaidDate, PaidTime, PaidPersonName: roles?.name
+                                                                        }
                                                                         fetch(`https://server.trustereocourier.com.bd/AdminPaidUserPaymentRequestData/${Payment?._id}`, {
-                                                                            method: "PATCH",
+                                                                            method: "PUT",
+                                                                            headers: {
+                                                                                "content-type": "application/json"
+                                                                            },
+                                                                            body: JSON.stringify(paidDetails)
                                                                         })
                                                                             .then(res => res.json())
                                                                             .then(data => {
@@ -133,7 +147,7 @@ const AdminViewPaymentRequestAll = () => {
                                                                                     Swal.fire({
                                                                                         position: 'top-end',
                                                                                         icon: 'success',
-                                                                                        title: 'PAyment Request Paid Success',
+                                                                                        title: 'Payment Request Paid Success',
                                                                                         showConfirmButton: false,
                                                                                         timer: 1500
                                                                                     })
@@ -144,6 +158,12 @@ const AdminViewPaymentRequestAll = () => {
                                                                     className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded shadow-sm text-sm">
                                                                     Approve Paid
                                                                 </button>
+                                                                <br />
+                                                                <Link to={`/dashboard/AdminDashboard/AdminPaymentRequestDetailsAll/${Payment?.ReqPaymentID}`}>
+                                                                    <button className="bg-blue-600 mt-[4px] hover:bg-blue-700 text-white px-3 py-1 rounded shadow-sm text-sm">
+                                                                        View
+                                                                    </button>
+                                                                </Link>
                                                             </td>
                                                         </tr>
                                                     )
@@ -151,7 +171,6 @@ const AdminViewPaymentRequestAll = () => {
                                             </tbody>
                                         </table>
                                     </div>
-
 
                                 </div>
                             </div>
@@ -176,6 +195,7 @@ const AdminViewPaymentRequestAll = () => {
                                                     <th className="px-6 py-3 text-left text-sm font-medium text-indigo-600">Amount</th>
                                                     <th className="px-6 py-3 text-left text-sm font-medium text-green-600">Received Money</th>
                                                     <th className="px-6 py-3 text-left text-sm font-medium text-blue-600">Status</th>
+                                                    <th className="px-6 py-3 text-left text-sm font-medium text-blue-600">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody className="bg-white divide-y divide-gray-200">
@@ -212,6 +232,14 @@ const AdminViewPaymentRequestAll = () => {
                                                                     }`}>
                                                                     {Payment?.Payment}
                                                                 </p>
+                                                            </td>
+                                                            <td className="px-6 py-4">
+                                                                <br />
+                                                                <Link
+                                                                    to={`/dashboard/AdminDashboard/AdminPaymentRequestDetailsAll/${Payment?.ReqPaymentID}`}
+                                                                    className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded shadow-sm text-sm">
+                                                                    View
+                                                                </Link>
                                                             </td>
                                                         </tr>
                                                     )

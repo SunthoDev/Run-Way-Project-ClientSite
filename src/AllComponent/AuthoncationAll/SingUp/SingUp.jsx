@@ -59,7 +59,6 @@ const SingUp = () => {
     const [success, setSuccess] = useState("");
 
     let onSubmit = (data) => {
-
         setError("")
         setSuccess("")
         let BusinessName = data.businessName
