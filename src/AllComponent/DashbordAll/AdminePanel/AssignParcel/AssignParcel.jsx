@@ -60,6 +60,7 @@ const AssignParcel = () => {
         let res = await fetch("https://server.trustereocourier.com.bd/users")
         return res.json()
     })
+    let [searchHubName, setSearchHubName] = useState("")
 
     // ========================================================================================================
     // All rider Show of select Hub
@@ -84,16 +85,178 @@ const AssignParcel = () => {
     };
 
 
+
+    // =========================================================================================================
+    // Take Group ids collect together by a enter Start 
+    // =====================================================
+
+    // Received All Ids together in json array
+    // ==========================================
+    const [AllId, setIDAll] = useState([]);
+    // Received input value
+    // ========================
+    const [inputValue, setInputValue] = useState("");
+
+    const handleKeyDown = (e) => {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            const value = inputValue.trim();
+            if (value && !AllId.includes(value)) {
+                setIDAll([...AllId, value]);
+            }
+            setInputValue("");
+        }
+    };
+
+    // Take id remove from json
+    // =====================================================
+    const removeTag = (index) => {
+        setIDAll(AllId.filter((_, i) => i !== index));
+    };
+
+    // =====================================================
+    // Take Group ids collect together by a enter End
+    // =====================================================
+
+
+
     return (
         <div className='AdminViewPaymentRequestAll bg-[#F6F6F6]'>
 
+            {/* ====================================================================== */}
+            {/* Multiple Parcel Assign To here */}
+            {/* ====================================================================== */}
+            <div className="flex justify-center md:px-4 my-4">
+                <div className="w-full bg-white shadow-lg border border-gray-200 rounded-xl p-6">
+                    <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+                        Multiple Parcel Assign to Here
+                    </h2>
+                    <form onSubmit={(e) => {
+                        e.preventDefault()
+                        const DispatchHubName = e.target.HubName.value;
+                        let date = moment().format("MM/DD/YYYY")
+                        let time = moment().format("hh:mm A")
+                        let DispatchId = Math.round(Math.random() * 99999999).toString()
+                        let TrackingMessage = `Sent to ${DispatchHubName} hub. Dispatch id ${DispatchId}`
+
+                        // Dispatch data post 
+                        // ===================================================================
+                        let DispatchDataPost = { DispatchId, TrackingMessage, date, time, DispatchType: "Sent", DispatchHubName, DispatchParcelAllId: AllId }
+                        // console.log(DispatchDataPost)
+
+                        // Tracking message post of dispatch 
+                        // =============================================================
+                        let TrackingMessagePost = AllId?.map((id, index) => ({
+                            userOrderIdTracking: id,
+                            TrackingMessage,
+                            TrackingDate: date,
+                            TrackingTime: time
+                        }));
+                        // console.log(TrackingMessagePost)
+
+
+                        // Dispatch Send Data Post 
+                        // ===========================================
+                        fetch("https://server.trustereocourier.com.bd/DispatchAllRequestWithTrackingMessage/AdminDispatchRequestSend", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify(DispatchDataPost)
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.insertedId) {
+                                    // Dispatch Tracking Data Post 
+                                    // ===========================================
+                                    fetch("https://server.trustereocourier.com.bd/DispatchAllRequestWithTrackingMessage/AdminTrackingRequestSentOfDispatch", {
+                                        method: "POST",
+                                        headers: {
+                                            "Content-Type": "application/json"
+                                        },
+                                        body: JSON.stringify(TrackingMessagePost)
+                                    })
+                                        .then(res => res.json())
+                                        .then(data => {
+                                            // console.log(data)
+                                            if (data.insertedCount > 0) {
+                                                e.target.reset()
+                                                setIDAll([]);
+                                                Swal.fire({
+                                                    position: 'top-end',
+                                                    icon: 'success',
+                                                    title: 'Dispatch Request Success',
+                                                    showConfirmButton: false,
+                                                    timer: 1500
+                                                })
+                                            }
+                                        })
+                                }
+                            })
+
+
+                    }} className="grid grid-cols-7 gap-6">
+
+                        {/* =============================================== */}
+                        {/* Parcel Multiple Id add System same time Start */}
+                        {/* =============================================== */}
+                        <div className="flex flex-wrap border rounded-lg p-2 min-h-[50px] col-span-4">
+                            {AllId?.map((tag, index) => (
+                                <div key={index} className="flex items-center bg-black text-white text-sm rounded-full px-3 h-[24px] m-1">
+                                    {tag}
+                                    <button
+                                        type="button"
+                                        onClick={() => removeTag(index)}
+                                        className="ml-2 text-red-500 font-bold"
+                                    >
+                                        ×
+                                    </button>
+                                </div>
+                            ))}
+                            <input
+                                type="text"
+                                className="flex-grow items-center bg-black text-white text-sm rounded-full px-3 h-[24px] m-1 w-[20%]"
+                                value={inputValue}
+                                onChange={(e) => setInputValue(e.target.value)}
+                                onKeyDown={handleKeyDown}
+                                placeholder="Type and press enter..."
+                            />
+                        </div>
+
+                        {/* Right side - select picker, submit button*/}
+                        <div className="col-span-3 space-y-4">
+                            <select required className="w-full bg-white border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                name="HubName"
+                            >
+                                <option value="">-- Select Hub Name --</option>
+                                {AllHubFind?.map((hubName, i) => (
+                                    <option key={i}>
+                                        {hubName?.NameOfHub}
+                                    </option>
+                                ))}
+                            </select>
+
+                            {/* Submit button */}
+                            <button
+                                type="submit"
+                                className="bg-blue-500 text-gray-50 px-4 py-2 rounded-md font-semibold shadow-md hover:bg-blue-600 w-full">
+                                Submit
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+
+
+
+
+            {/* ====================================================================== */}
+            {/* Assign Parcel (Pending) And (Review) Status data Show Here
+            {/* ====================================================================== */}
             <div className='md:px-4 my-4'>
-                {/* ====================================================================== */}
-                {/* Delivery monitoring | all dat show here
-                {/* ====================================================================== */}
-
                 <div className="bg-white p-6 rounded-xl shadow-md  mt-10">
-
                     <h3 className='text-black text-[24px] font-[600] text-left pb-4'>Assign Parcel</h3>
 
                     {/* Tabs with Different type of category parcel*/}
@@ -126,6 +289,7 @@ const AssignParcel = () => {
                                 onBlur={(e) => {
                                     const HubName = e.target.value
                                     setHubSearchPendingData(PendingParcelAll?.filter(Pending => Pending?.MyHub === HubName))
+                                    setSearchHubName(HubName)
                                 }}
                             >
                                 <option value="">-- Select Hub Name --</option>
@@ -244,22 +408,34 @@ const AssignParcel = () => {
                                                                                         tabIndex={0}
                                                                                         className="dropdown-content menu absolute mt-2 right-0 bg-white rounded-md shadow-lg w-60 p-2 space-y-1 border border-gray-200 z-[100]"
                                                                                     >
-                                                                                        {AllHubFind?.length > 0 ? (
-                                                                                            AllHubFind.map((hubName, i) => (
-                                                                                                <li key={i} className="">
-                                                                                                    <div className="flex justify-between items-center px-2 py-1 rounded hover:bg-gray-100 transition">
-                                                                                                        <span className="text-sm text-gray-700">{hubName?.NameOfHub}</span>
+                                                                                        {/* Hub show which is search to top from searchbar  */}
+                                                                                        {/* ====================================================== */}
+                                                                                        {/* searchHubName */}
+                                                                                        <div className="flex justify-between items-center px-2 py-1 rounded hover:bg-gray-100 transition">
+                                                                                            <span className="text-sm text-gray-700">{searchHubName}</span>
 
-                                                                                                        <button onClick={() => handleAssignRider(hubName?.NameOfHub, ParcelAll?.StandardParcelId)} className="btn btn-sm btn-outline btn-primary">Rider</button>
+                                                                                            <button onClick={() => handleAssignRider(searchHubName, ParcelAll?.StandardParcelId)} className="btn btn-sm btn-outline btn-primary">Rider</button>
 
-                                                                                                    </div>
-                                                                                                </li>
-                                                                                            ))
-                                                                                        ) : (
-                                                                                            <li>
-                                                                                                <div className="px-2 py-1 text-sm text-gray-400">No Hub found</div>
-                                                                                            </li>
-                                                                                        )}
+                                                                                        </div>
+
+                                                                                        {/* All hub show here to database  */}
+                                                                                        {/* ============================================== */}
+                                                                                        {/* {AllHubFind?.length > 0 ? (
+                                    AllHubFind.map((hubName, i) => (
+                                        <li key={i} className="">
+                                            <div className="flex justify-between items-center px-2 py-1 rounded hover:bg-gray-100 transition">
+                                                <span className="text-sm text-gray-700">{hubName?.NameOfHub}</span>
+
+                                                <button onClick={() => handleAssignRider(hubName?.NameOfHub, ParcelAll?.StandardParcelId)} className="btn btn-sm btn-outline btn-primary">Rider</button>
+
+                                            </div>
+                                        </li>
+                                    ))
+                                ) : (
+                                    <li>
+                                        <div className="px-2 py-1 text-sm text-gray-400">No Hub found</div>
+                                    </li>
+                                )} */}
                                                                                     </ul>
                                                                                 </div>
                                                                             </div>
@@ -339,34 +515,6 @@ const AssignParcel = () => {
                                                                 View
                                                             </button>
                                                         </Link>
-                                                        <button className="btn btn-sm btn-outline btn-primary"
-                                                            onClick={() => {
-                                                                let ApprovedData = { ApprovedOffice: "Corporate office", ApprovedName: roles?.name, PendingDate: moment().format("MM/DD/YY , hh:mm A"), AssignRider: "No" }
-
-                                                                fetch(`https://server.trustereocourier.com.bd/AdminApprovedUserStandardData/${AllData?._id}`, {
-                                                                    method: "PUT",
-                                                                    headers: {
-                                                                        "content-type": "application/json"
-                                                                    },
-                                                                    body: JSON.stringify(ApprovedData)
-                                                                })
-                                                                    .then(res => res.json())
-                                                                    .then(data => {
-                                                                        if (data.modifiedCount > 0) {
-                                                                            Swal.fire({
-                                                                                position: 'top-end',
-                                                                                icon: 'success',
-                                                                                title: 'Parcel Pending Success',
-                                                                                showConfirmButton: false,
-                                                                                timer: 1500
-                                                                            })
-                                                                        }
-                                                                        refetch()
-                                                                    })
-                                                            }}
-                                                        >
-                                                            Pending
-                                                        </button>
                                                     </td>
                                                 </tr>)
                                             }
@@ -381,10 +529,9 @@ const AssignParcel = () => {
                 </div>
             </div>
 
-            {/* ========================================================== */}
+            {/* ====================================================================== */}
             {/* Rider Hub Access Modal Update Start  */}
-            {/* ========================================================== */}
-
+            {/* ====================================================================== */}
             {activeAllRider && (
                 <dialog id="ParcelAssignToRider" className="modal"
                     key={activeAllRider._id}
@@ -494,9 +641,10 @@ const AssignParcel = () => {
                 </dialog>
             )}
 
-            {/* ========================================================== */}
+            {/* ====================================================================== */}
             {/* Rider Hub Access Update Start End  */}
-            {/* ========================================================== */}
+            {/* ====================================================================== */}
+
         </div>
     );
 };

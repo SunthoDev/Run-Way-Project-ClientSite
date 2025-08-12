@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import "./AdminSearchStandardParcelUser.css"
-import { Link, useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import AdminSendAllTrackingMessage from './AdminSendAllTrackingMessage/AdminSendAllTrackingMessage';
 import Swal from 'sweetalert2';
@@ -21,6 +21,7 @@ const AdminSearchStandardParcelUser = () => {
     // Find Parcel information
     // ===================================================
     let InVoiceData = useLoaderData()
+    let navigate =  useNavigate()
     let [roles] = useRole()
     const ad = roles?.role === "admin"
     // console.log(InVoiceData)
@@ -45,7 +46,6 @@ const AdminSearchStandardParcelUser = () => {
     // console.log(adminSendTrackingAllMessage)
 
     // ==========================================================
-
 
     // =========================================================================================================
     // Print (Invoice) Options Start
@@ -288,6 +288,65 @@ const AdminSearchStandardParcelUser = () => {
                             <p><strong>Invoice:</strong> {Invoice === "" ? "N/A" : Invoice}</p>
                             {/* <p><strong>Tracking Code:</strong> 3C7ADD84D</p> */}
                             {/* <p><strong>Tracking Link:</strong> <a href="https://trustereo-courire.com.bd/t/3C7ADD84D" className="text-blue-600 underline">https://trustereo-courire.bd/t/3C7ADD84D</a></p> */}
+                            {InVoiceData?.status === "Review" &&
+                                <button className="bg-[#22A197] text-white font-semibold px-4 py-2 rounded"
+                                    onClick={() => {
+                                        let date = moment().format("MM/DD/YYYY")
+                                        let time = moment().format("hh:mm A")
+                                        let ApprovedName = roles?.name
+                                        let TrackingMessage = `Consignment status has been updated as Pending.`
+
+                                        let TrackingMessagePost = {
+                                            userOrderIdTracking: StandardParcelId,
+                                            TrackingMessage,
+                                            TrackingDate: date,
+                                            TrackingTime: time
+                                        };
+
+                                        let ApprovedData = { ApprovedOffice: "Corporate office", PendingDate: moment().format("MM/DD/YY , hh:mm A"), AssignRider: "No" }
+
+                                        fetch(`https://server.trustereocourier.com.bd/AdminApprovedUserStandardData/${InVoiceData?._id}`, {
+                                            method: "PUT",
+                                            headers: {
+                                                "content-type": "application/json"
+                                            },
+                                            body: JSON.stringify(ApprovedData)
+                                        })
+                                            .then(res => res.json())
+                                            .then(data => {
+                                                if (data.modifiedCount > 0) {
+
+                                                    // Parcel status update to pending from Review.
+                                                    // tracking message send. 
+                                                    // ===========================================
+                                                    fetch("https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/AdminTrackingRequestSentOfAssignRider", {
+                                                        method: "POST",
+                                                        headers: {
+                                                            "Content-Type": "application/json"
+                                                        },
+                                                        body: JSON.stringify(TrackingMessagePost)
+                                                    })
+                                                        .then(res => res.json())
+                                                        .then(data => {
+                                                            // console.log(data)
+                                                            if (data.insertedId) {
+                                                                Swal.fire({
+                                                                    position: 'top-end',
+                                                                    icon: 'success',
+                                                                    title: 'Parcel Pending Success',
+                                                                    showConfirmButton: false,
+                                                                    timer: 1500
+                                                                })
+                                                                refetch()
+                                                                navigate("/dashboard/AdminDashboard/AssignParcel")
+                                                            }
+                                                        })
+                                                }
+                                            })
+                                    }}
+                                >
+                                    Pending Parcel</button>
+                            }
                         </div>
 
                         {/* Right Side Info */}
@@ -361,7 +420,7 @@ const AdminSearchStandardParcelUser = () => {
 
             <div className="border border-gray-200 rounded-lg p-6 shadow-sm">
 
-                <div className="trackingMessageShow w-[100%] md:w-[60%]">
+                <div className="trackingMessageShow ">
 
                     {
                         adminSendTrackingAllMessage?.map(messageAll => <AdminSendAllTrackingMessage key={messageAll._id} messageAllData={messageAll}></AdminSendAllTrackingMessage>)

@@ -202,7 +202,7 @@ const AdminPaymentRequestDetailsAll = () => {
             </div>
 
             {/* ========================================================== */}
-            {/* (PARCEL-MODAL) Parcel Details Show Bellow Start */}
+            {/* Payment Request Status Update to Admin (Modal)  */}
             {/* ========================================================== */}
             {PaymentDetailsForModal && (
                 <dialog
