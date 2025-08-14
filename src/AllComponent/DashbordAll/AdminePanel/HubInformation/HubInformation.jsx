@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import JoditEditor from 'jodit-react';
 import "./HubInformation.css"
 import { useQuery } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
@@ -6,6 +7,18 @@ import moment from "moment";
 import { Link, useNavigate } from 'react-router-dom';
 
 const HubInformation = () => {
+
+    // ========================================================================
+    // It is A edit text , and create html or css. Then that code received  
+    // ========================================================================
+    const editor = useRef(null);
+    const [content, setContent] = useState('');
+    // ========================================================================
+    // It is A edit text , and create html or css. Then that code received 
+    // ========================================================================
+
+
+
 
     // All Hub Information Data !!
     // =====================================================
@@ -25,51 +38,52 @@ const HubInformation = () => {
                     Add New Hub Information
                 </h2>
 
-                <form onSubmit={async (e) => {
-                    e.preventDefault();
-                    const hubName = e.target.hubName.value;
-                    const number = e.target.number.value;
-                    const address = e.target.address.value;
-                    const details = e.target.details.value;
+                <form
+                    onSubmit={async (e) => {
+                        e.preventDefault();
+                        const hubName = e.target.hubName.value;
+                        const number = e.target.number.value;
+                        const address = e.target.address.value;
+                        const details = e.target.details.value;
 
-                    const HubInformation = { hubName, number, address, details, date: moment().format("MM/DD/YYYY"), time: moment().format("hh:mm A") };
-                    // console.log(newHub);
+                        const HubInformation = { hubName, number, address, details, date: moment().format("MM/DD/YYYY"), time: moment().format("hh:mm A") };
+                        // console.log(newHub);
 
-                    // Hub information request data insert 
-                    // =================================
-                    try {
-                        let res = await fetch("https://server.trustereocourier.com.bd/HubInformationAll/PostHubInformation", {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json"
-                            },
-                            body: JSON.stringify(HubInformation)
-                        })
-                        let result = await res.json()
+                        // Hub information request data insert 
+                        // =================================
+                        try {
+                            let res = await fetch("https://server.trustereocourier.com.bd/HubInformationAll/PostHubInformation", {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json"
+                                },
+                                body: JSON.stringify(HubInformation)
+                            })
+                            let result = await res.json()
 
-                        if (res.ok) {
+                            if (res.ok) {
+                                Swal.fire({
+                                    position: "top-end",
+                                    icon: "success",
+                                    title: "🎉 Hub Information add successfully!",
+                                    showConfirmButton: false,
+                                    timer: 1500,
+                                });
+                                refetch()
+                                e.target.reset();
+                            }
+
+                        } catch (error) {
+                            console.error("An error occurred:", error.message);
                             Swal.fire({
-                                position: "top-end",
-                                icon: "success",
-                                title: "🎉 Hub Information add successfully!",
-                                showConfirmButton: false,
-                                timer: 1500,
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: error.message || 'Something went wrong!'
                             });
-                            refetch()
-                            e.target.reset();
+                        } finally {
+                            console.log("This will always run (finally block).");
                         }
-
-                    } catch (error) {
-                        console.error("An error occurred:", error.message);
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: error.message || 'Something went wrong!'
-                        });
-                    } finally {
-                        console.log("This will always run (finally block).");
-                    }
-                }} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    }} className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {/* Hub Name */}
                     <div className="col-span-1">
                         <label className="block text-sm font-medium text-gray-700 mb-1">Hub Name</label>
@@ -118,6 +132,26 @@ const HubInformation = () => {
                         ></textarea>
                     </div>
 
+                    {/* Main Description is Edite*/}
+                    <div className="col-span-1 md:col-span-2">
+                            <label className="block text-sm font-medium text-gray-700 mb-1">Sub Details</label>
+                        <label className="Description input-group w-full">
+                            <JoditEditor
+                                ref={editor}
+                                value={content}
+                                tabIndex={1}
+                                onBlur={newContent => setContent(newContent)}
+                            // onChange={newContent => setContent(newContent)}
+                            />
+                        </label>
+                    </div>
+
+
+
+
+
+
+
                     {/* Submit Button */}
                     <div className="col-span-1 md:col-span-2">
                         <button
@@ -133,7 +167,6 @@ const HubInformation = () => {
             {/* ================================================== */}
             {/* See ALl hub information data bellow !! */}
             {/* ================================================== */}
-
             <div className="bg-[#F6F6F6] px-[12px] md:px-4 my-4 flex justify-center">
                 <div className="w-full bg-white shadow-lg border border-gray-200 rounded-xl p-6">
                     <h2 className="text-2xl font-semibold text-gray-800 mb-4">Admin Hub List</h2>
@@ -202,10 +235,7 @@ const HubInformation = () => {
                 </div>
             </div>
 
-
-
-
-        </div >
+        </div>
     );
 };
 
