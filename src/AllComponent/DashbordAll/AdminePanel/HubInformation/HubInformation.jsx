@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react';
-import JoditEditor from 'jodit-react';
 import "./HubInformation.css"
 import { useQuery } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
@@ -7,18 +6,6 @@ import moment from "moment";
 import { Link, useNavigate } from 'react-router-dom';
 
 const HubInformation = () => {
-
-    // ========================================================================
-    // It is A edit text , and create html or css. Then that code received  
-    // ========================================================================
-    const editor = useRef(null);
-    const [content, setContent] = useState('');
-    // ========================================================================
-    // It is A edit text , and create html or css. Then that code received 
-    // ========================================================================
-
-
-
 
     // All Hub Information Data !!
     // =====================================================
@@ -131,26 +118,6 @@ const HubInformation = () => {
                             placeholder="Write more information about the hub..."
                         ></textarea>
                     </div>
-
-                    {/* Main Description is Edite*/}
-                    <div className="col-span-1 md:col-span-2">
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Sub Details</label>
-                        <label className="Description input-group w-full">
-                            <JoditEditor
-                                ref={editor}
-                                value={content}
-                                tabIndex={1}
-                                onBlur={newContent => setContent(newContent)}
-                            // onChange={newContent => setContent(newContent)}
-                            />
-                        </label>
-                    </div>
-
-
-
-
-
-
 
                     {/* Submit Button */}
                     <div className="col-span-1 md:col-span-2">

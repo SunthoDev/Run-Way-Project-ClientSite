@@ -75,12 +75,21 @@ const ExpressDelivery = () => {
         let StandardParcelId = Math.round(Math.random() * 9999999).toString()
         let date = moment().format("MM/DD/YYYY")
         let time = moment().format("hh:mm A")
+        let TrackingMessage = `Your parcel has been created successfully`
 
-        let StandardDeliveryData = { 
-            ParcelEntryFirstName:roles?.name,ParcelEntryLastName:roles?.LastName,ParcelEntryAddress:roles?.Address,
-            ParcelEntryPhone:roles?.Phone,StandardEmailUser: user?.email,
+        let TrackingMessagePost = {
+            userOrderIdTracking: StandardParcelId,
+            TrackingMessage,
+            TrackingDate: date,
+            TrackingTime: time
+        };
+
+        let StandardDeliveryData = {
+            ParcelEntryFirstName: roles?.name, ParcelEntryLastName: roles?.LastName, ParcelEntryAddress: roles?.Address,
+            ParcelEntryPhone: roles?.Phone, StandardEmailUser: user?.email,
             deliveryType, name, address, District, policeStation, AlternativePhone, RecipientEmail, number, CodAmount, Invoice, ItemDescription, note, weight,
-            StandardParcelId, date, time, DeliveryCharge: "60", status: "Review", Payment: "No", ParcelCategory: "Express", MyHub: MyHub?.HubName, AssignRider: "No" }
+            StandardParcelId, date, time, DeliveryCharge: "60", status: "Review", Payment: "No", ParcelCategory: "Express", MyHub: MyHub?.HubName, AssignRider: "No"
+        }
 
         // console.log(StandardDeliveryData)
 
@@ -95,14 +104,30 @@ const ExpressDelivery = () => {
             .then(data => {
                 navigate("/dashboard/StandardDelivery/StandardSucessInvoice")
                 if (data.insertedId) {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Standard Delivery Success',
-                        showConfirmButton: false,
-                        timer: 1500
+
+                    // tracking Message Send For Create Parcel
+                    // ====================================================
+                    fetch("https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/AdminTrackingRequestSentOfAssignRider", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(TrackingMessagePost)
                     })
-                    setStandardParcelId(StandardParcelId)
+                        .then(res => res.json())
+                        .then(data => {
+                            // console.log(data)
+                            if (data.insertedId) {
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Standard Delivery Success',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                                setStandardParcelId(StandardParcelId)
+                            }
+                        })
                 }
             })
     }

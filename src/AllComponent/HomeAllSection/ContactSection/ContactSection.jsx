@@ -4,7 +4,7 @@ import './ContactSection.css';
 
 const ContactSection = () => {
   return (
-    <div className="contact-section relative min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 py-20 overflow-hidden">
+    <div id="contact" className="contact-section relative min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 py-20 overflow-hidden">
       {/* Aurora Background Effects */}
       <div className="aurora-bg">
         <div className="aurora-1"></div>

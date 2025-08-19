@@ -55,7 +55,7 @@ const Footer = () => {
                             style={{ maxWidth: '260px', minWidth: '120px' }}
                         />
                         <p className="text-gray-400 mb-6">
-                            N/17,Noorjahanroad, Mohammadpur<br />
+                            N/17,Mirpur Dhaka.<br />
                             infotrustereocourier@gmail.com<br />
                             Hotline: 09611-049234
 

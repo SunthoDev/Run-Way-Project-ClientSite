@@ -10,6 +10,7 @@ const ParcelInfoOfRider = () => {
 
     const [tabState, setTabState] = useState(1);
     const [roles] = useRole()
+    // console.log(roles)
 
     // ===========================================================================================================
     // Rider Send Parcel COD all Amount Request Data Find Here
@@ -18,25 +19,21 @@ const ParcelInfoOfRider = () => {
         let res = await fetch(`https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/ParcelCollectCODRequestAllDataFind`)
         return res.json()
     })
-    // console.log(RiderSendParcelCODReqAll)
+    console.log(RiderSendParcelCODReqAll)
     
     // Rider Send Parcel COD all Pending Data Filter Bellow
     // =======================================================================
-    let PendingCODRequestData = RiderSendParcelCODReqAll?.filter(Pending => Pending?.status === "Pending")
+    let PendingCODRequestData = RiderSendParcelCODReqAll?.filter(Pending => Pending?.status === "Pending" && Pending?.CODReqEmail === roles?.email)
     // Rider Send Parcel COD all Approved Data Filter Bellow
     // =======================================================================
-    let ApprovedCODRequestData = RiderSendParcelCODReqAll?.filter(Approved => Approved?.status === "Approved")
-
-
-
-
+    let ApprovedCODRequestData = RiderSendParcelCODReqAll?.filter(Approved => Approved?.status === "Approved" && Pending?.CODReqEmail === roles?.email)
 
 
 
     return (
         <div className='AdminViewPaymentRequestAll bg-[#F6F6F6]'>
             <div className='px-2 md:px-4 my-4 pt-[80px] md:pt-0'>
-
+                
                 {/* ======================================================== */}
                 {/* Rider Send Parcel COD Request to Bellow  */}
                 {/* ======================================================== */}
@@ -71,6 +68,7 @@ const ParcelInfoOfRider = () => {
                                             CODReqEmail: roles?.email,
                                             ParcelTotalCODAmountOfRider: roles?.ParcelCODAmountOfRider,
                                             status:"Pending",
+                                            riderHub:roles?.MyHubRider
                                         }
                                         // ===================================================
                                         // Parcel Total Cod Amount Request Send  to Rider
@@ -237,9 +235,8 @@ const ParcelInfoOfRider = () => {
                     </div>
                 </div>
 
-
             </div>
-        </div >
+        </div>
     );
 };
 

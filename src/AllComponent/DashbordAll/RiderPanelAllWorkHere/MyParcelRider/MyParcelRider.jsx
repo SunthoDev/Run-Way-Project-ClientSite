@@ -67,7 +67,7 @@ const MyParcelRider = () => {
     };
 
 
-
+    // riderHub
 
     return (
         <div className='MyParcelRiderPArent bg-[#F6F6F6]'>
@@ -260,7 +260,17 @@ const MyParcelRider = () => {
                                 let parcelStatus = event.target.statusUp.value
                                 let date = moment().format("MM/DD/YYYY")
                                 let time = moment().format("hh:mm A")
-                                let TrackingMessage = `🚚 Delivery complete. We hope you enjoy your package!`
+                                let TrackingMessage = "";
+
+                                if (parcelStatus === "Delivered") {
+                                    TrackingMessage = "🚚 Delivery complete. We hope you enjoy your package!";
+                                } else if (parcelStatus === "PartiallyDelivered") {
+                                    TrackingMessage = "📦 Your parcel has been partially delivered. Please check your items.";
+                                } else if (parcelStatus === "Cancel") {
+                                    TrackingMessage = "❌ Your parcel has been cancelled. Please contact support for more details.";
+                                } else {
+                                    TrackingMessage = "ℹ️ Your parcel is being processed. Please wait for updates.";
+                                }
 
                                 // Parcel Delivery Tracking message send
                                 // ========================================

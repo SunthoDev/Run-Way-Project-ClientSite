@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import "./Header.css"
 import { Link, Navigate, NavLink } from 'react-router-dom';
+import { Link as ScrollLink } from "react-scroll";
 import logo from "../../../assets/logo/Logo.png"
 import { AuthContext } from '../../AuthoncationAll/AuthProvider/AuthProvider';
 import useRole from '../../../Hook/useRole';
@@ -13,7 +14,7 @@ const Header = () => {
     let { user, logOutUser } = useContext(AuthContext)
     const [roles] = useRole()
     const ad = roles?.role === "admin"
-    
+
     // ==========================================================
 
 
@@ -25,38 +26,38 @@ const Header = () => {
         threshold: 0.1,
     });
 
-    const navlinks = [
-        {
-            path: "/",
-            label: "Home"
-        },
-        {
-            path: "/services",
-            label: "Services"
-        },
-        {
-            path: "/tracking",
-            label: "Track Package"
-        },
-        {
-            path: "/about",
-            label: "About Us"
-        },
-        {
-            path: "/contact",
-            label: "Contact"
-        }
-    ];
+    // const navlinks = [
+    //     {
+    //         path: "/",
+    //         label: "Home"
+    //     },
+    //     {
+    //         path: "/services",
+    //         label: "Services"
+    //     },
+    //     {
+    //         path: "/tracking",
+    //         label: "Track Package"
+    //     },
+    //     {
+    //         path: "/about",
+    //         label: "About Us"
+    //     },
+    //     {
+    //         path: "/contact",
+    //         label: "Contact"
+    //     }
+    // ];
 
     // If user is logged in, add Dashboard
-    if (user) {
-        // navlinks.push({ path: "/dashboard", label: "Dashboard" });
-        navlinks.push({ path: `${ad ? "/dashboard/AdminDashboard" : "/dashboard/dashboard"}`, label: "Dashboard" });
-    } else {
-        navlinks.push(
-            { path: "/signup", label: "Register" }
-        );
-    }
+    // if (user) {
+    //     // navlinks.push({ path: "/dashboard", label: "Dashboard" });
+    //     navlinks.push({ path: `${ad ? "/dashboard/AdminDashboard" : "/dashboard/dashboard"}`, label: "Dashboard" });
+    // } else {
+    //     navlinks.push(
+    //         { path: "/singUp", label: "Register" }
+    //     );
+    // }
 
     useEffect(() => {
         const nav = document.querySelector("header");
@@ -115,6 +116,7 @@ const Header = () => {
             <div className="container mx-auto px-4">
                 <div className="flex items-center justify-between h-20">
                     {/* Logo */}
+                    {/* ================================== */}
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         animate={inView ? { opacity: 1, x: 0 } : {}}
@@ -131,13 +133,14 @@ const Header = () => {
                     </motion.div>
 
                     {/* Desktop Navigation */}
+                    {/* ================================== */}
                     <motion.nav
                         initial={{ opacity: 0, y: -20 }}
                         animate={inView ? { opacity: 1, y: 0 } : {}}
                         transition={{ duration: 0.5, delay: 0.2 }}
                         className="hidden md:flex items-center space-x-8"
                     >
-                        {navlinks.map((link, index) => (
+                        {/* {navlinks.map((link, index) => (
                             <NavLink
                                 key={link.path}
                                 to={link.path}
@@ -155,7 +158,130 @@ const Header = () => {
                             >
                                 {link.label}
                             </NavLink>
-                        ))}
+                        ))} */}
+                        <NavLink
+                            to="/"
+                            className={({ isActive }) =>
+                                `${isScrolled
+                                    ? 'text-gray-800 hover:text-blue-600'
+                                    : 'text-white hover:text-blue-300'
+                                } transition-colors duration-300 ${isActive
+                                    ? isScrolled
+                                        ? 'text-blue-600 font-semibold'
+                                        : 'text-blue-300 font-semibold'
+                                    : ''
+                                }`
+                            }
+                        >
+                            Home
+                        </NavLink>
+                        {/* <NavLink
+                            to="/services"
+                            className={({ isActive }) =>
+                                `${isScrolled
+                                    ? 'text-gray-800 hover:text-blue-600'
+                                    : 'text-white hover:text-blue-300'
+                                } transition-colors duration-300 ${isActive
+                                    ? isScrolled
+                                        ? 'text-blue-600 font-semibold'
+                                        : 'text-blue-300 font-semibold'
+                                    : ''
+                                }`
+                            }
+                        >
+                            Services
+                        </NavLink> */}
+                        <ScrollLink
+                            to="services"        // 👈 id name
+                            spy={true}
+                            smooth={true}
+                            offset={-80}         // navbar height adjust করার জন্য
+                            duration={500}       // scroll animation speed (ms)
+                            className={`${isScrolled
+                                ? 'text-gray-800 hover:text-blue-600'
+                                : 'text-white hover:text-blue-300'
+                                }  cursor-pointer`}
+                            activeClass="text-blue-600 font-semibold cursor-pointer"
+                        >
+                            Services
+                        </ScrollLink>
+                        <ScrollLink
+                            to="searchConsignment"        // 👈 id name
+                            spy={true}
+                            smooth={true}
+                            offset={-80}         // navbar height adjust করার জন্য
+                            duration={500}       // scroll animation speed (ms)
+                            className={`${isScrolled
+                                ? 'text-gray-800 hover:text-blue-600'
+                                : 'text-white hover:text-blue-300'
+                                } transition-colors duration-300 cursor-pointer`}
+                            activeClass="text-blue-600 font-semibold cursor-pointer"
+                        >
+                            Track Package
+                        </ScrollLink>
+                        <ScrollLink
+                            to="aboutUs"        // 👈 id name
+                            spy={true}
+                            smooth={true}
+                            offset={-80}         // navbar height adjust করার জন্য
+                            duration={500}       // scroll animation speed (ms)
+                            className={`${isScrolled
+                                ? 'text-gray-800 hover:text-blue-600 cursor-pointer'
+                                : 'text-white hover:text-blue-300 cursor-pointer'
+                                } transition-colors duration-300`}
+                            activeClass="text-blue-600 font-semibold cursor-pointer"
+                        >
+                            About Us
+                        </ScrollLink>
+                        <ScrollLink
+                            to="contact"        // 👈 id name
+                            spy={true}
+                            smooth={true}
+                            offset={-80}         // navbar height adjust করার জন্য
+                            duration={500}       // scroll animation speed (ms)
+                            className={`${isScrolled
+                                ? 'text-gray-800 hover:text-blue-600'
+                                : 'text-white hover:text-blue-300'
+                                } transition-colors duration-300 cursor-pointer`}
+                            activeClass="text-blue-600 font-semibold cursor-pointer"
+                        >
+                            Contact
+                        </ScrollLink>
+                        {user ? (
+                            <NavLink
+                                to={ad ? "/dashboard/AdminDashboard" : "/dashboard/dashboard"}
+                                className={({ isActive }) =>
+                                    `${isScrolled
+                                        ? 'text-gray-800 hover:text-blue-600'
+                                        : 'text-white hover:text-blue-300'
+                                    } transition-colors duration-300 ${isActive
+                                        ? isScrolled
+                                            ? 'text-blue-600 font-semibold'
+                                            : 'text-blue-300 font-semibold'
+                                        : ''
+                                    }`
+                                }
+                            >
+                                Dashboard
+                            </NavLink>
+                        ) : (
+                            <NavLink
+                                to="/singUp"
+                                className={({ isActive }) =>
+                                    `${isScrolled
+                                        ? 'text-gray-800 hover:text-blue-600'
+                                        : 'text-white hover:text-blue-300'
+                                    } transition-colors duration-300 ${isActive
+                                        ? isScrolled
+                                            ? 'text-blue-600 font-semibold'
+                                            : 'text-blue-300 font-semibold'
+                                        : ''
+                                    }`
+                                }
+                            >
+                                Register
+                            </NavLink>
+                        )}
                         {!user && (
                             <Link
                                 to="/login"
@@ -170,6 +296,7 @@ const Header = () => {
                     </motion.nav>
 
                     {/* Mobile Menu Button */}
+                    {/* ================================== */}
                     <motion.button
                         initial={{ opacity: 0, x: 20 }}
                         animate={inView ? { opacity: 1, x: 0 } : {}}
@@ -187,6 +314,7 @@ const Header = () => {
             </div>
 
             {/* Mobile Menu */}
+            {/* ================================== */}
             <AnimatePresence>
                 {isMobileMenuOpen && (
                     <motion.div
@@ -199,7 +327,7 @@ const Header = () => {
                     >
                         <div className="container mx-auto px-4 py-4">
                             <nav className="flex flex-col space-y-4">
-                                {navlinks.map((link) => (
+                                {/* {navlinks.map((link) => (
                                     <NavLink
                                         key={link.path}
                                         to={link.path}
@@ -218,7 +346,176 @@ const Header = () => {
                                     >
                                         {link.label}
                                     </NavLink>
-                                ))}
+                                ))} */}
+                                <NavLink
+                                    to="/"
+                                    className={({ isActive }) =>
+                                        `${isScrolled
+                                            ? 'text-gray-800 hover:text-blue-600'
+                                            : 'text-white hover:text-blue-300'
+                                        } transition-colors duration-300 ${isActive
+                                            ? isScrolled
+                                                ? 'text-blue-600 font-semibold'
+                                                : 'text-blue-300 font-semibold'
+                                            : ''
+                                        }`
+                                    }
+                                >
+                                    Home
+                                </NavLink>
+                                {/* <NavLink
+                                    to="/services"
+                                    className={({ isActive }) =>
+                                        `${isScrolled
+                                            ? 'text-gray-800 hover:text-blue-600'
+                                            : 'text-white hover:text-blue-300'
+                                        } transition-colors duration-300 ${isActive
+                                            ? isScrolled
+                                                ? 'text-blue-600 font-semibold'
+                                                : 'text-blue-300 font-semibold'
+                                            : ''
+                                        }`
+                                    }
+                                >
+                                    Services
+                                </NavLink> */}
+                                <ScrollLink
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    to="services"        // 👈 id name
+                                    spy={true}
+                                    smooth={true}
+                                    offset={-80}         // navbar height adjust করার জন্য
+                                    duration={500}       // scroll animation speed (ms)
+                                    className={`${isScrolled
+                                        ? 'text-gray-800 hover:text-blue-600'
+                                        : 'text-white hover:text-blue-300'
+                                        }  cursor-pointer`}
+                                    activeClass="text-blue-600 font-semibold cursor-pointer"
+                                >
+                                    Services
+                                </ScrollLink>
+                                {/* <NavLink
+                                    to="/tracking"
+                                    className={({ isActive }) =>
+                                        `${isScrolled
+                                            ? 'text-gray-800 hover:text-blue-600'
+                                            : 'text-white hover:text-blue-300'
+                                        } transition-colors duration-300 ${isActive
+                                            ? isScrolled
+                                                ? 'text-blue-600 font-semibold'
+                                                : 'text-blue-300 font-semibold'
+                                            : ''
+                                        }`
+                                    }
+                                >
+                                    Track Package
+                                </NavLink> */}
+                                <ScrollLink
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    to="searchConsignment"        // 👈 id name
+                                    spy={true}
+                                    smooth={true}
+                                    offset={-80}         // navbar height adjust করার জন্য
+                                    duration={500}       // scroll animation speed (ms)
+                                    className={`${isScrolled
+                                        ? 'text-gray-800 hover:text-blue-600'
+                                        : 'text-white hover:text-blue-300'
+                                        } transition-colors duration-300 cursor-pointer`}
+                                    activeClass="text-blue-600 font-semibold cursor-pointer"
+                                >
+                                    Track Package
+                                </ScrollLink>
+                                {/* <NavLink
+                                    to="/about"
+                                    className={({ isActive }) =>
+                                        `${isScrolled
+                                            ? 'text-gray-800 hover:text-blue-600'
+                                            : 'text-white hover:text-blue-300'
+                                        } transition-colors duration-300 ${isActive
+                                            ? isScrolled
+                                                ? 'text-blue-600 font-semibold'
+                                                : 'text-blue-300 font-semibold'
+                                            : ''
+                                        }`
+                                    }
+                                >
+                                    About Us
+                                </NavLink> */}
+                                <ScrollLink
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    to="aboutUs"        // 👈 id name
+                                    spy={true}
+                                    smooth={true}
+                                    offset={-80}         // navbar height adjust করার জন্য
+                                    duration={500}       // scroll animation speed (ms)
+                                    className={`${isScrolled
+                                        ? 'text-gray-800 hover:text-blue-600 cursor-pointer'
+                                        : 'text-white hover:text-blue-300 cursor-pointer'
+                                        } transition-colors duration-300`}
+                                    activeClass="text-blue-600 font-semibold cursor-pointer"
+                                >
+                                    About Us
+                                </ScrollLink>
+                                {/* <NavLink
+                                    to="/contact"
+                                    className={({ isActive }) =>
+                                        `${isScrolled
+                                            ? 'text-gray-800 hover:text-blue-600'
+                                            : 'text-white hover:text-blue-300'
+                                        } transition-colors duration-300 ${isActive
+                                            ? isScrolled
+                                                ? 'text-blue-600 font-semibold'
+                                                : 'text-blue-300 font-semibold'
+                                            : ''
+                                        }`
+                                    }
+                                >
+                                    Contact
+                                </NavLink> */}
+                                <ScrollLink
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    to="contact"        // 👈 id name
+                                    spy={true}
+                                    smooth={true}
+                                    offset={-80}         // navbar height adjust করার জন্য
+                                    duration={500}       // scroll animation speed (ms)
+                                    className={`${isScrolled
+                                        ? 'text-gray-800 hover:text-blue-600'
+                                        : 'text-white hover:text-blue-300'
+                                        } transition-colors duration-300 cursor-pointer`}
+                                    activeClass="text-blue-600 font-semibold cursor-pointer"
+                                >
+                                    Contact
+                                </ScrollLink>
+                                {user ? (
+                                    <NavLink
+                                        to={ad ? "/dashboard/AdminDashboard" : "/dashboard/dashboard"}
+                                        className={({ isActive }) =>
+                                            `${isScrolled
+                                                ? 'text-gray-800 hover:text-blue-600'
+                                                : 'text-white hover:text-blue-300'
+                                            } transition-colors duration-300 ${isActive
+                                                ? isScrolled
+                                                    ? 'text-blue-600 font-semibold'
+                                                    : 'text-blue-300 font-semibold'
+                                                : ''
+                                            }`
+                                        }
+                                    >
+                                        Dashboard
+                                    </NavLink>
+                                ) : (
+                                    <Link
+                                        to="/singUp"
+                                        className={`mt-2 px-6 py-2 rounded-lg transition-colors duration-300 text-center ${isScrolled
+                                            ? 'bg-purple-600 text-white hover:bg-purple-700'
+                                            : 'bg-white/20 text-white hover:bg-white/40'
+                                            }`}
+                                        onClick={() => setIsMobileMenuOpen(false)}
+                                    >
+                                        Register
+                                    </Link>
+                                )}
                                 <Link
                                     to="/login"
                                     className={`px-6 py-2 rounded-lg transition-colors duration-300 text-center ${isScrolled
@@ -228,16 +525,6 @@ const Header = () => {
                                     onClick={() => setIsMobileMenuOpen(false)}
                                 >
                                     Login
-                                </Link>
-                                <Link
-                                    to="/signup"
-                                    className={`mt-2 px-6 py-2 rounded-lg transition-colors duration-300 text-center ${isScrolled
-                                        ? 'bg-purple-600 text-white hover:bg-purple-700'
-                                        : 'bg-white/20 text-white hover:bg-white/40'
-                                        }`}
-                                    onClick={() => setIsMobileMenuOpen(false)}
-                                >
-                                    Register
                                 </Link>
                             </nav>
                         </div>
@@ -250,20 +537,3 @@ const Header = () => {
 };
 
 export default Header;
-
-
-
-// {user ?
-//     <button className='Dashboard'>
-//         <Link to={ad ? "/dashboard/AdminDashboard" : "/dashboard/dashboard"}><a>Dashboard</a></Link>
-//     </button>
-//     :
-//     <>
-//         <button className='LogIn'>
-//             <Link to="/login"><a>Login</a></Link></button>
-//         <button className='singUP'>
-//             <Link to="/singUp"><a>Register</a></Link>
-//         </button>
-//     </>
-
-// }

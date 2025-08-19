@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import './OurServices.css';
 
 const OurServices = () => {
+  
   const services = [
     {
       icon: "🚚",
@@ -64,7 +65,7 @@ const OurServices = () => {
   };
 
   return (
-    <div className="services-container py-20 px-4 md:px-8 bg-gradient-to-b from-gray-50 to-white">
+    <div id="services" className="services-container py-20 px-4 md:px-8 bg-gradient-to-b from-gray-50 to-white">
       {/* Header Section */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}

@@ -268,7 +268,6 @@ const DashboardItemsUser = () => {
                 {/* ============================================= */}
                 {/* First Information All */}
                 {/* ============================================= */}
-
                 <div className="OneItemsParent grid md:grid-cols-7 gap-4 pb-[14px]">
 
                     <div className="AllRequestDetails md:col-span-2">
@@ -449,13 +448,11 @@ const DashboardItemsUser = () => {
                         </div>
 
                     </div>
-
                 </div>
 
                 {/* ============================================= */}
                 {/* Second Information All */}
                 {/* ============================================= */}
-
                 <div className="TwoItemsParent grid md:grid-cols-7 gap-4">
 
                     <div className="PickUpHistory md:col-span-2 bg-white h-[304px] w-full | flex items-center justify-center rounded-[24px]">
@@ -502,73 +499,73 @@ const DashboardItemsUser = () => {
                             <Link to="/dashboard/addParcel">
                                 <div className="hover:bg-[#EDEEC0] transition duration-200 h-[96px] p-4 bg-white shadow rounded-[24px]">
                                     <div className="items bg-[#EDEEC0] py-[2px] px-[4px] rounded-[6px]">
-                                        <h2 className="text-[14px] font-semibold text-black truncate">Go Another Page</h2>
+                                        {/* <h2 className="text-[14px] font-semibold text-black truncate">Go Another Page</h2> */}
+                                        <p className="py-[8px] text-[14px] font-[600] text-black">Add Parcel</p>
                                     </div>
-                                    <p className="py-[8px] text-[14px] font-[600] text-black">Add Parcel</p>
                                 </div>
                             </Link>
                             <Link to="/dashboard/AllMarchentConsignment">
                                 <div className="hover:bg-[#D6D0F4] transition duration-200 h-[96px] p-4 bg-white shadow rounded-[24px]">
                                     <div className="items bg-[#D6D0F4] py-[2px] px-[4px] rounded-[6px]">
-                                        <h2 className="text-[14px] font-semibold text-black truncate">Go Another Page</h2>
+                                        {/* <h2 className="text-[14px] font-semibold text-black truncate">Go Another Page</h2> */}
+                                        <p className="py-[8px] text-[14px] font-[600] text-black">All Consignments</p>
                                     </div>
-                                    <p className="py-[8px] text-[14px] font-[600] text-black">All Consignments</p>
                                 </div>
                             </Link>
                             <Link to="/dashboard/UserAllPickupRequestData">
                                 <div className="hover:bg-[#F4AFE8] transition duration-200 h-[96px] p-4 bg-white shadow rounded-[24px]">
                                     <div className="items bg-[#F4AFE8] py-[2px] px-[4px] rounded-[6px]">
-                                        <h2 className="text-[14px] font-semibold text-black truncate">Go Another Page</h2>
+                                        {/* <h2 className="text-[14px] font-semibold text-black truncate">Go Another Page</h2> */}
+                                        <p className="py-[8px] text-[14px] font-[600] text-black">My Pickup Parcel</p>
                                     </div>
-                                    <p className="py-[8px] text-[14px] font-[600] text-black">My Pickup Parcel</p>
                                 </div>
                             </Link>
                             <Link to="/dashboard/UserAmountChange">
                                 <div className="hover:bg-[#BAC8F2] transition duration-200 h-[96px] p-4 bg-white shadow rounded-[24px]">
                                     <div className="items bg-[#BAC8F2] py-[2px] px-[4px] rounded-[6px]">
-                                        <h2 className="text-[14px] font-semibold text-black truncate">Go Another Page</h2>
+                                        {/* <h2 className="text-[14px] font-semibold text-black truncate">Go Another Page</h2> */}
+                                        <p className="py-[8px] text-[14px] font-[600] text-black">Amount Change</p>
                                     </div>
-                                    <p className="py-[8px] text-[14px] font-[600] text-black">Amount Change</p>
                                 </div>
                             </Link>
                             <Link to="/dashboard/UserAllCancelParcel">
                                 <div className="hover:bg-[#8DD1E1] transition duration-200 h-[96px] p-4 bg-white shadow rounded-[24px]">
                                     <div className="items bg-[#8DD1E1] py-[2px] px-[4px] rounded-[6px]">
-                                        <h2 className="text-[14px] font-semibold text-black truncate">Go Another Page</h2>
+                                        {/* <h2 className="text-[14px] font-semibold text-black truncate">Go Another Page</h2> */}
+                                        <p className="py-[8px] text-[14px] font-[600] text-black">Cancelled Parcels</p>
                                     </div>
-                                    <p className="py-[8px] text-[14px] font-[600] text-black">Cancelled Parcels</p>
                                 </div>
                             </Link>
                             <Link to="/dashboard/UserAllPaymentRequestData">
                                 <div className="hover:bg-[#EDEEC0] transition duration-200 h-[96px] p-4 bg-white shadow rounded-[24px]">
                                     <div className="items bg-[#EDEEC0] py-[2px] px-[4px] rounded-[6px]">
-                                        <h2 className="text-[14px] font-semibold text-black truncate">Go Another Page</h2>
+                                        {/* <h2 className="text-[14px] font-semibold text-black truncate">Go Another Page</h2> */}
+                                        <p className="py-[8px] text-[14px] font-[600] text-black">Payments List</p>
                                     </div>
-                                    <p className="py-[8px] text-[14px] font-[600] text-black">Payments List</p>
                                 </div>
                             </Link>
                             <Link to="#">
                                 <div className="hover:bg-[#F3F4C6] transition duration-200 h-[96px] p-4 bg-white shadow rounded-[24px]">
                                     <div className="items bg-[#F3F4C6] py-[2px] px-[4px] rounded-[6px]">
-                                        <h2 className="text-[14px] font-semibold text-black truncate">Go Another Page</h2>
+                                        {/* <h2 className="text-[14px] font-semibold text-black truncate">Go Another Page</h2> */}
+                                        <p className="py-[8px] text-[14px] font-[600] text-black">Unknown</p>
                                     </div>
-                                    <p className="py-[8px] text-[14px] font-[600] text-black">Unknown</p>
                                 </div>
                             </Link>
                             <Link to="#">
                                 <div className="hover:bg-[#DCD6FA] transition duration-200 h-[96px] p-4 bg-white shadow rounded-[24px]">
                                     <div className="items bg-[#DCD6FA] py-[2px] px-[4px] rounded-[6px]">
-                                        <h2 className="text-[14px] font-semibold text-black truncate">Go Another Page</h2>
+                                        {/* <h2 className="text-[14px] font-semibold text-black truncate">Go Another Page</h2> */}
+                                        <p className="py-[8px] text-[14px] font-[600] text-black">Unknown</p>
                                     </div>
-                                    <p className="py-[8px] text-[14px] font-[600] text-black">Unknown</p>
                                 </div>
                             </Link>
                             <Link to="#">
                                 <div className="hover:bg-[#C0CEF8] transition duration-200 h-[96px] p-4 bg-white shadow rounded-[24px]">
                                     <div className="items bg-[#C0CEF8] py-[2px] px-[4px] rounded-[6px]">
-                                        <h2 className="text-[14px] font-semibold text-black truncate">Go Another Page</h2>
+                                        {/* <h2 className="text-[14px] font-semibold text-black truncate">Go Another Page</h2> */}
+                                        <p className="py-[8px] text-[14px] font-[600] text-black">Unknown</p>
                                     </div>
-                                    <p className="py-[8px] text-[14px] font-[600] text-black">Unknown</p>
                                 </div>
                             </Link>
                         </div>
@@ -596,7 +593,7 @@ const DashboardItemsUser = () => {
                             </div>
                             <div className="">
                                 <p className="text-dark font-[400] text-[12px]">Amount</p>
-                                <h4 className="text-black font-[600] text-[14px]">$68.00</h4>
+                                <h4 className="text-black font-[600] text-[14px]">34,000 Tk</h4>
                             </div>
                         </div>
 
@@ -606,9 +603,7 @@ const DashboardItemsUser = () => {
                         </div>
 
                     </div>
-
                 </div>
-
 
                 {/* ============================================= */}
                 {/* Payment Request Send Modal Start */}

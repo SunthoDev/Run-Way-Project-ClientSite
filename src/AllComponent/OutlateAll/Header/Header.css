@@ -1,3 +1,7 @@
+.container {
+    scroll-margin-top: 80px;
+    /* header height */
+}
 
 .navParent {
     background-color: white;
@@ -14,7 +18,7 @@
     transition: .1s;
 }
 
-.navbar .NaveMenu a:hover{
+.navbar .NaveMenu a:hover {
     color: #38B6FF;
 }
 
@@ -26,12 +30,15 @@
     background-color: #38B6FF;
     transition: .2s;
 }
-.navbar .NaveMenu .singUP a{
+
+.navbar .NaveMenu .singUP a {
     color: white;
 }
-.navbar .NaveMenu .singUP:hover a{
+
+.navbar .NaveMenu .singUP:hover a {
     color: black;
 }
+
 .navbar .NaveMenu .singUP:hover {
     background-color: transparent;
     border: 1px solid #38B6FF;
@@ -45,13 +52,16 @@
     margin-right: 22px;
     transition: .2s;
 }
-.navbar .NaveMenu .LogIn:hover{
+
+.navbar .NaveMenu .LogIn:hover {
     background-color: #38B6FF;
     border: 1px solid #38B6FF;
 }
-.navbar .NaveMenu .LogIn:hover a{
+
+.navbar .NaveMenu .LogIn:hover a {
     color: white;
 }
+
 .navbar .NaveMenu .Dashboard {
     border: 1px solid #38B6FF;
     border-radius: 4px;
@@ -60,16 +70,16 @@
     background-color: #38B6FF;
     transition: .2s;
 }
-.navbar .NaveMenu .Dashboard a{
+
+.navbar .NaveMenu .Dashboard a {
     color: white;
 }
 
-.navbar .NaveMenu .Dashboard:hover a{
+.navbar .NaveMenu .Dashboard:hover a {
     color: black;
 }
-.navbar .NaveMenu .Dashboard:hover{
+
+.navbar .NaveMenu .Dashboard:hover {
     background-color: transparent;
     border: 1px solid #38B6FF;
 }
-
-

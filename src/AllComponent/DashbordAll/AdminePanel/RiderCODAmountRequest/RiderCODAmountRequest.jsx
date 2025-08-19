@@ -26,6 +26,19 @@ const RiderCODAmountRequest = () => {
     let ApprovedCODRequestData = RiderSendParcelCODReqAll?.filter(Approved => Approved?.status === "Approved")
 
 
+    // ============================================================================================================
+    // Created All Hub Find
+    // =====================================================
+    let { data: AllHubFind = [] } = useQuery(["HubManageAdminCreateOrUpdatePs_CreatedHubFind"], async () => {
+        let res = await fetch("https://server.trustereocourier.com.bd/HubManageAdminCreateOrUpdatePs/CreatedHubFind")
+        return res.json()
+    })
+    // console.log(AllHubFind)
+    let [SearchCodData, setSearchCodData] = useState([])
+    // console.log(SearchCodData)
+
+
+
 
     return (
         <div className='AdminViewPaymentRequestAll bg-[#F6F6F6]'>
@@ -40,7 +53,8 @@ const RiderCODAmountRequest = () => {
 
                     {/* Tabs with Different type of category COD Balance Status Data*/}
                     {/* ==================================================================== */}
-                    <div className="mb-6 gap-3">
+                    <div className="flex justify-between items-center mb-6 flex-wrap gap-3">
+
                         {/* ================================= */}
                         {/* Tabs */}
                         {/* ================================= */}
@@ -58,6 +72,32 @@ const RiderCODAmountRequest = () => {
                                 Approved
                             </button>
                         </div>
+
+                        {/* ======================================== */}
+                        {/* Search a Parcel by a (Hub) name */}
+                        {/* ======================================== */}
+                        <div className="flex items-center gap-2">
+                            <select required className="w-full bg-white border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                name="stationOfHub"
+                                onBlur={(e) => {
+                                    const HubName = e.target.value
+                                    setSearchCodData(RiderSendParcelCODReqAll?.filter(CodRequest => CodRequest?.riderHub === HubName))
+                                }}
+                            >
+                                <option value="">-- Select Hub Name --</option>
+                                {AllHubFind?.map((hubName, i) => (
+                                    <option key={i}>
+                                        {hubName?.NameOfHub}
+                                    </option>
+                                ))}
+                            </select>
+                            <button
+                                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md flex items-center gap-1 text-sm"
+                            >
+                                Search
+                            </button>
+                        </div>
+
                     </div>
 
                     {/* Tab Content All types parcel COD data show */}
@@ -79,6 +119,7 @@ const RiderCODAmountRequest = () => {
                                             <thead className="bg-blue-50">
                                                 <tr>
                                                     <th className="px-6 py-3 text-left font-semibold text-gray-700">Name</th>
+                                                    <th className="px-6 py-3 text-left font-semibold text-gray-700">Hub</th>
                                                     <th className="px-6 py-3 text-left font-semibold text-gray-700">Email</th>
                                                     <th className="px-6 py-3 text-left font-semibold text-gray-700">Address</th>
                                                     <th className="px-6 py-3 text-left font-semibold text-gray-700">Amount</th>
@@ -88,9 +129,11 @@ const RiderCODAmountRequest = () => {
                                             </thead>
                                             <tbody className="bg-white divide-y divide-gray-100">
                                                 {
-                                                    PendingCODRequestData?.slice().reverse().map(ParcelRequestCOD => (
+                                                    (SearchCodData.length > 0 ? SearchCodData 
+                                                    : PendingCODRequestData)?.slice().reverse().map(ParcelRequestCOD => (
                                                         <tr key={ParcelRequestCOD?._id} className="hover:bg-gray-50 transition-colors">
                                                             <td className="px-6 py-4 text-gray-800 font-medium">{ParcelRequestCOD?.CODReqName} {ParcelRequestCOD?.CODReqLastName}</td>
+                                                            <td className="px-6 py-4 text-gray-800 font-medium">{ParcelRequestCOD?.riderHub}</td>
                                                             <td className="px-6 py-4 text-gray-800 font-medium">{ParcelRequestCOD?.CODReqEmail}</td>
                                                             <td className="px-6 py-4 text-gray-800 font-medium">{ParcelRequestCOD?.CODReqAddress}</td>
                                                             <td className="px-6 py-4 text-gray-800 font-medium">{ParcelRequestCOD?.ParcelTotalCODAmountOfRider}</td>
@@ -146,6 +189,7 @@ const RiderCODAmountRequest = () => {
                                             <thead className="bg-blue-50">
                                                 <tr>
                                                     <th className="px-6 py-3 text-left font-semibold text-gray-700">Name</th>
+                                                    <th className="px-6 py-3 text-left font-semibold text-gray-700">Hub</th>
                                                     <th className="px-6 py-3 text-left font-semibold text-gray-700">Email</th>
                                                     <th className="px-6 py-3 text-left font-semibold text-gray-700">Address</th>
                                                     <th className="px-6 py-3 text-left font-semibold text-gray-700">Amount</th>
@@ -154,10 +198,12 @@ const RiderCODAmountRequest = () => {
                                                 </tr>
                                             </thead>
                                             <tbody className="bg-white divide-y divide-gray-100">
-                                                {
-                                                    ApprovedCODRequestData?.slice().reverse().map(ParcelRequestCOD => (
+                                                { 
+                                                (SearchCodData.length > 0 ? SearchCodData 
+                                                    : ApprovedCODRequestData)?.slice().reverse().map(ParcelRequestCOD => (
                                                         <tr key={ParcelRequestCOD?._id} className="hover:bg-gray-50 transition-colors">
                                                             <td className="px-6 py-4 text-gray-800 font-medium">{ParcelRequestCOD?.CODReqName} {ParcelRequestCOD?.CODReqLastName}</td>
+                                                            <td className="px-6 py-4 text-gray-800 font-medium">{ParcelRequestCOD?.riderHub}</td>
                                                             <td className="px-6 py-4 text-gray-800 font-medium">{ParcelRequestCOD?.CODReqEmail}</td>
                                                             <td className="px-6 py-4 text-gray-800 font-medium">{ParcelRequestCOD?.CODReqAddress}</td>
                                                             <td className="px-6 py-4 text-gray-800 font-medium">{ParcelRequestCOD?.ParcelTotalCODAmountOfRider}</td>
@@ -212,7 +258,6 @@ const RiderCODAmountRequest = () => {
 
                     </div>
                 </div>
-
             </div>
         </div>
     );

@@ -418,7 +418,7 @@ const UserTemporeryInvoiceAllStandardData = () => {
                         <p><strong>Entry By:</strong> Own </p>
                     </div>
 
-                    {/* Item & Note */}
+                    {/* Item & Note & Tracking*/}
                     <div className="mt-6 grid grid-cols-1 md:grid-cols-2 items-center gap-4 text-sm text-gray-700 bg-gray-100 rounded-lg overflow-hidden shadow-md">
                         <div className="py-4 px-4 text-center">
                             <h4 className="font-semibold text-gray-800 text-base mb-2">Note</h4>
@@ -449,7 +449,12 @@ const UserTemporeryInvoiceAllStandardData = () => {
                                         </div>
                                     </div>
                                     :
+                                    InVoiceData?.status === "Cancel" && InVoiceData?.AssignRider === "Yes" ?
                                     <h2 className="text-center text-lg font-semibold text-green-600">
+                                        ❌ Your parcel has been cancelled. Please contact support for more details.
+                                    </h2>
+                                    :
+                                    <h2 className="text-center text-lg font-semibold text-red-600">
                                         Your parcel has already been delivered successfully!
                                     </h2>
                         }

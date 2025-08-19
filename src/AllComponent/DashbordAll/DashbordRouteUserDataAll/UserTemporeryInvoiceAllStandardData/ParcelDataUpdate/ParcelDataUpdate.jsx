@@ -3,6 +3,7 @@ import "./ParcelDataUpdate.css"
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
+import moment from 'moment';
 
 const ParcelDataUpdate = () => {
 
@@ -49,10 +50,7 @@ const ParcelDataUpdate = () => {
     return (
         <div className='bg-[#F6F6F6]'>
 
-            {/* =================================================== */}
-
             <div className='StandardDeliveryParent px-[12px] md:px-4 my-4'>
-
                 <div className="StandardMain bg-white rounded-[8px] p-[28px]">
 
                     <h2 className='text-black font-[600] text-[20px]'>Update Merchant Parcel Information</h2>
@@ -80,29 +78,55 @@ const ParcelDataUpdate = () => {
                             let DeliveryChargeUP = event.target.DeliveryChargeUP.value
                             let ParcelCategoryUP = event.target.ParcelCategoryUP.value
                             let MyHubUP = event.target.MyHubUP.value
+                            let date = moment().format("MM/DD/YYYY")
+                            let time = moment().format("hh:mm A")
+                            let TrackingMessage = `Your parcel has been edit successfully`
+
+                            let TrackingMessagePost = {
+                                userOrderIdTracking: StandardParcelId,
+                                TrackingMessage,
+                                TrackingDate: date,
+                                TrackingTime: time
+                            };
 
                             let allInfo = { deliveryTypeUP, nameUP, addressUP, DistrictUP, policeStationUP, AlternativePhoneUP, RecipientEmailUP, numberUP, CodAmountUP, InvoiceUP, ItemDescriptionUP, noteUP, weightUP, DeliveryChargeUP, ParcelCategoryUP, MyHubUP }
                             // console.log(allInfo)
 
                             fetch(`https://server.trustereocourier.com.bd/AdminUserOrderInvoiceUpdate/${ParcelUpdateData?._id}`, {
                                 method: "PATCH",
-                                headers:{
-                                    "content-type" : "application/json"
+                                headers: {
+                                    "content-type": "application/json"
                                 },
                                 body: JSON.stringify(allInfo)
                             })
                                 .then(res => res.json())
                                 .then(data => {
                                     if (data.modifiedCount > 0) {
-                                        Swal.fire({
-                                            position: "top-end",
-                                            icon: "success",
-                                            title: "Parcel Information Update has been Success",
-                                            showConfirmButton: false,
-                                            timer: 1500
+
+                                        // Tracking Message is send for update parcel
+                                        // ====================================================
+                                        fetch("https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/AdminTrackingRequestSentOfAssignRider", {
+                                            method: "POST",
+                                            headers: {
+                                                "Content-Type": "application/json"
+                                            },
+                                            body: JSON.stringify(TrackingMessagePost)
                                         })
+                                            .then(res => res.json())
+                                            .then(data => {
+                                                // console.log(data)
+                                                if (data.insertedId) {
+                                                    Swal.fire({
+                                                        position: "top-end",
+                                                        icon: "success",
+                                                        title: "Parcel Information Update has been Success",
+                                                        showConfirmButton: false,
+                                                        timer: 1500
+                                                    })
+                                                    refetch()
+                                                }
+                                            })
                                     }
-                                    refetch()
                                 })
                         }}
                     >
@@ -334,7 +358,7 @@ const ParcelDataUpdate = () => {
                     </form>
                 </div>
             </div>
-        </div >
+        </div>
     );
 };
 

@@ -52,7 +52,7 @@ const ExperienceSection = () => {
   ];
 
   return (
-    <section className="experience-section bg-gradient-to-b from-gray-50 to-white py-20 px-4 md:px-20 overflow-hidden">
+    <section id="aboutUs" className="experience-section bg-gradient-to-b from-gray-50 to-white py-20 px-4 md:px-20 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <motion.div
           variants={containerVariants}

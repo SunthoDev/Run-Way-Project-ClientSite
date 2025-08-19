@@ -5,7 +5,7 @@ import Hero from '../HomeAllSection/Hero/Hero';
 import HeroSection from '../HomeAllSection/HeroSection/HeroSection';
 import Banner from '../HomeAllSection/Banner/Banner';
 import ServicesDetails from '../HomeAllSection/ServicesDEtails/ServicesDetails';
-import ServicesArea from '../HomeAllSection/ServicesArea/ServicesArea';
+import ParcelTracking from '../HomeAllSection/ParcelTracking/ParcelTracking';
 
 import OurServices from '../HomeAllSection/OurServices/OurServices';
 import ExperienceSection from '../HomeAllSection/ExperienceSection/ExperienceSection';
@@ -16,13 +16,12 @@ const Home = () => {
     return (
         <div>
             <VideoSlider />
+            
             {/* <Banner />  Test Component */}
+            {/* <Hero />   Test Component */}
+            {/* <ServicesDetails /> Test Component */}
 
-            {/* <Hero />   */} {/*Test Component*/}
-            {/* <ServicesDetails /> */} {/*Test Component*/}
-            {/* <ServicesArea /> */} {/*Test Component*/}
-
-
+            <ParcelTracking /> 
             <HeroSection />  
             <OurServices />  
             <Licensed /> 

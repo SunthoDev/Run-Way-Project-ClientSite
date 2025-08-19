@@ -131,7 +131,7 @@ const ApprovedParcelRoute = () => {
                                                     </td>
                                                     <td className="py-[8px]">
                                                         <Link
-                                                            to={`/dashboard/AdminDashboard/UserTemporeryInvoiceAllStandardData/${ParcelAll?.StandardParcelId}`}
+                                                            to={`/dashboard/UserTemporeryInvoiceAllStandardData/${ParcelAll?.StandardParcelId}`}
                                                         >
                                                             <button className="btn btn-sm btn-outline btn-primary mb-[8px]">View</button>
                                                         </Link>

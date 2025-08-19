@@ -94,7 +94,7 @@ const DashboardItemAdmin = () => {
 
             {/* Consignment Parcel search by number !! */}
             {/* =================================================================== */}
-            {/* <div className="Consignment bg-white p-[28px] rounded-[8px]  flex mt-8">
+            <div className="Consignment bg-white p-[28px] rounded-[8px]  flex mt-8">
 
                 <div className="relative w-[100%]">
                     <input onBlur={handleAdminUserNumberFind} className='w-[100%] py-1' placeholder='Search User Number' type="text" />
@@ -112,7 +112,7 @@ const DashboardItemAdmin = () => {
                     <option>Merchant</option>
                 </select>
 
-            </div> */}
+            </div>
 
             {/* =================================================================== */}
             {/* Send Tracking Message To bellow !! */}
