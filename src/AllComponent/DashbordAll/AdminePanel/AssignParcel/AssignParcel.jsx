@@ -139,10 +139,6 @@ const AssignParcel = () => {
 
 
 
-
-
-
-
     return (
         <div className='AdminViewPaymentRequestAll bg-[#F6F6F6]'>
 

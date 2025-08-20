@@ -53,12 +53,12 @@ const DashboardItemAdmin = () => {
                 {/* search User ID !! */}
                 {/* =================================================================== */}
                 <div className="item">
-                    <h3 className='text-[17px] font-[500] text-black mb-[8px]'>Search User ID</h3>
+                    <h3 className='text-[17px] font-[500] text-black mb-[8px]'>Search user by Id and Number!!</h3>
                     <div className="relative">
-                        <input onBlur={handleAdminUserIdFind} className='w-[100%]' placeholder='type only user id here' type="text" />
+                        <input onBlur={handleAdminUserIdFind} className='w-[100%]' placeholder='Search user id and number' type="text" />
                         <Link to={`AdminSearchUserId/${useId}`} className='absolute top-[12px] right-[20px]'>
                             <button disabled={useId === ""}>
-                                <i class="fa fa-search" aria-hidden="true"></i>
+                                <i className="fa fa-search" aria-hidden="true"></i>
                             </button>
                         </Link>
                     </div>
@@ -94,7 +94,7 @@ const DashboardItemAdmin = () => {
 
             {/* Consignment Parcel search by number !! */}
             {/* =================================================================== */}
-            <div className="Consignment bg-white p-[28px] rounded-[8px]  flex mt-8">
+            {/* <div className="Consignment bg-white p-[28px] rounded-[8px]  flex mt-8">
 
                 <div className="relative w-[100%]">
                     <input onBlur={handleAdminUserNumberFind} className='w-[100%] py-1' placeholder='Search User Number' type="text" />
@@ -112,7 +112,7 @@ const DashboardItemAdmin = () => {
                     <option>Merchant</option>
                 </select>
 
-            </div>
+            </div> */}
 
             {/* =================================================================== */}
             {/* Send Tracking Message To bellow !! */}

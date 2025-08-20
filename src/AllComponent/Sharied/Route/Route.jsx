@@ -186,7 +186,7 @@ let route = createBrowserRouter([
             path: "ParcelDataUpdate/:IdParcel",
             element: <ParcelDataUpdate></ParcelDataUpdate>
          },
-         
+
 
 
 
