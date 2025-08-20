@@ -11,7 +11,7 @@ const AssignParcel = () => {
     const [roles] = useRole()
     const [tabState, setTabState] = useState(1);
 
-    // ===========================================================================================================
+    // ========================================================================================================
     // User All Category Parcel Data Find
     // =======================================================================
     let { refetch, data: UserAllParcelDataFind = [] } = useQuery(["AdminAllStandardDeliveryDataFindAmountChange"], async () => {
@@ -31,7 +31,7 @@ const AssignParcel = () => {
     let PendingParcelAll = UserAllParcelDataFind?.filter(Pending => Pending?.status === "Pending" && Pending?.AssignRider === "No")
     // console.log(PendingParcelAll)
 
-    // ============================================================================================================
+    // ========================================================================================================
     // Created All Hub Find
     // =====================================================
     let { data: AllHubFind = [] } = useQuery(["HubManageAdminCreateOrUpdatePs_CreatedHubFind"], async () => {
@@ -63,7 +63,7 @@ const AssignParcel = () => {
     let [searchHubName, setSearchHubName] = useState("")
 
     // ========================================================================================================
-    // All rider Show of select Hub
+    // (Single) Assign Parcel From Bellow !!
     // =============================================
     const [activeAllRider, setActiveAllRider] = useState([]);
     const [ParcelId, setParcelId] = useState("");
@@ -71,7 +71,6 @@ const AssignParcel = () => {
     // Open the modal a set data on useState
     // =============================================
     const handleAssignRider = (SelectHubName, ParcelID) => {
-
         // filter all user for found all hub rider 
         // ==============================================
         let ThisHubAllRider = adminAllUsers?.filter(AllRider => AllRider?.MyHubRider === SelectHubName)
@@ -85,13 +84,12 @@ const AssignParcel = () => {
     };
 
 
-
     // =========================================================================================================
-    // Take Group ids collect together by a enter Start 
+    // (Multiple) Assign Parcel From Bellow !!
     // =====================================================
-
-    // Received All Ids together in json array
-    // ==========================================
+    // ==============================================
+    // Received All Ids together in json array start
+    // ==============================================
     const [AllId, setIDAll] = useState([]);
     // Received input value
     // ========================
@@ -114,9 +112,34 @@ const AssignParcel = () => {
         setIDAll(AllId.filter((_, i) => i !== index));
     };
 
-    // =====================================================
-    // Take Group ids collect together by a enter End
-    // =====================================================
+    // ==============================================
+    // Received All Ids together in json array End
+    // ==============================================
+
+    // Multiple Parcel Assign to rider !!
+    // ==============================================
+    const [MultipleActiveAllRider, setMultipleActiveAllRider] = useState([]);
+    const [ParcelIdAll, setParcelIdAll] = useState([]);
+
+    // Open the modal a set data on useState
+    // =============================================
+    const handleMultipleAssignRider = (SelectHubName, ParcelIDAll) => {
+
+        // filter all user for found all hub rider 
+        // ==============================================
+        let ThisHubAllRider = adminAllUsers?.filter(AllRider => AllRider?.MyHubRider === SelectHubName)
+        setMultipleActiveAllRider(ThisHubAllRider);
+        setParcelIdAll(ParcelIDAll);
+
+        // setState complete হওয়ার পর modal open করো
+        setTimeout(() => {
+            document.getElementById("MultipleParcelAssignToRider").showModal();
+        }, 50);
+    };
+
+
+
+
 
 
 
@@ -131,75 +154,11 @@ const AssignParcel = () => {
                     <h2 className="text-2xl font-semibold text-gray-800 mb-4">
                         Multiple Parcel Assign to Here
                     </h2>
-                    <form onSubmit={(e) => {
-                        e.preventDefault()
-                        const DispatchHubName = e.target.HubName.value;
-                        let date = moment().format("MM/DD/YYYY")
-                        let time = moment().format("hh:mm A")
-                        let DispatchId = Math.round(Math.random() * 99999999).toString()
-                        let TrackingMessage = `Sent to ${DispatchHubName} hub. Dispatch id ${DispatchId}`
-
-                        // Dispatch data post 
-                        // ===================================================================
-                        let DispatchDataPost = { DispatchId, TrackingMessage, date, time, DispatchType: "Sent", DispatchHubName, DispatchParcelAllId: AllId }
-                        // console.log(DispatchDataPost)
-
-                        // Tracking message post of dispatch 
-                        // =============================================================
-                        let TrackingMessagePost = AllId?.map((id, index) => ({
-                            userOrderIdTracking: id,
-                            TrackingMessage,
-                            TrackingDate: date,
-                            TrackingTime: time
-                        }));
-                        // console.log(TrackingMessagePost)
-
-
-                        // Dispatch Send Data Post 
-                        // ===========================================
-                        fetch("https://server.trustereocourier.com.bd/DispatchAllRequestWithTrackingMessage/AdminDispatchRequestSend", {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json"
-                            },
-                            body: JSON.stringify(DispatchDataPost)
-                        })
-                            .then(res => res.json())
-                            .then(data => {
-                                if (data.insertedId) {
-                                    // Dispatch Tracking Data Post 
-                                    // ===========================================
-                                    fetch("https://server.trustereocourier.com.bd/DispatchAllRequestWithTrackingMessage/AdminTrackingRequestSentOfDispatch", {
-                                        method: "POST",
-                                        headers: {
-                                            "Content-Type": "application/json"
-                                        },
-                                        body: JSON.stringify(TrackingMessagePost)
-                                    })
-                                        .then(res => res.json())
-                                        .then(data => {
-                                            // console.log(data)
-                                            if (data.insertedCount > 0) {
-                                                e.target.reset()
-                                                setIDAll([]);
-                                                Swal.fire({
-                                                    position: 'top-end',
-                                                    icon: 'success',
-                                                    title: 'Dispatch Request Success',
-                                                    showConfirmButton: false,
-                                                    timer: 1500
-                                                })
-                                            }
-                                        })
-                                }
-                            })
-
-
-                    }} className="grid grid-cols-7 gap-6">
-
-                        {/* =============================================== */}
-                        {/* Parcel Multiple Id add System same time Start */}
-                        {/* =============================================== */}
+                    {/* =============================================== */}
+                    {/* Parcel Multiple Id add System same time Start */}
+                    {/* =============================================== */}
+                    <div className="grid grid-cols-7 gap-6">
+                        {/* Left side - select add parcel Id*/}
                         <div className="flex flex-wrap border rounded-lg p-2 min-h-[50px] col-span-4">
                             {AllId?.map((tag, index) => (
                                 <div key={index} className="flex items-center bg-black text-white text-sm rounded-full px-3 h-[24px] m-1">
@@ -223,28 +182,34 @@ const AssignParcel = () => {
                             />
                         </div>
 
-                        {/* Right side - select picker, submit button*/}
+                        {/* Right side - select hub, submit button*/}
                         <div className="col-span-3 space-y-4">
-                            <select required className="w-full bg-white border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                                name="HubName"
-                            >
-                                <option value="">-- Select Hub Name --</option>
-                                {AllHubFind?.map((hubName, i) => (
-                                    <option key={i}>
-                                        {hubName?.NameOfHub}
-                                    </option>
-                                ))}
-                            </select>
+                            <form onSubmit={(e) => {
+                                e.preventDefault()
+                                let hubName = e.target.HubName.value
+                                handleMultipleAssignRider(hubName, AllId)
 
-                            {/* Submit button */}
-                            <button
-                                type="submit"
-                                className="bg-blue-500 text-gray-50 px-4 py-2 rounded-md font-semibold shadow-md hover:bg-blue-600 w-full">
-                                Submit
-                            </button>
+                            }}>
+                                <select required className="w-full bg-white border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                    name="HubName"
+                                >
+                                    <option value="">-- Select Hub Name --</option>
+                                    {AllHubFind?.map((hubName, i) => (
+                                        <option key={i}>
+                                            {hubName?.NameOfHub}
+                                        </option>
+                                    ))}
+                                </select>
+
+                                {/* Submit button */}
+                                <button
+                                    type="submit"
+                                    className="bg-blue-500 text-gray-50 px-4 py-2 rounded-md font-semibold shadow-md hover:bg-blue-600 w-full">
+                                    Submit
+                                </button>
+                            </form>
                         </div>
-
-                    </form>
+                    </div>
                 </div>
             </div>
 
@@ -520,20 +485,19 @@ const AssignParcel = () => {
 
                             </div>
                         }
-
                     </div>
                 </div>
             </div>
 
-            {/* ====================================================================== */}
-            {/* Rider Hub Access Modal Update Start  */}
+            {/* ================================================================================================ */}
+            {/* Rider single parcel assign of modal start **************   */}
             {/* ====================================================================== */}
             {activeAllRider && (
                 <dialog id="ParcelAssignToRider" className="modal"
                     key={activeAllRider._id}
                 >
                     <div className="modal-box w-full max-w-2xl text-white bg-gray-900">
-                        <h3 className="font-bold text-xl mb-4">🔐 Assign Parcel to Rider</h3>
+                        <h3 className="font-bold text-xl mb-4">🔐 Single assign parcel to rider</h3>
                         <form
                             method="dialog">
                             <div className="gap-4">
@@ -626,7 +590,7 @@ const AssignParcel = () => {
                             <button
                                 onClick={() => {
                                     document.getElementById("ParcelAssignToRider").close()
-                                    setActiveUser(null)
+                                    setActiveAllRider(null)
                                 }}
                                 className="btn bg-gray-300 text-black"
                             >
@@ -638,7 +602,139 @@ const AssignParcel = () => {
             )}
 
             {/* ====================================================================== */}
-            {/* Rider Hub Access Update Start End  */}
+            {/* Rider single parcel assign of modal End  */}
+            {/* ====================================================================== */}
+            {/* ================================================================================================ */}
+            {/* Multiple parcel Rider Assign Modal Start **************  */}
+            {/* ====================================================================== */}
+            {MultipleActiveAllRider && (
+                <dialog id="MultipleParcelAssignToRider" className="modal"
+                    key={MultipleActiveAllRider._id}
+                >
+                    <div className="modal-box w-full max-w-2xl text-white bg-gray-900">
+                        <h3 className="font-bold text-xl mb-4">🔐 Multiple assign parcel to rider</h3>
+                        <form
+                            method="dialog">
+                            <div className="gap-4">
+                                {MultipleActiveAllRider?.map(rider => (
+                                    <div
+                                        key={rider?._id}
+                                        className="flex items-center justify-between border border-gray-200 rounded-xl shadow-md p-4 mb-4 bg-white backdrop-blur-md transition hover:shadow-lg"
+                                    >
+                                        <p className="text-lg font-semibold text-gray-800">{rider?.name} {rider?.LastName}</p>
+                                        <p className="text-sm text-gray-600">{rider?.email}</p>
+                                        <p className="text-sm text-gray-600">{rider?.Phone}</p>
+                                        <button
+                                            onClick={() => {
+                                                let date = moment().format("MM/DD/YYYY")
+                                                let time = moment().format("hh:mm A")
+                                                let TrackingMessage = `Your parcel has been successfully assigned to a rider. The rider will collect your parcel shortly and begin the delivery process.`
+
+                                                // Tracking message post of  
+                                                // ========================================
+                                                let TrackingMessagePost = AllId?.map((id, index) => ({
+                                                    userOrderIdTracking: id,
+                                                    TrackingMessage,
+                                                    TrackingDate: date,
+                                                    TrackingTime: time
+                                                }));
+                                                // console.log(TrackingMessagePost)
+
+                                                // Assign Parcel Data
+                                                // ========================================
+                                                let AssignPArcelPostToRider = AllId?.map((id, index) => ({
+                                                    RiderEmail: rider?.email,
+                                                    RiderPhone: rider?.Phone,
+                                                    RiderName: rider?.name,
+                                                    RiderUserId: rider?.userId,
+                                                    ParcelIdForRider: id,
+                                                    CategoryAssign: "Parcel",
+                                                }));
+                                                // console.log(AssignPArcelPostToRider)
+
+                                                fetch("https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/InsertAssignParcelToRiderMultiple", {
+                                                    method: "POST",
+                                                    headers: {
+                                                        "Content-Type": "application/json"
+                                                    },
+                                                    body: JSON.stringify(AssignPArcelPostToRider)
+                                                })
+                                                    .then(res => res.json())
+                                                    .then(data => {
+                                                        //  console.log(data)
+
+                                                        if (data.insertedCount > 0) {
+                                                            console.log(data)
+                                                            // Return Tracking Data Post 
+                                                            // ===========================================
+                                                            fetch("https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/AdminTrackingRequestSentOfAssignRiderMultiple", {
+                                                                method: "POST",
+                                                                headers: {
+                                                                    "Content-Type": "application/json"
+                                                                },
+                                                                body: JSON.stringify(TrackingMessagePost)
+                                                            })
+                                                                .then(res => res.json())
+                                                                .then(data => {
+                                                                    console.log(data)
+                                                                    if (data.insertedCount > 0) {
+                                                                        // Parcel Assign Rider status up (Yes)
+                                                                        // =======================================
+                                                                        fetch("https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/ParcelAssignStatusUpdateYesMultiple", {
+                                                                            method: "PATCH",
+                                                                            headers: {
+                                                                                "Content-Type": "application/json",
+                                                                            },
+                                                                            body: JSON.stringify({ ids: AllId })
+                                                                        })
+                                                                            .then(res => res.json())
+                                                                            .then(data => {
+                                                                                console.log(data)
+                                                                                if (data.modifiedCount > 0) {
+                                                                                    Swal.fire({
+                                                                                        position: 'top-end',
+                                                                                        icon: 'success',
+                                                                                        title: 'Parcel Assign Successful',
+                                                                                        showConfirmButton: false,
+                                                                                        timer: 1500
+                                                                                    })
+                                                                                    refetch()
+                                                                                    setIDAll([]);
+                                                                                }
+                                                                            })
+                                                                    }
+                                                                })
+                                                        }
+
+                                                    })
+                                            }}
+                                            className="bg-blue-600 hover:bg-blue-700 text-white text-sm px-5 py-2 rounded-full shadow-md transition duration-150"
+                                        >
+                                            ✅ Assign Him
+                                        </button>
+                                    </div>
+
+                                ))}
+                            </div>
+                        </form>
+
+                        <div className="modal-action mt-6 flex justify-end">
+                            <button
+                                onClick={() => {
+                                    document.getElementById("MultipleParcelAssignToRider").close()
+                                    setMultipleActiveAllRider(null)
+                                }}
+                                className="btn bg-gray-300 text-black"
+                            >
+                                ❌ Cancel
+                            </button>
+                        </div>
+                    </div>
+                </dialog>
+            )}
+
+            {/* ====================================================================== */}
+            {/* Multiple  parcel Rider Assign Modal End  */}
             {/* ====================================================================== */}
 
         </div>

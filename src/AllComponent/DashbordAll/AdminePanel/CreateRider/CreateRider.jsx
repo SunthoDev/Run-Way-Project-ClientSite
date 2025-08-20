@@ -29,8 +29,7 @@ const CreateRider = () => {
 
     // user role Change Click User
     let handleUser = (id) => {
-
-        fetch(`https://server.trustereocourier.com.bd/AdminUpdateRoleUser/${id}`, {
+        fetch(`https://server.trustereocourier.com.bd/AdminUpdateRoleUserToCreateRider/${id}`, {
             method: "PATCH",
         })
             .then(res => res.json())
