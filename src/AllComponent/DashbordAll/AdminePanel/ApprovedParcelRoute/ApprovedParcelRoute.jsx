@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import "./ApprovedParcelRoute.css"
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
@@ -35,8 +35,6 @@ const ApprovedParcelRoute = () => {
     // =======================================
     let [HubSearchPendingData, setHubSearchPendingData] = useState([])
     // console.log(HubSearchPendingData)
-
-
 
 
 
@@ -101,64 +99,86 @@ const ApprovedParcelRoute = () => {
                                             ((HubSearchPendingData.length > 0 ? HubSearchPendingData :
                                                 ApprovedPendingData)?.slice().reverse().map((ParcelAll) =>
 
-                                                <tr key={ParcelAll?._id}>
-                                                    <td>
-                                                        <p className="font-medium text-base text-gray-800">{ParcelAll?.name}</p>
-                                                        <p className="text-sm text-gray-600">{ParcelAll?.number}</p>
-                                                        <p className="text-sm text-black">MyHub: {ParcelAll?.MyHub}</p>
-                                                    </td>
-                                                    <td>
-                                                        <p className="text-sm text-gray-600">Parcel Category: {ParcelAll?.ParcelCategory}</p>
-                                                        <p className="text-sm text-gray-800 font-medium">Parcel Id: {ParcelAll?.StandardParcelId}</p>
-                                                    </td>
-                                                    <td>
-                                                        <p className="text-sm text-gray-600">{ParcelAll?.address}</p>
-                                                        <p className="text-sm text-gray-800 font-medium">P.s: {ParcelAll?.policeStation}</p>
-                                                    </td>
-                                                    <td>
-                                                        <p className="text-sm font-semibold text-green-600">Amount: {ParcelAll?.CodAmount} ৳</p>
-                                                        <p className="text-sm text-blue-600">Delivery Charge: {ParcelAll?.DeliveryCharge} ৳</p>
-                                                    </td>
-                                                    <td>
-                                                        <p className="text-sm text-gray-500">{ParcelAll?.date}, {ParcelAll?.time} </p>
-                                                    </td>
-                                                    <td>
-                                                        <span
-                                                            className={`badge badge-sm ${ParcelAll?.status === "Pending" && "badge-success"}`}
-                                                        >
-                                                            {ParcelAll?.status}
-                                                        </span>
-                                                    </td>
-                                                    <td className="py-[8px]">
-                                                        <Link
-                                                            to={`/dashboard/UserTemporeryInvoiceAllStandardData/${ParcelAll?.StandardParcelId}`}
-                                                        >
-                                                            <button className="btn btn-sm btn-outline btn-primary mb-[8px]">View</button>
-                                                        </Link>
-                                                        <br />
-                                                        <button onClick={() => {
-                                                            fetch(`https://server.trustereocourier.com.bd/AdminApprovedParcelStandardDataYesPayment/${ParcelAll?._id}`, {
-                                                                method: "PATCH",
-                                                            })
-                                                                .then(res => res.json())
-                                                                .then(data => {
-                                                                    if (data.modifiedCount > 0) {
-                                                                        Swal.fire({
-                                                                            position: 'top-end',
-                                                                            icon: 'success',
-                                                                            title: 'Parcel Approved Success',
-                                                                            showConfirmButton: false,
-                                                                            timer: 1500
-                                                                        })
-                                                                    }
-                                                                    refetch()
+                                                    <tr key={ParcelAll?._id}>
+                                                        <td>
+                                                            <p className="font-medium text-base text-gray-800">{ParcelAll?.name}</p>
+                                                            <p className="text-sm text-gray-600">{ParcelAll?.number}</p>
+                                                            <p className="text-sm text-black">MyHub: {ParcelAll?.MyHub}</p>
+                                                        </td>
+                                                        <td>
+                                                            <p className="text-sm text-gray-600">Parcel Category: {ParcelAll?.ParcelCategory}</p>
+                                                            <p className="text-sm text-gray-800 font-medium">Parcel Id: {ParcelAll?.StandardParcelId}</p>
+                                                        </td>
+                                                        <td>
+                                                            <p className="text-sm text-gray-600">{ParcelAll?.address}</p>
+                                                            <p className="text-sm text-gray-800 font-medium">P.s: {ParcelAll?.policeStation}</p>
+                                                        </td>
+                                                        <td>
+                                                            <p className="text-sm font-semibold text-green-600">Amount: {ParcelAll?.CodAmount} ৳</p>
+                                                            <p className="text-sm text-blue-600">Delivery Charge: {ParcelAll?.DeliveryCharge} ৳</p>
+                                                        </td>
+                                                        <td>
+                                                            <p className="text-sm text-gray-500">{ParcelAll?.date}, {ParcelAll?.time} </p>
+                                                        </td>
+                                                        <td>
+                                                            <span
+                                                                className={`badge badge-sm ${ParcelAll?.status === "Pending" && "badge-success"}`}
+                                                            >
+                                                                {ParcelAll?.status}
+                                                            </span>
+                                                        </td>
+                                                        <td className="py-[8px]">
+                                                            <Link
+                                                                to={`/dashboard/UserTemporeryInvoiceAllStandardData/${ParcelAll?.StandardParcelId}`}
+                                                            >
+                                                                <button className="btn btn-sm btn-outline btn-primary mb-[8px]">View</button>
+                                                            </Link>
+                                                            <br />
+                                                            <button onClick={() => {
+                                                                fetch(`https://server.trustereocourier.com.bd/AdminApprovedParcelStandardDataYesPayment/${ParcelAll?._id}`, {
+                                                                    method: "PATCH",
                                                                 })
+                                                                    .then(res => res.json())
+                                                                    .then(data => {
+                                                                        if (data.modifiedCount > 0) {
+                                                                            Swal.fire({
+                                                                                position: 'top-end',
+                                                                                icon: 'success',
+                                                                                title: 'Parcel Approved Success',
+                                                                                showConfirmButton: false,
+                                                                                timer: 1500
+                                                                            })
+                                                                        }
+                                                                        refetch()
+                                                                    })
 
-                                                        }} className="btn btn-sm btn-outline btn-primary">
-                                                            Approved
-                                                        </button>
-                                                    </td>
-                                                </tr>))
+                                                            }} className="btn btn-sm btn-outline btn-primary">
+                                                                Approved
+                                                            </button>
+                                                            <br />
+                                                            <button onClick={() => {
+                                                                fetch(`https://server.trustereocourier.com.bd/AdminApprovedParcelDataBackToPendingStatus/${ParcelAll?._id}`, {
+                                                                    method: "PATCH",
+                                                                })
+                                                                    .then(res => res.json())
+                                                                    .then(data => {
+                                                                        if (data.modifiedCount > 0) {
+                                                                            Swal.fire({
+                                                                                position: 'top-end',
+                                                                                icon: 'success',
+                                                                                title: 'Parcel pending success',
+                                                                                showConfirmButton: false,
+                                                                                timer: 1500
+                                                                            })
+                                                                        }
+                                                                        refetch()
+                                                                    })
+
+                                                            }} className="btn btn-sm btn-outline btn-primary mt-[8px]">
+                                                                Back Pending
+                                                            </button>
+                                                        </td>
+                                                    </tr>))
                                         }
                                     </tbody>
                                 </table>
