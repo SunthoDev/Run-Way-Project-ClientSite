@@ -121,72 +121,8 @@ const Dispatch = () => {
                                         <h2 className="text-2xl font-semibold text-gray-800 mb-4">
                                             Send Dispatch
                                         </h2>
-                                        <form onSubmit={(e) => {
-                                            e.preventDefault()
-                                            const DispatchHubName = e.target.HubName.value;
-                                            let date = moment().format("MM/DD/YYYY")
-                                            let time = moment().format("hh:mm A")
-                                            let DispatchId = Math.round(Math.random() * 99999999).toString()
-                                            let TrackingMessage = `Sent to ${DispatchHubName} hub. Dispatch id ${DispatchId}`
 
-                                            // Dispatch data post 
-                                            // ===================================================================
-                                            let DispatchDataPost = { DispatchId, TrackingMessage, date, time, DispatchType: "Sent", DispatchHubName, DispatchParcelAllId: AllId }
-                                            // console.log(DispatchDataPost)
-
-                                            // Tracking message post of dispatch 
-                                            // =============================================================
-                                            let TrackingMessagePost = AllId?.map((id, index) => ({
-                                                userOrderIdTracking: id,
-                                                TrackingMessage,
-                                                TrackingDate: date,
-                                                TrackingTime: time
-                                            }));
-                                            // console.log(TrackingMessagePost)
-
-
-                                            // Dispatch Send Data Post 
-                                            // ===========================================
-                                            fetch("https://server.trustereocourier.com.bd/DispatchAllRequestWithTrackingMessage/AdminDispatchRequestSend", {
-                                                method: "POST",
-                                                headers: {
-                                                    "Content-Type": "application/json"
-                                                },
-                                                body: JSON.stringify(DispatchDataPost)
-                                            })
-                                                .then(res => res.json())
-                                                .then(data => {
-                                                    if (data.insertedId) {
-                                                        // Dispatch Tracking Data Post 
-                                                        // ===========================================
-                                                        fetch("https://server.trustereocourier.com.bd/DispatchAllRequestWithTrackingMessage/AdminTrackingRequestSentOfDispatch", {
-                                                            method: "POST",
-                                                            headers: {
-                                                                "Content-Type": "application/json"
-                                                            },
-                                                            body: JSON.stringify(TrackingMessagePost)
-                                                        })
-                                                            .then(res => res.json())
-                                                            .then(data => {
-                                                                // console.log(data)
-                                                                if (data.insertedCount > 0) {
-                                                                    e.target.reset()
-                                                                    setIDAll([]);
-                                                                    Swal.fire({
-                                                                        position: 'top-end',
-                                                                        icon: 'success',
-                                                                        title: 'Dispatch Request Success',
-                                                                        showConfirmButton: false,
-                                                                        timer: 1500
-                                                                    })
-                                                                }
-                                                            })
-                                                    }
-                                                })
-
-
-                                        }} className="grid grid-cols-7 gap-6">
-
+                                        <div className="grid grid-cols-7 gap-6">
                                             {/* =============================================== */}
                                             {/* Parcel Multiple Id add System same time Start */}
                                             {/* =============================================== */}
@@ -213,28 +149,94 @@ const Dispatch = () => {
                                                 />
                                             </div>
 
-                                            {/* Right side - select picker, submit button*/}
-                                            <div className="col-span-3 space-y-4">
-                                                <select required className="w-full bg-white border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                                                    name="HubName"
-                                                >
-                                                    <option value="">-- Select Hub Name --</option>
-                                                    {AllHubFind?.map((hubName, i) => (
-                                                        <option key={i}>
-                                                            {hubName?.NameOfHub}
-                                                        </option>
-                                                    ))}
-                                                </select>
+                                            {/* Submit parcel here*/}
+                                            {/* ================================ */}
+                                            <form
+                                                onSubmit={(e) => {
+                                                    e.preventDefault()
+                                                    const DispatchHubName = e.target.HubName.value;
+                                                    let date = moment().format("MM/DD/YYYY")
+                                                    let time = moment().format("hh:mm A")
+                                                    let DispatchId = Math.round(Math.random() * 99999999).toString()
+                                                    let TrackingMessage = `Sent to ${DispatchHubName} hub. Dispatch id ${DispatchId}`
 
-                                                {/* Submit button */}
-                                                <button
-                                                    type="submit"
-                                                    className="bg-blue-500 text-gray-50 px-4 py-2 rounded-md font-semibold shadow-md hover:bg-blue-600 w-full">
-                                                    Submit
-                                                </button>
-                                            </div>
+                                                    // Dispatch data post 
+                                                    // ===================================================================
+                                                    let DispatchDataPost = { DispatchId, TrackingMessage, date, time, DispatchType: "Sent", DispatchHubName, DispatchParcelAllId: AllId }
+                                                    // console.log(DispatchDataPost)
 
-                                        </form>
+                                                    // Tracking message post of dispatch 
+                                                    // =============================================================
+                                                    let TrackingMessagePost = AllId?.map((id, index) => ({
+                                                        userOrderIdTracking: id,
+                                                        TrackingMessage,
+                                                        TrackingDate: date,
+                                                        TrackingTime: time
+                                                    }));
+                                                    // console.log(TrackingMessagePost)
+
+
+                                                    // Dispatch Send Data Post 
+                                                    // ===========================================
+                                                    fetch("https://server.trustereocourier.com.bd/DispatchAllRequestWithTrackingMessage/AdminDispatchRequestSend", {
+                                                        method: "POST",
+                                                        headers: {
+                                                            "Content-Type": "application/json"
+                                                        },
+                                                        body: JSON.stringify(DispatchDataPost)
+                                                    })
+                                                        .then(res => res.json())
+                                                        .then(data => {
+                                                            if (data.insertedId) {
+                                                                // Dispatch Tracking Data Post 
+                                                                // ===========================================
+                                                                fetch("https://server.trustereocourier.com.bd/DispatchAllRequestWithTrackingMessage/AdminTrackingRequestSentOfDispatch", {
+                                                                    method: "POST",
+                                                                    headers: {
+                                                                        "Content-Type": "application/json"
+                                                                    },
+                                                                    body: JSON.stringify(TrackingMessagePost)
+                                                                })
+                                                                    .then(res => res.json())
+                                                                    .then(data => {
+                                                                        // console.log(data)
+                                                                        if (data.insertedCount > 0) {
+                                                                            e.target.reset()
+                                                                            setIDAll([]);
+                                                                            Swal.fire({
+                                                                                position: 'top-end',
+                                                                                icon: 'success',
+                                                                                title: 'Dispatch Request Success',
+                                                                                showConfirmButton: false,
+                                                                                timer: 1500
+                                                                            })
+                                                                        }
+                                                                    })
+                                                            }
+                                                        })
+                                                }} className="col-span-3 space-y-4">
+
+                                                <div className="">
+                                                    <select required className="w-full bg-white border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                                        name="HubName"
+                                                    >
+                                                        <option value="">-- Select Hub Name --</option>
+                                                        {AllHubFind?.map((hubName, i) => (
+                                                            <option key={i}>
+                                                                {hubName?.NameOfHub}
+                                                            </option>
+                                                        ))}
+                                                    </select>
+
+                                                    {/* Submit button */}
+                                                    <button
+                                                        type="submit"
+                                                        className="bg-blue-500 text-gray-50 px-4 py-2 rounded-md font-semibold shadow-md hover:bg-blue-600 w-full">
+                                                        Submit
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
 
