@@ -61,6 +61,7 @@ import RiderCODAmountRequest from "../../DashbordAll/AdminePanel/RiderCODAmountR
 import ParcelDeliveryHistory from "../../DashbordAll/RiderPanelAllWorkHere/ParcelDeliveryHistory/ParcelDeliveryHistory";
 import ParcelDataUpdate from "../../DashbordAll/DashbordRouteUserDataAll/UserTemporeryInvoiceAllStandardData/ParcelDataUpdate/ParcelDataUpdate";
 import ParcelTrackingDataShow from "../../DashbordAll/DashbordRouteUserDataAll/ParcelTrackingDataShow/ParcelTrackingDataShow";
+import ParcelInvoiceOfRider from "../../DashbordAll/RiderPanelAllWorkHere/ParcelInvoiceOfRider/ParcelInvoiceOfRider";
 
 
 let route = createBrowserRouter([
@@ -372,6 +373,11 @@ let route = createBrowserRouter([
          {
             path: "ParcelDeliveryHistory",
             element: <PrivateRoute> <ParcelDeliveryHistory></ParcelDeliveryHistory> </PrivateRoute>
+         },
+         {
+            path: "RiderDashboard/RiderSeeStandardParcelId/:id",
+            element: <ParcelInvoiceOfRider></ParcelInvoiceOfRider>,
+            loader: ({ params }) => fetch(`https://server.trustereocourier.com.bd/AdminSearchStandardParcelId?StandardParcelId=${params.id}`)
          },
 
       ]

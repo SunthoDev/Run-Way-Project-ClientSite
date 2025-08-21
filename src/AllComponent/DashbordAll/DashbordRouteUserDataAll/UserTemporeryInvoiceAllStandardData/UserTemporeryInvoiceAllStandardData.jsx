@@ -443,8 +443,6 @@ const UserTemporeryInvoiceAllStandardData = () => {
                                             <div className="text-center md:text-left">
                                                 <p className="text-black font-semibold text-sm">Rider Name: {ParcelRiderFind?.RiderName}</p>
                                                 <p className="text-gray-800 font-bold text-sm">📞 {ParcelRiderFind?.RiderPhone}</p>
-                                                {/* <p className="text-gray-600 text-sm">Hub: Bagerhat</p>
-                                    <p className="text-gray-600 text-sm">Hub Contact: 01321-230753</p> */}
                                             </div>
                                         </div>
                                     </div>

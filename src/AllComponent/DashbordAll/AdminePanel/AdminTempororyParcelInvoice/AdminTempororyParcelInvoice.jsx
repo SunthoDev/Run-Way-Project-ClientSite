@@ -6,7 +6,7 @@ const AdminTempororyParcelInvoice = () => {
 
     let InVoiceData = useLoaderData()
 
-    console.log(InVoiceData)
+    // console.log(InVoiceData)
 
     let { AmountChangeDate, Invoice, StandardEmailUser, StandardParcelId, address, date, name, note, number, policeStation, CodAmount } = InVoiceData
 
@@ -27,7 +27,7 @@ const AdminTempororyParcelInvoice = () => {
 
                     <button className='text-white bg-[#22A197] py-[8px] px-[13px] rounded-[6px] text-[14px] font-[500]'>Edite</button>
                 </div>
-                <div className="Horijontal bg-[#d4d2d2] my-[12px] w-[full] h-[1px]"></div>
+                <div className="Horijontal bg-[#d4d2d2] my-[12px] w-[full] h-[1px]"></div>z
 
                 <div className="flex justify-between mt-2">
                     <h3 className='text-[16px] font-[500] text-black'>{date}</h3>

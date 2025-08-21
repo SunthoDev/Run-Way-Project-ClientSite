@@ -19,14 +19,14 @@ const ParcelInfoOfRider = () => {
         let res = await fetch(`https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/ParcelCollectCODRequestAllDataFind`)
         return res.json()
     })
-    console.log(RiderSendParcelCODReqAll)
+    // console.log(RiderSendParcelCODReqAll)
     
     // Rider Send Parcel COD all Pending Data Filter Bellow
     // =======================================================================
     let PendingCODRequestData = RiderSendParcelCODReqAll?.filter(Pending => Pending?.status === "Pending" && Pending?.CODReqEmail === roles?.email)
     // Rider Send Parcel COD all Approved Data Filter Bellow
     // =======================================================================
-    let ApprovedCODRequestData = RiderSendParcelCODReqAll?.filter(Approved => Approved?.status === "Approved" && Pending?.CODReqEmail === roles?.email)
+    let ApprovedCODRequestData = RiderSendParcelCODReqAll?.filter(Approved => Approved?.status === "Approved" && Approved?.CODReqEmail === roles?.email)
 
 
 
