@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import "./ParcelDataUpdate.css"
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
 import moment from 'moment';
@@ -8,6 +8,7 @@ import moment from 'moment';
 const ParcelDataUpdate = () => {
 
     let { IdParcel } = useParams()
+    let navigate = useNavigate()
     // console.log(IdParcel)
 
     // ==========================================================
@@ -124,6 +125,7 @@ const ParcelDataUpdate = () => {
                                                         timer: 1500
                                                     })
                                                     refetch()
+                                                    navigate(-1)
                                                 }
                                             })
                                     }

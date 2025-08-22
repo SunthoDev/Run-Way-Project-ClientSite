@@ -21,6 +21,7 @@ const UserTemporeryInvoiceAllStandardData = () => {
     let navigate = useNavigate()
     const [roles] = useRole()
     const ad = roles?.role === "admin"
+    const subAdmin = roles?.role === "subAdmin"
     // console.log(InVoiceData)
 
     let {
@@ -316,7 +317,7 @@ const UserTemporeryInvoiceAllStandardData = () => {
                     <button onClick={handleLabelPrint} className="bg-[#22A197] text-white font-semibold px-4 py-2 rounded">Label</button>
                     {/* If is it a admin panel then can be edit */}
                     {
-                        ad &&
+                        (ad || subAdmin) &&
                         <Link to={`/dashboard/ParcelDataUpdate/${StandardParcelId}`}>
                             <button className="bg-[#22A197] text-white font-semibold px-4 py-2 rounded">Edit</button>
                         </Link>
@@ -334,7 +335,8 @@ const UserTemporeryInvoiceAllStandardData = () => {
                             <p><strong>Invoice:</strong> {Invoice === "" ? "N/A" : Invoice}</p>
                             {/* <p><strong>Tracking Code:</strong> 3C7ADD84D</p> */}
                             {/* <p><strong>Tracking Link:</strong> <a href="https://trustereo-courire.com.bd/t/3C7ADD84D" className="text-blue-600 underline">https://trustereo-courire.bd/t/3C7ADD84D</a></p> */}
-                            {InVoiceData?.status === "Review" &&
+                            {(ad || subAdmin) && InVoiceData?.status === "Review" &&
+
                                 <button className="bg-[#22A197] text-white font-semibold px-4 py-2 rounded"
                                     onClick={() => {
                                         let date = moment().format("MM/DD/YYYY")
@@ -448,13 +450,13 @@ const UserTemporeryInvoiceAllStandardData = () => {
                                     </div>
                                     :
                                     InVoiceData?.status === "Cancel" && InVoiceData?.AssignRider === "Yes" ?
-                                    <h2 className="text-center text-lg font-semibold text-green-600">
-                                        ❌ Your parcel has been cancelled. Please contact support for more details.
-                                    </h2>
-                                    :
-                                    <h2 className="text-center text-lg font-semibold text-red-600">
-                                        Your parcel has already been delivered successfully!
-                                    </h2>
+                                        <h2 className="text-center text-lg font-semibold text-green-600">
+                                            ❌ Your parcel has been cancelled. Please contact support for more details.
+                                        </h2>
+                                        :
+                                        <h2 className="text-center text-lg font-semibold text-red-600">
+                                            Your parcel has already been delivered successfully!
+                                        </h2>
                         }
 
                     </div>

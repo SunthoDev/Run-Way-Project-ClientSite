@@ -24,6 +24,7 @@ const AdminSearchStandardParcelUser = () => {
     let navigate =  useNavigate()
     let [roles] = useRole()
     const ad = roles?.role === "admin"
+    const subAdmin = roles?.role === "subAdmin"
     // console.log(InVoiceData)
 
     let {
@@ -269,7 +270,7 @@ const AdminSearchStandardParcelUser = () => {
                     <button onClick={handleLabelPrint} className="bg-[#22A197] text-white font-semibold px-4 py-2 rounded">Label</button>
                     {/* If is it a admin panel then can be edit */}
                     {
-                        ad &&
+                        ad || subAdmin &&
                         <Link to={`/dashboard/ParcelDataUpdate/${InVoiceData?.StandardParcelId}`}>
                             <button className="bg-[#22A197] text-white font-semibold px-4 py-2 rounded">Edit</button>
                         </Link>
