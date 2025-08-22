@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import "./AdminSearchUserId.css"
-import { Link, useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData, useNavigate } from 'react-router-dom';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { AuthContext } from '../../../AuthoncationAll/AuthProvider/AuthProvider';
@@ -13,6 +13,7 @@ import moment from 'moment';
 const AdminSearchUserId = () => {
 
     let { user, setAdminUserEmailSendDataEntry } = useContext(AuthContext)
+    let navigate = useNavigate()
 
     let AdminFineUserProfileId = useLoaderData()
     let { _id, Address, BusinessName, LastName, Password, Phone, email, name, photo, role, status, userId, Districts, PoliceStations, date } = AdminFineUserProfileId
@@ -134,8 +135,13 @@ const AdminSearchUserId = () => {
                     <h3 className='text-black font-[500] text-[16px] pt-[4px] text-center'>Contact no: {Phone}</h3>
                     <h3 className='text-black font-[500] text-[16px] pt-[4px] text-center'>{email}</h3>
                     <h3 className='text-black font-[500] text-[16px] pt-[4px] text-center'>{Address}</h3>
+                    <h3 className='text-green-600 font-[500] text-[16px] pt-[4px] text-center'>Districts: {AdminFineUserProfileId?.Districts}</h3>
                     <h3 className='text-red-600 font-[500] text-[16px] pt-[4px] text-center'>{AdminFineUserProfileId?.PoliceStations}</h3>
-                    {/* <button className='font-[600] bg-[#22AFA3] py-2 px-2 text-[14px] text-white  rounded-[8px] w-[100%] mt-4 md:mt-6'>Update Address</button> */}
+                    <button 
+                    onClick={()=>{
+                        navigate(`/dashboard/AdminDashboard/AdminEditUserInformation/${userId}`)
+                    }}
+                    className='font-[600] bg-[#22AFA3] py-2 px-2 text-[14px] text-white  rounded-[8px] w-[100%] mt-4 md:mt-6'>Update Information</button>
                 </div>
 
                 {/* Right information start */}

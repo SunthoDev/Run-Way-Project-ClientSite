@@ -62,6 +62,7 @@ import ParcelDeliveryHistory from "../../DashbordAll/RiderPanelAllWorkHere/Parce
 import ParcelDataUpdate from "../../DashbordAll/DashbordRouteUserDataAll/UserTemporeryInvoiceAllStandardData/ParcelDataUpdate/ParcelDataUpdate";
 import ParcelTrackingDataShow from "../../DashbordAll/DashbordRouteUserDataAll/ParcelTrackingDataShow/ParcelTrackingDataShow";
 import ParcelInvoiceOfRider from "../../DashbordAll/RiderPanelAllWorkHere/ParcelInvoiceOfRider/ParcelInvoiceOfRider";
+import AdminEditUserInformation from "../../DashbordAll/AdminePanel/AdminSearchUserId/AdminEditUserInformation/AdminEditUserInformation";
 
 
 let route = createBrowserRouter([
@@ -347,6 +348,11 @@ let route = createBrowserRouter([
          {
             path: "AdminDashboard/RiderCODAmountRequest",
             element: <RiderCODAmountRequest></RiderCODAmountRequest>
+         },
+         {
+            path: "AdminDashboard/AdminEditUserInformation/:id",
+            element: <AdminEditUserInformation></AdminEditUserInformation>,
+            loader: ({ params }) => fetch(`https://server.trustereocourier.com.bd/adminSearchUserId?userId=${params.id}`)
          },
       ]
    },
