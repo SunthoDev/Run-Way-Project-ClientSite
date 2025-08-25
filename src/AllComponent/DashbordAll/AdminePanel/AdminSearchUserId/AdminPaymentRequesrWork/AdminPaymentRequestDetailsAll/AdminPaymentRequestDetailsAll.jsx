@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import "./AdminPaymentRequestDetailsAll.css"
 import { useLoaderData, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
@@ -6,6 +6,7 @@ import moment from 'moment';
 import logo from "../../../../../../assets/logo/Logo.png"
 import UserPaymentRequestAllPaymentDataShow from '../UserPaymentRequestAllPaymentDataShow/UserPaymentRequestAllPaymentDataShow';
 import Swal from 'sweetalert2';
+import { useReactToPrint } from "react-to-print";
 
 {/* <Link to={`/dashboard/AdminDashboard/AdminPaymentRequestDetailsAll/${ReqPaymentID}`} className='Pending ml-3'>View</Link> */ }
 
@@ -21,7 +22,7 @@ const AdminPaymentRequestDetailsAll = () => {
 
     // Find User Information , who is send payment request
     // ===================================================================
-    let { refetch , data: requestUserUserInformationFind = [] } = useQuery(["AdminPaymentRequestSendUserInformationGet"], async () => {
+    let { refetch, data: requestUserUserInformationFind = [] } = useQuery(["AdminPaymentRequestSendUserInformationGet"], async () => {
         let res = await fetch(`https://server.trustereocourier.com.bd/AdminPaymentRequestSendUserInformationGet?email=${ReqUserEmail}`)
         return res.json()
     })
@@ -61,12 +62,22 @@ const AdminPaymentRequestDetailsAll = () => {
         }, 50);
     };
 
+    // ==========================================================
+    // Print (Payment Report) Options Start
+    // ==========================================================
+    const PaymentRef = useRef();
+    const handlePaymentDetailsPrint = useReactToPrint({
+        content: () => PaymentRef.current,
+    });
 
 
+    
     return (
         <div className=''>
+
             <div className='flex items-center justify-between mx-4 my-4'>
                 <button
+                    onClick={handlePaymentDetailsPrint}
                     className="px-5 py-2 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg shadow-md transition duration-300 ease-in-out"
                 >📥 Download Excel</button>
                 <button
@@ -74,10 +85,11 @@ const AdminPaymentRequestDetailsAll = () => {
                     className="px-5 py-2 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg shadow-md transition duration-300 ease-in-out"
                 >Edit</button>
             </div>
+            
             {/* ============================================ */}
             {/* Payment Details All Here!! */}
             {/* ============================================ */}
-            <div className='AdminPaymentRequestDetailsAll mx-2 md:mx-4 rounded-[6px] my-4 bg-white px-2 md:px-6 py-10 relative overflow-hidden'>
+            <div ref={PaymentRef} className='AdminPaymentRequestDetailsAll mx-2 md:mx-4 rounded-[6px] my-4 bg-white px-2 md:px-6 py-10 relative overflow-hidden'>
 
                 <div className="PaymentRequestDetailsInvoice ">
 
@@ -220,10 +232,10 @@ const AdminPaymentRequestDetailsAll = () => {
 
                             fetch(`https://server.trustereocourier.com.bd/AdminUpdateUserSendPaymentInvoiceData/${PaymentDetailsForModal?._id}`, {
                                 method: "PATCH",
-                                headers:{
-                                    "content-type" : "application/json"
+                                headers: {
+                                    "content-type": "application/json"
                                 },
-                                body:JSON.stringify(allInfo)
+                                body: JSON.stringify(allInfo)
                             })
                                 .then(res => res.json())
                                 .then(data => {
@@ -235,7 +247,7 @@ const AdminPaymentRequestDetailsAll = () => {
                                             showConfirmButton: false,
                                             timer: 1500
                                         })
-                                    refetch()
+                                        refetch()
                                     }
                                 })
                         }}>

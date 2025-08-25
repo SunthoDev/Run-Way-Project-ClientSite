@@ -317,7 +317,7 @@ const UserTemporeryInvoiceAllStandardData = () => {
                     <button onClick={handleLabelPrint} className="bg-[#22A197] text-white font-semibold px-4 py-2 rounded">Label</button>
                     {/* If is it a admin panel then can be edit */}
                     {
-                        (ad || subAdmin) &&
+                        (ad || subAdmin) && (InVoiceData?.status === "Review" || InVoiceData?.status === "Pending") &&
                         <Link to={`/dashboard/ParcelDataUpdate/${StandardParcelId}`}>
                             <button className="bg-[#22A197] text-white font-semibold px-4 py-2 rounded">Edit</button>
                         </Link>

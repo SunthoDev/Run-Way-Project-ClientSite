@@ -1,4 +1,39 @@
 
+@media print {
+    body {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .AdminPaymentRequestDetailsAll {
+        font-family: 'Arial', sans-serif !important;
+        margin: 20px 40px;
+    }
+
+    .AdminPaymentRequestDetailsAll {
+        background: white !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        /* color: black !important; */
+        padding:20px 40px;
+        /* text contrast ভালো করার জন্য */
+    }
+
+    /* Hide everything else if needed */
+    /* body * {
+        visibility: hidden;
+    } */
+    .AdminPaymentRequestDetailsAll,
+    .AdminPaymentRequestDetailsAll * {
+        visibility: visible;
+    }
+
+    .AdminPaymentRequestDetailsAll {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+}
 
 .AdminPaymentRequestDetailsAll .paid-badge {
     position: absolute;
@@ -13,16 +48,6 @@
     padding-bottom: 0.25rem;
     text-align: center;
 }
-
-
-
-
-
-
-
-
-
-
 
 
 

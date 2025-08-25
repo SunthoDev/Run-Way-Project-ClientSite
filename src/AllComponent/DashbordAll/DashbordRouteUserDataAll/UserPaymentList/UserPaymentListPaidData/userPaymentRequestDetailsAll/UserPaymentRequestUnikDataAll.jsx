@@ -1,16 +1,17 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import "./UserPaymentRequestUnikDataAll.css"
 import { useLoaderData } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import logo from "../../../../../../assets/logo/LogoTwo.png"
 import moment from 'moment';
 import UserSeeAllPaymentRequestDelivaryData from '../UserSeeAllPaymentRequestDelivary/UserSeeAllPaymentRequestDelivaryData';
+import { useReactToPrint } from "react-to-print";
 
 const UserPaymentRequestUnikDataAll = () => {
     let userPaymentRequestData = useLoaderData()
     // console.log(userPaymentRequestData)
 
-    let { _id, ReqPaymentID, ReqPay, TotalCodAmount, TotalDeliveryCharge, subTotal, subTotalOnePercentCharge, totalBalanceUser, name, LastName, photo, userId, Address, BusinessName, Phone, ReqUserEmail, userStatus, date,time, Payment } = userPaymentRequestData
+    let { _id, ReqPaymentID, ReqPay, TotalCodAmount, TotalDeliveryCharge, subTotal, subTotalOnePercentCharge, totalBalanceUser, name, LastName, photo, userId, Address, BusinessName, Phone, ReqUserEmail, userStatus, date, time, Payment } = userPaymentRequestData
 
 
     // find request user paid Delivery data all
@@ -26,17 +27,28 @@ const UserPaymentRequestUnikDataAll = () => {
 
     // console.log(userPaidAllDeliveryData)
 
+    // ==========================================================
+    // Print (Payment Report) Options Start
+    // ==========================================================
+    const PaymentRef = useRef();
+    const handlePaymentDetailsPrint = useReactToPrint({
+        content: () => PaymentRef.current,
+    });
+
+
 
     return (
         <div className=''>
+
             <button
+                onClick={handlePaymentDetailsPrint}
                 className="mx-4 my-4 px-5 py-2 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg shadow-md transition duration-300 ease-in-out"
             >📥 Download Excel</button>
-            
+
             {/* ============================================ */}
             {/* Payment Details All Here!! */}
             {/* ============================================ */}
-            <div className='AdminSeePaymentRequestDetailsAll mx-2 md:mx-4 rounded-[6px] my-4 bg-white px-2 md:px-6 py-10'>
+            <div ref={PaymentRef} className='UserSeePaymentRequestDetailsAll mx-2 md:mx-4 rounded-[6px] my-4 bg-white px-2 md:px-6 py-10'>
                 <div className="PaymentRequestDetailsUserInvoice">
 
                     {/* Paid Badge  */}
