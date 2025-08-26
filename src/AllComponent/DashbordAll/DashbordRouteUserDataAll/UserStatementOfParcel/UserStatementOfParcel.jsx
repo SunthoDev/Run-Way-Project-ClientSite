@@ -25,7 +25,7 @@ const UserStatementOfParcel = () => {
     // All user parcel data load here !!
     // ==============================================
     let { refetch, data: AllConsignmentData = [] } = useQuery(["UseAllConsignmentStandardData"], async () => {
-        let res = await fetch(`https://server.trustereocourier.com.bd/UseAllConsignmentStandardData?email=${roles?.email}`)
+        let res = await fetch(`https://server.trustereocourier.com.bd/UseAllConsignmentStandardData?email=${user?.email}`)
         return res.json()
     })
     // console.log(AllConsignmentData)
