@@ -312,7 +312,11 @@ const UserTemporeryInvoiceAllStandardData = () => {
 
                 {/* Top Action Bar */}
                 <div className="flex flex-wrap justify-end gap-3 mb-6">
-
+                    {(ad || subAdmin) &&
+                        <Link to={`/dashboard/AdminDashboard/AdminSearchUserId/${ParcelEntryPhone}`}>
+                            <button className="bg-[#0abef2] text-white font-semibold px-4 py-2 rounded">Profile</button>
+                        </Link>
+                    }
                     <button onClick={handleInvoicePrint} className="bg-[#0abef2] text-white font-semibold px-4 py-2 rounded">Invoice</button>
                     <button onClick={handleLabelPrint} className="bg-[#22A197] text-white font-semibold px-4 py-2 rounded">Label</button>
                     {/* If is it a admin panel then can be edit */}

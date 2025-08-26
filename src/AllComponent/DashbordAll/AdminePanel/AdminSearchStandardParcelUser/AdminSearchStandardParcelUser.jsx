@@ -21,7 +21,7 @@ const AdminSearchStandardParcelUser = () => {
     // Find Parcel information
     // ===================================================
     let InVoiceData = useLoaderData()
-    let navigate =  useNavigate()
+    let navigate = useNavigate()
     let [roles] = useRole()
     const ad = roles?.role === "admin"
     const subAdmin = roles?.role === "subAdmin"
@@ -264,6 +264,10 @@ const AdminSearchStandardParcelUser = () => {
                 {/* All Button Bellow */}
                 {/* ============================== */}
                 <div className="flex flex-wrap justify-end gap-3 mb-6">
+
+                    <Link to={`/dashboard/AdminDashboard/AdminSearchUserId/${ParcelEntryPhone}`}>
+                        <button className="bg-[#0abef2] text-white font-semibold px-4 py-2 rounded">Profile</button>
+                    </Link>
 
                     <button onClick={handleInvoicePrint} className="bg-[#0abef2] text-white font-semibold px-4 py-2 rounded">Invoice</button>
 

@@ -148,6 +148,9 @@ const Footer = () => {
                     className="mt-16 pt-8 border-t border-gray-800"
                 >
                     <div className="flex flex-col md:flex-row justify-between items-center">
+                        <p className="text-gray-400 text-sm pb-2 md:pb-0">
+                            Designer By: <a href="https://my-portfolio-shipon.web.app" target="_blank" className="hover:underline hover:text-blue-800 transition transform-600">Shipon Deb</a>
+                        </p>
                         <p className="text-gray-400 text-sm">
                             © {new Date().getFullYear()} Trustereo Courier. All rights reserved.
                         </p>

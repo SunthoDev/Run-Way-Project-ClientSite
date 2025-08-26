@@ -132,7 +132,6 @@ const UserStatementOfParcel = () => {
                             <th className="border border-gray-400 p-2">Customer Name</th>
                             <th className="border border-gray-400 p-2">Customer Number</th>
                             <th className="border border-gray-400 p-2">Police station</th>
-                            <th className="border border-gray-400 p-2">Parcel Category</th>
                             <th className="border border-gray-400 p-2">Weight</th>
                             <th className="border border-gray-400 p-2">COD Amount</th>
                             <th className="border border-gray-400 p-2">Delivery Charge</th>
@@ -156,7 +155,6 @@ const UserStatementOfParcel = () => {
                                     <td className="border border-gray-400 p-2">{item.name}</td>
                                     <td className="border border-gray-400 p-2">{item.number}</td>
                                     <td className="border border-gray-400 p-2">{item.policeStation}</td>
-                                    <td className="border border-gray-400 p-2">{item.ParcelCategory}</td>
                                     <td className="border border-gray-400 p-2">{item.weight}</td>
                                     <td className="border border-gray-400 p-2">{item.CodAmount}</td>
                                     <td className="border border-gray-400 p-2">{item.DeliveryCharge}</td>
