@@ -1,0 +1,32 @@
+@media print {
+    body {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    .ParcelStatementParent {
+        font-family: 'Arial', sans-serif !important;
+        margin: 20px 40px;
+    }
+    .ParcelStatementParent {
+        background: white !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        /* color: black !important; */
+        padding:20px 40px;
+        /* text contrast ভালো করার জন্য */
+    }
+
+    /* Hide everything else if needed */
+    /* body * {
+        visibility: hidden;
+    } */
+    .ParcelStatementParent,
+    .ParcelStatementParent * {
+        visibility: visible;
+    }
+    .ParcelStatementParent {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+}

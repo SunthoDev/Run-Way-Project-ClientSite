@@ -225,6 +225,7 @@ const Dashboard = () => {
                                     <li> <NavLink to="/dashboard/UserAllPaymentRequestData"><span><i className="fa fa-credit-card" aria-hidden="true"></i></span> Payment List</NavLink></li>
                                     <li> <NavLink to="/dashboard/API"><span><i className="fa fa-credit-card" aria-hidden="true"></i></span>API</NavLink></li>
                                     <li> <NavLink to="/dashboard/AddBalancePayRequest"><span><i className="fa fa-credit-card" aria-hidden="true"></i></span>Balance Request</NavLink></li>
+                                    <li> <NavLink to="/dashboard/UserStatementOfParcel"><span><i className="fa fa-credit-card" aria-hidden="true"></i></span>Parcel Statement</NavLink></li>
                                 </div>
                     }
 

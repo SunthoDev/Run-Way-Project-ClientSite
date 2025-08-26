@@ -1,4 +1,4 @@
-
+import React from "react";
 import './AllMarchentConsignment.css'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { useQuery } from '@tanstack/react-query';
@@ -20,22 +20,21 @@ const AllMarchentConsignment = () => {
     const [roles] = useRole()
     let { role, Address, BusinessName, name, userId, photo, status } = roles
 
-
-    // TODO: Data lode problems late 
-
+    // ==============================================
+    // All Parcel Data Load Here
+    // ==============================================
     let { refetch, data: AllConsignmentData = [] } = useQuery(["UseAllConsignmentStandardData"], async () => {
         let res = await fetch(`https://server.trustereocourier.com.bd/UseAllConsignmentStandardData?email=${user?.email}`)
         return res.json()
     })
-
     // console.log(AllConsignmentData)
 
-
-    // All  data find 
+    // ===========================
+    // All  data filter bellow
+    // ===========================
     let ConsignmentAllData = AllConsignmentData.filter(approved => approved?.status == "Pending" || approved?.Payment == "Yes" && approved?.status == "Delivered" || approved?.Payment == "Yes" && approved?.status == "PartiallyDelivered" || approved?.Payment == "Yes" && approved?.status == "Cancel")
 
     // console.log(ConsignmentAllData)
-
 
 
     // pending data find 

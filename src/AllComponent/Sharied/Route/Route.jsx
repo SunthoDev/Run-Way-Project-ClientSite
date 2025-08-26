@@ -63,6 +63,7 @@ import ParcelDataUpdate from "../../DashbordAll/DashbordRouteUserDataAll/UserTem
 import ParcelTrackingDataShow from "../../DashbordAll/DashbordRouteUserDataAll/ParcelTrackingDataShow/ParcelTrackingDataShow";
 import ParcelInvoiceOfRider from "../../DashbordAll/RiderPanelAllWorkHere/ParcelInvoiceOfRider/ParcelInvoiceOfRider";
 import AdminEditUserInformation from "../../DashbordAll/AdminePanel/AdminSearchUserId/AdminEditUserInformation/AdminEditUserInformation";
+import UserStatementOfParcel from "../../DashbordAll/DashbordRouteUserDataAll/UserStatementOfParcel/UserStatementOfParcel";
 
 
 let route = createBrowserRouter([
@@ -187,6 +188,10 @@ let route = createBrowserRouter([
          {
             path: "ParcelDataUpdate/:IdParcel",
             element: <ParcelDataUpdate></ParcelDataUpdate>
+         },
+         {
+            path: "UserStatementOfParcel",
+            element: <UserStatementOfParcel></UserStatementOfParcel>
          },
 
 
