@@ -372,7 +372,6 @@ const AssignParcel = () => {
                                                                                             <span className="text-sm text-gray-700">{searchHubName}</span>
 
                                                                                             <button onClick={() => handleAssignRider(searchHubName, ParcelAll?.StandardParcelId)} className="btn btn-sm btn-outline btn-primary">Rider</button>
-
                                                                                         </div>
 
                                                                                         {/* All hub show here to database  */}
@@ -417,7 +416,6 @@ const AssignParcel = () => {
                                 </div>
                             </div>
                         }
-
                         {/* ============================================ */}
                         {/* Parcel (In Review) Type category data show */}
                         {/* ============================================ */}

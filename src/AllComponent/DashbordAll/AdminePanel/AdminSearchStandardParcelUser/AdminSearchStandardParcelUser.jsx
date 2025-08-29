@@ -29,7 +29,7 @@ const AdminSearchStandardParcelUser = () => {
 
     let {
         ParcelEntryFirstName, ParcelEntryLastName, ParcelEntryAddress, ParcelEntryPhone,
-        AlternativePhone, CodAmount, DeliveryCharge, District, Invoice, ItemDescription, ParcelCategory, Payment, RecipientEmail, StandardEmailUser, StandardParcelId, address, date, deliveryType, name, note, number, policeStation, status, weight, _id } = InVoiceData
+        AlternativePhone, CodAmount, DeliveryCharge, District, Invoice, ItemDescription, ParcelCategory, Payment, RecipientEmail, StandardEmailUser, StandardParcelId, address, date, deliveryType, name, note, number, policeStation, status, weight, MyHub, _id } = InVoiceData
 
 
     // =============================================
@@ -212,9 +212,12 @@ const AdminSearchStandardParcelUser = () => {
                     </table>
                 </div>
 
-                <p className="text-sm mt-4">Note: {note?.InVoiceData}</p>
+                <div className="flex items-center justify-between">
+                    <p className="text-sm mt-4">Note: {note}</p>
+                    <p className="text-sm mt-4 font-bold">Hub: {MyHub}</p>
+                </div>
 
-                <p className="text-sm text-right mt-2">Prepared by Trustereocourier.com</p>
+                <p className="text-sm text-right mt-2">Prepared by: Trustereocourier.com</p>
 
             </div>
 
@@ -234,7 +237,8 @@ const AdminSearchStandardParcelUser = () => {
                     </div>
                     <h3 className="flex justify-between items-center mt-1">
                         <div className="text-center text-[10px]">
-                            <p className="text-left">Merchant Number: {ParcelEntryPhone}</p>
+                            <p className="text-left">Hub: {MyHub}</p>
+                            <p className="text-left">{ParcelEntryPhone}</p>
                             <p className="text-left">Invoice: {Invoice}</p>
                             <p className="text-left">Parcel ID: {StandardParcelId}</p>
                             <p className="text-left">D.Type: {deliveryType}</p>
