@@ -523,6 +523,13 @@ const AssignParcel = () => {
                                                     ParcelIdForRider: ParcelId,
                                                     CategoryAssign: "Parcel",
                                                 }
+                                                let RIderInfoSaveToParcel = {
+                                                    RiderEmail: rider?.email,
+                                                    RiderPhone: rider?.Phone,
+                                                    RiderName: rider?.name,
+                                                    RiderUserId: rider?.userId,
+                                                }
+
                                                 // console.log(AssignPArcelPostToRider)
                                                 fetch("https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/InsertAssignParcelToRider", {
                                                     method: "POST",
@@ -534,7 +541,7 @@ const AssignParcel = () => {
                                                     .then(res => res.json())
                                                     .then(data => {
                                                         if (data.insertedId) {
-                                                            // Return Tracking Data Post 
+                                                            // Parcel assign Tracking Data Post 
                                                             // ===========================================
                                                             fetch("https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/AdminTrackingRequestSentOfAssignRider", {
                                                                 method: "POST",
@@ -550,7 +557,11 @@ const AssignParcel = () => {
                                                                         // Parcel Assign Rider status up (Yes)
                                                                         // =======================================
                                                                         fetch(`https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/ParcelAssignStatusUpdateYes/${ParcelId}`, {
-                                                                            method: "PATCH",
+                                                                            method: "PUT",
+                                                                            headers: {
+                                                                                "Content-Type": "application/json"
+                                                                            },
+                                                                            body: JSON.stringify(RIderInfoSaveToParcel)
                                                                         })
                                                                             .then(res => res.json())
                                                                             .then(data => {
@@ -645,7 +656,16 @@ const AssignParcel = () => {
                                                     CategoryAssign: "Parcel",
                                                 }));
                                                 // console.log(AssignPArcelPostToRider)
-
+                                                // Rider information save with parcel data 
+                                                // =======================================
+                                                let RIderInfoSaveToParcel = {
+                                                    RiderEmail: rider?.email,
+                                                    RiderPhone: rider?.Phone,
+                                                    RiderName: rider?.name,
+                                                    RiderUserId: rider?.userId,
+                                                }
+                                                //  Parcel assign to rider data insert!!
+                                                // ==============================================
                                                 fetch("https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/InsertAssignParcelToRiderMultiple", {
                                                     method: "POST",
                                                     headers: {
@@ -659,7 +679,7 @@ const AssignParcel = () => {
 
                                                         if (data.insertedCount > 0) {
                                                             console.log(data)
-                                                            // Return Tracking Data Post 
+                                                            // Return tracking data post!!
                                                             // ===========================================
                                                             fetch("https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/AdminTrackingRequestSentOfAssignRiderMultiple", {
                                                                 method: "POST",
@@ -670,20 +690,20 @@ const AssignParcel = () => {
                                                             })
                                                                 .then(res => res.json())
                                                                 .then(data => {
-                                                                    console.log(data)
+                                                                    // console.log(data)
                                                                     if (data.insertedCount > 0) {
                                                                         // Parcel Assign Rider status up (Yes)
                                                                         // =======================================
                                                                         fetch("https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/ParcelAssignStatusUpdateYesMultiple", {
-                                                                            method: "PATCH",
+                                                                            method: "PUT",
                                                                             headers: {
                                                                                 "Content-Type": "application/json",
                                                                             },
-                                                                            body: JSON.stringify({ ids: AllId })
+                                                                            body: JSON.stringify({ ids: AllId, RIderInfoSaveToParcel })
                                                                         })
                                                                             .then(res => res.json())
                                                                             .then(data => {
-                                                                                console.log(data)
+                                                                                // console.log(data)
                                                                                 if (data.modifiedCount > 0) {
                                                                                     Swal.fire({
                                                                                         position: 'top-end',
@@ -736,3 +756,4 @@ const AssignParcel = () => {
 };
 
 export default AssignParcel;
+

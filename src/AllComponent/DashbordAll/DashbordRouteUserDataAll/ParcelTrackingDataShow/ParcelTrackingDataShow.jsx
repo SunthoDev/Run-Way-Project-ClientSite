@@ -31,27 +31,6 @@ const ParcelTrackingDataShow = () => {
 
 
 
-    // =========================================================================================================
-    // Parcel Assign Rider Information
-    // =======================================================================
-    // Assign Parcel All Data Find Here !!  (PARCEL) (PICKUP) (RETURN)
-    // =======================================================================
-    let { data: RiderAssignDataAll = [] } = useQuery(["AdminAllAssignParcelHere_AllAssignParcelFindToHere"], async () => {
-        let res = await fetch(`https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/AllAssignParcelFindToHere`)
-        return res.json()
-
-    })
-    // console.log(RiderAssignDataAll)
-
-    // ===============================================================
-    // This Parcel Rider Find
-    // ===============================================================
-    let ParcelRiderFind = RiderAssignDataAll?.find(parcel => parcel?.CategoryAssign === "Parcel" && parcel?.ParcelIdForRider === StandardParcelId)
-    // console.log(ParcelRiderFind)
-
-
-
-
 
     return (
         <div className='UserTemporeryInvoiceAllStandardData bg-white min-h-screen px-4 md:px-10 py-6'>
@@ -198,25 +177,24 @@ const ParcelTrackingDataShow = () => {
                                     InVoiceData?.status === "Review" && InVoiceData?.AssignRider === "No" ?
                                     <h2 className="text-center text-base font-medium text-orange-500">
                                         Your parcel is currently pending assignment to a rider. Please wait.
-                                    </h2> :
-                                    InVoiceData?.status === "Pending" && InVoiceData?.AssignRider === "Yes" ?
+                                    </h2> 
+                                    :
+                                    // InVoiceData?.status === "Pending" && InVoiceData?.AssignRider === "Yes" ?
 
                                         <div className="py-4 px-4">
-                                            <h4 className="font-semibold text-gray-800 text-base text-center md:text-left">Assigned to - {ParcelRiderFind?.RiderName}</h4>
+                                            <h4 className="font-semibold text-gray-800 text-base text-center md:text-left">Assigned to - {InVoiceData?.RiderName}</h4>
                                             <div className="flex flex-col md:flex-row items-center gap-4 mt-3 md:justify-start justify-center">
                                                 <img src="https://i.ibb.co/kX7XnCQ/avatar.png" alt="staff" className="w-12 h-12 rounded-full border border-gray-300 shadow-sm" />
                                                 <div className="text-center md:text-left">
-                                                    <p className="text-black font-semibold text-sm">Rider Name: {ParcelRiderFind?.RiderName}</p>
-                                                    <p className="text-gray-800 font-bold text-sm">📞 {ParcelRiderFind?.RiderPhone}</p>
-                                                    {/* <p className="text-gray-600 text-sm">Hub: Bagerhat</p>
-                                    <p className="text-gray-600 text-sm">Hub Contact: 01321-230753</p> */}
+                                                    <p className="text-black font-semibold text-sm">Rider Name: {InVoiceData?.RiderName}</p>
+                                                    <p className="text-gray-800 font-bold text-sm">📞 {InVoiceData?.RiderPhone}</p>
                                                 </div>
                                             </div>
                                         </div>
-                                        :
-                                        <h2 className="text-center text-lg font-semibold text-green-600">
-                                            Your parcel has already been delivered successfully!
-                                        </h2>
+                                        // :
+                                        // <h2 className="text-center text-lg font-semibold text-green-600">
+                                        //     Your parcel has already been delivered successfully!
+                                        // </h2>
                             }
 
                         </div>

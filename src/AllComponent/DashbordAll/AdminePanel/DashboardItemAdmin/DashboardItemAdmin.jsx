@@ -1,81 +1,81 @@
 import React, { useState } from 'react';
 import "./DashboardItemAdmin.css"
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import moment from 'moment';
 
 const DashboardItemAdmin = () => {
 
-    let [useId, setUserId] = useState("")
-    let [Standard, setStandard] = useState("")
-    let [Number, setNumber] = useState("")
-    let [PaymentId, setPaymentId] = useState("")
-
-    // admin find user profile id
-    let handleAdminUserIdFind = (event) => {
-        setUserId(event.target.value)
-    }
-    // admin find user standard parcel id
-    let handleAdminStandardParcelIdFind = (event) => {
-        setStandard(event.target.value)
-    }
-    // admin find user standard parcel id
-    let handleAdminUserNumberFind = (event) => {
-        setNumber(event.target.value)
-    }
-    // admin find payment Id
-    let handleAdminPaymentIdFind = (event) => {
-        setPaymentId(event.target.value)
-    }
-
+    let navigate = useNavigate()
 
 
     return (
         <div className='DashboardItemAdmin px-2 md:px-10 py-10'>
+
             <div className="DashboardItem bg-white p-[28px] rounded-[8px]  grid grid-cols-1 md:grid-cols-2 gap-5">
 
                 {/* search Parcel ID !! */}
                 {/* =================================================================== */}
                 <div className="item">
-                    <h3 className='text-[17px] font-[500] text-black mb-[8px]'>Search Parcel ID</h3>
-                    <div className="relative">
-                        <input onBlur={handleAdminStandardParcelIdFind} className='w-[100%]' placeholder='type only customer id here' type="text" />
+                    <form onSubmit={(event) => {
+                        event.preventDefault()
+                        let ParcelId = event.target.ParcelId.value
+                        navigate(`AdminSearchStandardParcelId/${ParcelId}`)
 
-                        <Link to={`AdminSearchStandardParcelId/${Standard}`} className='absolute top-[12px] right-[20px]'>
-                            <button disabled={Standard === ""}>
-                                <i class="fa fa-search" aria-hidden="true"></i>
-                            </button>admin
+                    }}>
+                        <h3 className='text-[17px] font-[500] text-black mb-[8px]'>Search Parcel ID</h3>
+                        <div className="relative">
+                            <input required className='w-[100%]' placeholder='type only customer id here' type="text" name="ParcelId" />
 
-                        </Link>
-                    </div>
+                            <div className='absolute top-[12px] right-[20px]'>
+                                <button type='submit'>
+                                    <i className="fa fa-search" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
 
                 {/* search User ID !! */}
                 {/* =================================================================== */}
                 <div className="item">
-                    <h3 className='text-[17px] font-[500] text-black mb-[8px]'>Search user by Id and Number!!</h3>
-                    <div className="relative">
-                        <input onBlur={handleAdminUserIdFind} className='w-[100%]' placeholder='Search user id and number' type="text" />
-                        <Link to={`AdminSearchUserId/${useId}`} className='absolute top-[12px] right-[20px]'>
-                            <button disabled={useId === ""}>
-                                <i className="fa fa-search" aria-hidden="true"></i>
-                            </button>
-                        </Link>
-                    </div>
+                    <form onSubmit={(event) => {
+                        event.preventDefault()
+                        let UserIdAndNumber = event.target.UserIdAndNumber.value
+                        navigate(`AdminSearchUserId/${UserIdAndNumber}`)
+
+                    }}>
+                        <h3 className='text-[17px] font-[500] text-black mb-[8px]'>Search user by Id and Number!!</h3>
+                        <div className="relative">
+                            <input required className='w-[100%]' placeholder='Search user id and number' type="text" name="UserIdAndNumber" />
+                            <div className='absolute top-[12px] right-[20px]'>
+                                <button type='submit'>
+                                    <i className="fa fa-search" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
 
                 {/* search Payment ID !! */}
                 {/* =================================================================== */}
                 <div className="item">
-                    <h3 className='text-[17px] font-[500] text-black mb-[8px]'>Search Payment ID</h3>
-                    <div className="relative">
-                        <input onBlur={handleAdminPaymentIdFind} className='w-[100%]' placeholder='Search payment  id here' type="text" />
-                        <Link to={`/dashboard/AdminDashboard/AdminPaymentRequestDetailsAll/${PaymentId}`} className='absolute top-[12px] right-[20px]'>
-                            <button disabled={PaymentId === ""}>
-                                <i class="fa fa-search" aria-hidden="true"></i>
-                            </button>
-                        </Link>
-                    </div>
+                    <form onSubmit={(event) => {
+                        event.preventDefault()
+                        let PaymentID = event.target.PaymentID.value
+                        navigate(`/dashboard/AdminDashboard/AdminPaymentRequestDetailsAll/${PaymentID}`)
+
+                    }}>
+                        <h3 className='text-[17px] font-[500] text-black mb-[8px]'>Search Payment ID</h3>
+                        <div className="relative">
+                            <input required name="PaymentID" className='w-[100%]' placeholder='Search payment  id here' type="text" />
+                            <div className='absolute top-[12px] right-[20px]'>
+                                <button type='submit'>
+                                    <i className="fa fa-search" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
 
                 {/* search Tracking ID !! */}
@@ -95,23 +95,27 @@ const DashboardItemAdmin = () => {
             {/* Consignment Parcel search by number !! */}
             {/* =================================================================== */}
             <div className="Consignment bg-white p-[28px] rounded-[8px]  flex mt-8">
+                <form className="w-[100%]" onSubmit={(event) => {
+                    event.preventDefault()
+                    let Number = event.target.Number.value
+                    navigate(`AdminSearchUserNumber/${Number}`)
 
-                <div className="relative w-[100%]">
-                    <input onBlur={handleAdminUserNumberFind} className='w-[100%] py-1' placeholder='Search User Number' type="text" />
-                    <Link to={`AdminSearchUserNumber/${Number}`} className='absolute top-[12px] right-[20px]'>
-                        <button disabled={Number === ""}>
-                            <i class="fa fa-search" aria-hidden="true"></i>
-                        </button>
-                    </Link>
-                </div>
-
+                }}>
+                    <div className="relative">
+                        <input required name="Number" className='w-[100%] py-1' placeholder='Search User Number' type="text" />
+                        <div className='absolute top-[12px] right-[20px]'>
+                            <button type='submit'>
+                                <i className="fa fa-search" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
 
                 <select className="select  w-[50%] md:w-[20%] max-w-xs">
                     <option disabled selected>Consignment</option>
                     <option>Consignment</option>
                     {/* <option>Merchant</option> */}
                 </select>
-
             </div>
 
             {/* =================================================================== */}
@@ -206,7 +210,6 @@ const DashboardItemAdmin = () => {
                 </form>
 
             </div> */}
-
 
         </div>
     );
