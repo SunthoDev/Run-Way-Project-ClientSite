@@ -777,71 +777,9 @@ const AdminMyHub = () => {
                 {/* ====================================================================== */}
                 <div className="bg-white p-6 rounded-xl shadow-md  mt-10">
 
-                    <div className="md:flex items-center justify-between">
-                        {/* Title of Pickup Request*/}
-                        {/* ==================================== */}
-                        <h3 className='text-black text-[24px] font-[600] text-left pb-4'>Pickup Request All Approved Data</h3>
-
-                        {/* Update Hub of Pickup Request*/}
-                        {/* ==================================== */}
-                        <div className="">
-                            <form onSubmit={(event) => {
-                                event.preventDefault()
-                                const HubName = event.target.HubNameOfUpdatePickup.value;
-                                const PickupId = event.target.PickupRequestId.value;
-                                const allInfo = { HubName, PickupId }
-                                fetch(`https://server.trustereocourier.com.bd/PickupRequestWithManegeAdminUsers/AdminUpdatePickupRequestHubData/${PickupId}`, {
-                                    method: "PATCH",
-                                    headers: {
-                                        "content-type": "application/json"
-                                    },
-                                    body: JSON.stringify(allInfo)
-                                })
-                                    .then(res => res.json())
-                                    .then(data => {
-                                        if (data.modifiedCount > 0) {
-                                            Swal.fire({
-                                                position: 'top-end',
-                                                icon: 'success',
-                                                title: 'Pickup request hub name update is success',
-                                                showConfirmButton: false,
-                                                timer: 1500
-                                            })
-                                        }
-                                        refetch()
-                                        event.target.reset()
-                                    })
-                            }}>
-                                <h1 className="text-black text-left text-[18px] font-[600] pb-2">You can update hub of pickup request !!</h1>
-                                <input
-                                    type="number"
-                                    name="PickupRequestId"
-                                    required
-                                    placeholder="Give a pickup request id"
-                                    className="w-full bg-white border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
-                                <div className="flex items-center gap-2">
-                                    <select
-                                        required
-                                        className="w-full bg-white border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                                        name="HubNameOfUpdatePickup"
-                                    >
-                                        <option value="">-- Select Hub Name --</option>
-                                        {AllHubFind?.map((hubName, i) => (
-                                            <option key={i}>
-                                                {hubName?.NameOfHub}
-                                            </option>
-                                        ))}
-                                    </select>
-
-                                    <button
-                                        className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md flex items-center gap-1 text-sm"
-                                    >
-                                        Update
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+                    {/* Title of Pickup Request*/}
+                    {/* ==================================== */}
+                    <h3 className='text-black text-[24px] font-[600] text-left pb-4'>Pickup Request All Approved Data</h3>
 
                     {/* Tabs with Search bar (Approved)*/}
                     {/* ==================================== */}

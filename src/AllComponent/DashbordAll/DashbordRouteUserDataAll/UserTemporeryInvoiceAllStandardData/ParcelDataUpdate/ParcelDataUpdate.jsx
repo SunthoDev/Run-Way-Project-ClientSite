@@ -76,7 +76,6 @@ const ParcelDataUpdate = () => {
                             let ItemDescriptionUP = event.target.ItemDescriptionUP.value
                             let noteUP = event.target.noteUP.value
                             let weightUP = event.target.weightUP.value
-                            let DeliveryChargeUP = event.target.DeliveryChargeUP.value
                             let ParcelCategoryUP = event.target.ParcelCategoryUP.value
                             let MyHubUP = event.target.MyHubUP.value
                             let date = moment().format("MM/DD/YYYY")
@@ -90,7 +89,7 @@ const ParcelDataUpdate = () => {
                                 TrackingTime: time
                             };
 
-                            let allInfo = { deliveryTypeUP, nameUP, addressUP, DistrictUP, policeStationUP, AlternativePhoneUP, RecipientEmailUP, numberUP, InvoiceUP, ItemDescriptionUP, noteUP, weightUP, DeliveryChargeUP, ParcelCategoryUP, MyHubUP }
+                            let allInfo = { deliveryTypeUP, nameUP, addressUP, DistrictUP, policeStationUP, AlternativePhoneUP, RecipientEmailUP, numberUP, InvoiceUP, ItemDescriptionUP, noteUP, weightUP, ParcelCategoryUP, MyHubUP }
                             // console.log(allInfo)
 
                             fetch(`https://server.trustereocourier.com.bd/AdminUserOrderInvoiceUpdate/${ParcelUpdateData?._id}`, {
@@ -264,6 +263,12 @@ const ParcelDataUpdate = () => {
                                         <input defaultValue={RecipientEmail} className='w-[100%]' type="text" name='RecipientEmailUP' />
                                     </div>
                                 </div>
+                            </div>
+
+                            {/* ======================================== */}
+                            {/* Right Information!! */}
+                            {/* ======================================== */}
+                            <div className="">
                                 <div className="grid grid-cols-6 mt-[18px] gap-2  items-center">
                                     <h4 className='col-span-2 text-[16px] font-[500] '>Phone</h4>
                                     <div className="col-span-4">
@@ -271,14 +276,6 @@ const ParcelDataUpdate = () => {
                                         <input defaultValue={number} className='w-[100%]' type="number" name='numberUP' />
                                     </div>
                                 </div>
-
-                            </div>
-
-                            {/* ======================================== */}
-                            {/* Right Information!! */}
-                            {/* ======================================== */}
-                            <div className="">
-
                                 <div className="grid grid-cols-6 mt-[18px] gap-2  items-center">
                                     <h4 className='col-span-2 text-[16px] font-[500] '>Invoice#</h4>
                                     <div className="col-span-4">
@@ -305,13 +302,6 @@ const ParcelDataUpdate = () => {
                                     <div className="col-span-4">
                                         <h4 className='text-[16px] font-[500] '>Wight(KG): {weight}</h4>
                                         <input defaultValue={weight} className='w-[100%]' type="number" name='weightUP' />
-                                    </div>
-                                </div>
-                                <div className="grid grid-cols-6 mt-[18px] gap-2  items-center">
-                                    <h4 className='col-span-2 text-[16px] font-[500] '>Delivery Charge</h4>
-                                    <div className="col-span-4">
-                                        <h4 className='text-[16px] font-[500] '>Delivery Charge: {DeliveryCharge}</h4>
-                                        <input defaultValue={DeliveryCharge} className='w-[100%]' type="number" name='DeliveryChargeUP' />
                                     </div>
                                 </div>
                                 <div className="grid grid-cols-6 mt-[18px] gap-2  items-center">
@@ -351,6 +341,7 @@ const ParcelDataUpdate = () => {
                         </div>
 
                     </form>
+
                 </div>
 
                 {/* =================================================== */}
@@ -434,6 +425,86 @@ const ParcelDataUpdate = () => {
                         </form>
                     </div>
                 </div>
+
+
+                {/* =================================================== */}
+                {/* Delivery Charge update of Parcel */}
+                {/* =================================================== */}
+                <div className="StandardMain bg-white rounded-[8px] p-[28px]">
+                    <h2 className='text-black font-[600] text-[20px]'>Update delivery charge amount of parcel !!</h2>
+                    <div className="Horijontal bg-[#d4d2d2] my-[12px] w-[full] h-[1px]"></div>
+                    {/* =================================================== */}
+
+                    <div className="AmountChange w-[100%] md:w-[50%] mt-[30px]">
+                        <h2 className='text-black font-[600] text-[16px] text-center'>Delivery charge Amount !!</h2>
+
+                        <form onSubmit={(event) => {
+                            event.preventDefault()
+                            let DeliveryChargeAmountUp = event.target.DeliveryChargeUP.value
+                            let date = moment().format("MM/DD/YYYY")
+                            let time = moment().format("hh:mm A")
+                            let TrackingMessage = `Delivery charge change ${ParcelUpdateData?.DeliveryCharge} to ${DeliveryChargeAmountUp} by ${roles?.name}`
+
+                            let TrackingMessagePost = {
+                                userOrderIdTracking: ParcelUpdateData?.StandardParcelId,
+                                TrackingMessage,
+                                TrackingDate: date,
+                                TrackingTime: time
+                            };
+                            let DeliveryChargeAmountChangeData = { DeliveryChargeAmountUp }
+
+                            // Parcel Delivery Charge Amount Change request send
+                            // ===========================================================
+                            fetch(`https://server.trustereocourier.com.bd/AdminChangeDeliveryChargeOfParcel/${ParcelUpdateData?._id}`, {
+                                method: "PATCH",
+                                headers: {
+                                    "content-type": "application/json"
+                                },
+                                body: JSON.stringify(DeliveryChargeAmountChangeData)
+                            })
+                                .then(res => res.json())
+                                .then(data => {
+                                    if (data.modifiedCount > 0) {
+                                        // Delivery Change Tracking Message Send to Admin !!
+                                        // =========================================================
+                                        fetch("https://server.trustereocourier.com.bd/DeliveryChargeTrackingMessageSendToAdmin", {
+                                            method: "POST",
+                                            headers: {
+                                                "Content-Type": "application/json"
+                                            },
+                                            body: JSON.stringify(TrackingMessagePost)
+                                        })
+                                            .then(res => res.json())
+                                            .then(data => {
+                                                // console.log(data)
+                                                if (data.insertedId) {
+                                                    Swal.fire({
+                                                        position: 'top-end',
+                                                        icon: 'success',
+                                                        title: 'Delivery amount change successful',
+                                                        showConfirmButton: false,
+                                                        timer: 1500
+                                                    })
+                                                    refetch()
+                                                    event.target.reset()
+                                                    navigate(-1)
+                                                }
+                                            })
+                                    }
+                                })
+                        }}>
+                            <div className="grid grid-cols-6 mt-[18px] gap-4  items-center">
+                                <h4 className='col-span-2 text-[16px] font-[500] '>Delivery charge amount</h4>
+                                <input className='col-span-4  w-[100%]' type="number" name='DeliveryChargeUP' defaultValue={DeliveryCharge} />
+                            </div>
+                            <div className="grid grid-cols-1 md:grid-cols-6 mt-[18px] gap-4  items-center">
+                                <h4 className='col-span-2 text-[16px] font-[500] hidden md:inline-block'></h4>
+                                <button className='col-span-4  bg-[#22A197] color-white text-[14px] text-white font-[600] rounded-[8px] w-[100%] py-[10px]' type='submit'>Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
             </div>
         </div>
     );
