@@ -16,7 +16,7 @@ const CurrentBalanceDetailsAllData = ({ AmountPaymentDataAll }) => {
                 <h4>{StandardParcelId}</h4>
             </th>
             <th>
-                <h4>{Invoice}</h4>
+                <h4>{weight}</h4>
             </th>
             <th>
                 <h4>{name}</h4>

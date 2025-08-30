@@ -21,24 +21,21 @@ const AdminConsignmentPendingInvoiceUpdate = () => {
     })
 
     let DistrictAllPoliceStation = AllCoveragesPoliceStation.filter(PoliceStationAll => PoliceStationAll?.AddDistrict == district)
-    // =========================================================
+    // ===========================================================
 
     let data = useLoaderData()
     // console.log(data)
 
     let { _id, weight, status, policeStation, number, note, name, District, date, address, StandardParcelId, StandardEmailUser, Invoice, CodAmount, DeliveryCharge, ApprovedDate, ApprovedName, ApprovedOffice } = data
-
-
+    
     // update Admin user parcel 
-    // ____________________________________________
+    // ==========================================
     let AdminConsignmentPendingInvoiceUpdate = (event) => {
         event.preventDefault()
         let number = event.target.number.value
         let name = event.target.name.value
         let address = event.target.address.value
-
         let policeStation = event.target.policeStation.value
-
         let Invoice = event.target.Invoice.value
         let note = event.target.note.value
         let weight = event.target.weight.value
@@ -46,11 +43,7 @@ const AdminConsignmentPendingInvoiceUpdate = () => {
         let statusUp = event.target.statusUp.value
 
         let ConsignmentPendingInvoiceUpdate = { number, name, address, district, policeStation, Invoice, note, weight, Charge, statusUp }
-
-
         // console.log(ConsignmentPendingInvoiceUpdate)
-
-
 
         fetch(`https://server.trustereocourier.com.bd/AdminConsignmentPendingInvoiceUpdateData/${_id}`, {
             method: "PATCH",
@@ -72,18 +65,15 @@ const AdminConsignmentPendingInvoiceUpdate = () => {
                 }
                 refetch()
             })
-
     }
 
-
     // update Admin user Cod Amount
-    // ____________________________________________
+    // ==========================================
     let AdminChangeAmountParcel = (event) => {
         event.preventDefault()
         let CodAmount = event.target.CodAmount.value
 
         let AmountChangeData = { CodAmount, AmountChangeDate: moment().format("MM/D/YY , hh:mm A"), AmountChangeAdminStatus: "unverified" }
-
 
         fetch(`https://server.trustereocourier.com.bd/AdminConsignmentPendingInvoiceAmountChange/${_id}`, {
             method: "PUT",
@@ -105,11 +95,6 @@ const AdminConsignmentPendingInvoiceUpdate = () => {
                 }
                 // refetch()
             })
-
-
-
-
-
     }
 
 
@@ -128,7 +113,6 @@ const AdminConsignmentPendingInvoiceUpdate = () => {
 
                     {/* Admin Update Parcel Data */}
                     {/* ========================================= */}
-
                     <div className="AdminEntryUserPar mt-6">
                         <form onSubmit={AdminConsignmentPendingInvoiceUpdate} className='StandardFromData'>
                             <div className="w-[100%] md:w-[50%] mt-[44px]">
@@ -281,7 +265,6 @@ const AdminConsignmentPendingInvoiceUpdate = () => {
                             </div>
                         </form>
                     </div>
-
 
                     {/* Admin Change Parcel Amount  */}
                     {/* ========================================= */}

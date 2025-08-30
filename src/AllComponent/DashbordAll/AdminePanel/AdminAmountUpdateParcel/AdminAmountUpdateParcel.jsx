@@ -27,7 +27,6 @@ const AdminAmountUpdateParcel = () => {
     // console.log(AmountChangeParcelDataVerified)
 
 
-
     // ================================================
     // Admin Search Email Id.  And find user Parcel amount change All Data
     let [UserAmountChange, setUserAmountChange] = useState("")
@@ -38,48 +37,36 @@ const AdminAmountUpdateParcel = () => {
     }
 
 
-
-
     return (
         <div className='AdminAmountUpdateParcel'>
 
             <div className="AmountUpdateParcel my-6 mx-6">
-
                 <h2 className='text-black text-[22px] text-center font-[600]'>Unverified Amount Change Data</h2>
-
-                < div className="Search relative w-[100%] md:w-[40%] mx-auto mt-[28px]" >
+                <div className="Search relative w-[100%] md:w-[40%] mx-auto mt-[28px]" >
                     <input onBlur={handleAdminUserParcelAmountChangeSearchEmail} type="text" placeholder='Search User Email & See Parcel' className='w-[100%]' />
-
                     <Link to={`/dashboard/AdminDashboard/AdminAmountChangeUserDataFind/${UserAmountChange}`}>
                         <button disabled={UserAmountChange === ""}>
                             <i className="ParcelSearch fa fa-search absolute" aria-hidden="true"></i>
                         </button>
-
                     </Link>
-
-                </div >
+                </div>
 
                 <div className="flex items-center justify-between">
-
                     <h3 className='DataList w-[100%] md:w-[18%]'>Total Data {AmountChangeParcelDataUnverified.length}</h3>
-
                     <button className='AllApprovedData'>All Verified</button>
-
                 </div>
 
                 <div className="unverifiedData">
 
                     {
-                        AmountChangeParcelDataUnverified.map(AmountUnverifiedData => <AdminAmountUpdateParcelUnverifiedData key={AmountUnverifiedData._id} AmountUnverifiedData={AmountUnverifiedData} refetch={refetch}></AdminAmountUpdateParcelUnverifiedData>)
+                        AmountChangeParcelDataUnverified?.map(AmountUnverifiedData => <AdminAmountUpdateParcelUnverifiedData key={AmountUnverifiedData._id} AmountUnverifiedData={AmountUnverifiedData} refetch={refetch}></AdminAmountUpdateParcelUnverifiedData>)
                     }
 
                 </div>
 
-
                 <div className="unverifiedData">
                     <h2 className='text-black text-[22px] text-center font-[600] mt-14'>Verified Amount Change Data</h2>
                     <h3 className='DataList w-[100%] md:w-[18%]'>Total Data {AmountChangeParcelDataVerified.length}</h3>
-
                     <div className="overflow-x-auto bg-white mt-6">
                         <table className="table">
                             {/* head */}
@@ -96,26 +83,14 @@ const AdminAmountUpdateParcel = () => {
                                 </tr>
                             </thead>
                             <tbody>
-
                                 {
                                     AmountChangeParcelDataVerified.map(AmountVerifiedData => <AdminAmountUpdateParcelVerifiedData key={AmountVerifiedData._id} AmountVerifiedData={AmountVerifiedData} refetch={refetch}></AdminAmountUpdateParcelVerifiedData>)
                                 }
-
                             </tbody>
-
                         </table>
                     </div>
-
-
-
                 </div>
-
-
-
-
-
             </div>
-
         </div>
     );
 };

@@ -243,7 +243,7 @@ const CurrentBalanceDetails = () => {
                                 <tr>
                                     <th>DATE</th>
                                     <th>ID</th>
-                                    <th>INVOICE</th>
+                                    <th>WEIGHT</th>
                                     <th>CUSTOMER NAME</th>
                                     <th>COD AMOUNT</th>
                                     <th>DELIVERY CHARGE</th>
@@ -252,19 +252,13 @@ const CurrentBalanceDetails = () => {
                             </thead>
                             <tbody>
                                 {
-                                    CodAmountPaymentData.map(AmountPaymentDataAll =>
+                                    CodAmountPaymentData?.map(AmountPaymentDataAll =>
                                         <CurrentBalanceDetailsAllData key={AmountPaymentDataAll._id} AmountPaymentDataAll={AmountPaymentDataAll}></CurrentBalanceDetailsAllData>)
                                 }
 
-
                             </tbody>
-
                         </table>
                     </div>
-
-
-
-
                 </div>
             </div>
 

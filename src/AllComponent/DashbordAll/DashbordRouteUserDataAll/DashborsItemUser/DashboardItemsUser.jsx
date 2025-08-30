@@ -645,7 +645,7 @@ const DashboardItemsUser = () => {
                                 let date = moment().format("MM/DD/YYYY")
                                 let time = moment().format("hh:mm A")
 
-                                let AllInfo = { PickupRequestType: PickupRequest, PickupIdUser, date, time, Address, BusinessName, LastName, Phone, PickReqUserEmail: email, name, photo, userId, status: "Pending", PoliceStations, Districts, MyHub: MyHub?.HubName }
+                                let AllInfo = { PickupRequestType: PickupRequest, PickupIdUser, date, time, Address, BusinessName, LastName, Phone, PickReqUserEmail: email, name, photo, userId, status: "Pending", PoliceStations, Districts, MyHub: MyHub?.HubName, AssignRider:"No" }
 
                                 try {
                                     const response = await fetch("https://server.trustereocourier.com.bd/PickupRequestWithManegeAdminUsers/UserPickupRequestSend", {

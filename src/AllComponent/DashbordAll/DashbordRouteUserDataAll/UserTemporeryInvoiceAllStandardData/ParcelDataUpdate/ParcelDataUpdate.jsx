@@ -4,11 +4,13 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
 import moment from 'moment';
+import useRole from '../../../../../Hook/useRole';
 
 const ParcelDataUpdate = () => {
 
     let { IdParcel } = useParams()
     let navigate = useNavigate()
+    const [roles] = useRole()
     // console.log(IdParcel)
 
     // ==========================================================
@@ -47,7 +49,6 @@ const ParcelDataUpdate = () => {
     let DistrictAllPoliceStation = AllCoveragesPoliceStation.filter(PoliceStationAll => PoliceStationAll?.AddDistrict === Districts)
 
 
-
     return (
         <div className='bg-[#F6F6F6]'>
 
@@ -71,7 +72,6 @@ const ParcelDataUpdate = () => {
                             let AlternativePhoneUP = event.target.AlternativePhoneUP.value
                             let RecipientEmailUP = event.target.RecipientEmailUP.value
                             let numberUP = event.target.numberUP.value
-                            let CodAmountUP = event.target.CodAmountUP.value
                             let InvoiceUP = event.target.InvoiceUP.value
                             let ItemDescriptionUP = event.target.ItemDescriptionUP.value
                             let noteUP = event.target.noteUP.value
@@ -90,7 +90,7 @@ const ParcelDataUpdate = () => {
                                 TrackingTime: time
                             };
 
-                            let allInfo = { deliveryTypeUP, nameUP, addressUP, DistrictUP, policeStationUP, AlternativePhoneUP, RecipientEmailUP, numberUP, CodAmountUP, InvoiceUP, ItemDescriptionUP, noteUP, weightUP, DeliveryChargeUP, ParcelCategoryUP, MyHubUP }
+                            let allInfo = { deliveryTypeUP, nameUP, addressUP, DistrictUP, policeStationUP, AlternativePhoneUP, RecipientEmailUP, numberUP, InvoiceUP, ItemDescriptionUP, noteUP, weightUP, DeliveryChargeUP, ParcelCategoryUP, MyHubUP }
                             // console.log(allInfo)
 
                             fetch(`https://server.trustereocourier.com.bd/AdminUserOrderInvoiceUpdate/${ParcelUpdateData?._id}`, {
@@ -280,13 +280,6 @@ const ParcelDataUpdate = () => {
                             <div className="">
 
                                 <div className="grid grid-cols-6 mt-[18px] gap-2  items-center">
-                                    <h4 className='col-span-2 text-[16px] font-[500] '>COD <br /> Amount</h4>
-                                    <div className="col-span-4">
-                                        <h4 className='text-[16px] font-[500] '>COD Amount: {CodAmount}</h4>
-                                        <input defaultValue={CodAmount} className='w-[100%]' type="text" name='CodAmountUP' />
-                                    </div>
-                                </div>
-                                <div className="grid grid-cols-6 mt-[18px] gap-2  items-center">
                                     <h4 className='col-span-2 text-[16px] font-[500] '>Invoice#</h4>
                                     <div className="col-span-4">
                                         <h4 className='text-[16px] font-[500] '>Invoice#: {Invoice}</h4>
@@ -358,6 +351,88 @@ const ParcelDataUpdate = () => {
                         </div>
 
                     </form>
+                </div>
+
+                {/* =================================================== */}
+                {/* Cod Amount update of Parcel */}
+                {/* =================================================== */}
+                <div className="StandardMain bg-white rounded-[8px] p-[28px]">
+                    <h2 className='text-black font-[600] text-[20px]'>Update cod amount of parcel !!</h2>
+                    <div className="Horijontal bg-[#d4d2d2] my-[12px] w-[full] h-[1px]"></div>
+                    {/* =================================================== */}
+
+                    <div className="AmountChange w-[100%] md:w-[50%] mt-[30px]">
+                        <h2 className='text-black font-[600] text-[16px] text-center'>Cod Amount !!</h2>
+
+                        <form onSubmit={(event) => {
+                            event.preventDefault()
+                            let codAmountUp = event.target.CodAmount.value
+                            let date = moment().format("MM/DD/YYYY")
+                            let time = moment().format("hh:mm A")
+                            let TrackingMessage = `Cod change ${ParcelUpdateData?.CodAmount} to ${codAmountUp} by ${roles?.name}`
+
+                            let TrackingMessagePost = {
+                                userOrderIdTracking: ParcelUpdateData?.StandardParcelId,
+                                TrackingMessage,
+                                TrackingDate: date,
+                                TrackingTime: time
+                            };
+                            let AmountChangeData = {
+                                CodAmount: codAmountUp,
+                                AmountChangeDate: date,
+                                AmountChangeAdminStatus: "unverified"
+                            }
+
+                            // Parcel Amount Amount Change request send
+                            // ===========================================================
+                            fetch(`https://server.trustereocourier.com.bd/AdminConsignmentPendingInvoiceAmountChange/${ParcelUpdateData?._id}`, {
+                                method: "PUT",
+                                headers: {
+                                    "content-type": "application/json"
+                                },
+                                body: JSON.stringify(AmountChangeData)
+                            })
+                                .then(res => res.json())
+                                .then(data => {
+                                    if (data.modifiedCount > 0) {
+                                        // Cod Change Tracking Message Send to Admin !!
+                                        // =========================================================
+                                        fetch("https://server.trustereocourier.com.bd/CodChangeTrackingMessageSendToAdmin", {
+                                            method: "POST",
+                                            headers: {
+                                                "Content-Type": "application/json"
+                                            },
+                                            body: JSON.stringify(TrackingMessagePost)
+                                        })
+                                            .then(res => res.json())
+                                            .then(data => {
+                                                // console.log(data)
+                                                if (data.insertedId) {
+                                                    Swal.fire({
+                                                        position: 'top-end',
+                                                        icon: 'success',
+                                                        title: 'Parcel cod change successful',
+                                                        showConfirmButton: false,
+                                                        timer: 1500
+                                                    })
+                                                    refetch()
+                                                    event.target.reset()
+                                                    navigate(-1)
+                                                }
+                                            })
+                                    }
+                                })
+                        }}>
+                            <div className="grid grid-cols-6 mt-[18px] gap-4  items-center">
+                                <h4 className='col-span-2 text-[16px] font-[500] '>COD Amount</h4>
+                                <input className='col-span-4  w-[100%]' type="text" name='CodAmount' defaultValue={CodAmount} />
+                            </div>
+                            <div className="grid grid-cols-1 md:grid-cols-6 mt-[18px] gap-4  items-center">
+                                <h4 className='col-span-2 text-[16px] font-[500] hidden md:inline-block'></h4>
+                                <button className='col-span-4  bg-[#22A197] color-white text-[14px] text-white font-[600] rounded-[8px] w-[100%] py-[10px]' type='submit'>Submit</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

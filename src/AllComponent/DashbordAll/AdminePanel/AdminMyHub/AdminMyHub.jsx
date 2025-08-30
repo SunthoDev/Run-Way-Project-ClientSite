@@ -19,7 +19,7 @@ const AdminMyHub = () => {
     // ==================================================================================================
     // PickUp Request (Approved) Data Filter
     // ============================================
-    let UserApprovedHub = HubRequestDataAll?.filter(Approved => Approved.status === "Approved")
+    let UserApprovedHub = HubRequestDataAll?.filter(Approved => Approved.status === "Approved" && Approved?.AssignRider === "Yes")
     // console.log(UserApprovedHub)
     // =============================================
 
@@ -54,7 +54,7 @@ const AdminMyHub = () => {
     // PickUp Request (Pending) Data Filter
     // ============================================
 
-    let UserPendingHub = HubRequestDataAll?.filter(Pending => Pending.status === "Pending")
+    let UserPendingHub = HubRequestDataAll?.filter(Pending => Pending.status === "Pending" && Pending?.AssignRider === "No")
     // console.log(UserPendingHub)
     // =============================================
 
@@ -1192,7 +1192,7 @@ const AdminMyHub = () => {
                 </div>
 
             </div>
-            
+
             {/* ================================================================================================ */}
             {/* Rider single pickup request assign of modal start **************   */}
             {/* ====================================================================== */}
@@ -1218,7 +1218,7 @@ const AdminMyHub = () => {
                                                 let date = moment().format("MM/DD/YYYY")
                                                 let time = moment().format("hh:mm A")
 
-                                                let AssignPArcelPostToRider = {
+                                                let AssignPickupRequestPostToRider = {
                                                     RiderEmail: rider?.email,
                                                     RiderPhone: rider?.Phone,
                                                     RiderName: rider?.name,
@@ -1226,55 +1226,40 @@ const AdminMyHub = () => {
                                                     PickupReqIdForRider: PickupReqId,
                                                     CategoryAssign: "PickupRequest",
                                                 }
-                                                console.log(AssignPArcelPostToRider)
+                                                // console.log(AssignPickupRequestPostToRider)
 
-                                                // fetch("https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/InsertAssignParcelToRider", {
-                                                //     method: "POST",
-                                                //     headers: {
-                                                //         "Content-Type": "application/json"
-                                                //     },
-                                                //     body: JSON.stringify(AssignPArcelPostToRider)
-                                                // })
-                                                //     .then(res => res.json())
-                                                //     .then(data => {
-                                                //         if (data.insertedId) {
-                                                //             // Return Tracking Data Post 
-                                                //             // ===========================================
-                                                //             fetch("https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/AdminTrackingRequestSentOfAssignRider", {
-                                                //                 method: "POST",
-                                                //                 headers: {
-                                                //                     "Content-Type": "application/json"
-                                                //                 },
-                                                //                 body: JSON.stringify(TrackingMessagePost)
-                                                //             })
-                                                //                 .then(res => res.json())
-                                                //                 .then(data => {
-                                                //                     // console.log(data)
-                                                //                     if (data.insertedId) {
-                                                //                         // Parcel Assign Rider status up (Yes)
-                                                //                         // =======================================
-                                                //                         fetch(`https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/ParcelAssignStatusUpdateYes/${ParcelId}`, {
-                                                //                             method: "PATCH",
-                                                //                         })
-                                                //                             .then(res => res.json())
-                                                //                             .then(data => {
-                                                //                                 if (data.modifiedCount > 0) {
-                                                //                                     refetch()
-                                                //                                     Swal.fire({
-                                                //                                         position: 'top-end',
-                                                //                                         icon: 'success',
-                                                //                                         title: 'Parcel Assign Successful',
-                                                //                                         showConfirmButton: false,
-                                                //                                         timer: 1500
-                                                //                                     })
-                                                //                                 }
-                                                //                             })
-                                                //                     }
-                                                //                 })
-                                                //         }
-                                                //     })
-
-
+                                                // Pickup request assign ot rider !!
+                                                // =======================================
+                                                fetch("https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/InsertAssignPickupRequestToRider", {
+                                                    method: "POST",
+                                                    headers: {
+                                                        "Content-Type": "application/json"
+                                                    },
+                                                    body: JSON.stringify(AssignPickupRequestPostToRider)
+                                                })
+                                                    .then(res => res.json())
+                                                    .then(data => {
+                                                        if (data.insertedId) {
+                                                            // Pickup Request Assign Rider status up (Yes)
+                                                            // ===============================================
+                                                            fetch(`https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/PickupRequestAssignStatusUpdateYes/${PickupReqId}`, {
+                                                                method: "PATCH",
+                                                            })
+                                                                .then(res => res.json())
+                                                                .then(data => {
+                                                                    if (data.modifiedCount > 0) {
+                                                                        Swal.fire({
+                                                                            position: 'top-end',
+                                                                            icon: 'success',
+                                                                            title: 'Pickup request assign successful',
+                                                                            showConfirmButton: false,
+                                                                            timer: 1500
+                                                                        })
+                                                                        refetch()
+                                                                    }
+                                                                })
+                                                        }
+                                                    })
                                             }}
                                             className="bg-blue-600 hover:bg-blue-700 text-white text-sm px-5 py-2 rounded-full shadow-md transition duration-150"
                                         >

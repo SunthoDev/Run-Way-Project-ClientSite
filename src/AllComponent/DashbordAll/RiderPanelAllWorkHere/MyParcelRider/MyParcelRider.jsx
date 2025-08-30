@@ -36,6 +36,12 @@ const MyParcelRider = () => {
     let MyAssignReturnParcel = RiderAssignDataAll?.filter(parcel => parcel?.RiderEmail === roles?.email && parcel?.CategoryAssign === "ReturnParcel")
     // console.log(MyAssignReturnParcel)
 
+    // ===========================================================================
+    // (Rider) My Assign Return parcel all Data Filter Here !! (RETURN-PARCEL)
+    // ===========================================================================
+    let MyAssignPickupRequest = RiderAssignDataAll?.filter(PickupRequest => PickupRequest?.RiderEmail === roles?.email && PickupRequest?.CategoryAssign === "PickupRequest")
+    // console.log(MyAssignReturnParcel)
+
 
     // ===========================================================================================================
     // User All Category Parcel Data Find Here !! (PARCEL)
@@ -77,8 +83,9 @@ const MyParcelRider = () => {
 
     return (
         <div className='MyParcelRiderPArent bg-[#F6F6F6]'>
-            <div className='md:px-4 my-4'>
 
+            <div className='md:px-4 my-4'>
+                
                 <div className="bg-white p-6 rounded-xl shadow-md  mt-10">
                     <h3 className='text-black text-[24px] font-[600] text-left pb-4'>My All Assign Parcel</h3>
 
@@ -123,7 +130,7 @@ const MyParcelRider = () => {
                                 <div className="w-full bg-white shadow-lg border border-gray-200 rounded-xl p-6">
 
                                     <div className="pb-4">
-                                        <h2 className="text-2xl font-semibold text-gray-800 mb-4">My Parcel for assign: </h2>
+                                        <h2 className="text-2xl font-semibold text-gray-800 mb-4">My Parcel for assign: {MyAssignParcel?.length}</h2>
                                     </div>
 
                                     <div className="overflow-x-auto rounded-xl shadow-md border border-gray-200">
@@ -172,7 +179,7 @@ const MyParcelRider = () => {
                                 <div className="w-full bg-white shadow-lg border border-gray-200 rounded-xl p-6">
 
                                     <div className="pb-4">
-                                        <h2 className="text-2xl font-semibold text-gray-800 mb-4">My Return Parcel for assign: </h2>
+                                        <h2 className="text-2xl font-semibold text-gray-800 mb-4">My Return Parcel for assign: {MyAssignReturnParcel?.length}</h2>
                                     </div>
 
                                     <div className="overflow-x-auto rounded-xl shadow-md border border-gray-200">
@@ -312,8 +319,99 @@ const MyParcelRider = () => {
                                 </div>
                             </div>
                         }
+                        {/* ================================================ */}
+                        {/* Me Assign (Pickup Request) Show below !! */}
+                        {/* ================================================ */}
+                        {tabState === 3 &&
+                            <div className="flex justify-center">
+                                <div className="w-full bg-white shadow-lg border border-gray-200 rounded-xl p-6">
+
+                                    <div className="pb-4">
+                                        <h2 className="text-2xl font-semibold text-gray-800 mb-4">My Pickup Request for assign: {MyAssignPickupRequest?.length}</h2>
+                                    </div>
+
+                                    <div className="overflow-x-auto rounded-xl shadow-md border border-gray-200">
+                                        <table className="min-w-full divide-y divide-gray-200 text-sm">
+                                            <thead className="bg-blue-50">
+                                                <tr>
+                                                    <th className="px-6 py-3 text-left font-semibold text-gray-700">Rider ID</th>
+                                                    <th className="px-6 py-3 text-left font-semibold text-gray-700">Rider Name</th>
+                                                    <th className="px-6 py-3 text-left font-semibold text-gray-700">Rider Phone</th>
+                                                    <th className="px-6 py-3 text-left font-semibold text-gray-700">Pickup RequestID</th>
+                                                    <th className="px-6 py-3 text-left font-semibold text-gray-700">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody className="bg-white divide-y divide-gray-100">
+                                                {
+                                                    MyAssignPickupRequest?.map(PickupRequestRequest => (
+                                                        <tr key={PickupRequestRequest?._id} className="hover:bg-gray-50 transition-colors">
+                                                            <td className="px-6 py-4 text-gray-800 font-medium">{PickupRequestRequest?.RiderUserId}</td>
+                                                            <td className="px-6 py-4 text-gray-800">{PickupRequestRequest?.RiderName}</td>
+                                                            <td className="px-6 py-4 text-gray-800">{PickupRequestRequest?.RiderPhone}</td>
+                                                            <td className="px-6 py-4 text-gray-800">{PickupRequestRequest?.PickupReqIdForRider}</td>
+                                                            <td className="px-6 py-4">
+                                                                <div className="">
+                                                                    <form
+                                                                        onSubmit={(event) => {
+                                                                            setIsLoading(true)
+                                                                            event.preventDefault()
+                                                                            let parcelNumbers = event.target.number.value
+                                                                            let PickupRequestData = { parcelNum: parcelNumbers }
+                                                                            // console.log(PickupRequestData)
+                                                                            // Rider approved pickup request with update parcel number
+                                                                            // ======================================================================
+                                                                            fetch(`https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/RiderApprovedUserPickupRequestData/${PickupRequestRequest?.PickupReqIdForRider}`, {
+                                                                                method: "PUT",
+                                                                                headers: {
+                                                                                    "content-type": "application/json"
+                                                                                },
+                                                                                body: JSON.stringify(PickupRequestData)
+                                                                            })
+                                                                                .then(res => res.json())
+                                                                                .then(data => {
+                                                                                    if (data.modifiedCount > 0) {
+                                                                                        // After pickup request delivery success, then delete will be rider assign data
+                                                                                        // ==============================================================================
+                                                                                        fetch(`https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/DeletePickupRequestAssignParcel/${PickupRequestRequest?._id}`, {
+                                                                                            method: "DELETE",
+                                                                                        })
+                                                                                            .then(res => res.json())
+                                                                                            .then(data => {
+                                                                                                if (data.deletedCount > 0) {
+                                                                                                    refetch()
+                                                                                                    setIsLoading(false)
+                                                                                                    Swal.fire({
+                                                                                                        position: 'top-end',
+                                                                                                        icon: 'success',
+                                                                                                        title: 'Pickup request approved success',
+                                                                                                        showConfirmButton: false,
+                                                                                                        timer: 1500
+                                                                                                    })
+                                                                                                }
+                                                                                                // console.log(data)
+                                                                                            })
+                                                                                    }
+                                                                                })
+                                                                        }}>
+                                                                        <input name="number" type="number" placeholder="Enter parcel number" className='px-2 my-2 text-black font-[600] text-[16px]' />
+                                                                        <br />
+                                                                        <button type="submit" className="btn btn-sm btn-outline btn-primary">{IsLoading ? "Loading..." : "Pickup Request Approved"}</button>
+                                                                    </form>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    ))
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                        }
                     </div>
                 </div>
+
             </div>
 
             {/* ========================================================== */}
@@ -329,6 +427,8 @@ const MyParcelRider = () => {
                             🔐 Parcel Details & Status Update To Rider
                         </h3>
 
+                        {/* Parcel Details All Show Bellow !! */}
+                        {/* ============================================== */}
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-sm">
                             <div>
                                 <p className="font-semibold text-gray-300">📦 Parcel ID:</p>
@@ -404,146 +504,233 @@ const MyParcelRider = () => {
                             </div>
                         </div>
 
+                        {/* Rider send note of this parcel !! */}
+                        {/* ============================================== */}
+                        <div className="mt-10 border-t border-gray-700 pt-6">
+                            <h2 className="text-lg font-bold text-white mb-4 text-center">📦 Rider send note of this parcel</h2>
+                            <form
+                                onSubmit={(event) => {
+                                    setIsLoading(true)
+                                    event.preventDefault()
+                                    let ParcelNote = event.target.ParcelNote.value;
+                                    let date = moment().format("MM/DD/YYYY")
+                                    let time = moment().format("hh:mm A")
+                                    let TrackingMessage = ParcelNote
+
+                                    let allInfo = { ParcelNote }
+                                    let TrackingMessagePost = {
+                                        userOrderIdTracking: AssignParcelDetails?.StandardParcelId,
+                                        TrackingMessage,
+                                        TrackingDate: date,
+                                        TrackingTime: time
+                                    };
+                                    // console.log(allInfo)
+                                    // console.log(TrackingMessagePost)
+
+                                    {/* Update Parcel Note*/ }
+                                    {/* ==================================== */ }
+                                    fetch(`https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/UserWithRiderUpdateParcelNote/${AssignParcelDetails?._id}`, {
+                                        method: "PATCH",
+                                        headers: {
+                                            "content-type": "application/json"
+                                        },
+                                        body: JSON.stringify(allInfo)
+                                    })
+                                        .then(res => res.json())
+                                        .then(data => {
+                                            if (data.modifiedCount > 0) {
+                                                // Note Tracking Message Send Tracking Data Post 
+                                                // =========================================================
+                                                fetch("https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/NoteTrackingMessageSendOfUserAndRider", {
+                                                    method: "POST",
+                                                    headers: {
+                                                        "Content-Type": "application/json"
+                                                    },
+                                                    body: JSON.stringify(TrackingMessagePost)
+                                                })
+                                                    .then(res => res.json())
+                                                    .then(data => {
+                                                        // console.log(data)
+                                                        if (data.insertedId) {
+                                                            Swal.fire({
+                                                                position: 'top-end',
+                                                                icon: 'success',
+                                                                title: 'Parcel note send successful',
+                                                                showConfirmButton: false,
+                                                                timer: 1500
+                                                            })
+                                                            refetch()
+                                                            event.target.reset()
+                                                            setIsLoading(false)
+                                                            document.getElementById("MyAssignParcelDetailsShow").close()
+                                                        }
+                                                    })
+                                            }
+                                        })
+                                }}
+                            >
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-center">
+                                    <input
+                                        type="text"
+                                        name="ParcelNote"
+                                        required
+                                        placeholder="Give parcel note here !!"
+                                        className="bg-white text-black select select-bordered w-full max-w-xs"
+                                    />
+                                    <button
+                                        disabled={IsLoading}
+                                        type="submit"
+                                        className="bg-[#22A197] text-white text-[14px] font-semibold rounded-[8px] w-full py-[10px]"
+                                    >
+                                        {IsLoading ? "Loading ..." : "✅ Send Note"}
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+                        {/* Rider Update Parcel Status Here !! */}
+                        {/* ============================================== */}
                         <div className="mt-10 border-t border-gray-700 pt-6">
                             <h2 className="text-lg font-bold text-white mb-4 text-center">📦 Update Parcel Delivery Status</h2>
-                            <form onSubmit={(event) => {
-                                event.preventDefault()
-                                setIsLoading(true)
-                                let parcelStatus = event.target.statusUp.value
-                                let date = moment().format("MM/DD/YYYY")
-                                let time = moment().format("hh:mm A")
-                                let TrackingMessage = "";
+                            <form
+                                onSubmit={(event) => {
+                                    event.preventDefault()
+                                    setIsLoading(true)
+                                    let parcelStatus = event.target.statusUp.value
+                                    let date = moment().format("MM/DD/YYYY")
+                                    let time = moment().format("hh:mm A")
+                                    let TrackingMessage = "";
 
-                                if (parcelStatus === "Delivered") {
-                                    TrackingMessage = "🚚 Delivery complete. We hope you enjoy your package!";
-                                } else if (parcelStatus === "PartiallyDelivered") {
-                                    TrackingMessage = "📦 Your parcel has been partially delivered. Please check your items.";
-                                } else if (parcelStatus === "Cancel") {
-                                    TrackingMessage = "❌ Your parcel has been cancelled. Please contact support for more details.";
-                                } else {
-                                    TrackingMessage = "ℹ️ Your parcel is being processed. Please wait for updates.";
-                                }
-                                // Parcel Delivery Tracking message send
-                                // ========================================
-                                let TrackingMessagePost = {
-                                    userOrderIdTracking: AssignParcelDetails?.StandardParcelId,
-                                    TrackingMessage,
-                                    TrackingDate: date,
-                                    TrackingTime: time
-                                };
+                                    if (parcelStatus === "Delivered") {
+                                        TrackingMessage = "🚚 Delivery complete. We hope you enjoy your package!";
+                                    } else if (parcelStatus === "PartiallyDelivered") {
+                                        TrackingMessage = "📦 Your parcel has been partially delivered. Please check your items.";
+                                    } else if (parcelStatus === "Cancel") {
+                                        TrackingMessage = "❌ Your parcel has been cancelled. Please contact support for more details.";
+                                    } else {
+                                        TrackingMessage = "ℹ️ Your parcel is being processed. Please wait for updates.";
+                                    }
+                                    // Parcel Delivery Tracking message send
+                                    // ========================================
+                                    let TrackingMessagePost = {
+                                        userOrderIdTracking: AssignParcelDetails?.StandardParcelId,
+                                        TrackingMessage,
+                                        TrackingDate: date,
+                                        TrackingTime: time
+                                    };
 
-                                // Parcel Delivery Status Update
-                                // ======================================
-                                let ParcelStatusUpToRider = { parcelStatus }
+                                    // Parcel Delivery Status Update
+                                    // ======================================
+                                    let ParcelStatusUpToRider = { parcelStatus }
 
-                                // Rider Parcel Delivery History Data
-                                // ======================================
-                                let RiderDeliveryHistoryDate = {
-                                    RiderEmail: roles?.roles,
-                                    RiderID: roles?.userId,
-                                    RiderFirstName: roles?.name,
-                                    RiderLastName: roles?.LastName,
-                                    ParcelId: AssignParcelDetails?.StandardParcelId,
-                                    ParcelDistrict: AssignParcelDetails?.District,
-                                    ParcelPoliceStation: AssignParcelDetails?.policeStation,
-                                    ParcelMyHub: AssignParcelDetails?.MyHub,
-                                    ParcelWeight: AssignParcelDetails?.weight,
-                                    ParcelCod: AssignParcelDetails?.CodAmount,
-                                    date,
-                                    time,
-                                }
+                                    // Rider Parcel Delivery History Data
+                                    // ======================================
+                                    let RiderDeliveryHistoryDate = {
+                                        RiderEmail: roles?.roles,
+                                        RiderID: roles?.userId,
+                                        RiderFirstName: roles?.name,
+                                        RiderLastName: roles?.LastName,
+                                        ParcelId: AssignParcelDetails?.StandardParcelId,
+                                        ParcelDistrict: AssignParcelDetails?.District,
+                                        ParcelPoliceStation: AssignParcelDetails?.policeStation,
+                                        ParcelMyHub: AssignParcelDetails?.MyHub,
+                                        ParcelWeight: AssignParcelDetails?.weight,
+                                        ParcelCod: AssignParcelDetails?.CodAmount,
+                                        date,
+                                        time,
+                                    }
 
-                                // Parcel COD Balance Increase Rider Balance
-                                // ===================================================
-                                let ParcelCodBalance = {
-                                    ParcelCod: Math.floor(Number(AssignParcelDetails?.CodAmount) || 0)
-                                };
+                                    // Parcel COD Balance Increase Rider Balance
+                                    // ===================================================
+                                    let ParcelCodBalance = {
+                                        ParcelCod: Math.floor(Number(AssignParcelDetails?.CodAmount) || 0)
+                                    };
 
-                                // ===================================================
-                                // Parcel Status Update, When rider approved parcel
-                                // ===================================================
-                                fetch(`https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/RiderParcelDeliveryStatusUpdate/${AssignParcelDetails?._id}`, {
-                                    method: "PATCH",
-                                    headers: {
-                                        "content-type": "application/json"
-                                    },
-                                    body: JSON.stringify(ParcelStatusUpToRider)
-                                })
-                                    .then(res => res.json())
-                                    .then(data => {
-                                        if (data.modifiedCount > 0) {
-                                            // ===============================================
-                                            // Rider after Delivery Tracking Message Send 
-                                            // ===============================================
-                                            fetch("https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/AdminTrackingRequestSentOfAssignRider", {
-                                                method: "POST",
-                                                headers: {
-                                                    "Content-Type": "application/json"
-                                                },
-                                                body: JSON.stringify(TrackingMessagePost)
-                                            })
-                                                .then(res => res.json())
-                                                .then(data => {
-                                                    // console.log(data)
-                                                    if (data.insertedId) {
-                                                        // ===========================================
-                                                        // Rider Delivery parcel (History) post
-                                                        // ===========================================
-                                                        fetch("https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/ParcelDeliveryHistoryOfRider", {
-                                                            method: "POST",
-                                                            headers: {
-                                                                "Content-Type": "application/json"
-                                                            },
-                                                            body: JSON.stringify(RiderDeliveryHistoryDate)
-                                                        })
-                                                            .then(res => res.json())
-                                                            .then(data => {
-                                                                // console.log(data)
-                                                                if (data.insertedId) {
-
-                                                                    // =============================================
-                                                                    // Parcel (COD) Amount Will Be Pluse Rider Balance..
-                                                                    // =============================================
-                                                                    fetch(`https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/ParcelCODAmountIncreaseRiderBalance/${roles?.email}`, {
-                                                                        method: "PUT",
-                                                                        headers: {
-                                                                            "content-type": "application/json"
-                                                                        },
-                                                                        body: JSON.stringify(ParcelCodBalance)
-                                                                    })
-                                                                        .then(res => res.json())
-                                                                        .then(data => {
-                                                                            if (data.modifiedCount > 0) {
-                                                                                // Assign Parcel Request Delete After, change parcel status and others to rider..
-                                                                                // ===============================
-                                                                                fetch(`https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/DeleteAssignParcel/${AssignRequestIdFoDeleteRequest}`, {
-                                                                                    method: "DELETE",
-                                                                                })
-                                                                                    .then(res => res.json())
-                                                                                    .then(data => {
-                                                                                        if (data.deletedCount > 0) {
-                                                                                            refetch()
-                                                                                            setIsLoading(false)
-                                                                                            document.getElementById("MyAssignParcelDetailsShow").close()
-                                                                                            Swal.fire({
-                                                                                                position: 'top-end',
-                                                                                                icon: 'success',
-                                                                                                title: 'Parcel delivery Successful',
-                                                                                                showConfirmButton: false,
-                                                                                                timer: 1500
-                                                                                            })
-                                                                                        }
-                                                                                        // console.log(data)
-                                                                                    })
-                                                                            }
-                                                                        })
-                                                                }
-                                                            })
-                                                    }
-                                                })
-                                        }
+                                    // ===================================================
+                                    // Parcel Status Update, When rider approved parcel
+                                    // ===================================================
+                                    fetch(`https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/RiderParcelDeliveryStatusUpdate/${AssignParcelDetails?._id}`, {
+                                        method: "PATCH",
+                                        headers: {
+                                            "content-type": "application/json"
+                                        },
+                                        body: JSON.stringify(ParcelStatusUpToRider)
                                     })
-                            }}>
+                                        .then(res => res.json())
+                                        .then(data => {
+                                            if (data.modifiedCount > 0) {
+                                                // ===============================================
+                                                // Rider after Delivery Tracking Message Send 
+                                                // ===============================================
+                                                fetch("https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/AdminTrackingRequestSentOfAssignRider", {
+                                                    method: "POST",
+                                                    headers: {
+                                                        "Content-Type": "application/json"
+                                                    },
+                                                    body: JSON.stringify(TrackingMessagePost)
+                                                })
+                                                    .then(res => res.json())
+                                                    .then(data => {
+                                                        // console.log(data)
+                                                        if (data.insertedId) {
+                                                            // ===========================================
+                                                            // Rider Delivery parcel (History) post
+                                                            // ===========================================
+                                                            fetch("https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/ParcelDeliveryHistoryOfRider", {
+                                                                method: "POST",
+                                                                headers: {
+                                                                    "Content-Type": "application/json"
+                                                                },
+                                                                body: JSON.stringify(RiderDeliveryHistoryDate)
+                                                            })
+                                                                .then(res => res.json())
+                                                                .then(data => {
+                                                                    // console.log(data)
+                                                                    if (data.insertedId) {
+
+                                                                        // =============================================
+                                                                        // Parcel (COD) Amount Will Be Pluse Rider Balance..
+                                                                        // =============================================
+                                                                        fetch(`https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/ParcelCODAmountIncreaseRiderBalance/${roles?.email}`, {
+                                                                            method: "PUT",
+                                                                            headers: {
+                                                                                "content-type": "application/json"
+                                                                            },
+                                                                            body: JSON.stringify(ParcelCodBalance)
+                                                                        })
+                                                                            .then(res => res.json())
+                                                                            .then(data => {
+                                                                                if (data.modifiedCount > 0) {
+                                                                                    // Assign Parcel Request Delete After, change parcel status and others to rider..
+                                                                                    // ===============================
+                                                                                    fetch(`https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/DeleteAssignParcel/${AssignRequestIdFoDeleteRequest}`, {
+                                                                                        method: "DELETE",
+                                                                                    })
+                                                                                        .then(res => res.json())
+                                                                                        .then(data => {
+                                                                                            if (data.deletedCount > 0) {
+                                                                                                refetch()
+                                                                                                setIsLoading(false)
+                                                                                                document.getElementById("MyAssignParcelDetailsShow").close()
+                                                                                                Swal.fire({
+                                                                                                    position: 'top-end',
+                                                                                                    icon: 'success',
+                                                                                                    title: 'Parcel delivery Successful',
+                                                                                                    showConfirmButton: false,
+                                                                                                    timer: 1500
+                                                                                                })
+                                                                                            }
+                                                                                            // console.log(data)
+                                                                                        })
+                                                                                }
+                                                                            })
+                                                                    }
+                                                                })
+                                                        }
+                                                    })
+                                            }
+                                        })
+                                }}>
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-center">
                                     <select
                                         name="statusUp"
@@ -569,6 +756,8 @@ const MyParcelRider = () => {
                             </form>
                         </div>
 
+                        {/* Modal cancel bellow !! */}
+                        {/* ============================================== */}
                         <div className="modal-action mt-8 flex justify-end">
                             <button
                                 onClick={() => {
