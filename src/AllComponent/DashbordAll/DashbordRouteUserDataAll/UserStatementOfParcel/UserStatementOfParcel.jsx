@@ -61,21 +61,13 @@ const UserStatementOfParcel = () => {
         (sum, item) => sum + (Number(item?.CodAmount) || 0), 0);
 
 
-
-
-
-
-
-
-
-
     return (
-        <div className="w-full p-4">
+        <div className="w-full p-4 bg-[#F6F6F6] h-[100%] pt-20 md:pt-8 pb-8">
 
             {/* ================================================== */}
             {/* Search Parcel Statement And Download Bellow !! */}
             {/* ================================================== */}
-            <div className="w-full flex flex-col md:flex-row items-center justify-between gap-4 p-4 bg-gray-50 shadow rounded">
+            <div className="w-full flex flex-col md:flex-row items-center justify-between gap-4 p-4 bg-white shadow rounded">
                 {/* Left Side: Download */}
                 {/* ================================= */}
                 <div>
@@ -123,19 +115,19 @@ const UserStatementOfParcel = () => {
                 <table className="w-full border border-gray-400 border-collapse text-sm">
                     {/* // AlternativePhone, CodAmount, DeliveryCharge, District, Invoice, ItemDescription, ParcelCategory, Payment, RecipientEmail, StandardEmailUser, StandardParcelId, address, date, deliveryType, name, note, number, policeStation, status, weight, _id  */}
                     <thead>
-                        <tr className="bg-gray-100 text-left text-black">
-                            <th className="border border-gray-400 p-2">Number</th>
-                            <th className="border border-gray-400 p-2">Date</th>
-                            <th className="border border-gray-400 p-2">
-                                Order ID / Tracking ID
+                        <tr className="bg-white text-left text-black">
+                            <th className="border border-gray-800 p-2">Number</th>
+                            <th className="border border-gray-800 p-2">Date</th>
+                            <th className="border border-gray-800 p-2">
+                                Order ID / Tracing ID
                             </th>
-                            <th className="border border-gray-400 p-2">Customer Name</th>
-                            <th className="border border-gray-400 p-2">Customer Number</th>
-                            <th className="border border-gray-400 p-2">Police station</th>
-                            <th className="border border-gray-400 p-2">Weight</th>
-                            <th className="border border-gray-400 p-2">COD Amount</th>
-                            <th className="border border-gray-400 p-2">Delivery Charge</th>
-                            <th className="border border-gray-400 p-2">Status</th>
+                            <th className="border border-gray-800 p-2">Customer Name</th>
+                            <th className="border border-gray-800 p-2">Customer Number</th>
+                            <th className="border border-gray-800 p-2">Police station</th>
+                            <th className="border border-gray-800 p-2">Weight</th>
+                            <th className="border border-gray-800 p-2">COD Amount</th>
+                            <th className="border border-gray-800 p-2">Delivery Charge</th>
+                            <th className="border border-gray-800 p-2">Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -143,11 +135,10 @@ const UserStatementOfParcel = () => {
                         {/* Parcel Details All Start */}
                         {/* ============================================================ */}
                         {UserAllDeliveryStatusData?.map((item, index) => {
-
                             return (
                                 <tr
                                     key={item.id}
-                                    className={index % 2 === 0 ? "bg-white text-black" : "bg-gray-50 text-black"}
+                                    className={index % 2 === 0 ? "bg-gray-50 text-black" : "bg-white text-black"}
                                 >
                                     <td className="border border-gray-400 p-2">{index + 1}</td>
                                     <td className="border border-gray-400 p-2">{item.date}</td>
@@ -180,19 +171,19 @@ const UserStatementOfParcel = () => {
                         {/* ============================================================ */}
                         {/* Summary Rows */}
                         <tr className="bg-white font-bold text-black">
-                            <td className="border border-gray-400 p-2" colSpan={10}>
+                            <td className="border border-gray-400 p-2" colSpan={9}>
                                 Total Collection COD:
                             </td>
                             <td className="border border-gray-400 p-2">{totalCODAmount}</td>
                         </tr>
                         <tr className="bg-white font-bold text-black">
-                            <td className="border border-gray-400 p-2" colSpan={10}>
+                            <td className="border border-gray-400 p-2" colSpan={9}>
                                 Total Delivery Charge:
                             </td>
                             <td className="border border-gray-400 p-2">{totalDeliveryCharge}</td>
                         </tr>
                         <tr className="bg-white font-bold text-black">
-                            <td className="border border-gray-400 p-2" colSpan={10}>
+                            <td className="border border-gray-400 p-2" colSpan={9}>
                                 Total Cancel COD:
                             </td>
                             <td className="border border-gray-400 p-2">{totalCancelCODAmount}</td>

@@ -62,20 +62,12 @@ const AllMarchentConsignment = () => {
     // console.log(ApprovedPendingData)
 
 
-
-
-
-
     return (
-        <div >
+        <div className="bg-[#F6F6F6]">
             {status == "pending" ?
-
                 <h2 className='text-black font-[700] text-center mt-[40px] text-[34px]'>Please Waite, For Admin Approved</h2>
-
                 :
-
-                <div className="AllMarchentConsignment  p-6 my-8 mx-8 bg-white rounded-[8px]">
-
+                <div className="AllMarchentConsignment p-6 mt-20 md:mt-8 mb-8 mx-8 bg-white rounded-[8px]">
                     <Tabs>
                         <TabList>
                             <Tab> <span className="text-black font-[600] text-[16px]">All</span> </Tab>
@@ -86,7 +78,6 @@ const AllMarchentConsignment = () => {
                             <Tab> <span className="text-black font-[600] text-[16px]">Cancel</span> </Tab>
                             <Tab> <span className="text-black font-[600] text-[16px]">Reviewed</span> </Tab>
                         </TabList>
-
                         <TabPanel>
                             <div className="AllDataConsignment">
 
@@ -281,7 +272,6 @@ const AllMarchentConsignment = () => {
                     </Tabs>
                 </div>
             }
-
         </div>
     );
 };

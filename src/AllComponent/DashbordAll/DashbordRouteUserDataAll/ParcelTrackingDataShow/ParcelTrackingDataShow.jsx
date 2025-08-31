@@ -53,80 +53,77 @@ const ParcelTrackingDataShow = () => {
                     {/* ====================  */}
                     {/* User send note  */}
                     {/* ====================  */}
-                    {
-                        InVoiceData?.status === "Pending" &&
-                        <div className="mb-4">
-                            <form
-                                onSubmit={(event) => {
-                                    setIsLoading(true)
-                                    event.preventDefault()
-                                    let ParcelNote = event.target.ParcelNote.value;
-                                    let date = moment().format("MM/DD/YYYY")
-                                    let time = moment().format("hh:mm A")
-                                    let TrackingMessage = ParcelNote
+                    <div className="mb-4">
+                        <form
+                            onSubmit={(event) => {
+                                setIsLoading(true)
+                                event.preventDefault()
+                                let ParcelNote = event.target.ParcelNote.value;
+                                let date = moment().format("MM/DD/YYYY")
+                                let time = moment().format("hh:mm A")
+                                let TrackingMessage = ParcelNote
 
-                                    let allInfo = { ParcelNote }
-                                    let TrackingMessagePost = {
-                                        userOrderIdTracking: StandardParcelId,
-                                        TrackingMessage,
-                                        TrackingDate: date,
-                                        TrackingTime: time
-                                    };
-                                    {/* Update Parcel Note*/ }
-                                    {/* ==================================== */ }
-                                    fetch(`https://server.trustereocourier.com.bd/UserWithRiderUpdateParcelNote/${InVoiceData?._id}`, {
-                                        method: "PATCH",
-                                        headers: {
-                                            "content-type": "application/json"
-                                        },
-                                        body: JSON.stringify(allInfo)
-                                    })
-                                        .then(res => res.json())
-                                        .then(data => {
-                                            if (data.modifiedCount > 0) {
-                                                // Note Tracking Message Send Tracking Data Post 
-                                                // =========================================================
-                                                fetch("https://server.trustereocourier.com.bd/NoteTrackingMessageSendOfUserAndRider", {
-                                                    method: "POST",
-                                                    headers: {
-                                                        "Content-Type": "application/json"
-                                                    },
-                                                    body: JSON.stringify(TrackingMessagePost)
+                                let allInfo = { ParcelNote }
+                                let TrackingMessagePost = {
+                                    userOrderIdTracking: StandardParcelId,
+                                    TrackingMessage,
+                                    TrackingDate: date,
+                                    TrackingTime: time
+                                };
+                                {/* Update Parcel Note*/ }
+                                {/* ==================================== */ }
+                                fetch(`https://server.trustereocourier.com.bd/UserWithRiderUpdateParcelNote/${InVoiceData?._id}`, {
+                                    method: "PATCH",
+                                    headers: {
+                                        "content-type": "application/json"
+                                    },
+                                    body: JSON.stringify(allInfo)
+                                })
+                                    .then(res => res.json())
+                                    .then(data => {
+                                        if (data.modifiedCount > 0) {
+                                            // Note Tracking Message Send Tracking Data Post 
+                                            // =========================================================
+                                            fetch("https://server.trustereocourier.com.bd/NoteTrackingMessageSendOfUserAndRider", {
+                                                method: "POST",
+                                                headers: {
+                                                    "Content-Type": "application/json"
+                                                },
+                                                body: JSON.stringify(TrackingMessagePost)
+                                            })
+                                                .then(res => res.json())
+                                                .then(data => {
+                                                    // console.log(data)
+                                                    if (data.insertedId) {
+                                                        Swal.fire({
+                                                            position: 'top-end',
+                                                            icon: 'success',
+                                                            title: 'Parcel note send successful',
+                                                            showConfirmButton: false,
+                                                            timer: 1500
+                                                        })
+                                                        refetch()
+                                                        event.target.reset()
+                                                        setIsLoading(false)
+                                                    }
                                                 })
-                                                    .then(res => res.json())
-                                                    .then(data => {
-                                                        // console.log(data)
-                                                        if (data.insertedId) {
-                                                            Swal.fire({
-                                                                position: 'top-end',
-                                                                icon: 'success',
-                                                                title: 'Parcel note send successful',
-                                                                showConfirmButton: false,
-                                                                timer: 1500
-                                                            })
-                                                            refetch()
-                                                            event.target.reset()
-                                                            setIsLoading(false)
-                                                        }
-                                                    })
-                                            }
-                                        })
-                                }}>
-                                <h1 className="text-black text-left text-[18px] font-[600] pb-2">You can sent note of parcel !!</h1>
-                                <input
-                                    type="text"
-                                    name="ParcelNote"
-                                    required
-                                    placeholder="Give parcel note here !!"
-                                    className="w-full bg-white border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 md:w-[18%]" />
-                                <button
-                                    className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md flex items-center gap-1 text-sm"
-                                >
-                                    {isLoading ? "Loading..." : "Send Note"}
-                                </button>
-                            </form>
-                        </div>
-                    }
+                                        }
+                                    })
+                            }}>
+                            <h1 className="text-black text-left text-[18px] font-[600] pb-2">You can sent note of parcel !!</h1>
+                            <input
+                                type="text"
+                                name="ParcelNote"
+                                required
+                                placeholder="Give parcel note here !!"
+                                className="w-full bg-white border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 md:w-[18%]" />
+                            <button
+                                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md flex items-center gap-1 text-sm"
+                            >
+                                {isLoading ? "Loading..." : "Send Note"}
+                            </button>
+                        </form>
+                    </div>
 
                     {/* ==================== */}
                     {/* Main Box */}
@@ -177,24 +174,24 @@ const ParcelTrackingDataShow = () => {
                                     InVoiceData?.status === "Review" && InVoiceData?.AssignRider === "No" ?
                                     <h2 className="text-center text-base font-medium text-orange-500">
                                         Your parcel is currently pending assignment to a rider. Please wait.
-                                    </h2> 
+                                    </h2>
                                     :
                                     // InVoiceData?.status === "Pending" && InVoiceData?.AssignRider === "Yes" ?
 
-                                        <div className="py-4 px-4">
-                                            <h4 className="font-semibold text-gray-800 text-base text-center md:text-left">Assigned to - {InVoiceData?.RiderName}</h4>
-                                            <div className="flex flex-col md:flex-row items-center gap-4 mt-3 md:justify-start justify-center">
-                                                <img src="https://i.ibb.co/kX7XnCQ/avatar.png" alt="staff" className="w-12 h-12 rounded-full border border-gray-300 shadow-sm" />
-                                                <div className="text-center md:text-left">
-                                                    <p className="text-black font-semibold text-sm">Rider Name: {InVoiceData?.RiderName}</p>
-                                                    <p className="text-gray-800 font-bold text-sm">📞 {InVoiceData?.RiderPhone}</p>
-                                                </div>
+                                    <div className="py-4 px-4">
+                                        <h4 className="font-semibold text-gray-800 text-base text-center md:text-left">Assigned to - {InVoiceData?.RiderName}</h4>
+                                        <div className="flex flex-col md:flex-row items-center gap-4 mt-3 md:justify-start justify-center">
+                                            <img src="https://i.ibb.co/kX7XnCQ/avatar.png" alt="staff" className="w-12 h-12 rounded-full border border-gray-300 shadow-sm" />
+                                            <div className="text-center md:text-left">
+                                                <p className="text-black font-semibold text-sm">Rider Name: {InVoiceData?.RiderName}</p>
+                                                <p className="text-gray-800 font-bold text-sm">📞 {InVoiceData?.RiderPhone}</p>
                                             </div>
                                         </div>
-                                        // :
-                                        // <h2 className="text-center text-lg font-semibold text-green-600">
-                                        //     Your parcel has already been delivered successfully!
-                                        // </h2>
+                                    </div>
+                                // :
+                                // <h2 className="text-center text-lg font-semibold text-green-600">
+                                //     Your parcel has already been delivered successfully!
+                                // </h2>
                             }
 
                         </div>

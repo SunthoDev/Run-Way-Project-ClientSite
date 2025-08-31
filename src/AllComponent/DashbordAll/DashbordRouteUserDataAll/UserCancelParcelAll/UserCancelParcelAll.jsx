@@ -26,13 +26,13 @@ const UserCancelParcelAll = () => {
 
 
     return (
-        <div className='UserCancelParcelAll mx-6 my-8 rounded-[8px] p-6 bg-white'>
+        <div className='UserCancelParcelAll  p-6 bg-[#F6F6F6] '>
             {status == "pending" ?
 
                 <h2 className='text-black font-[700] text-center mt-[40px] text-[34px]'>Please Waite, For Admin Approved</h2>
                 :
-                <div className="">
-                    <div className="overflow-x-auto p-4">
+                <div className="mt-20 md:mt-8 mb-8 mx-8 rounded-[8px]">
+                    <div className="overflow-x-auto p-4 bg-white">
                         <table className="table  w-full rounded-xl shadow-md">
                             <thead className="bg-base-200 text-base-content">
                                 <tr>

@@ -2,7 +2,7 @@ import React from 'react';
 import "./AdminSendAllTrackingMessageTemporery.css"
 
 const AdminSendAllTrackingMessageTemporery = ({messageAllData}) => {
-    console.log(messageAllData)
+    // console.log(messageAllData)
     let { TrackingDate, TrackingTime, TrackingMessage, userOrderIdTracking, _id } = messageAllData
 
     return (
