@@ -36,6 +36,16 @@ const ApprovedParcelRoute = () => {
     let [HubSearchPendingData, setHubSearchPendingData] = useState([])
     // console.log(HubSearchPendingData)
 
+    // ===================================================================
+    // Total COD after search parcel, by hub (Delivery & partial Delivery)
+    // ===================================================================
+    let TotalCOdAfterHubChargeFilter = HubSearchPendingData.filter(approved => approved?.Payment == "No" && approved?.status == "Delivered" || approved?.Payment == "No" && approved?.status == "PartiallyDelivered")
+
+    // Total cod of (Delivery & partial Delivery)
+    // ===============================================
+    let TotalCOdAfterHubCharge = (TotalCOdAfterHubChargeFilter || []).reduce((initial, item) => initial + (Number(item?.CodAmount) || 0), 0);
+    // console.log(TotalCOdAfterHubCharge)
+
 
 
     return (
@@ -52,7 +62,8 @@ const ApprovedParcelRoute = () => {
                             {/* Search user Request Approved parcel by a Hub Name */}
                             {/* ========================================================= */}
                             <div className="flex justify-between items-center pb-4">
-                                <h2 className="text-2xl font-semibold text-gray-800 mb-4">Total Data: {ApprovedPendingData.length}</h2>
+                                <h2 className="text-2xl font-semibold text-gray-800 mb-4">Total Data: {ApprovedPendingData?.length}</h2>
+                                <h2 className="text-2xl font-semibold text-gray-800 mb-4">Total COD: {TotalCOdAfterHubCharge}</h2>
                                 {/* Search Section (Pending)*/}
                                 {/* ==================================== */}
                                 <div className="flex items-center gap-2">
@@ -93,7 +104,6 @@ const ApprovedParcelRoute = () => {
                                             <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Action</th>
                                         </tr>
                                     </thead>
-
                                     <tbody className="bg-white divide-y divide-gray-200">
                                         {
                                             ((HubSearchPendingData.length > 0 ? HubSearchPendingData :

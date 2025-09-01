@@ -140,7 +140,7 @@ const AssignParcel = () => {
 
 
     return (
-        <div className='AdminViewPaymentRequestAll bg-[#F6F6F6]'>
+        <div className='AdminViewPaymentRequestAll bg-[#F6F6F6] pb-[320px]'>
 
             {/* ====================================================================== */}
             {/* Multiple Parcel Assign To here */}
@@ -529,8 +529,10 @@ const AssignParcel = () => {
                                                     RiderName: rider?.name,
                                                     RiderUserId: rider?.userId,
                                                 }
-
                                                 // console.log(AssignPArcelPostToRider)
+                                                
+                                                //  Parcel assign to rider data insert!!
+                                                // ==============================================
                                                 fetch("https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/InsertAssignParcelToRider", {
                                                     method: "POST",
                                                     headers: {

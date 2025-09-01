@@ -76,7 +76,7 @@ const Dispatch = () => {
 
 
     return (
-        <div className='AdminViewPaymentRequestAll bg-[#F6F6F6]'>
+        <div className='AdminViewPaymentRequestAll bg-[#F6F6F6] pb-[320px]'>
             <div className='md:px-4 my-4'>
 
                 {/* ====================================================================== */}
@@ -252,7 +252,7 @@ const Dispatch = () => {
                                                     <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Dispatch Parcel Id</th>
                                                     <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Dispatch Hub Name</th>
                                                     <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Tracking Message</th>
-                                                    <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Action</th>
+                                                    {/* <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Action</th> */}
                                                 </tr>
                                             </thead>
                                             <tbody className="bg-white divide-y divide-gray-200">
@@ -293,7 +293,7 @@ const Dispatch = () => {
 
                                                         <td className="px-6 py-4 text-sm text-gray-800">{SentData?.DispatchHubName}</td>
                                                         <td className="px-6 py-4 text-sm text-gray-800">{SentData?.TrackingMessage}</td>
-                                                        <td className="px-6 py-4">
+                                                        {/* <td className="px-6 py-4">
                                                             <button onClick={async () => {
                                                                 Swal.fire({
                                                                     title: "Are you sure?",
@@ -335,7 +335,7 @@ const Dispatch = () => {
 
                                                             }} className="!bg-red-500 !hover:bg-red-600 !text-white text-sm px-4 py-1.5 rounded-md transition"
                                                             > Delete </button>
-                                                        </td>
+                                                        </td> */}
                                                     </tr>
                                                 )}
                                             </tbody>
@@ -486,7 +486,7 @@ const Dispatch = () => {
                                                     <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Dispatch Parcel Id</th>
                                                     <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Dispatch Hub Name</th>
                                                     <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Tracking Message</th>
-                                                    <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Action</th>
+                                                    {/* <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Action</th> */}
                                                 </tr>
                                             </thead>
                                             <tbody className="bg-white divide-y divide-gray-200">
@@ -527,7 +527,7 @@ const Dispatch = () => {
 
                                                         <td className="px-6 py-4 text-sm text-gray-800">{ReceivedData?.DispatchHubName}</td>
                                                         <td className="px-6 py-4 text-sm text-gray-800">{ReceivedData?.TrackingMessage}</td>
-                                                        <td className="px-6 py-4">
+                                                        {/* <td className="px-6 py-4">
                                                             <button onClick={async () => {
                                                                 Swal.fire({
                                                                     title: "Are you sure?",
@@ -569,7 +569,7 @@ const Dispatch = () => {
 
                                                             }} className="!bg-red-500 !hover:bg-red-600 !text-white text-sm px-4 py-1.5 rounded-md transition"
                                                             > Delete </button>
-                                                        </td>
+                                                        </td> */}
                                                     </tr>
                                                 )}
                                             </tbody>

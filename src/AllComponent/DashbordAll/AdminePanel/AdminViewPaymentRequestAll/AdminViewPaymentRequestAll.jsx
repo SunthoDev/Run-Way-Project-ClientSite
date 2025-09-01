@@ -74,16 +74,14 @@ const AdminViewPaymentRequestAll = () => {
                         {tabState === 1 &&
                             <div className="flex justify-center">
                                 <div className="w-full bg-white shadow-lg border border-gray-200 rounded-xl p-6">
-
                                     <h2 className="text-2xl font-semibold text-gray-800 mb-4">UnPaid Payment</h2>
-
                                     <div className="overflow-x-auto">
                                         <table className="min-w-full divide-y divide-gray-200">
                                             <thead className="bg-gray-100">
                                                 <tr>
                                                     <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">ID / Name</th>
-                                                    <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Email / Date</th>
-                                                    <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Address / Number</th>
+                                                    <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Date</th>
+                                                    {/* <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Address / Number</th> */}
                                                     <th className="px-6 py-3 text-left text-sm font-medium text-indigo-600">Amount</th>
                                                     <th className="px-6 py-3 text-left text-sm font-medium text-green-600">Received Money</th>
                                                     <th className="px-6 py-3 text-left text-sm font-medium text-blue-600">Status</th>
@@ -99,13 +97,13 @@ const AdminViewPaymentRequestAll = () => {
                                                                 <p className="font-medium text-base text-gray-800">{Payment?.name} {Payment?.LastName}</p>
                                                             </td>
                                                             <td className="px-6 py-4">
-                                                                <p className="font-medium text-base text-gray-800">{Payment?.ReqUserEmail}</p>
-                                                                <p className="font-medium text-base text-gray-800">{Payment?.UserPaymentReqDate}</p>
+                                                                {/* <p className="font-medium text-base text-gray-800">{Payment?.ReqUserEmail}</p> */}
+                                                                <p className="font-medium text-base text-gray-800">{Payment?.date}</p>
                                                             </td>
-                                                            <td className="px-6 py-4">
+                                                            {/* <td className="px-6 py-4">
                                                                 <p className="font-medium text-base text-gray-800">{Payment?.Address}</p>
                                                                 <p className="font-medium text-base text-gray-800">{Payment?.Phone}</p>
-                                                            </td>
+                                                            </td> */}
                                                             {/* Amount */}
                                                             <td className="px-6 py-4">
                                                                 <p className="font-semibold text-base text-indigo-700 bg-indigo-50 px-2 py-1 rounded-md inline-block shadow-sm">
@@ -126,7 +124,7 @@ const AdminViewPaymentRequestAll = () => {
                                                                 </p>
                                                             </td>
                                                             {/* Action */}
-                                                            <td className="px-6 py-4">
+                                                            <td className="flex items-center gap-4 px-6 py-4">
                                                                 <button
                                                                     onClick={() => {
                                                                         let PaidDate = moment().format("MM/DD/YY")
@@ -171,7 +169,6 @@ const AdminViewPaymentRequestAll = () => {
                                             </tbody>
                                         </table>
                                     </div>
-
                                 </div>
                             </div>
                         }
@@ -182,16 +179,14 @@ const AdminViewPaymentRequestAll = () => {
                         {tabState === 2 &&
                             <div className="flex justify-center">
                                 <div className="w-full bg-white shadow-lg border border-gray-200 rounded-xl p-6">
-
                                     <h2 className="text-2xl font-semibold text-gray-800 mb-4">UnPaid Payment</h2>
-
                                     <div className="overflow-x-auto">
                                         <table className="min-w-full divide-y divide-gray-200">
                                             <thead className="bg-gray-100">
                                                 <tr>
                                                     <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">ID / Name</th>
-                                                    <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Email / Date</th>
-                                                    <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Address / Number</th>
+                                                    <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Date</th>
+                                                    {/* <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Address / Number</th> */}
                                                     <th className="px-6 py-3 text-left text-sm font-medium text-indigo-600">Amount</th>
                                                     <th className="px-6 py-3 text-left text-sm font-medium text-green-600">Received Money</th>
                                                     <th className="px-6 py-3 text-left text-sm font-medium text-blue-600">Status</th>
@@ -207,13 +202,13 @@ const AdminViewPaymentRequestAll = () => {
                                                                 <p className="font-medium text-base text-gray-800">{Payment?.name} {Payment?.LastName}</p>
                                                             </td>
                                                             <td className="px-6 py-4">
-                                                                <p className="font-medium text-base text-gray-800">{Payment?.ReqUserEmail}</p>
-                                                                <p className="font-medium text-base text-gray-800">{Payment?.UserPaymentReqDate}</p>
+                                                                {/* <p className="font-medium text-base text-gray-800">{Payment?.ReqUserEmail}</p> */}
+                                                                <p className="font-medium text-base text-gray-800">{Payment?.date}</p>
                                                             </td>
-                                                            <td className="px-6 py-4">
+                                                            {/* <td className="px-6 py-4">
                                                                 <p className="font-medium text-base text-gray-800">{Payment?.Address}</p>
                                                                 <p className="font-medium text-base text-gray-800">{Payment?.Phone}</p>
-                                                            </td>
+                                                            </td> */}
                                                             {/* Amount */}
                                                             <td className="px-6 py-4">
                                                                 <p className="font-semibold text-base text-indigo-700 bg-indigo-50 px-2 py-1 rounded-md inline-block shadow-sm">

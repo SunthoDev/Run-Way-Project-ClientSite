@@ -111,7 +111,7 @@ const CreateRider = () => {
         <div className='AdminViewPaymentRequestAll bg-[#F6F6F6]'>
             <div className='md:px-4 my-4'>
 
-                {/* Tabs of Users Panel */}
+                {/* Tabs of Users Panel bellow !!*/}
                 {/* ==================================== */}
                 <div className="flex border-b border-gray-200 space-x-4 mb-4">
                     <button onClick={() => setTabState(1)}
@@ -128,13 +128,15 @@ const CreateRider = () => {
                     </button>
                 </div>
 
+                {/* User information bellow !! */}
+                {/* ==================================== */}
                 <div className="overflow-x-auto">
                     <table className="table">
                         <thead>
                             <tr className="bg-black">
                                 <th className="text-[14px] font-[600] text-white">Image</th>
                                 <th className="text-[14px] font-[600] text-white">Name</th>
-                                <th className="text-[14px] font-[600] text-white">Email</th>
+                                {/* <th className="text-[14px] font-[600] text-white">Email</th> */}
                                 <th className="text-[14px] font-[600] text-white">Role</th>
                                 <th className="text-[14px] font-[600] text-white">Change Role</th>
                                 <th className="text-[14px] font-[600] text-white">Delete Id</th>

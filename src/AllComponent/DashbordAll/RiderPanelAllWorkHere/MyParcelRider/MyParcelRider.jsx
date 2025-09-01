@@ -85,7 +85,6 @@ const MyParcelRider = () => {
         <div className='MyParcelRiderPArent bg-[#F6F6F6]'>
 
             <div className='md:px-4 my-4'>
-
                 <div className="bg-white p-6 rounded-xl shadow-md  mt-10">
                     <h3 className='text-black text-[24px] font-[600] text-left pb-4'>My All Assign Parcel</h3>
 
@@ -154,11 +153,75 @@ const MyParcelRider = () => {
                                                             <td className="px-6 py-4 text-gray-800">{ParcelRequest?.RiderPhone}</td>
                                                             <td className="px-6 py-4 text-gray-800">{ParcelRequest?.RiderEmail}</td>
                                                             <td className="px-6 py-4 text-gray-800">{ParcelRequest?.ParcelIdForRider}</td>
-                                                            <td className="px-6 py-4">
+                                                            <td className="flex items-center gap-4 px-6 py-4">
                                                                 <button
                                                                     onClick={() => handleParcelDetails(ParcelRequest?.ParcelIdForRider, ParcelRequest?._id)}
                                                                     className="btn btn-sm btn-outline btn-primary">
                                                                     Parcel Details
+                                                                </button>
+                                                                <button
+                                                                    onClick={() => {
+
+                                                                        let date = moment().format("MM/DD/YYYY")
+                                                                        let time = moment().format("hh:mm A")
+                                                                        let TrackingMessage = `Your parcel has been successfully assigned to a rider. The rider will collect your parcel shortly and begin the delivery process.`
+                                                                        let TrackingMessagePost = {
+                                                                            userOrderIdTracking: ParcelRequest?.ParcelIdForRider,
+                                                                            TrackingMessage,
+                                                                            TrackingDate: date,
+                                                                            TrackingTime: time
+                                                                        };
+
+                                                                        // Parcel Assign Rider status up (No) For Rider Rejected Parcel
+                                                                        // =================================================================
+                                                                        fetch(`https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/RiderRejectedParcelAssignStatusUpdateYes/${ParcelRequest?.ParcelIdForRider}`, {
+                                                                            method: "PATCH",
+                                                                        })
+                                                                            .then(res => res.json())
+                                                                            .then(data => {
+                                                                                if (data.modifiedCount > 0) {
+                                                                                    // Parcel rejected rider Tracking Data Post 
+                                                                                    // ===============================================
+                                                                                    fetch("https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/RejectedParcelRiderTrackingMessageSend", {
+                                                                                        method: "POST",
+                                                                                        headers: {
+                                                                                            "Content-Type": "application/json"
+                                                                                        },
+                                                                                        body: JSON.stringify(TrackingMessagePost)
+                                                                                    })
+                                                                                        .then(res => res.json())
+                                                                                        .then(data => {
+                                                                                            // console.log(data)
+                                                                                            if (data.insertedId) {
+
+                                                                                                // Assign Parcel Request Delete After, rejected parcel !!
+                                                                                                // ==============================================================
+                                                                                                fetch(`https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/DeleteAssignParcelForRejectedRider/${ParcelRequest?._id}`, {
+                                                                                                    method: "DELETE",
+                                                                                                })
+                                                                                                    .then(res => res.json())
+                                                                                                    .then(data => {
+                                                                                                        if (data.deletedCount > 0) {
+                                                                                                            Swal.fire({
+                                                                                                                position: 'top-end',
+                                                                                                                icon: 'success',
+                                                                                                                title: 'Parcel Rejected Successful',
+                                                                                                                showConfirmButton: false,
+                                                                                                                timer: 1500
+                                                                                                            })
+                                                                                                            refetch()
+                                                                                                            setIsLoading(false)
+                                                                                                        }
+                                                                                                        // console.log(data)
+                                                                                                    })
+                                                                                            }
+                                                                                        })
+                                                                                }
+                                                                            })
+
+                                                                    }}
+                                                                    className="btn btn-sm btn-outline btn-primary">
+                                                                    Rejected Parcel
                                                                 </button>
                                                             </td>
                                                         </tr>
@@ -411,7 +474,6 @@ const MyParcelRider = () => {
                         }
                     </div>
                 </div>
-
             </div>
 
             {/* ========================================================== */}
@@ -600,7 +662,6 @@ const MyParcelRider = () => {
                                     let date = moment().format("MM/DD/YYYY")
                                     let time = moment().format("hh:mm A")
                                     let TrackingMessage = "";
-
                                     if (parcelStatus === "Delivered") {
                                         TrackingMessage = "🚚 Delivery complete. We hope you enjoy your package!";
                                     } else if (parcelStatus === "PartiallyDelivered") {

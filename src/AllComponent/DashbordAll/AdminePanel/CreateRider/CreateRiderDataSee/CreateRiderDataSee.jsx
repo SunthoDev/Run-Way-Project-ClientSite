@@ -51,9 +51,9 @@ const CreateRiderDataSee = ({ allUser, handleUser, HandleRider, HandleDelete, re
             <td>
                 <h3>{name}</h3>
             </td>
-            <td>
+            {/* <td>
                 <h3>{email}</h3>
-            </td>
+            </td> */}
             <td className={`Role ${role == "admin" ? "text-red-700" : role == "rider" ?
                 "text-[#22AFA3]" : role == "subAdmin" ? "text-yellow-600" : "text-black"}`}>{role}</td>
             <td>

@@ -80,7 +80,7 @@ const BalanceRequestAllUser = () => {
                                                     <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Pay Method / Trx ID</th>
                                                     <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Amount</th>
                                                     <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Charge</th>
-                                                    <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">User Email</th>
+                                                    <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">User Id</th>
                                                     <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Status</th>
                                                     <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Action</th>
                                                 </tr>
@@ -93,7 +93,7 @@ const BalanceRequestAllUser = () => {
                                                         <td className="px-6 py-4 text-sm text-gray-800">{item?.method} <br /> Trx ID: {item?.trxId}</td>
                                                         <td className="px-6 py-4 text-sm text-gray-800">{item?.amount} </td>
                                                         <td className="px-6 py-4 text-sm text-gray-800">{item?.charge} </td>
-                                                        <td className="px-6 py-4 text-sm text-gray-800">{item?.UserEmail} <br /> User Id: {item?.userId} </td>
+                                                        <td className="px-6 py-4 text-sm text-gray-800">User Id: {item?.userId} </td>
                                                         <td className="px-6 py-4 text-sm text-gray-800">{item?.status}</td>
 
                                                         <td className="px-6 py-4">
@@ -196,7 +196,7 @@ const BalanceRequestAllUser = () => {
                                                     <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Pay Method / Trx ID</th>
                                                     <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Amount</th>
                                                     <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Charge</th>
-                                                    <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">User Email</th>
+                                                    <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">User Id</th>
                                                     <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Status</th>
                                                     <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Action</th>
                                                 </tr>
@@ -209,9 +209,8 @@ const BalanceRequestAllUser = () => {
                                                         <td className="px-6 py-4 text-sm text-gray-800">{item?.method} <br /> Trx ID: {item?.trxId}</td>
                                                         <td className="px-6 py-4 text-sm text-gray-800">{item?.amount} </td>
                                                         <td className="px-6 py-4 text-sm text-gray-800">{item?.charge} </td>
-                                                        <td className="px-6 py-4 text-sm text-gray-800">{item?.UserEmail} <br /> User Id: {item?.userId} </td>
+                                                        <td className="px-6 py-4 text-sm text-gray-800">User Id: {item?.userId} </td>
                                                         <td className="px-6 py-4 text-sm text-gray-800">{item?.status}</td>
-
                                                         <td className="px-6 py-4">
                                                             <button
                                                                 onClick={() => {

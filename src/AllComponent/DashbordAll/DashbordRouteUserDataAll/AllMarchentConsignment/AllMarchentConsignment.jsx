@@ -12,11 +12,13 @@ import UserReturnedConsignment from './UserReturnedConsignment/UserReturnedConsi
 import UserPendingConsignment from './UserPendingConsignment/UserPendingConsignment';
 import UserAllStatusConsignmentData from './UserAllStatusConsignmentData/UserAllStatusConsignmentData';
 import useRole from '../../../../Hook/useRole';
+import { useNavigate } from "react-router-dom";
 
 
 const AllMarchentConsignment = () => {
 
     let { user } = useContext(AuthContext)
+    let navigate = useNavigate()
     const [roles] = useRole()
     let { role, Address, BusinessName, name, userId, photo, status } = roles
 
@@ -68,6 +70,32 @@ const AllMarchentConsignment = () => {
                 <h2 className='text-black font-[700] text-center mt-[40px] text-[34px]'>Please Waite, For Admin Approved</h2>
                 :
                 <div className="AllMarchentConsignment p-6 mt-20 md:mt-8 mb-8 mx-8 bg-white rounded-[8px]">
+                    {/* Merchant all parcel by number */}
+                    {/* ============================================================== */}
+                    <div className="w-full max-w-md mx-auto mb-4">
+                        <form onSubmit={(event) => {
+                            event.preventDefault()
+                            let number = event.target.ParcelSearchNumber.value
+                             navigate(`/dashboard/UserSearchParcelByNumber/${number}`)
+
+                        }}>
+                            <div className="relative">
+                                <input
+                                    name="ParcelSearchNumber"
+                                    type="text"
+                                    placeholder="search your parcel by phone number"
+                                    className="w-full rounded-2xl border border-gray-300 px-4 pr-12 py-3 text-base shadow-sm outline-none
+                                        focus:border-blue-500 focus:ring-4 focus:ring-blue-200/60 transition"
+                                />
+                                {/* Right side search icon */}
+                                <i type='submit' className="fa fa-search absolute right-3 top-1/2 -translate-y-1/2 text-lg text-gray-500"
+                                    aria-hidden="true" />
+                            </div>
+                        </form>
+                    </div>
+
+                    {/* All status parcel show bellow for see merchant */}
+                    {/* ============================================================== */}
                     <Tabs>
                         <TabList>
                             <Tab> <span className="text-black font-[600] text-[16px]">All</span> </Tab>

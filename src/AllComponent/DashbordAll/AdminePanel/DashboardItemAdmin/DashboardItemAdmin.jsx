@@ -12,6 +12,8 @@ const DashboardItemAdmin = () => {
     return (
         <div className='DashboardItemAdmin px-2 md:px-10 py-10'>
 
+            {/* Admin search all thing bellow !! */}
+            {/* =================================================================== */}
             <div className="DashboardItem bg-white p-[28px] rounded-[8px]  grid grid-cols-1 md:grid-cols-2 gap-5">
 
                 {/* search Parcel ID !! */}

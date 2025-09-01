@@ -147,7 +147,6 @@ const AdminSearchUserId = () => {
                 {/* Right information start */}
                 {/* ======================================================== */}
                 <div className="right p-6 col-span-1 md:col-span-5 bg-white rounded-[8px]">
-
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
 
                         <Link to={`/dashboard/AdminDashboard/AdminCurrentBalanceDetails/${email}`} className="CurrentBalance bg-[#1f7f0e]">
@@ -178,14 +177,13 @@ const AdminSearchUserId = () => {
                             <button className='font-[600] py-[4px] text-[16px] bg-[#22AFA3] text-white text-center px-4 rounded-[8px]'>Add Bank Details</button>
                         </Link>
                     </div>
-                    <div className="md:flex justify-between gap-8 items-center mt-6">
+                    {/* <div className="md:flex justify-between gap-8 items-center mt-6">
                         <select className="select bg-white select-success w-full md:w-[30%] ">
                             <option disabled selected>{status}</option>
                             <option className='text-black font-[500] text-[16px]'>Approved</option>
                             <option className='text-black font-[500] text-[16px]'>Pending</option>
                         </select>
-                    </div>
-
+                    </div> */}
                 </div>
             </div>
 

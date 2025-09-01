@@ -10,7 +10,6 @@ const AdminNewMerchants = () => {
     let { refetch, data: users = [] } = useQuery(["users"], async () => {
         let res = await fetch("https://server.trustereocourier.com.bd/users")
         return res.json()
-
     })
     // console.log(users)
 
@@ -67,15 +66,12 @@ const AdminNewMerchants = () => {
                         {tabState === 1 &&
                             <div className="flex justify-center">
                                 <div className="w-full bg-white shadow-lg border border-gray-200 rounded-xl p-6">
-
                                     <h2 className="text-2xl font-semibold text-gray-800 mb-4">Pending User</h2>
-
                                     <div className="overflow-x-auto">
                                         <table className="min-w-full divide-y divide-gray-200 shadow rounded-md">
                                             <thead className="bg-gray-100">
                                                 <tr>
                                                     <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">ID / Name</th>
-                                                    <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">Email</th>
                                                     <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">Address</th>
                                                     <th className="px-6 py-3 text-left text-sm font-semibold text-green-600">Number</th>
                                                     <th className="px-6 py-3 text-left text-sm font-semibold text-indigo-600">Date</th>
@@ -92,31 +88,22 @@ const AdminNewMerchants = () => {
                                                                 <p className="text-sm text-gray-500">ID: {User?.userId}</p>
                                                                 <p className="font-semibold text-base text-gray-800">{User?.name} {User?.LastName}</p>
                                                             </td>
-
-                                                            {/* Email */}
-                                                            <td className="px-6 py-4">
-                                                                <p className="text-sm text-gray-800">{User?.email}</p>
-                                                            </td>
-
                                                             {/* Address */}
                                                             <td className="px-6 py-4">
                                                                 <p className="text-sm text-gray-800">{User?.Address}</p>
                                                             </td>
-
                                                             {/* Phone Number */}
                                                             <td className="px-6 py-4">
                                                                 <p className="text-sm font-medium text-green-700 bg-green-50 px-2 py-1 rounded-md inline-block shadow-sm">
                                                                     {User?.Phone}
                                                                 </p>
                                                             </td>
-
                                                             {/* Date */}
                                                             <td className="px-6 py-4">
                                                                 <p className="text-sm font-medium text-indigo-700 bg-indigo-50 px-2 py-1 rounded-md inline-block shadow-sm">
                                                                     {User?.date}
                                                                 </p>
                                                             </td>
-
                                                             {/* Status */}
                                                             <td className="px-6 py-4">
                                                                 <p className={`text-sm font-medium px-2 py-1 rounded-md inline-block shadow-sm ${User?.status === 'Approved'
@@ -126,7 +113,6 @@ const AdminNewMerchants = () => {
                                                                     {User?.status}
                                                                 </p>
                                                             </td>
-
                                                             {/* Action Button */}
                                                             <td className="px-6 py-4">
                                                                 <button
@@ -169,15 +155,12 @@ const AdminNewMerchants = () => {
                         {tabState === 2 &&
                             <div className="flex justify-center">
                                 <div className="w-full bg-white shadow-lg border border-gray-200 rounded-xl p-6">
-
                                     <h2 className="text-2xl font-semibold text-gray-800 mb-4">Pending User</h2>
-
                                     <div className="overflow-x-auto">
                                         <table className="min-w-full divide-y divide-gray-200 shadow rounded-md">
                                             <thead className="bg-gray-100">
                                                 <tr>
                                                     <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">ID / Name</th>
-                                                    <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">Email</th>
                                                     <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">Address</th>
                                                     <th className="px-6 py-3 text-left text-sm font-semibold text-green-600">Number</th>
                                                     <th className="px-6 py-3 text-left text-sm font-semibold text-indigo-600">Date</th>
@@ -193,31 +176,22 @@ const AdminNewMerchants = () => {
                                                                 <p className="text-sm text-gray-500">ID: {User?.userId}</p>
                                                                 <p className="font-semibold text-base text-gray-800">{User?.name} {User?.LastName}</p>
                                                             </td>
-
-                                                            {/* Email */}
-                                                            <td className="px-6 py-4">
-                                                                <p className="text-sm text-gray-800">{User?.email}</p>
-                                                            </td>
-
                                                             {/* Address */}
                                                             <td className="px-6 py-4">
                                                                 <p className="text-sm text-gray-800">{User?.Address}</p>
                                                             </td>
-
                                                             {/* Phone Number */}
                                                             <td className="px-6 py-4">
                                                                 <p className="text-sm font-medium text-green-700 bg-green-50 px-2 py-1 rounded-md inline-block shadow-sm">
                                                                     {User?.Phone}
                                                                 </p>
                                                             </td>
-
                                                             {/* Date */}
                                                             <td className="px-6 py-4">
                                                                 <p className="text-sm font-medium text-indigo-700 bg-indigo-50 px-2 py-1 rounded-md inline-block shadow-sm">
                                                                     {User?.date}
                                                                 </p>
                                                             </td>
-
                                                             {/* Status */}
                                                             <td className="px-6 py-4">
                                                                 <p className={`text-sm font-medium px-2 py-1 rounded-md inline-block shadow-sm ${User?.status === 'Approved'

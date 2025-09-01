@@ -125,7 +125,7 @@ const ReturnParcelMonitoring = () => {
 
 
     return (
-        <div className='ReturnParcelMonitoring bg-[#F6F6F6]'>
+        <div className='ReturnParcelMonitoring bg-[#F6F6F6] pb-[320px]'>
             <div className='md:px-4 my-4'>
 
                 {/* ====================================================================== */}

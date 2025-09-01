@@ -64,6 +64,7 @@ import ParcelTrackingDataShow from "../../DashbordAll/DashbordRouteUserDataAll/P
 import ParcelInvoiceOfRider from "../../DashbordAll/RiderPanelAllWorkHere/ParcelInvoiceOfRider/ParcelInvoiceOfRider";
 import AdminEditUserInformation from "../../DashbordAll/AdminePanel/AdminSearchUserId/AdminEditUserInformation/AdminEditUserInformation";
 import UserStatementOfParcel from "../../DashbordAll/DashbordRouteUserDataAll/UserStatementOfParcel/UserStatementOfParcel";
+import UserSearchParcelByNumber from "../../DashbordAll/DashbordRouteUserDataAll/AllMarchentConsignment/UserSearchParcelByNumber/UserSearchParcelByNumber";
 
 
 let route = createBrowserRouter([
@@ -192,6 +193,11 @@ let route = createBrowserRouter([
          {
             path: "UserStatementOfParcel",
             element: <UserStatementOfParcel></UserStatementOfParcel>
+         },
+         {
+            path: "UserSearchParcelByNumber/:number",
+            element: <UserSearchParcelByNumber></UserSearchParcelByNumber>,
+            loader: ({ params }) => fetch(`https://server.trustereocourier.com.bd/adminSearchUserNumber?userNumber=${params.number}`)
          },
 
 
