@@ -125,7 +125,7 @@ const AllMarchentConsignment = () => {
                                         <tbody>
 
                                             {
-                                                ConsignmentAllData.map(ConsignmentAll => <UserAllStatusConsignmentData key={ConsignmentAll._id} ConsignmentAll={ConsignmentAll}></UserAllStatusConsignmentData>)
+                                                ConsignmentAllData?.map(ConsignmentAll => <UserAllStatusConsignmentData key={ConsignmentAll._id} ConsignmentAll={ConsignmentAll}></UserAllStatusConsignmentData>)
                                             }
 
                                         </tbody>
@@ -153,7 +153,7 @@ const AllMarchentConsignment = () => {
                                         <tbody>
 
                                             {
-                                                PendingData.map(ConsignmentPending => <UserApprovedConsignment key={ConsignmentPending._id} ConsignmentPending={ConsignmentPending}></UserApprovedConsignment>)
+                                                PendingData?.map(ConsignmentPending => <UserApprovedConsignment key={ConsignmentPending._id} ConsignmentPending={ConsignmentPending}></UserApprovedConsignment>)
                                             }
 
                                         </tbody>
@@ -181,7 +181,7 @@ const AllMarchentConsignment = () => {
                                         <tbody>
 
                                             {
-                                                ApprovedPendingData.map(ApprovedPending => <UserApprovedPendingConsignment key={ApprovedPending._id} ApprovedPending={ApprovedPending}></UserApprovedPendingConsignment>)
+                                                ApprovedPendingData?.map(ApprovedPending => <UserApprovedPendingConsignment key={ApprovedPending._id} ApprovedPending={ApprovedPending}></UserApprovedPendingConsignment>)
                                             }
                                         </tbody>
                                     </table>
@@ -207,34 +207,7 @@ const AllMarchentConsignment = () => {
                                         <tbody>
 
                                             {
-                                                DeliveredData.map(DeliveredData => <UserDelivereConsignment key={DeliveredData._id} DeliveredData={DeliveredData}></UserDelivereConsignment>)
-                                            }
-
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                            </div>
-                        </TabPanel>
-                        <TabPanel>
-                            <div className="AllDataConsignment">
-                                <div className="overflow-x-auto p-4">
-                                    <table className="table w-full rounded-xl shadow-md">
-                                        <thead className="bg-base-200 text-base-content">
-                                            <tr>
-                                                <th>Merchant Name</th>
-                                                <th>Parcel ID</th>
-                                                <th>Amount</th>
-                                                <th>Delivery Charge</th>
-                                                <th>Request Date</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                            {
-                                                PartiallyDelivered.map(PartiallyDeliveredData => <UserPartiallyDeliveredConsignment key={PartiallyDeliveredData._id} PartiallyDeliveredData={PartiallyDeliveredData}></UserPartiallyDeliveredConsignment>)
+                                                DeliveredData?.map(DeliveredData => <UserDelivereConsignment key={DeliveredData._id} DeliveredData={DeliveredData}></UserDelivereConsignment>)
                                             }
 
                                         </tbody>
@@ -261,7 +234,34 @@ const AllMarchentConsignment = () => {
                                         <tbody>
 
                                             {
-                                                CancelData.map(CancelDelivered => <UserReturnedConsignment key={CancelDelivered._id} CancelDelivered={CancelDelivered}></UserReturnedConsignment>)
+                                                PartiallyDelivered?.map(PartiallyDeliveredData => <UserPartiallyDeliveredConsignment key={PartiallyDeliveredData._id} PartiallyDeliveredData={PartiallyDeliveredData}></UserPartiallyDeliveredConsignment>)
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </TabPanel>
+                        <TabPanel>
+                            <div className="AllDataConsignment">
+                                <div className="overflow-x-auto p-4">
+                                    <table className="table w-full rounded-xl shadow-md">
+                                        <thead className="bg-base-200 text-base-content">
+                                            <tr>
+                                                <th>Merchant Name</th>
+                                                <th>Parcel ID</th>
+                                                <th>Amount</th>
+                                                <th>Delivery Charge</th>
+                                                <th>Request Date</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            {
+                                                CancelData?.map(CancelDelivered => <UserReturnedConsignment key={CancelDelivered._id} CancelDelivered={CancelDelivered}></UserReturnedConsignment>)
                                             }
 
                                         </tbody>
@@ -288,13 +288,12 @@ const AllMarchentConsignment = () => {
                                         <tbody>
 
                                             {
-                                                ReviewData.map(ReviewUserData => <UserPendingConsignment key={ReviewUserData._id} ReviewUserData={ReviewUserData}></UserPendingConsignment>)
+                                                ReviewData?.map(ReviewUserData => <UserPendingConsignment key={ReviewUserData._id} refetch={refetch} ReviewUserData={ReviewUserData}></UserPendingConsignment>)
                                             }
 
                                         </tbody>
                                     </table>
                                 </div>
-
                             </div>
                         </TabPanel>
                     </Tabs>

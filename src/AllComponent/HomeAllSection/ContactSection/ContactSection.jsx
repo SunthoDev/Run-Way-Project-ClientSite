@@ -46,7 +46,7 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-gray-800">Office Address</h4>
-                    <p className="text-gray-600">N/17,Noorjahanroad, Mohammadpur</p>
+                    <p className="text-gray-600">N/17,Mirpur Dhaka.</p>
                   </div>
                 </motion.div>
 

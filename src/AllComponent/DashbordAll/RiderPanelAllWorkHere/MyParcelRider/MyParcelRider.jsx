@@ -161,64 +161,74 @@ const MyParcelRider = () => {
                                                                 </button>
                                                                 <button
                                                                     onClick={() => {
+                                                                        Swal.fire({
+                                                                            title: "Are you sure?",
+                                                                            text: "Do you want to rejected thi parcel.?",
+                                                                            icon: "warning",
+                                                                            showCancelButton: true,
+                                                                            confirmButtonColor: "#3085d6",
+                                                                            cancelButtonColor: "#d33",
+                                                                            confirmButtonText: "Yes, Rejected it!"
+                                                                        }).then((result) => {
+                                                                            if (result.isConfirmed) {
+                                                                                let date = moment().format("MM/DD/YYYY")
+                                                                                let time = moment().format("hh:mm A")
+                                                                                let TrackingMessage = `Your parcel has been successfully assigned to a rider. The rider will collect your parcel shortly and begin the delivery process.`
+                                                                                let TrackingMessagePost = {
+                                                                                    userOrderIdTracking: ParcelRequest?.ParcelIdForRider,
+                                                                                    TrackingMessage,
+                                                                                    TrackingDate: date,
+                                                                                    TrackingTime: time
+                                                                                };
 
-                                                                        let date = moment().format("MM/DD/YYYY")
-                                                                        let time = moment().format("hh:mm A")
-                                                                        let TrackingMessage = `Your parcel has been successfully assigned to a rider. The rider will collect your parcel shortly and begin the delivery process.`
-                                                                        let TrackingMessagePost = {
-                                                                            userOrderIdTracking: ParcelRequest?.ParcelIdForRider,
-                                                                            TrackingMessage,
-                                                                            TrackingDate: date,
-                                                                            TrackingTime: time
-                                                                        };
+                                                                                // Parcel Assign Rider status up (No) For Rider Rejected Parcel
+                                                                                // =================================================================
+                                                                                fetch(`https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/RiderRejectedParcelAssignStatusUpdateYes/${ParcelRequest?.ParcelIdForRider}`, {
+                                                                                    method: "PATCH",
+                                                                                })
+                                                                                    .then(res => res.json())
+                                                                                    .then(data => {
+                                                                                        if (data.modifiedCount > 0) {
+                                                                                            // Parcel rejected rider Tracking Data Post 
+                                                                                            // ===============================================
+                                                                                            fetch("https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/RejectedParcelRiderTrackingMessageSend", {
+                                                                                                method: "POST",
+                                                                                                headers: {
+                                                                                                    "Content-Type": "application/json"
+                                                                                                },
+                                                                                                body: JSON.stringify(TrackingMessagePost)
+                                                                                            })
+                                                                                                .then(res => res.json())
+                                                                                                .then(data => {
+                                                                                                    // console.log(data)
+                                                                                                    if (data.insertedId) {
 
-                                                                        // Parcel Assign Rider status up (No) For Rider Rejected Parcel
-                                                                        // =================================================================
-                                                                        fetch(`https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/RiderRejectedParcelAssignStatusUpdateYes/${ParcelRequest?.ParcelIdForRider}`, {
-                                                                            method: "PATCH",
-                                                                        })
-                                                                            .then(res => res.json())
-                                                                            .then(data => {
-                                                                                if (data.modifiedCount > 0) {
-                                                                                    // Parcel rejected rider Tracking Data Post 
-                                                                                    // ===============================================
-                                                                                    fetch("https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/RejectedParcelRiderTrackingMessageSend", {
-                                                                                        method: "POST",
-                                                                                        headers: {
-                                                                                            "Content-Type": "application/json"
-                                                                                        },
-                                                                                        body: JSON.stringify(TrackingMessagePost)
-                                                                                    })
-                                                                                        .then(res => res.json())
-                                                                                        .then(data => {
-                                                                                            // console.log(data)
-                                                                                            if (data.insertedId) {
-
-                                                                                                // Assign Parcel Request Delete After, rejected parcel !!
-                                                                                                // ==============================================================
-                                                                                                fetch(`https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/DeleteAssignParcelForRejectedRider/${ParcelRequest?._id}`, {
-                                                                                                    method: "DELETE",
-                                                                                                })
-                                                                                                    .then(res => res.json())
-                                                                                                    .then(data => {
-                                                                                                        if (data.deletedCount > 0) {
-                                                                                                            Swal.fire({
-                                                                                                                position: 'top-end',
-                                                                                                                icon: 'success',
-                                                                                                                title: 'Parcel Rejected Successful',
-                                                                                                                showConfirmButton: false,
-                                                                                                                timer: 1500
+                                                                                                        // Assign Parcel Request Delete After, rejected parcel !!
+                                                                                                        // ==============================================================
+                                                                                                        fetch(`https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/DeleteAssignParcelForRejectedRider/${ParcelRequest?._id}`, {
+                                                                                                            method: "DELETE",
+                                                                                                        })
+                                                                                                            .then(res => res.json())
+                                                                                                            .then(data => {
+                                                                                                                if (data.deletedCount > 0) {
+                                                                                                                    Swal.fire({
+                                                                                                                        position: 'top-end',
+                                                                                                                        icon: 'success',
+                                                                                                                        title: 'Parcel Rejected Successful',
+                                                                                                                        showConfirmButton: false,
+                                                                                                                        timer: 1500
+                                                                                                                    })
+                                                                                                                    refetch()
+                                                                                                                    setIsLoading(false)
+                                                                                                                }
+                                                                                                                // console.log(data)
                                                                                                             })
-                                                                                                            refetch()
-                                                                                                            setIsLoading(false)
-                                                                                                        }
-                                                                                                        // console.log(data)
-                                                                                                    })
-                                                                                            }
-                                                                                        })
-                                                                                }
-                                                                            })
-
+                                                                                                    }
+                                                                                                })
+                                                                                        }
+                                                                                    })
+                                                                            }
+                                                                        });
                                                                     }}
                                                                     className="btn btn-sm btn-outline btn-primary">
                                                                     Rejected Parcel

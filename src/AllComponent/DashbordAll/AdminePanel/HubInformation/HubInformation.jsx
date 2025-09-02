@@ -137,27 +137,39 @@ const HubInformation = () => {
             <div className="bg-[#F6F6F6] px-[12px] md:px-4 my-4 flex justify-center">
                 <div className="w-full bg-white shadow-lg border border-gray-200 rounded-xl p-6">
                     <h2 className="text-2xl font-semibold text-gray-800 mb-4">Admin Hub List</h2>
-                    <div className="overflow-x-auto">
-                        <table className="w-full divide-y divide-gray-200">
-                            <thead className="bg-gray-100">
-                                <tr>
-                                    <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">HubName</th>
-                                    <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Number</th>
-                                    <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Address</th>
-                                    <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Details</th>
-                                    <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Date</th>
-                                    <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody className="bg-white divide-y divide-gray-200">
-                                {AllHubInformationData?.map((HubInformation) =>
-                                    <tr key={HubInformation?._id}>
-                                        <td className="px-6 py-4 text-sm text-gray-800">{HubInformation?.hubName}</td>
-                                        <td className="px-6 py-4 text-sm text-gray-800">{HubInformation?.number}</td>
-                                        <td className="px-6 py-4 text-sm text-gray-800">{HubInformation?.address}</td>
-                                        <td className="px-6 py-4 text-sm text-gray-800">{HubInformation?.details}</td>
-                                        <td className="px-6 py-4 text-sm text-gray-800">{HubInformation?.date}, {HubInformation?.time}</td>
-                                        <td className="px-6 py-4">
+
+                    <div className="px-4 py-8">
+                        <div className="max-w-7xl mx-auto">
+                            {/* Responsive Grid */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                {AllHubInformationData?.slice().reverse().map((HubInformation, i) => (
+                                    <div
+                                        key={i}
+                                        className="bg-white border border-gray-100 rounded-xl shadow-md p-6 transform transition duration-300 hover:-translate-y-2 hover:shadow-xl"
+                                    >
+                                        {/* Title */}
+                                        <div className="mb-3">
+                                            <div className="inline-block bg-emerald-500 text-white font-semibold text-sm px-4 py-2 rounded-full shadow">
+                                                {HubInformation?.hubName}
+                                            </div>
+                                        </div>
+
+                                        {/* Address */}
+                                        <p className="text-gray-600 text-sm leading-relaxed mb-3">
+                                            {HubInformation?.address}
+                                        </p>
+
+                                        {/* Phone */}
+                                        <p className="text-gray-800 font-medium mb-2">{HubInformation?.number}</p>
+
+                                        {/* Details */}
+                                        <p className="text-gray-500 text-sm italic mb-2">
+                                            {HubInformation?.details || "No extra details available"}
+                                        </p>
+
+                                        {/* Date + Delete Button */}
+                                        <div className="flex items-center justify-between text-xs text-gray-400">
+                                            <p>📅 {HubInformation?.date || "No date given"}</p>
                                             <button
                                                 onClick={() => {
                                                     Swal.fire({
@@ -191,14 +203,17 @@ const HubInformation = () => {
                                                         }
                                                     })
                                                 }}
-                                                className="!bg-red-500 !hover:bg-red-600 !text-white text-sm px-4 py-1.5 rounded-md transition"
-                                            > Delete </button>
-                                        </td>
-                                    </tr>
-                                )}
-                            </tbody>
-                        </table>
+                                                className="px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded-full shadow transition"
+                                            >
+                                                Delete
+                                            </button>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
                     </div>
+
                 </div>
             </div>
 

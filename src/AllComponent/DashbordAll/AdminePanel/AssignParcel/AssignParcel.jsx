@@ -436,7 +436,6 @@ const AssignParcel = () => {
                                         <tbody>
                                             {
                                                 ReviewData?.slice().reverse().map(AllData => <tr className="">
-
                                                     <td>
                                                         <p className="font-medium text-base text-gray-800">{AllData?.name}</p>
                                                         <p className="text-sm text-gray-600">{AllData?.number}</p>
@@ -470,13 +469,57 @@ const AssignParcel = () => {
                                                                 View
                                                             </button>
                                                         </Link>
+                                                        <br />
+                                                        <button className="mt-[4px] btn btn-sm btn-outline btn-primary"
+                                                            onClick={() => {
+                                                                Swal.fire({
+                                                                    title: "Are you sure?",
+                                                                    text: "You won't be able to revert this!",
+                                                                    icon: "warning",
+                                                                    showCancelButton: true,
+                                                                    confirmButtonColor: "#3085d6",
+                                                                    cancelButtonColor: "#d33",
+                                                                    confirmButtonText: "Yes, delete it!"
+                                                                }).then((result) => {
+                                                                    if (result.isConfirmed) {
+                                                                        fetch(`https://server.trustereocourier.com.bd/AdminAndUserDeleteReviewParcel/${AllData?.StandardParcelId}`, {
+                                                                            method: "DELETE",
+                                                                        })
+                                                                            .then(res => res.json())
+                                                                            .then(data => {
+                                                                                if (data.success && data.deletedParcel > 0) {
+                                                                                    Swal.fire({
+                                                                                        title: "✅ User Deleted!",
+                                                                                        text: "The user and related parcel have been successfully removed.",
+                                                                                        icon: "success",
+                                                                                        position: "center",
+                                                                                        showConfirmButton: false,
+                                                                                        timer: 1800,
+                                                                                        timerProgressBar: true,
+                                                                                        background: "#f0fdf4",
+                                                                                        color: "#065f46",
+                                                                                        backdrop: `
+                                                                                                                        rgba(0,0,0,0.4)
+                                                                                                                        url("https://i.gifer.com/7efs.gif")
+                                                                                                                        left top
+                                                                                                                        no-repeat
+                                                                                                                    `,
+                                                                                    });
+                                                                                    refetch();
+                                                                                }
+                                                                            })
+                                                                    }
+                                                                });
+                                                            }}
+                                                        >
+                                                            Delete
+                                                        </button>
                                                     </td>
                                                 </tr>)
                                             }
                                         </tbody>
                                     </table>
                                 </div>
-
                             </div>
                         }
                     </div>
@@ -530,7 +573,7 @@ const AssignParcel = () => {
                                                     RiderUserId: rider?.userId,
                                                 }
                                                 // console.log(AssignPArcelPostToRider)
-                                                
+
                                                 //  Parcel assign to rider data insert!!
                                                 // ==============================================
                                                 fetch("https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/InsertAssignParcelToRider", {

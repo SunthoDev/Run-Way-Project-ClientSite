@@ -171,22 +171,24 @@ const UserStatementOfParcel = () => {
                         {/* ============================================================ */}
                         {/* Summary Rows */}
                         <tr className="bg-white font-bold text-black">
-                            <td className="border border-gray-400 p-2" colSpan={9}>
+                            <td className="border border-gray-400 p-2" colSpan={8}>
                                 Total Collection COD:
                             </td>
-                            <td className="border border-gray-400 p-2">{totalCODAmount}</td>
+                            <td className="border border-gray-400 p-2">Parcel: {DeliveryAndPartiallyDeliveryData?.length}</td>
+                            <td className="border border-gray-400 p-2">{totalCODAmount}Tk.</td>
                         </tr>
-                        <tr className="bg-white font-bold text-black">
+                        {/* <tr className="bg-white font-bold text-black">
                             <td className="border border-gray-400 p-2" colSpan={9}>
                                 Total Delivery Charge:
                             </td>
                             <td className="border border-gray-400 p-2">{totalDeliveryCharge}</td>
-                        </tr>
+                        </tr> */}
                         <tr className="bg-white font-bold text-black">
-                            <td className="border border-gray-400 p-2" colSpan={9}>
+                            <td className="border border-gray-400 p-2" colSpan={8}>
                                 Total Cancel COD:
                             </td>
-                            <td className="border border-gray-400 p-2">{totalCancelCODAmount}</td>
+                            <td className="border border-gray-400 p-2">Parcel: {CancelDeliveryData?.length}</td>
+                            <td className="border border-gray-400 p-2">{totalCancelCODAmount}Tk.</td>
                         </tr>
                         {/* ============================================================ */}
                         {/* Parcel Summery Total End */}
