@@ -27,7 +27,7 @@ const DashboardItemsUser = () => {
     let { Address, BusinessName, LastName, Phone, email, name, photo, status, userId, PoliceStations, Districts } = roles
 
     let { refetch, data: AllDeliveryDataUserBalance = [] } = useQuery(["UserTotalBalanceFindDeliveryAllData"], async () => {
-        let res = await fetch(`https://server.trustereocourier.com.bd/UserTotalBalanceFindDeliveryAllData?email=${roles.email}`)
+        let res = await fetch(`http://localhost:5000/UserTotalBalanceFindDeliveryAllData?email=${roles.email}`)
         return res.json()
     })
 
@@ -62,7 +62,7 @@ const DashboardItemsUser = () => {
     // All Police Station data. which is add Hub
     // =====================================================
     let { data: AllStationOfHub = [] } = useQuery(["HubManageAdminCreateOrUpdatePs_PoliceStationWithOfHub"], async () => {
-        let res = await fetch("https://server.trustereocourier.com.bd/HubManageAdminCreateOrUpdatePs/PoliceStationWithOfHub")
+        let res = await fetch("http://localhost:5000/HubManageAdminCreateOrUpdatePs/PoliceStationWithOfHub")
         return res.json()
     })
     // console.log(AllStationOfHub)
@@ -155,7 +155,7 @@ const DashboardItemsUser = () => {
 
 
 
-        fetch(`https://server.trustereocourier.com.bd/UserPaymentRequestUpdateAllData/${roles.email}`, {
+        fetch(`http://localhost:5000/UserPaymentRequestUpdateAllData/${roles.email}`, {
             method: "PUT",
             headers: {
                 "content-type": "application/json"
@@ -167,7 +167,7 @@ const DashboardItemsUser = () => {
                 if (data.modifiedCount > 0) {
 
                     // Post Data  Start
-                    fetch("https://server.trustereocourier.com.bd/UserPaymentRequest", {
+                    fetch("http://localhost:5000/UserPaymentRequest", {
                         method: "POST",
                         headers: {
                             "content-type": "application/json"
@@ -648,7 +648,7 @@ const DashboardItemsUser = () => {
                                 let AllInfo = { PickupRequestType: PickupRequest, PickupIdUser, date, time, Address, BusinessName, LastName, Phone, PickReqUserEmail: email, name, photo, userId, status: "Pending", PoliceStations, Districts, MyHub: MyHub?.HubName, AssignRider:"No" }
 
                                 try {
-                                    const response = await fetch("https://server.trustereocourier.com.bd/PickupRequestWithManegeAdminUsers/UserPickupRequestSend", {
+                                    const response = await fetch("http://localhost:5000/PickupRequestWithManegeAdminUsers/UserPickupRequestSend", {
                                         method: "POST",
                                         headers: {
                                             "Content-Type": "application/json",

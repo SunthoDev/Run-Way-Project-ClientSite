@@ -19,7 +19,7 @@ const AdminEntryParcelOrApproved = () => {
     // User entry all parcel data find of (REVIEW) status 
     // ==========================================================
     let { data: userOrderStandardParcelData = [] } = useQuery(["AdminDataEntryStandardDeliveryData"], async () => {
-        let res = await fetch(`https://server.trustereocourier.com.bd/AdminDataEntryStandardDeliveryData?email=${UserEmailSendDataEntry}`)
+        let res = await fetch(`http://localhost:5000/AdminDataEntryStandardDeliveryData?email=${UserEmailSendDataEntry}`)
         return res.json()
 
     })
@@ -45,7 +45,7 @@ const AdminEntryParcelOrApproved = () => {
     // Coverage All Police Station Data Find
     // ========================================================
     let { refetch, data: AllCoveragesPoliceStation = [] } = useQuery(["CoveragesPoliceStationAll"], async () => {
-        let res = await fetch("https://server.trustereocourier.com.bd/CoveragesPoliceStationAll")
+        let res = await fetch("http://localhost:5000/CoveragesPoliceStationAll")
         return res.json()
     })
     let DistrictAllPoliceStation = AllCoveragesPoliceStation.filter(PoliceStationAll => PoliceStationAll?.AddDistrict == District)
@@ -63,7 +63,7 @@ const AdminEntryParcelOrApproved = () => {
     // Created All Hub Find
     // =====================================================
     let { data: AllHubFind = [] } = useQuery(["HubManageAdminCreateOrUpdatePs_CreatedHubFind"], async () => {
-        let res = await fetch("https://server.trustereocourier.com.bd/HubManageAdminCreateOrUpdatePs/CreatedHubFind")
+        let res = await fetch("http://localhost:5000/HubManageAdminCreateOrUpdatePs/CreatedHubFind")
         return res.json()
     })
     // console.log(AllHubFind)
@@ -105,7 +105,7 @@ const AdminEntryParcelOrApproved = () => {
         }
         // console.log(AdminEntryStandardDeliveryData)
 
-        fetch("https://server.trustereocourier.com.bd/AdminEntryStandardDeliveryData", {
+        fetch("http://localhost:5000/AdminEntryStandardDeliveryData", {
             method: "POST",
             headers: {
                 "content-type": "application/json"
@@ -117,7 +117,7 @@ const AdminEntryParcelOrApproved = () => {
                 if (data.insertedId) {
                     // tracking Message Send For Create Parcel
                     // ====================================================
-                    fetch("https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/AdminTrackingRequestSentOfAssignRider", {
+                    fetch("http://localhost:5000/AdminAllAssignParcelHere/AdminTrackingRequestSentOfAssignRider", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json"

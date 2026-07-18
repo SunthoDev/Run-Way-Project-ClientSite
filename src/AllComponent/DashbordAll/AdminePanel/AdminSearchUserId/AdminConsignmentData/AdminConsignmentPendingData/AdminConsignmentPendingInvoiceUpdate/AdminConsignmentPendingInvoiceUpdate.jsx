@@ -16,7 +16,7 @@ const AdminConsignmentPendingInvoiceUpdate = () => {
     // Coverage All Police Station Data Find
     // =========================================================
     let { refetch, data: AllCoveragesPoliceStation = [] } = useQuery(["CoveragesPoliceStationAll"], async () => {
-        let res = await fetch("https://server.trustereocourier.com.bd/CoveragesPoliceStationAll")
+        let res = await fetch("http://localhost:5000/CoveragesPoliceStationAll")
         return res.json()
     })
 
@@ -45,7 +45,7 @@ const AdminConsignmentPendingInvoiceUpdate = () => {
         let ConsignmentPendingInvoiceUpdate = { number, name, address, district, policeStation, Invoice, note, weight, Charge, statusUp }
         // console.log(ConsignmentPendingInvoiceUpdate)
 
-        fetch(`https://server.trustereocourier.com.bd/AdminConsignmentPendingInvoiceUpdateData/${_id}`, {
+        fetch(`http://localhost:5000/AdminConsignmentPendingInvoiceUpdateData/${_id}`, {
             method: "PATCH",
             headers: {
                 "content-type": "application/json"
@@ -75,7 +75,7 @@ const AdminConsignmentPendingInvoiceUpdate = () => {
 
         let AmountChangeData = { CodAmount, AmountChangeDate: moment().format("MM/D/YY , hh:mm A"), AmountChangeAdminStatus: "unverified" }
 
-        fetch(`https://server.trustereocourier.com.bd/AdminConsignmentPendingInvoiceAmountChange/${_id}`, {
+        fetch(`http://localhost:5000/AdminConsignmentPendingInvoiceAmountChange/${_id}`, {
             method: "PUT",
             headers: {
                 "content-type": "application/json"

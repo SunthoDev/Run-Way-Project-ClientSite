@@ -35,7 +35,7 @@ const HeaderDashBord = () => {
     // Admin Send All Notice Data Find
     // ============================================================
     let { refetch, data: AllNotice = [] } = useQuery(["NoticeMessageSendAdminToAllUser_AllNoticeData"], async () => {
-        let res = await fetch(`https://server.trustereocourier.com.bd/NoticeMessageSendAdminToAllUser/AllNoticeData`)
+        let res = await fetch(`http://localhost:5000/NoticeMessageSendAdminToAllUser/AllNoticeData`)
         return res.json()
     })
     // console.log(AllNotice)
@@ -104,13 +104,8 @@ const HeaderDashBord = () => {
                             </ul>
                             :
                             <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
-                                <li>
-                                    <a className="justify-between">
-                                        Profile
-                                        <span className="badge">New</span>
-                                    </a>
-                                </li>
-                                <li><Link to={`/dashboard/UserAddBankDetails/${roles.userId}`}>Add Bank Details</Link></li>
+                                <li><Link to={`/dashboard/UserProfile`}>Profile</Link></li>
+                                <li><Link to={`/dashboard/UserAddBankDetails/${roles?.userId}`}>Add Bank Details</Link></li>
                                 <hr />
                                 <li><button onClick={handelLogOut}>Logout</button></li>
                             </ul>
@@ -132,7 +127,7 @@ const HeaderDashBord = () => {
                     let time = moment().format("hh:mm A")
                     let allInfo = { ID, Message, date, time }
                     try {
-                        let res = await fetch("https://server.trustereocourier.com.bd/NoticeMessageSendAdminToAllUser/AdminSendNoticeMessage", {
+                        let res = await fetch("http://localhost:5000/NoticeMessageSendAdminToAllUser/AdminSendNoticeMessage", {
                             method: "POST",
                             headers: {
                                 "content-type": "application/json"

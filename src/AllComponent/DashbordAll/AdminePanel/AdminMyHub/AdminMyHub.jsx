@@ -11,7 +11,7 @@ const AdminMyHub = () => {
     // PickUp Request All Data Find
     // ============================================
     let { refetch, data: HubRequestDataAll = [] } = useQuery(["PickupRequestWithManegeAdminUsers_AllPickupRequestData"], async () => {
-        let res = await fetch("https://server.trustereocourier.com.bd/PickupRequestWithManegeAdminUsers/AllPickupRequestData")
+        let res = await fetch("http://localhost:5000/PickupRequestWithManegeAdminUsers/AllPickupRequestData")
         return res.json()
     })
     // console.log(HubRequestDataAll)
@@ -87,7 +87,7 @@ const AdminMyHub = () => {
     // Created All Police Station find of Hub
     // =====================================================
     let { data: AllStationOfHub = [] } = useQuery(["HubManageAdminCreateOrUpdatePs_PoliceStationWithOfHub"], async () => {
-        let res = await fetch("https://server.trustereocourier.com.bd/HubManageAdminCreateOrUpdatePs/PoliceStationWithOfHub")
+        let res = await fetch("http://localhost:5000/HubManageAdminCreateOrUpdatePs/PoliceStationWithOfHub")
         return res.json()
     })
     // console.log(AllStationOfHub)
@@ -96,7 +96,7 @@ const AdminMyHub = () => {
     // Created All Hub Find
     // =====================================================
     let { data: AllHubFind = [] } = useQuery(["HubManageAdminCreateOrUpdatePs_CreatedHubFind"], async () => {
-        let res = await fetch("https://server.trustereocourier.com.bd/HubManageAdminCreateOrUpdatePs/CreatedHubFind")
+        let res = await fetch("http://localhost:5000/HubManageAdminCreateOrUpdatePs/CreatedHubFind")
         return res.json()
     })
     // console.log(AllHubFind)
@@ -107,7 +107,7 @@ const AdminMyHub = () => {
     // =============================================
     // user data all find use tenStack query 
     let { data: adminAllUsers = [] } = useQuery(["users"], async () => {
-        let res = await fetch("https://server.trustereocourier.com.bd/users")
+        let res = await fetch("http://localhost:5000/users")
         return res.json()
     })
     // received hub name fo show assign hub
@@ -163,7 +163,7 @@ const AdminMyHub = () => {
                                 const HubName = event.target.HubNameOfUpdatePickup.value;
                                 const PickupId = event.target.PickupRequestId.value;
                                 const allInfo = { HubName, PickupId }
-                                fetch(`https://server.trustereocourier.com.bd/PickupRequestWithManegeAdminUsers/AdminUpdatePickupRequestHubData/${PickupId}`, {
+                                fetch(`http://localhost:5000/PickupRequestWithManegeAdminUsers/AdminUpdatePickupRequestHubData/${PickupId}`, {
                                     method: "PATCH",
                                     headers: {
                                         "content-type": "application/json"
@@ -311,7 +311,7 @@ const AdminMyHub = () => {
                                                                         let HubData = { parcelNum: parcelNumbers }
                                                                         // console.log(HubData)
 
-                                                                        fetch(`https://server.trustereocourier.com.bd/PickupRequestWithManegeAdminUsers/AdminApprovedUserPickupRequestData/${item?._id}`, {
+                                                                        fetch(`http://localhost:5000/PickupRequestWithManegeAdminUsers/AdminApprovedUserPickupRequestData/${item?._id}`, {
                                                                             method: "PUT",
                                                                             headers: {
                                                                                 "content-type": "application/json"
@@ -374,7 +374,7 @@ const AdminMyHub = () => {
                                                                                 // Hub request data insert 
                                                                                 // =================================
                                                                                 try {
-                                                                                    let res = await fetch(`https://server.trustereocourier.com.bd/PickupRequestWithManegeAdminUsers/AdminDeletePickupRequestData/${item?._id}`, {
+                                                                                    let res = await fetch(`http://localhost:5000/PickupRequestWithManegeAdminUsers/AdminDeletePickupRequestData/${item?._id}`, {
                                                                                         method: "DELETE",
                                                                                     })
                                                                                     let result = await res.json()
@@ -507,7 +507,7 @@ const AdminMyHub = () => {
                                                                         let HubData = { parcelNum: parcelNumbers }
                                                                         // console.log(HubData)
 
-                                                                        fetch(`https://server.trustereocourier.com.bd/PickupRequestWithManegeAdminUsers/AdminApprovedUserPickupRequestData/${item?._id}`, {
+                                                                        fetch(`http://localhost:5000/PickupRequestWithManegeAdminUsers/AdminApprovedUserPickupRequestData/${item?._id}`, {
                                                                             method: "PUT",
                                                                             headers: {
                                                                                 "content-type": "application/json"
@@ -570,7 +570,7 @@ const AdminMyHub = () => {
                                                                                 // Hub request data insert 
                                                                                 // =================================
                                                                                 try {
-                                                                                    let res = await fetch(`https://server.trustereocourier.com.bd/PickupRequestWithManegeAdminUsers/AdminDeletePickupRequestData/${item?._id}`, {
+                                                                                    let res = await fetch(`http://localhost:5000/PickupRequestWithManegeAdminUsers/AdminDeletePickupRequestData/${item?._id}`, {
                                                                                         method: "DELETE",
                                                                                     })
                                                                                     let result = await res.json()
@@ -669,7 +669,7 @@ const AdminMyHub = () => {
                                                                         let HubData = { parcelNum: parcelNumbers }
                                                                         // console.log(HubData)
 
-                                                                        fetch(`https://server.trustereocourier.com.bd/PickupRequestWithManegeAdminUsers/AdminApprovedUserPickupRequestData/${item?._id}`, {
+                                                                        fetch(`http://localhost:5000/PickupRequestWithManegeAdminUsers/AdminApprovedUserPickupRequestData/${item?._id}`, {
                                                                             method: "PUT",
                                                                             headers: {
                                                                                 "content-type": "application/json"
@@ -732,7 +732,7 @@ const AdminMyHub = () => {
                                                                                 // Hub request data insert 
                                                                                 // =================================
                                                                                 try {
-                                                                                    let res = await fetch(`https://server.trustereocourier.com.bd/PickupRequestWithManegeAdminUsers/AdminDeletePickupRequestData/${item?._id}`, {
+                                                                                    let res = await fetch(`http://localhost:5000/PickupRequestWithManegeAdminUsers/AdminDeletePickupRequestData/${item?._id}`, {
                                                                                         method: "DELETE",
                                                                                     })
                                                                                     let result = await res.json()
@@ -870,7 +870,7 @@ const AdminMyHub = () => {
                                                                 {/* <div className="">
                                                                     <button type="submit" className="bg-[#2BA1BE] py-2 px-4 rounded-[8px] text-[14px] font-[600]"
                                                                         onClick={() => {
-                                                                            fetch(`https://server.trustereocourier.com.bd/PickupRequestWithManegeAdminUsers/AdminPendingUserPickupRequestData/${item?._id}`, {
+                                                                            fetch(`http://localhost:5000/PickupRequestWithManegeAdminUsers/AdminPendingUserPickupRequestData/${item?._id}`, {
                                                                                 method: "PATCH",
                                                                             })
                                                                                 .then(res => res.json())
@@ -974,7 +974,7 @@ const AdminMyHub = () => {
                                                                 {/* <div className="">
                                                                     <button type="submit" className="bg-[#2BA1BE] py-2 px-4 rounded-[8px] text-[14px] font-[600]"
                                                                         onClick={() => {
-                                                                            fetch(`https://server.trustereocourier.com.bd/PickupRequestWithManegeAdminUsers/AdminPendingUserPickupRequestData/${item?._id}`, {
+                                                                            fetch(`http://localhost:5000/PickupRequestWithManegeAdminUsers/AdminPendingUserPickupRequestData/${item?._id}`, {
                                                                                 method: "PATCH",
                                                                             })
                                                                                 .then(res => res.json())
@@ -1079,7 +1079,7 @@ const AdminMyHub = () => {
                                                                 {/* <div className="">
                                                                     <button type="submit" className="bg-[#2BA1BE] py-2 px-4 rounded-[8px] text-[14px] font-[600]"
                                                                         onClick={() => {
-                                                                            fetch(`https://server.trustereocourier.com.bd/PickupRequestWithManegeAdminUsers/AdminPendingUserPickupRequestData/${item?._id}`, {
+                                                                            fetch(`http://localhost:5000/PickupRequestWithManegeAdminUsers/AdminPendingUserPickupRequestData/${item?._id}`, {
                                                                                 method: "PATCH",
                                                                             })
                                                                                 .then(res => res.json())
@@ -1168,7 +1168,7 @@ const AdminMyHub = () => {
 
                                                 // Pickup request assign ot rider !!
                                                 // =======================================
-                                                fetch("https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/InsertAssignPickupRequestToRider", {
+                                                fetch("http://localhost:5000/AdminAllAssignParcelHere/InsertAssignPickupRequestToRider", {
                                                     method: "POST",
                                                     headers: {
                                                         "Content-Type": "application/json"
@@ -1180,7 +1180,7 @@ const AdminMyHub = () => {
                                                         if (data.insertedId) {
                                                             // Pickup Request Assign Rider status up (Yes)
                                                             // ===============================================
-                                                            fetch(`https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/PickupRequestAssignStatusUpdateYes/${PickupReqId}`, {
+                                                            fetch(`http://localhost:5000/AdminAllAssignParcelHere/PickupRequestAssignStatusUpdateYes/${PickupReqId}`, {
                                                                 method: "PATCH",
                                                             })
                                                                 .then(res => res.json())

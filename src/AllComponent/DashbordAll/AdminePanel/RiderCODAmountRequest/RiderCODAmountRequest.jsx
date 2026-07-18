@@ -13,7 +13,7 @@ const RiderCODAmountRequest = () => {
     // Rider Send Parcel COD all Amount Request Data Find Here
     // =======================================================================
     let { refetch, data: RiderSendParcelCODReqAll = [] } = useQuery(["AdminAllAssignParcelHere_ParcelCollectCODRequestAllDataFind"], async () => {
-        let res = await fetch(`https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/ParcelCollectCODRequestAllDataFind`)
+        let res = await fetch(`http://localhost:5000/AdminAllAssignParcelHere/ParcelCollectCODRequestAllDataFind`)
         return res.json()
     })
     // console.log(RiderSendParcelCODReqAll)
@@ -30,7 +30,7 @@ const RiderCODAmountRequest = () => {
     // Created All Hub Find
     // =====================================================
     let { data: AllHubFind = [] } = useQuery(["HubManageAdminCreateOrUpdatePs_CreatedHubFind"], async () => {
-        let res = await fetch("https://server.trustereocourier.com.bd/HubManageAdminCreateOrUpdatePs/CreatedHubFind")
+        let res = await fetch("http://localhost:5000/HubManageAdminCreateOrUpdatePs/CreatedHubFind")
         return res.json()
     })
     // console.log(AllHubFind)
@@ -141,7 +141,7 @@ const RiderCODAmountRequest = () => {
                                                             <td className="px-6 py-4 text-gray-800 font-medium">
                                                                 <button
                                                                     onClick={() => {
-                                                                        fetch(`https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/AdminRiderParcelCodeReqAmountStatusApproved/${ParcelRequestCOD?._id}`, {
+                                                                        fetch(`http://localhost:5000/AdminAllAssignParcelHere/AdminRiderParcelCodeReqAmountStatusApproved/${ParcelRequestCOD?._id}`, {
                                                                             method: "PATCH",
                                                                         })
                                                                             .then(res => res.json())
@@ -222,7 +222,7 @@ const RiderCODAmountRequest = () => {
                                                                         });
 
                                                                         if (result.isConfirmed) {
-                                                                            const res = await fetch(`https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/AdminRiderParcelCodeReqAmountDelete/${ParcelRequestCOD?._id}`, {
+                                                                            const res = await fetch(`http://localhost:5000/AdminAllAssignParcelHere/AdminRiderParcelCodeReqAmountDelete/${ParcelRequestCOD?._id}`, {
                                                                                 method: "DELETE",
                                                                             });
                                                                             const data = await res.json();

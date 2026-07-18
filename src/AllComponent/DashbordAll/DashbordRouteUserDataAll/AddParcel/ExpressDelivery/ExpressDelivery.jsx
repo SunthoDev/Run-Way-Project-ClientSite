@@ -24,7 +24,7 @@ const ExpressDelivery = () => {
     }
     // Coverage All Police Station Data Find
     let { refetch, data: AllCoveragesPoliceStation = [] } = useQuery(["CoveragesPoliceStationAll"], async () => {
-        let res = await fetch("https://server.trustereocourier.com.bd/CoveragesPoliceStationAll")
+        let res = await fetch("http://localhost:5000/CoveragesPoliceStationAll")
         return res.json()
     })
     let DistrictAllPoliceStation = AllCoveragesPoliceStation.filter(PoliceStationAll => PoliceStationAll?.AddDistrict == District)
@@ -43,7 +43,7 @@ const ExpressDelivery = () => {
     // All Police Station data. which is add Hub
     // =====================================================
     let { data: AllStationOfHub = [] } = useQuery(["HubManageAdminCreateOrUpdatePs_PoliceStationWithOfHub"], async () => {
-        let res = await fetch("https://server.trustereocourier.com.bd/HubManageAdminCreateOrUpdatePs/PoliceStationWithOfHub")
+        let res = await fetch("http://localhost:5000/HubManageAdminCreateOrUpdatePs/PoliceStationWithOfHub")
         return res.json()
     })
     // console.log(AllStationOfHub)
@@ -93,7 +93,7 @@ const ExpressDelivery = () => {
 
         // console.log(StandardDeliveryData)
 
-        fetch("https://server.trustereocourier.com.bd/StandardDeliveryData", {
+        fetch("http://localhost:5000/StandardDeliveryData", {
             method: "POST",
             headers: {
                 "content-type": "application/json"
@@ -107,7 +107,7 @@ const ExpressDelivery = () => {
 
                     // tracking Message Send For Create Parcel
                     // ====================================================
-                    fetch("https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/AdminTrackingRequestSentOfAssignRider", {
+                    fetch("http://localhost:5000/AdminAllAssignParcelHere/AdminTrackingRequestSentOfAssignRider", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json"

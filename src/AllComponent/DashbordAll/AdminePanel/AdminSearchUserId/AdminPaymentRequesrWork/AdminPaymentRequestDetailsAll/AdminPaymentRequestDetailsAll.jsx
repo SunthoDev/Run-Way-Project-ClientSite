@@ -23,7 +23,7 @@ const AdminPaymentRequestDetailsAll = () => {
     // Find User Information , who is send payment request
     // ===================================================================
     let { refetch, data: requestUserUserInformationFind = [] } = useQuery(["AdminPaymentRequestSendUserInformationGet"], async () => {
-        let res = await fetch(`https://server.trustereocourier.com.bd/AdminPaymentRequestSendUserInformationGet?email=${ReqUserEmail}`)
+        let res = await fetch(`http://localhost:5000/AdminPaymentRequestSendUserInformationGet?email=${ReqUserEmail}`)
         return res.json()
     })
     let UserInformation = requestUserUserInformationFind[0]
@@ -33,7 +33,7 @@ const AdminPaymentRequestDetailsAll = () => {
     // Find All Parcel Data For Which, is payment request
     // =====================================================
     let { data: userALlDeliveryDataFind = [] } = useQuery(["AdminPaymentRequestSendUserEmailFindAllDeliveryData"], async () => {
-        let res = await fetch(`https://server.trustereocourier.com.bd/AdminPaymentRequestSendUserEmailFindAllDeliveryData?email=${ReqUserEmail}`)
+        let res = await fetch(`http://localhost:5000/AdminPaymentRequestSendUserEmailFindAllDeliveryData?email=${ReqUserEmail}`)
         return res.json()
     })
     // console.log(userALlDeliveryDataFind)
@@ -230,7 +230,7 @@ const AdminPaymentRequestDetailsAll = () => {
                             let PayUp = event.target.payUP.value
                             let allInfo = { PayUp }
 
-                            fetch(`https://server.trustereocourier.com.bd/AdminUpdateUserSendPaymentInvoiceData/${PaymentDetailsForModal?._id}`, {
+                            fetch(`http://localhost:5000/AdminUpdateUserSendPaymentInvoiceData/${PaymentDetailsForModal?._id}`, {
                                 method: "PATCH",
                                 headers: {
                                     "content-type": "application/json"

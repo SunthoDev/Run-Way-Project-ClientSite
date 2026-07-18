@@ -39,7 +39,7 @@ const SingUp = () => {
     }
     // user data all find use tenStack query 
     let { refetch, data: AllCoveragesPoliceStation = [] } = useQuery(["CoveragesPoliceStationAll"], async () => {
-        let res = await fetch("https://server.trustereocourier.com.bd/CoveragesPoliceStationAll")
+        let res = await fetch("http://localhost:5000/CoveragesPoliceStationAll")
         return res.json()
 
     })
@@ -75,7 +75,7 @@ const SingUp = () => {
         let date = moment().format("MM/D/YY , hh:mm A")
 
         if (Password !== confirmPassword) {
-            setError("Please Meatch Your Password")
+            setError("Please Match Your Password")
             return
         }
         let allData = { BusinessName, FirstName, LastName, Districts, PoliceStations, Address, Phone, Email, Password, confirmPassword, date }
@@ -97,7 +97,7 @@ const SingUp = () => {
                         // console.log(saveUser)
 
                         // save user DB 
-                        fetch("https://server.trustereocourier.com.bd/users", {
+                        fetch("http://localhost:5000/users", {
                             method: "POST",
                             headers: {
                                 "content-type": "application/json"
@@ -129,7 +129,6 @@ const SingUp = () => {
                 setError(error.message)
             })
     }
-
 
 
     return (

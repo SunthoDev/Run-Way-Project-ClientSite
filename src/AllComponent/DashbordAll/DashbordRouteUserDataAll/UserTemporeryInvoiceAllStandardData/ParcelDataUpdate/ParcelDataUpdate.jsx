@@ -17,7 +17,7 @@ const ParcelDataUpdate = () => {
     // Parcel Data Load For Update!!
     // ==========================================================
     let { refetch, data: ParcelUpdateData = [] } = useQuery(["StandardDeliveryData"], async () => {
-        let res = await fetch(`https://server.trustereocourier.com.bd/StandardDeliveryData?StandardParcelId=${IdParcel}`)
+        let res = await fetch(`http://localhost:5000/StandardDeliveryData?StandardParcelId=${IdParcel}`)
         return res.json()
     })
     // console.log(ParcelUpdateData)
@@ -28,7 +28,7 @@ const ParcelDataUpdate = () => {
     // Created All Hub Find
     // =====================================================
     let { data: AllHubFind = [] } = useQuery(["HubManageAdminCreateOrUpdatePs_CreatedHubFind"], async () => {
-        let res = await fetch("https://server.trustereocourier.com.bd/HubManageAdminCreateOrUpdatePs/CreatedHubFind")
+        let res = await fetch("http://localhost:5000/HubManageAdminCreateOrUpdatePs/CreatedHubFind")
         return res.json()
     })
     // console.log(AllHubFind)
@@ -43,7 +43,7 @@ const ParcelDataUpdate = () => {
     // Coverage All Police Station Data Find
     // ==================================================
     let { data: AllCoveragesPoliceStation = [] } = useQuery(["CoveragesPoliceStationAll"], async () => {
-        let res = await fetch("https://server.trustereocourier.com.bd/CoveragesPoliceStationAll")
+        let res = await fetch("http://localhost:5000/CoveragesPoliceStationAll")
         return res.json()
     })
     let DistrictAllPoliceStation = AllCoveragesPoliceStation.filter(PoliceStationAll => PoliceStationAll?.AddDistrict === Districts)
@@ -96,7 +96,7 @@ const ParcelDataUpdate = () => {
                             let allInfo = { deliveryTypeUP, nameUP, addressUP, DistrictUP, policeStationUP, AlternativePhoneUP, RecipientEmailUP, numberUP, InvoiceUP, ItemDescriptionUP, noteUP, weightUP, ParcelCategoryUP, MyHubUP }
                             // console.log(allInfo)
 
-                            fetch(`https://server.trustereocourier.com.bd/AdminUserOrderInvoiceUpdate/${ParcelUpdateData?._id}`, {
+                            fetch(`http://localhost:5000/AdminUserOrderInvoiceUpdate/${ParcelUpdateData?._id}`, {
                                 method: "PATCH",
                                 headers: {
                                     "content-type": "application/json"
@@ -109,7 +109,7 @@ const ParcelDataUpdate = () => {
 
                                         // Tracking Message is send for update parcel
                                         // ====================================================
-                                        fetch("https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/AdminTrackingRequestSentOfAssignRider", {
+                                        fetch("http://localhost:5000/AdminAllAssignParcelHere/AdminTrackingRequestSentOfAssignRider", {
                                             method: "POST",
                                             headers: {
                                                 "Content-Type": "application/json"
@@ -375,7 +375,7 @@ const ParcelDataUpdate = () => {
 
                             // Parcel Delivery Charge Amount Change request send
                             // ===========================================================
-                            fetch(`https://server.trustereocourier.com.bd/AdminChangeDeliveryChargeOfParcel/${ParcelUpdateData?._id}`, {
+                            fetch(`http://localhost:5000/AdminChangeDeliveryChargeOfParcel/${ParcelUpdateData?._id}`, {
                                 method: "PATCH",
                                 headers: {
                                     "content-type": "application/json"
@@ -387,7 +387,7 @@ const ParcelDataUpdate = () => {
                                     if (data.modifiedCount > 0) {
                                         // Delivery Change Tracking Message Send to Admin !!
                                         // =========================================================
-                                        fetch("https://server.trustereocourier.com.bd/DeliveryChargeTrackingMessageSendToAdmin", {
+                                        fetch("http://localhost:5000/DeliveryChargeTrackingMessageSendToAdmin", {
                                             method: "POST",
                                             headers: {
                                                 "Content-Type": "application/json"
@@ -457,7 +457,7 @@ const ParcelDataUpdate = () => {
 
                             // Parcel Amount Amount Change request send
                             // ===========================================================
-                            fetch(`https://server.trustereocourier.com.bd/AdminConsignmentPendingInvoiceAmountChange/${ParcelUpdateData?._id}`, {
+                            fetch(`http://localhost:5000/AdminConsignmentPendingInvoiceAmountChange/${ParcelUpdateData?._id}`, {
                                 method: "PUT",
                                 headers: {
                                     "content-type": "application/json"
@@ -469,7 +469,7 @@ const ParcelDataUpdate = () => {
                                     if (data.modifiedCount > 0) {
                                         // Cod Change Tracking Message Send to Admin !!
                                         // =========================================================
-                                        fetch("https://server.trustereocourier.com.bd/CodChangeTrackingMessageSendToAdmin", {
+                                        fetch("http://localhost:5000/CodChangeTrackingMessageSendToAdmin", {
                                             method: "POST",
                                             headers: {
                                                 "Content-Type": "application/json"

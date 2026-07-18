@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "./Dashboard.css"
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import { FaWallet, FaShoppingCart, FaCalendarAlt, FaHome, FaHeadSideVirus } from 'react-icons/fa';
@@ -17,6 +17,9 @@ const Dashboard = () => {
     const subAdmin = roles?.role === "subAdmin"
     const Rider = roles?.role === "rider"
     // console.log(roles)
+
+    // 🔽 ড্রপডাউন ওপেন/ক্লোজ স্টেট
+    const [isOpen, setIsOpen] = useState(false);
 
     let handelLogOut = () => {
         logOutUser()
@@ -226,6 +229,61 @@ const Dashboard = () => {
                                     <li> <NavLink to="/dashboard/API"><span><i className="fa fa-credit-card" aria-hidden="true"></i></span>API</NavLink></li>
                                     <li> <NavLink to="/dashboard/AddBalancePayRequest"><span><i className="fa fa-credit-card" aria-hidden="true"></i></span>Balance Request</NavLink></li>
                                     <li> <NavLink to="/dashboard/UserStatementOfParcel"><span><i className="fa fa-credit-card" aria-hidden="true"></i></span>Parcel Statement</NavLink></li>
+
+                                    <li className="w-full list-none">
+                                        {/* 📁 মেইন মেনু বাটন (কোন ব্যাকগ্রাউন্ড কালার ছাড়া ক্লিন ও স্লিম) */}
+                                        <button
+                                            onClick={() => setIsOpen(!isOpen)}
+                                            className="w-full flex items-center justify-between py-2 text-black/70 hover:text-black transition-all font-black text-xs md:text-sm cursor-pointer select-none"
+                                        >
+                                            <div className="flex items-center gap-2.5">
+                                                <span className="text-black/60">
+                                                    <i className="fa fa-user-circle-o text-base" aria-hidden="true"></i>
+                                                </span>
+                                                <span className="tracking-wide">Personal Information</span>
+                                            </div>
+
+                                            {/* 🔄 ড্রপডাউন ওপেন ইন্ডিকেটর */}
+                                            <span className={`transition-transform duration-200 text-black/40 ${isOpen ? 'rotate-180' : ''}`}>
+                                                <i className="fa fa-angle-down text-sm" aria-hidden="true"></i>
+                                            </span>
+                                        </button>
+
+                                        {/* 📜 সাব-মেনু অপশনস (নিচে নিচে এবং সুন্দর গ্যাপে সাজানো) */}
+                                        <div
+                                            className={`flex flex-col pl-4 space-y-1 overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-36 opacity-100 mt-1.5' : 'max-h-0 opacity-0 pointer-events-none'
+                                                }`}
+                                        >
+                                            {/* ১. প্রোফাইল অপশন */}
+                                            <NavLink
+                                                to={`/dashboard/UserProfile`}
+                                                className={({ isActive }) =>
+                                                    `flex items-center justify-start gap-2.5 w-full py-2 px-3 rounded-xl text-xs font-bold transition-all ${isActive
+                                                        ? 'bg-black text-white'
+                                                        : 'text-black/60 hover:text-black hover:bg-black/5'
+                                                    }`
+                                                }
+                                            >
+                                                <span className="w-4 text-left"><i className="fa fa-user" aria-hidden="true"></i></span>
+                                                <span>Profile</span>
+                                            </NavLink>
+
+                                            {/* ২. অ্যাড ব্যাংক ডিটেইলস অপশন */}
+                                            <NavLink
+                                                to={`/dashboard/UserAddBankDetails/${roles?.userId}`}
+                                                className={({ isActive }) =>
+                                                    `flex items-center justify-start gap-2.5 w-full py-2 px-3 rounded-xl text-xs font-bold transition-all ${isActive
+                                                        ? 'bg-black text-white'
+                                                        : 'text-black/60 hover:text-black hover:bg-black/5'
+                                                    }`
+                                                }
+                                            >
+                                                <span className="w-4 text-left"><i className="fa fa-bank" aria-hidden="true"></i></span>
+                                                <span>Add Bank Details</span>
+                                            </NavLink>
+                                        </div>
+                                    </li>
+
                                 </div>
                     }
 

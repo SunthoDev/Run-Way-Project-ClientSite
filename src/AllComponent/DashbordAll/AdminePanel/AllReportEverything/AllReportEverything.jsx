@@ -28,7 +28,7 @@ const AllReportEverything = () => {
   // All User Parcel Data Find Here
   // =================================================
   let { refetch, data: AllParcelData = [] } = useQuery(["AdminAllReportDataFindHere_AllUserParcelData"], async () => {
-    let res = await fetch(`https://server.trustereocourier.com.bd/AdminAllReportDataFindHere/AllUserParcelData`)
+    let res = await fetch(`http://localhost:5000/AdminAllReportDataFindHere/AllUserParcelData`)
     return res.json()
   })
   // console.log(AllParcelData)
@@ -73,7 +73,7 @@ const AllReportEverything = () => {
   // All User Pickup Request Data Find Here
   // =================================================
   let { data: AllPickupRequest = [] } = useQuery(["AdminAllReportDataFindHere_AllUserPickupRequestData"], async () => {
-    let res = await fetch(`https://server.trustereocourier.com.bd/AdminAllReportDataFindHere/AllUserPickupRequestData`)
+    let res = await fetch(`http://localhost:5000/AdminAllReportDataFindHere/AllUserPickupRequestData`)
     return res.json()
   })
   // console.log(AllPickupRequest)
@@ -101,7 +101,7 @@ const AllReportEverything = () => {
   // All User Return Parcel Data Find Here
   // =================================================
   let { data: AllReturnParcelData = [] } = useQuery(["AdminAllReportDataFindHere_AllUserReturnParcelData"], async () => {
-    let res = await fetch(`https://server.trustereocourier.com.bd/AdminAllReportDataFindHere/AllUserReturnParcelData`)
+    let res = await fetch(`http://localhost:5000/AdminAllReportDataFindHere/AllUserReturnParcelData`)
     return res.json()
   })
   // console.log(AllReturnParcelData)
@@ -129,7 +129,7 @@ const AllReportEverything = () => {
   // All Dispatch Parcel Data Find Here
   // =================================================
   let { data: AllDispatchParcelData = [] } = useQuery(["AdminAllReportDataFindHere_AllDispatchRequestData"], async () => {
-    let res = await fetch(`https://server.trustereocourier.com.bd/AdminAllReportDataFindHere/AllDispatchRequestData`)
+    let res = await fetch(`http://localhost:5000/AdminAllReportDataFindHere/AllDispatchRequestData`)
     return res.json()
   })
   // console.log(AllDispatchParcelData)
@@ -176,7 +176,7 @@ const AllReportEverything = () => {
   // All User Add Balance Request Data Find Here
   // =================================================
   let { data: AddBalanceRequestData = [] } = useQuery(["AdminAllReportDataFindHere_AllAddBalanceRequestData"], async () => {
-    let res = await fetch(`https://server.trustereocourier.com.bd/AdminAllReportDataFindHere/AllAddBalanceRequestData`)
+    let res = await fetch(`http://localhost:5000/AdminAllReportDataFindHere/AllAddBalanceRequestData`)
     return res.json()
   })
   // console.log(AddBalanceRequestData)
@@ -204,7 +204,7 @@ const AllReportEverything = () => {
   // All User Payment Request of Parcel Data Find Here
   // =========================================================
   let { data: AllBalanceRequestDataOfParcel = [] } = useQuery(["AdminAllReportDataFindHere_AllPaymentRequestDataOfParcel"], async () => {
-    let res = await fetch(`https://server.trustereocourier.com.bd/AdminAllReportDataFindHere/AllPaymentRequestDataOfParcel`)
+    let res = await fetch(`http://localhost:5000/AdminAllReportDataFindHere/AllPaymentRequestDataOfParcel`)
     return res.json()
   })
   // console.log(AllBalanceRequestDataOfParcel)

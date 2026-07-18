@@ -11,7 +11,7 @@ const UserAdmin = () => {
 
     // user data all find use tenStack query 
     let { refetch, data: adminAllUsers = [] } = useQuery(["users"], async () => {
-        let res = await fetch("https://server.trustereocourier.com.bd/users")
+        let res = await fetch("http://localhost:5000/users")
         return res.json()
 
     })
@@ -34,7 +34,7 @@ const UserAdmin = () => {
     // user role Change Click Admin
     let HandleAdmin = (id) => {
 
-        fetch(`https://server.trustereocourier.com.bd/AdminUpdateRoleAdmin/${id}`, {
+        fetch(`http://localhost:5000/AdminUpdateRoleAdmin/${id}`, {
             method: "PATCH",
         })
             .then(res => res.json())
@@ -54,7 +54,7 @@ const UserAdmin = () => {
     // user role Change Click User
     let handleUser = (id) => {
 
-        fetch(`https://server.trustereocourier.com.bd/AdminUpdateRoleUser/${id}`, {
+        fetch(`http://localhost:5000/AdminUpdateRoleUser/${id}`, {
             method: "PATCH",
         })
             .then(res => res.json())
@@ -75,7 +75,7 @@ const UserAdmin = () => {
     // user role Change Click Rider
     let HandleRider = (id) => {
 
-        fetch(`https://server.trustereocourier.com.bd/AdminUpdateRoleRider/${id}`, {
+        fetch(`http://localhost:5000/AdminUpdateRoleRider/${id}`, {
             method: "PUT",
         })
             .then(res => res.json())
@@ -96,7 +96,7 @@ const UserAdmin = () => {
     // user role Change Click SubAdmin
     let HandleSubAdmin = (id) => {
 
-        fetch(`https://server.trustereocourier.com.bd/AdminUpdateRoleSubAdmin/${id}`, {
+        fetch(`http://localhost:5000/AdminUpdateRoleSubAdmin/${id}`, {
             method: "PUT",
         })
             .then(res => res.json())
@@ -127,7 +127,7 @@ const UserAdmin = () => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                fetch(`https://server.trustereocourier.com.bd/AdminDeleteUsers/${id}`, {
+                fetch(`http://localhost:5000/AdminDeleteUsers/${id}`, {
                     method: "DELETE",
                 })
                     .then(res => res.json())

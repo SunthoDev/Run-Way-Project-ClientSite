@@ -9,7 +9,7 @@ const AdminCoveragesPoliceStations = () => {
     // All Coverage Ploce Station Find By Query
     // =========================================================================================
     let { refetch, data: AllCoveragesPoliceStation = [] } = useQuery(["CoveragesPoliceStationAll"], async () => {
-        let res = await fetch("https://server.trustereocourier.com.bd/CoveragesPoliceStationAll")
+        let res = await fetch("http://localhost:5000/CoveragesPoliceStationAll")
         return res.json()
 
     })
@@ -34,7 +34,7 @@ const AdminCoveragesPoliceStations = () => {
                 // Hub request data insert 
                 // =================================
                 try {
-                    let res = await fetch(`https://server.trustereocourier.com.bd/DeletedPoliceStationWithOfCoverage/${id}`, {
+                    let res = await fetch(`http://localhost:5000/DeletedPoliceStationWithOfCoverage/${id}`, {
                         method: "DELETE",
                     })
                     let result = await res.json()
@@ -65,7 +65,7 @@ const AdminCoveragesPoliceStations = () => {
     // Created All Police Station find of Hub
     // ================================================================================================
     let { data: AllStationOfHub = [] } = useQuery(["HubManageAdminCreateOrUpdatePs"], async () => {
-        let res = await fetch("https://server.trustereocourier.com.bd/HubManageAdminCreateOrUpdatePs/PoliceStationWithOfHub")
+        let res = await fetch("http://localhost:5000/HubManageAdminCreateOrUpdatePs/PoliceStationWithOfHub")
         return res.json()
     })
     // console.log(AllStationOfHub)

@@ -65,6 +65,7 @@ import ParcelInvoiceOfRider from "../../DashbordAll/RiderPanelAllWorkHere/Parcel
 import AdminEditUserInformation from "../../DashbordAll/AdminePanel/AdminSearchUserId/AdminEditUserInformation/AdminEditUserInformation";
 import UserStatementOfParcel from "../../DashbordAll/DashbordRouteUserDataAll/UserStatementOfParcel/UserStatementOfParcel";
 import UserSearchParcelByNumber from "../../DashbordAll/DashbordRouteUserDataAll/AllMarchentConsignment/UserSearchParcelByNumber/UserSearchParcelByNumber";
+import UserProfile from "../../DashbordAll/DashbordRouteUserDataAll/UserProfile/UserProfile";
 
 
 let route = createBrowserRouter([
@@ -87,7 +88,7 @@ let route = createBrowserRouter([
          {
             path: "/ParcelTrackingDataShow/:id",
             element: <ParcelTrackingDataShow></ParcelTrackingDataShow>,
-            loader: ({ params }) => fetch(`https://server.trustereocourier.com.bd/StandardDeliveryDataTemporory?StandardParcelId=${params.id}`)
+            loader: ({ params }) => fetch(`http://localhost:5000/StandardDeliveryDataTemporory?StandardParcelId=${params.id}`)
          },
       ]
    },
@@ -132,14 +133,14 @@ let route = createBrowserRouter([
 
             path: "UserPendingConsignmentInvoice/:id",
             element: <UserPendingConsignmentInvoice></UserPendingConsignmentInvoice>,
-            loader: ({ params }) => fetch(`https://server.trustereocourier.com.bd/UserConsignmentPendingInvoice/${params.id}`)
+            loader: ({ params }) => fetch(`http://localhost:5000/UserConsignmentPendingInvoice/${params.id}`)
 
          },
          {
 
             path: "UserConsignmentPendingInvoiceUpdate/:id",
             element: <UserPendingConsignmentInvoiceUpdate></UserPendingConsignmentInvoiceUpdate>,
-            loader: ({ params }) => fetch(`https://server.trustereocourier.com.bd/UserConsignmentPendingInvoiceUpdate/${params.id}`)
+            loader: ({ params }) => fetch(`http://localhost:5000/UserConsignmentPendingInvoiceUpdate/${params.id}`)
 
          },
          {
@@ -153,7 +154,11 @@ let route = createBrowserRouter([
          {
             path: "UserAddBankDetails/:id",
             element: <UserBankDetailsAdd></UserBankDetailsAdd>,
-            loader: ({ params }) => fetch(`https://server.trustereocourier.com.bd/UserBankDetailsAddGetUserData/${params.id}`)
+            loader: ({ params }) => fetch(`http://localhost:5000/UserBankDetailsAddGetUserData/${params.id}`)
+         },
+         {
+            path: "UserProfile",
+            element: <UserProfile></UserProfile>
          },
 
          // --Kal dhaka lagva  2 ta route
@@ -165,7 +170,7 @@ let route = createBrowserRouter([
          {
             path: "UserPaymentRequestDetailsAll/:id",
             element: <UserPaymentRequestUnikDataAll></UserPaymentRequestUnikDataAll>,
-            loader: ({ params }) => fetch(`https://server.trustereocourier.com.bd/UserPaymentDetailUnikDataFind/${params.id}`)
+            loader: ({ params }) => fetch(`http://localhost:5000/UserPaymentDetailUnikDataFind/${params.id}`)
 
          },
          // ==================
@@ -184,7 +189,7 @@ let route = createBrowserRouter([
          {
             path: "UserTemporeryInvoiceAllStandardData/:id",
             element: <UserTemporeryInvoiceAllStandardData></UserTemporeryInvoiceAllStandardData>,
-            loader: ({ params }) => fetch(`https://server.trustereocourier.com.bd/StandardDeliveryDataTemporory?StandardParcelId=${params.id}`)
+            loader: ({ params }) => fetch(`http://localhost:5000/StandardDeliveryDataTemporory?StandardParcelId=${params.id}`)
          },
          {
             path: "ParcelDataUpdate/:IdParcel",
@@ -197,21 +202,14 @@ let route = createBrowserRouter([
          {
             path: "UserSearchParcelByNumber/:number",
             element: <UserSearchParcelByNumber></UserSearchParcelByNumber>,
-            loader: ({ params }) => fetch(`https://server.trustereocourier.com.bd/adminSearchUserNumber?userNumber=${params.number}`)
+            loader: ({ params }) => fetch(`http://localhost:5000/adminSearchUserNumber?userNumber=${params.number}`)
          },
-
-
-
-
-
-
-
 
          // =============================================================================
          // admin route  
          // =============================================================================
-         // https://server.trustereocourier.com.bd/
-         // https://server.trustereocourier.com.bd/
+         // http://localhost:5000/
+         // http://localhost:5000/
 
          {
             path: "AdminDashboard",
@@ -225,22 +223,22 @@ let route = createBrowserRouter([
          {
             path: "AdminDashboard/AdminSearchUserId/:id",
             element: <AdminSearchUserId></AdminSearchUserId>,
-            loader: ({ params }) => fetch(`https://server.trustereocourier.com.bd/adminSearchUserId?userId=${params.id}`)
+            loader: ({ params }) => fetch(`http://localhost:5000/adminSearchUserId?userId=${params.id}`)
          },
          {
             path: "AdminDashboard/AdminSearchUserNumber/:number",
             element: <AdminSearchUserNumber></AdminSearchUserNumber>,
-            loader: ({ params }) => fetch(`https://server.trustereocourier.com.bd/adminSearchUserNumber?userNumber=${params.number}`)
+            loader: ({ params }) => fetch(`http://localhost:5000/adminSearchUserNumber?userNumber=${params.number}`)
          },
          {
             path: "AdminDashboard/AdminSearchStandardParcelId/:id",
             element: <AdminSearchStandardParcelUser></AdminSearchStandardParcelUser>,
-            loader: ({ params }) => fetch(`https://server.trustereocourier.com.bd/AdminSearchStandardParcelId?StandardParcelId=${params.id}`)
+            loader: ({ params }) => fetch(`http://localhost:5000/AdminSearchStandardParcelId?StandardParcelId=${params.id}`)
          },
          {
             path: "AdminDashboard/AdminCurrentBalanceDetails/:email",
             element: <CurrentBalanceDetails></CurrentBalanceDetails>,
-            loader: ({ params }) => fetch(`https://server.trustereocourier.com.bd/AdminCurrentBalanceAllData?email=${params.email}`)
+            loader: ({ params }) => fetch(`http://localhost:5000/AdminCurrentBalanceAllData?email=${params.email}`)
          },
          // =========================
 
@@ -248,13 +246,13 @@ let route = createBrowserRouter([
          {
             path: "AdminDashboard/AdminSearchUserIdDataEntry",
             element: <AdminDataEntryUserApproved></AdminDataEntryUserApproved>
-            // loader: ({ params }) => fetch(`https://server.trustereocourier.com.bd/xxxxxxxxx?email=${params.email}`)
+            // loader: ({ params }) => fetch(`http://localhost:5000/xxxxxxxxx?email=${params.email}`)
          },
 
          {
             path: "AdminDashboard/AdminEntryParcelOrApproved",
             element: <AdminEntryParcelOrApproved></AdminEntryParcelOrApproved>
-            // loader: ({ params }) => fetch(`https://server.trustereocourier.com.bd/AdminDataEntryStandardDeliveryData?email=${params.email}`)
+            // loader: ({ params }) => fetch(`http://localhost:5000/AdminDataEntryStandardDeliveryData?email=${params.email}`)
          },
          // ===============TODO
 
@@ -262,13 +260,13 @@ let route = createBrowserRouter([
          {
             path: "AdminDashboard/AdminConsignmentPendingInvoice/:id",
             element: <AdminConsignmentPendingInvoice></AdminConsignmentPendingInvoice>,
-            loader: ({ params }) => fetch(`https://server.trustereocourier.com.bd/AdminSearchConsignmentInvoice/${params.id}`)
+            loader: ({ params }) => fetch(`http://localhost:5000/AdminSearchConsignmentInvoice/${params.id}`)
 
          },
          {
             path: "AdminDashboard/AdminConsignmentPendingInvoiceUpdate/:id",
             element: <AdminConsignmentPendingInvoiceUpdate></AdminConsignmentPendingInvoiceUpdate>,
-            loader: ({ params }) => fetch(`https://server.trustereocourier.com.bd/AdminConsignmentPendingInvoiceUpdate/${params.id}`)
+            loader: ({ params }) => fetch(`http://localhost:5000/AdminConsignmentPendingInvoiceUpdate/${params.id}`)
 
          },
          {
@@ -282,7 +280,7 @@ let route = createBrowserRouter([
          {
             path: "AdminDashboard/AdminAmountChangeUserDataFind/:email",
             element: <AdminSearchAmountChangeUserDataAllFindEmail></AdminSearchAmountChangeUserDataAllFindEmail>,
-            loader: ({ params }) => fetch(`https://server.trustereocourier.com.bd/AdminAmountChangeUserDataFindEmailGet?email=${params.email}`)
+            loader: ({ params }) => fetch(`http://localhost:5000/AdminAmountChangeUserDataFindEmailGet?email=${params.email}`)
          },
          {
             path: "AdminDashboard/NewMerchants",
@@ -305,12 +303,12 @@ let route = createBrowserRouter([
          {
             path: "AdminDashboard/AdminPaymentRequestDetailsAll/:id",
             element: <AdminPaymentRequestDetailsAll></AdminPaymentRequestDetailsAll>,
-            loader: ({ params }) => fetch(`https://server.trustereocourier.com.bd/AdminPaymentDetailsUnikeDatFind/${params.id}`)
+            loader: ({ params }) => fetch(`http://localhost:5000/AdminPaymentDetailsUnikeDatFind/${params.id}`)
          },
          {
             path: "AdminDashboard/UserTemporeryInvoiceAllStandardData/:id",
             element: <AdminTempororyParcelInvoice></AdminTempororyParcelInvoice>,
-            loader: ({ params }) => fetch(`https://server.trustereocourier.com.bd/AdminStandardDeliveryDataTemporory?StandardParcelId=${params.id}`)
+            loader: ({ params }) => fetch(`http://localhost:5000/AdminStandardDeliveryDataTemporory?StandardParcelId=${params.id}`)
          },
          {
             path: "AdminDashboard/AdminCreateHub",
@@ -363,7 +361,7 @@ let route = createBrowserRouter([
          {
             path: "AdminDashboard/AdminEditUserInformation/:id",
             element: <AdminEditUserInformation></AdminEditUserInformation>,
-            loader: ({ params }) => fetch(`https://server.trustereocourier.com.bd/adminSearchUserId?userId=${params.id}`)
+            loader: ({ params }) => fetch(`http://localhost:5000/adminSearchUserId?userId=${params.id}`)
          },
       ]
    },
@@ -394,7 +392,7 @@ let route = createBrowserRouter([
          {
             path: "RiderDashboard/RiderSeeStandardParcelId/:id",
             element: <ParcelInvoiceOfRider></ParcelInvoiceOfRider>,
-            loader: ({ params }) => fetch(`https://server.trustereocourier.com.bd/AdminSearchStandardParcelId?StandardParcelId=${params.id}`)
+            loader: ({ params }) => fetch(`http://localhost:5000/AdminSearchStandardParcelId?StandardParcelId=${params.id}`)
          },
 
       ]

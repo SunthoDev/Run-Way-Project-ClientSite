@@ -15,7 +15,7 @@ const ReturnParcelMonitoring = () => {
     // User All Category Parcel Data Find
     // =======================================================================
     let { refetch, data: ReturnAllParcelRequestData = [] } = useQuery(["ReturnParcelRequestWithTrackingMessage_AllReturnParcelRequestData"], async () => {
-        let res = await fetch(`https://server.trustereocourier.com.bd/ReturnParcelRequestWithTrackingMessage/AllReturnParcelRequestData`)
+        let res = await fetch(`http://localhost:5000/ReturnParcelRequestWithTrackingMessage/AllReturnParcelRequestData`)
         return res.json()
 
     })
@@ -82,7 +82,7 @@ const ReturnParcelMonitoring = () => {
     // Created All Hub Find
     // =====================================================
     let { data: AllHubFind = [] } = useQuery(["HubManageAdminCreateOrUpdatePs_CreatedHubFind"], async () => {
-        let res = await fetch("https://server.trustereocourier.com.bd/HubManageAdminCreateOrUpdatePs/CreatedHubFind")
+        let res = await fetch("http://localhost:5000/HubManageAdminCreateOrUpdatePs/CreatedHubFind")
         return res.json()
     })
     // console.log(AllHubFind)
@@ -92,7 +92,7 @@ const ReturnParcelMonitoring = () => {
     // =============================================
     // user data all find use tenStack query 
     let { data: adminAllUsers = [] } = useQuery(["users"], async () => {
-        let res = await fetch("https://server.trustereocourier.com.bd/users")
+        let res = await fetch("http://localhost:5000/users")
         return res.json()
     })
     let [searchHubName, setSearchHubName] = useState("")
@@ -165,7 +165,7 @@ const ReturnParcelMonitoring = () => {
 
                                 // Return Parcel Data Post
                                 // ===========================================
-                                fetch("https://server.trustereocourier.com.bd/ReturnParcelRequestWithTrackingMessage/UserReturnRequestSend", {
+                                fetch("http://localhost:5000/ReturnParcelRequestWithTrackingMessage/UserReturnRequestSend", {
                                     method: "POST",
                                     headers: {
                                         "Content-Type": "application/json"
@@ -177,7 +177,7 @@ const ReturnParcelMonitoring = () => {
                                         if (data.insertedId) {
                                             // Return Tracking Data Post 
                                             // ===========================================
-                                            fetch("https://server.trustereocourier.com.bd/ReturnParcelRequestWithTrackingMessage/AdminTrackingRequestSentOfReturnParcel", {
+                                            fetch("http://localhost:5000/ReturnParcelRequestWithTrackingMessage/AdminTrackingRequestSentOfReturnParcel", {
                                                 method: "POST",
                                                 headers: {
                                                     "Content-Type": "application/json"
@@ -439,7 +439,7 @@ const ReturnParcelMonitoring = () => {
                                                                                 if (result.isConfirmed) {
                                                                                     try {
                                                                                         const res = await fetch(
-                                                                                            `https://server.trustereocourier.com.bd/ReturnParcelRequestWithTrackingMessage/AdminDeleteReqOfReturnParcel/${ParcelAll?._id}`,
+                                                                                            `http://localhost:5000/ReturnParcelRequestWithTrackingMessage/AdminDeleteReqOfReturnParcel/${ParcelAll?._id}`,
                                                                                             {
                                                                                                 method: "DELETE",
                                                                                             }
@@ -692,7 +692,7 @@ const ReturnParcelMonitoring = () => {
                                                                                 if (result.isConfirmed) {
                                                                                     try {
                                                                                         const res = await fetch(
-                                                                                            `https://server.trustereocourier.com.bd/ReturnParcelRequestWithTrackingMessage/AdminDeleteReqOfReturnParcel/${ParcelAll?._id}`,
+                                                                                            `http://localhost:5000/ReturnParcelRequestWithTrackingMessage/AdminDeleteReqOfReturnParcel/${ParcelAll?._id}`,
                                                                                             {
                                                                                                 method: "DELETE",
                                                                                             }
@@ -787,7 +787,7 @@ const ReturnParcelMonitoring = () => {
 
                                                 // Post return parcel to rider
                                                 // ===============================
-                                                fetch("https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/InsertAssignReturnParcelToRider", {
+                                                fetch("http://localhost:5000/AdminAllAssignParcelHere/InsertAssignReturnParcelToRider", {
                                                     method: "POST",
                                                     headers: {
                                                         "Content-Type": "application/json"
@@ -799,7 +799,7 @@ const ReturnParcelMonitoring = () => {
                                                         if (data.insertedId) {
                                                             // Return Tracking Data Post 
                                                             // ===========================================
-                                                            fetch("https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/AdminTrackingRequestSentOfReturnParcelAssignRiderMultiple", {
+                                                            fetch("http://localhost:5000/AdminAllAssignParcelHere/AdminTrackingRequestSentOfReturnParcelAssignRiderMultiple", {
                                                                 method: "POST",
                                                                 headers: {
                                                                     "Content-Type": "application/json"
@@ -811,7 +811,7 @@ const ReturnParcelMonitoring = () => {
                                                                     if (data.insertedCount > 0) {
                                                                         // Return Parcel Assign Rider status up (HandHoverRider)
                                                                         // =======================================
-                                                                        fetch(`https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/ReturnParcelAssignStatusUpdateHandHoverRider/${ReturnId}`, {
+                                                                        fetch(`http://localhost:5000/AdminAllAssignParcelHere/ReturnParcelAssignStatusUpdateHandHoverRider/${ReturnId}`, {
                                                                             method: "PATCH",
                                                                         })
                                                                             .then(res => res.json())

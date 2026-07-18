@@ -22,7 +22,7 @@ const AdminSearchUserId = () => {
     // Consignment Standard Delivery Data Wok Start
     // =======================================================================
     let { refetch, data: userOrderStandardParcelData = [] } = useQuery(["AdminConsignmentUserStandardDataFind"], async () => {
-        let res = await fetch(`https://server.trustereocourier.com.bd/AdminConsignmentUserStandardDataFind?email=${email}`)
+        let res = await fetch(`http://localhost:5000/AdminConsignmentUserStandardDataFind?email=${email}`)
         return res.json()
 
     })
@@ -64,7 +64,7 @@ const AdminSearchUserId = () => {
     // Payment Request Wok User Start
     // =======================================================================
     let { data: UserPaymentRequestDataAll = [] } = useQuery(["AdminPaymentRequestAllDataFind"], async () => {
-        let res = await fetch(`https://server.trustereocourier.com.bd/AdminPaymentRequestAllDataFind?email=${email}`)
+        let res = await fetch(`http://localhost:5000/AdminPaymentRequestAllDataFind?email=${email}`)
         return res.json()
 
     })
@@ -82,7 +82,7 @@ const AdminSearchUserId = () => {
     // Pickup Request User Data All Find Start
     // =======================================================================
     let { data: UserPickUpRequestDataAll = [] } = useQuery(["PickupRequestWithManegeAdminUsers_PickupRequestAllDataFindByEmail"], async () => {
-        let res = await fetch(`https://server.trustereocourier.com.bd/PickupRequestWithManegeAdminUsers/PickupRequestAllDataFindByEmail?email=${email}`)
+        let res = await fetch(`http://localhost:5000/PickupRequestWithManegeAdminUsers/PickupRequestAllDataFindByEmail?email=${email}`)
         return res.json()
 
     })
@@ -98,7 +98,7 @@ const AdminSearchUserId = () => {
     // Created All Police Station find of Hub
     // =====================================================
     let { data: AllStationOfHub = [] } = useQuery(["HubManageAdminCreateOrUpdatePs_PoliceStationWithOfHub"], async () => {
-        let res = await fetch("https://server.trustereocourier.com.bd/HubManageAdminCreateOrUpdatePs/PoliceStationWithOfHub")
+        let res = await fetch("http://localhost:5000/HubManageAdminCreateOrUpdatePs/PoliceStationWithOfHub")
         return res.json()
     })
     // console.log(AllStationOfHub)
@@ -690,7 +690,7 @@ const AdminSearchUserId = () => {
                             let AllInfo = { PickupRequestType: PickupRequest, PickupIdUser, date, time, Address, BusinessName, LastName, Phone, PickReqUserEmail: email, name, photo, userId, status: "Pending", PoliceStations, Districts, MyHub: MyHubName?.HubName, AssignRider:"No" }
 
                             try {
-                                const response = await fetch("https://server.trustereocourier.com.bd/PickupRequestWithManegeAdminUsers/UserPickupRequestSend", {
+                                const response = await fetch("http://localhost:5000/PickupRequestWithManegeAdminUsers/UserPickupRequestSend", {
                                     method: "POST",
                                     headers: {
                                         "Content-Type": "application/json",

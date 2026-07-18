@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import './AllMarchentConsignment.css'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { useQuery } from '@tanstack/react-query';
@@ -20,13 +20,21 @@ const AllMarchentConsignment = () => {
     let { user } = useContext(AuthContext)
     let navigate = useNavigate()
     const [roles] = useRole()
-    let { role, Address, BusinessName, name, userId, photo, status } = roles
+    // 📦 De-structure ing of user data !!
+    const {
+        _id, status, name, LastName, BusinessName, Address, RoutePasswordDetails,
+        Phone, email, photo, userId, role, Districts, PoliceStations, date
+    } = roles || {};
+
+    // Router password verify bellow !!
+    // ===============================================
+    const [isVerified, setIsVerified] = useState(false);
 
     // ==============================================
     // All Parcel Data Load Here
     // ==============================================
     let { refetch, data: AllConsignmentData = [] } = useQuery(["UseAllConsignmentStandardData"], async () => {
-        let res = await fetch(`https://server.trustereocourier.com.bd/UseAllConsignmentStandardData?email=${user?.email}`)
+        let res = await fetch(`http://localhost:5000/UseAllConsignmentStandardData?email=${user?.email}`)
         return res.json()
     })
     // console.log(AllConsignmentData)
@@ -66,238 +74,304 @@ const AllMarchentConsignment = () => {
 
     return (
         <div className="bg-[#F6F6F6]">
-            {status == "pending" ?
-                <h2 className='text-black font-[700] text-center mt-[40px] text-[34px]'>Please Waite, For Admin Approved</h2>
-                :
-                <div className="AllMarchentConsignment p-6 mt-20 md:mt-8 mb-8 mx-8 bg-white rounded-[8px]">
-                    {/* Merchant all parcel by number */}
-                    {/* ============================================================== */}
-                    <div className="w-full max-w-md mx-auto mb-4">
-                        <form onSubmit={(event) => {
-                            event.preventDefault()
-                            let number = event.target.ParcelSearchNumber.value
-                             navigate(`/dashboard/UserSearchParcelByNumber/${number}`)
+            {
+                RoutePasswordDetails?.AllConsignmentPass === "yes" && !isVerified ? (
+                    /* 🛡️ পাসওয়ার্ড ভেরিফিকেশন বক্স */
+                    <div className="flex flex-col items-center justify-center text-center bg-white border border-gray-100 p-8 md:p-12 rounded-2xl shadow-xs my-10 max-w-md mx-auto">
+                        <div className="w-14 h-14 bg-black text-white rounded-full flex items-center justify-center mb-4 shadow-sm">
+                            <i className="fa fa-lock text-xl" aria-hidden="true"></i>
+                        </div>
+                        <h2 className="text-lg font-black text-black uppercase tracking-wide">
+                            Route Security Active
+                        </h2>
+                        <p className="text-xs text-black/50 font-bold mt-1 max-w-xs leading-relaxed">
+                            This area is password protected. Enter your Route Password to access your profile data.
+                        </p>
 
-                        }}>
-                            <div className="relative">
-                                <input
-                                    name="ParcelSearchNumber"
-                                    type="text"
-                                    placeholder="search your parcel by phone number"
-                                    className="w-full rounded-2xl border border-gray-300 px-4 pr-12 py-3 text-base shadow-sm outline-none
-                                        focus:border-blue-500 focus:ring-4 focus:ring-blue-200/60 transition"
-                                />
-                                {/* Right side search icon */}
-                                <i type='submit' className="fa fa-search absolute right-3 top-1/2 -translate-y-1/2 text-lg text-gray-500"
-                                    aria-hidden="true" />
-                            </div>
+                        <form
+                            onSubmit={(e) => {
+                                e.preventDefault();
+                                let RoutePass = e.target.RoutePass.value;
+                                if (RoutePass === RoutePasswordDetails?.RoutePass) {
+                                    setIsVerified(true); // পাসওয়ার্ড মিললে কনটেন্ট আনলক হবে
+                                    Swal.fire({
+                                        toast: true,
+                                        position: 'top-end',
+                                        icon: 'success',
+                                        title: 'Access Granted',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Wrong Password',
+                                        text: 'The route password you entered is incorrect!',
+                                        confirmButtonColor: '#000000'
+                                    });
+                                }
+                            }}
+                            className="w-full mt-6 space-y-4"
+                        >
+                            <input
+                                type="password"
+                                name="RoutePass"
+                                required
+                                placeholder="Enter Route Password"
+                                className="w-full px-3 py-2.5 bg-black/[0.02] border border-black/10 rounded-xl text-xs font-bold text-black text-center focus:outline-none focus:border-black transition-all tracking-widest"
+                            />
+                            <button
+                                type="submit"
+                                className="w-full bg-black text-white py-2.5 rounded-xl text-xs font-black uppercase tracking-wider hover:bg-black/90 active:scale-98 transition-all cursor-pointer shadow-xs"
+                            >
+                                Unlock Profile
+                            </button>
                         </form>
                     </div>
-
-                    {/* All status parcel show bellow for see merchant */}
-                    {/* ============================================================== */}
-                    <Tabs>
-                        <TabList>
-                            <Tab> <span className="text-black font-[600] text-[16px]">All</span> </Tab>
-                            <Tab> <span className="text-black font-[600] text-[16px]">Pending</span> </Tab>
-                            <Tab> <span className="text-black font-[600] text-[16px]">Approved Pending</span> </Tab>
-                            <Tab> <span className="text-black font-[600] text-[16px]">Delivered</span> </Tab>
-                            <Tab> <span className="text-black font-[600] text-[16px]">Partially Delivered</span> </Tab>
-                            <Tab> <span className="text-black font-[600] text-[16px]">Cancel</span> </Tab>
-                            <Tab> <span className="text-black font-[600] text-[16px]">Reviewed</span> </Tab>
-                        </TabList>
-                        <TabPanel>
-                            <div className="AllDataConsignment">
-
-                                <div className="overflow-x-auto p-4">
-                                    <table className="table w-full rounded-xl shadow-md">
-                                        <thead className="bg-base-200 text-base-content">
-                                            <tr>
-                                                <th>Merchant Name</th>
-                                                <th>Parcel ID</th>
-                                                <th>Amount</th>
-                                                <th>Delivery Charge</th>
-                                                <th>Request Date</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                            {
-                                                ConsignmentAllData?.map(ConsignmentAll => <UserAllStatusConsignmentData key={ConsignmentAll._id} ConsignmentAll={ConsignmentAll}></UserAllStatusConsignmentData>)
-                                            }
-
-                                        </tbody>
-                                    </table>
-                                </div>
-
+                ) :
+                    status === "pending" ? (
+                        /* ⏳ পেন্ডিং ভেরিফিকেশন নোটিশ (সুপার ক্লিন ও মডার্ন লুক) */
+                        <div className="flex flex-col items-center justify-center text-center bg-white border border-gray-100 p-12 rounded-2xl shadow-2xs my-10 max-w-xl mx-auto">
+                            <div className="w-16 h-16 bg-amber-50 rounded-full flex items-center justify-center text-amber-500 mb-4 animate-pulse">
+                                <i className="fa fa-clock-o text-3xl" aria-hidden="true"></i>
                             </div>
-                        </TabPanel>
-                        <TabPanel>
-                            <div className="AllDataConsignment">
+                            <h2 className="text-xl md:text-2xl font-black text-black uppercase tracking-wide">
+                                Account Verification Pending
+                            </h2>
+                            <p className="text-xs md:text-sm text-black/50 font-bold mt-2 max-w-sm leading-relaxed">
+                                Please wait while our admin team reviews and approves your profile. You'll get full access once verified.
+                            </p>
+                        </div>
+                    ) :
+                        <div className="AllMarchentConsignment p-6 mt-20 md:mt-8 mb-8 mx-8 bg-white rounded-[8px]">
+                            {/* Merchant all parcel by number */}
+                            {/* ============================================================== */}
+                            <div className="w-full max-w-md mx-auto mb-4">
+                                <form onSubmit={(event) => {
+                                    event.preventDefault()
+                                    let number = event.target.ParcelSearchNumber.value
+                                    navigate(`/dashboard/UserSearchParcelByNumber/${number}`)
 
-                                <div className="overflow-x-auto p-4">
-                                    <table className="table w-full rounded-xl shadow-md">
-                                        <thead className="bg-base-200 text-base-content">
-                                            <tr>
-                                                <th>Merchant Name</th>
-                                                <th>Parcel ID</th>
-                                                <th>Amount</th>
-                                                <th>Delivery Charge</th>
-                                                <th>Request Date</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                            {
-                                                PendingData?.map(ConsignmentPending => <UserApprovedConsignment key={ConsignmentPending._id} ConsignmentPending={ConsignmentPending}></UserApprovedConsignment>)
-                                            }
-
-                                        </tbody>
-                                    </table>
-                                </div>
-
+                                }}>
+                                    <div className="relative">
+                                        <input
+                                            name="ParcelSearchNumber"
+                                            type="text"
+                                            placeholder="search your parcel by phone number"
+                                            className="w-full rounded-2xl border border-gray-300 px-4 pr-12 py-3 text-base shadow-sm outline-none
+                                        focus:border-blue-500 focus:ring-4 focus:ring-blue-200/60 transition"
+                                        />
+                                        {/* Right side search icon */}
+                                        <i type='submit' className="fa fa-search absolute right-3 top-1/2 -translate-y-1/2 text-lg text-gray-500"
+                                            aria-hidden="true" />
+                                    </div>
+                                </form>
                             </div>
-                        </TabPanel>
-                        <TabPanel>
-                            <div className="AllDataConsignment">
 
-                                <div className="overflow-x-auto p-4">
-                                    <table className="table w-full rounded-xl shadow-md">
-                                        <thead className="bg-base-200 text-base-content">
-                                            <tr>
-                                                <th>Merchant Name</th>
-                                                <th>Parcel ID</th>
-                                                <th>Amount</th>
-                                                <th>Delivery Charge</th>
-                                                <th>Request Date</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+                            {/* All status parcel show bellow for see merchant */}
+                            {/* ============================================================== */}
+                            <Tabs>
+                                <TabList>
+                                    <Tab> <span className="text-black font-[600] text-[16px]">All</span> </Tab>
+                                    <Tab> <span className="text-black font-[600] text-[16px]">Pending</span> </Tab>
+                                    <Tab> <span className="text-black font-[600] text-[16px]">Approved Pending</span> </Tab>
+                                    <Tab> <span className="text-black font-[600] text-[16px]">Delivered</span> </Tab>
+                                    <Tab> <span className="text-black font-[600] text-[16px]">Partially Delivered</span> </Tab>
+                                    <Tab> <span className="text-black font-[600] text-[16px]">Cancel</span> </Tab>
+                                    <Tab> <span className="text-black font-[600] text-[16px]">Reviewed</span> </Tab>
+                                </TabList>
+                                <TabPanel>
+                                    <div className="AllDataConsignment">
 
-                                            {
-                                                ApprovedPendingData?.map(ApprovedPending => <UserApprovedPendingConsignment key={ApprovedPending._id} ApprovedPending={ApprovedPending}></UserApprovedPendingConsignment>)
-                                            }
-                                        </tbody>
-                                    </table>
-                                </div>
+                                        <div className="overflow-x-auto p-4">
+                                            <table className="table w-full rounded-xl shadow-md">
+                                                <thead className="bg-base-200 text-base-content">
+                                                    <tr>
+                                                        <th>Merchant Name</th>
+                                                        <th>Parcel ID</th>
+                                                        <th>Amount</th>
+                                                        <th>Delivery Charge</th>
+                                                        <th>Request Date</th>
+                                                        <th>Status</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
 
-                            </div>
-                        </TabPanel>
-                        <TabPanel>
-                            <div className="AllDataConsignment">
-                                <div className="overflow-x-auto p-4">
-                                    <table className="table w-full rounded-xl shadow-md">
-                                        <thead className="bg-base-200 text-base-content">
-                                            <tr>
-                                                <th>Merchant Name</th>
-                                                <th>Parcel ID</th>
-                                                <th>Amount</th>
-                                                <th>Delivery Charge</th>
-                                                <th>Request Date</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+                                                    {
+                                                        ConsignmentAllData?.map(ConsignmentAll => <UserAllStatusConsignmentData key={ConsignmentAll._id} ConsignmentAll={ConsignmentAll}></UserAllStatusConsignmentData>)
+                                                    }
 
-                                            {
-                                                DeliveredData?.map(DeliveredData => <UserDelivereConsignment key={DeliveredData._id} DeliveredData={DeliveredData}></UserDelivereConsignment>)
-                                            }
+                                                </tbody>
+                                            </table>
+                                        </div>
 
-                                        </tbody>
-                                    </table>
-                                </div>
+                                    </div>
+                                </TabPanel>
+                                <TabPanel>
+                                    <div className="AllDataConsignment">
 
-                            </div>
-                        </TabPanel>
-                        <TabPanel>
-                            <div className="AllDataConsignment">
-                                <div className="overflow-x-auto p-4">
-                                    <table className="table w-full rounded-xl shadow-md">
-                                        <thead className="bg-base-200 text-base-content">
-                                            <tr>
-                                                <th>Merchant Name</th>
-                                                <th>Parcel ID</th>
-                                                <th>Amount</th>
-                                                <th>Delivery Charge</th>
-                                                <th>Request Date</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+                                        <div className="overflow-x-auto p-4">
+                                            <table className="table w-full rounded-xl shadow-md">
+                                                <thead className="bg-base-200 text-base-content">
+                                                    <tr>
+                                                        <th>Merchant Name</th>
+                                                        <th>Parcel ID</th>
+                                                        <th>Amount</th>
+                                                        <th>Delivery Charge</th>
+                                                        <th>Request Date</th>
+                                                        <th>Status</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
 
-                                            {
-                                                PartiallyDelivered?.map(PartiallyDeliveredData => <UserPartiallyDeliveredConsignment key={PartiallyDeliveredData._id} PartiallyDeliveredData={PartiallyDeliveredData}></UserPartiallyDeliveredConsignment>)
-                                            }
+                                                    {
+                                                        PendingData?.map(ConsignmentPending => <UserApprovedConsignment key={ConsignmentPending._id} ConsignmentPending={ConsignmentPending}></UserApprovedConsignment>)
+                                                    }
 
-                                        </tbody>
-                                    </table>
-                                </div>
+                                                </tbody>
+                                            </table>
+                                        </div>
 
-                            </div>
-                        </TabPanel>
-                        <TabPanel>
-                            <div className="AllDataConsignment">
-                                <div className="overflow-x-auto p-4">
-                                    <table className="table w-full rounded-xl shadow-md">
-                                        <thead className="bg-base-200 text-base-content">
-                                            <tr>
-                                                <th>Merchant Name</th>
-                                                <th>Parcel ID</th>
-                                                <th>Amount</th>
-                                                <th>Delivery Charge</th>
-                                                <th>Request Date</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+                                    </div>
+                                </TabPanel>
+                                <TabPanel>
+                                    <div className="AllDataConsignment">
 
-                                            {
-                                                CancelData?.map(CancelDelivered => <UserReturnedConsignment key={CancelDelivered._id} CancelDelivered={CancelDelivered}></UserReturnedConsignment>)
-                                            }
+                                        <div className="overflow-x-auto p-4">
+                                            <table className="table w-full rounded-xl shadow-md">
+                                                <thead className="bg-base-200 text-base-content">
+                                                    <tr>
+                                                        <th>Merchant Name</th>
+                                                        <th>Parcel ID</th>
+                                                        <th>Amount</th>
+                                                        <th>Delivery Charge</th>
+                                                        <th>Request Date</th>
+                                                        <th>Status</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
 
-                                        </tbody>
-                                    </table>
-                                </div>
+                                                    {
+                                                        ApprovedPendingData?.map(ApprovedPending => <UserApprovedPendingConsignment key={ApprovedPending._id} ApprovedPending={ApprovedPending}></UserApprovedPendingConsignment>)
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
 
-                            </div>
-                        </TabPanel>
-                        <TabPanel>
-                            <div className="AllDataConsignment">
-                                <div className="overflow-x-auto p-4">
-                                    <table className="table  w-full rounded-xl shadow-md">
-                                        <thead className="bg-base-200 text-base-content">
-                                            <tr>
-                                                <th>Merchant Name</th>
-                                                <th>Parcel ID</th>
-                                                <th>Amount</th>
-                                                <th>Delivery Charge</th>
-                                                <th>Request Date</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+                                    </div>
+                                </TabPanel>
+                                <TabPanel>
+                                    <div className="AllDataConsignment">
+                                        <div className="overflow-x-auto p-4">
+                                            <table className="table w-full rounded-xl shadow-md">
+                                                <thead className="bg-base-200 text-base-content">
+                                                    <tr>
+                                                        <th>Merchant Name</th>
+                                                        <th>Parcel ID</th>
+                                                        <th>Amount</th>
+                                                        <th>Delivery Charge</th>
+                                                        <th>Request Date</th>
+                                                        <th>Status</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
 
-                                            {
-                                                ReviewData?.map(ReviewUserData => <UserPendingConsignment key={ReviewUserData._id} refetch={refetch} ReviewUserData={ReviewUserData}></UserPendingConsignment>)
-                                            }
+                                                    {
+                                                        DeliveredData?.map(DeliveredData => <UserDelivereConsignment key={DeliveredData._id} DeliveredData={DeliveredData}></UserDelivereConsignment>)
+                                                    }
 
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </TabPanel>
-                    </Tabs>
-                </div>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </TabPanel>
+                                <TabPanel>
+                                    <div className="AllDataConsignment">
+                                        <div className="overflow-x-auto p-4">
+                                            <table className="table w-full rounded-xl shadow-md">
+                                                <thead className="bg-base-200 text-base-content">
+                                                    <tr>
+                                                        <th>Merchant Name</th>
+                                                        <th>Parcel ID</th>
+                                                        <th>Amount</th>
+                                                        <th>Delivery Charge</th>
+                                                        <th>Request Date</th>
+                                                        <th>Status</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    {
+                                                        PartiallyDelivered?.map(PartiallyDeliveredData => <UserPartiallyDeliveredConsignment key={PartiallyDeliveredData._id} PartiallyDeliveredData={PartiallyDeliveredData}></UserPartiallyDeliveredConsignment>)
+                                                    }
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </TabPanel>
+                                <TabPanel>
+                                    <div className="AllDataConsignment">
+                                        <div className="overflow-x-auto p-4">
+                                            <table className="table w-full rounded-xl shadow-md">
+                                                <thead className="bg-base-200 text-base-content">
+                                                    <tr>
+                                                        <th>Merchant Name</th>
+                                                        <th>Parcel ID</th>
+                                                        <th>Amount</th>
+                                                        <th>Delivery Charge</th>
+                                                        <th>Request Date</th>
+                                                        <th>Status</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    {
+                                                        CancelData?.map(CancelDelivered => <UserReturnedConsignment key={CancelDelivered._id} CancelDelivered={CancelDelivered}></UserReturnedConsignment>)
+                                                    }
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </TabPanel>
+                                <TabPanel>
+                                    <div className="AllDataConsignment">
+                                        <div className="overflow-x-auto p-4">
+                                            <table className="table  w-full rounded-xl shadow-md">
+                                                <thead className="bg-base-200 text-base-content">
+                                                    <tr>
+                                                        <th>Merchant Name</th>
+                                                        <th>Parcel ID</th>
+                                                        <th>Amount</th>
+                                                        <th>Delivery Charge</th>
+                                                        <th>Request Date</th>
+                                                        <th>Status</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    {
+                                                        ReviewData?.map(ReviewUserData => <UserPendingConsignment key={ReviewUserData._id} refetch={refetch} ReviewUserData={ReviewUserData}></UserPendingConsignment>)
+                                                    }
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </TabPanel>
+                            </Tabs>
+                        </div>
             }
         </div>
     );

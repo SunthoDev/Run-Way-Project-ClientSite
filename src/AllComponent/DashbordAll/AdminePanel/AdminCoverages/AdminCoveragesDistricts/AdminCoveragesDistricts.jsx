@@ -18,7 +18,7 @@ const AdminCoveragesDistricts = () => {
     // All District Data Find!!
     // ================================
     let { refetch, data: AllCoveragesDistricts = [] } = useQuery(["CoveragesDistrictsAll"], async () => {
-        let res = await fetch("https://server.trustereocourier.com.bd/CoveragesDistrictsAll")
+        let res = await fetch("http://localhost:5000/CoveragesDistrictsAll")
         return res.json()
 
     })
@@ -34,7 +34,7 @@ const AdminCoveragesDistricts = () => {
         let Data = { AddDistrict, AddPoliceStation }
         // console.log(Data)
 
-        fetch("https://server.trustereocourier.com.bd/AdminAddPoliceStationCoverage", {
+        fetch("http://localhost:5000/AdminAddPoliceStationCoverage", {
             method: "POST",
             headers: {
                 "content-type": "application/json"

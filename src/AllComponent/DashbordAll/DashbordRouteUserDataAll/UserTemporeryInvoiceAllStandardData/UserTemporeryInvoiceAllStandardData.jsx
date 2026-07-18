@@ -35,7 +35,7 @@ const UserTemporeryInvoiceAllStandardData = () => {
     // =============================================
     // Admin is get all tracking data 
     let { refetch, data: AllTrackingData = [] } = useQuery(["AllTrackingData"], async () => {
-        let res = await fetch("https://server.trustereocourier.com.bd/AllTrackingData")
+        let res = await fetch("http://localhost:5000/AllTrackingData")
         return res.json()
 
     })
@@ -127,7 +127,7 @@ const UserTemporeryInvoiceAllStandardData = () => {
     // Assign Parcel All Data Find Here !!  (PARCEL) (PICKUP) (RETURN)
     // =======================================================================
     // let { data: RiderAssignDataAll = [] } = useQuery(["AdminAllAssignParcelHere_AllAssignParcelFindToHere"], async () => {
-    //     let res = await fetch(`https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/AllAssignParcelFindToHere`)
+    //     let res = await fetch(`http://localhost:5000/AdminAllAssignParcelHere/AllAssignParcelFindToHere`)
     //     return res.json()
 
     // })
@@ -341,7 +341,7 @@ const UserTemporeryInvoiceAllStandardData = () => {
                                 };
                                 {/* Update Parcel Note*/ }
                                 {/* ==================================== */ }
-                                fetch(`https://server.trustereocourier.com.bd/UserWithRiderUpdateParcelNote/${InVoiceData?._id}`, {
+                                fetch(`http://localhost:5000/UserWithRiderUpdateParcelNote/${InVoiceData?._id}`, {
                                     method: "PATCH",
                                     headers: {
                                         "content-type": "application/json"
@@ -353,7 +353,7 @@ const UserTemporeryInvoiceAllStandardData = () => {
                                         if (data.modifiedCount > 0) {
                                             // Note Tracking Message Send Tracking Data Post 
                                             // =========================================================
-                                            fetch("https://server.trustereocourier.com.bd/NoteTrackingMessageSendOfUserAndRider", {
+                                            fetch("http://localhost:5000/NoteTrackingMessageSendOfUserAndRider", {
                                                 method: "POST",
                                                 headers: {
                                                     "Content-Type": "application/json"
@@ -440,7 +440,7 @@ const UserTemporeryInvoiceAllStandardData = () => {
 
                                         let ApprovedData = { ApprovedOffice: "Corporate office", PendingDate: moment().format("MM/DD/YY , hh:mm A"), AssignRider: "No" }
 
-                                        fetch(`https://server.trustereocourier.com.bd/AdminApprovedUserStandardData/${InVoiceData?._id}`, {
+                                        fetch(`http://localhost:5000/AdminApprovedUserStandardData/${InVoiceData?._id}`, {
                                             method: "PUT",
                                             headers: {
                                                 "content-type": "application/json"
@@ -454,7 +454,7 @@ const UserTemporeryInvoiceAllStandardData = () => {
                                                     // Parcel status update to pending from Review.
                                                     // tracking message send. 
                                                     // ===========================================
-                                                    fetch("https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/AdminTrackingRequestSentOfAssignRider", {
+                                                    fetch("http://localhost:5000/AdminAllAssignParcelHere/AdminTrackingRequestSentOfAssignRider", {
                                                         method: "POST",
                                                         headers: {
                                                             "Content-Type": "application/json"

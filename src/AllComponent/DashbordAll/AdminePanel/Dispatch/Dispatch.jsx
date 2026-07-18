@@ -15,7 +15,7 @@ const Dispatch = () => {
     // Created All Hub Find
     // =====================================================
     let { refetch, data: AllHubFind = [] } = useQuery(["HubManageAdminCreateOrUpdatePs_CreatedHubFind"], async () => {
-        let res = await fetch("https://server.trustereocourier.com.bd/HubManageAdminCreateOrUpdatePs/CreatedHubFind")
+        let res = await fetch("http://localhost:5000/HubManageAdminCreateOrUpdatePs/CreatedHubFind")
         return res.json()
     })
     // console.log(AllHubFind)
@@ -24,7 +24,7 @@ const Dispatch = () => {
     // Dispatch All Data Find
     // =====================================================
     let { data: DispatchAllData = [] } = useQuery(["DispatchAllRequestWithTrackingMessage_AllDispatchRequestData"], async () => {
-        let res = await fetch("https://server.trustereocourier.com.bd/DispatchAllRequestWithTrackingMessage/AllDispatchRequestData")
+        let res = await fetch("http://localhost:5000/DispatchAllRequestWithTrackingMessage/AllDispatchRequestData")
         return res.json()
     })
     // console.log(AllStationOfHub)
@@ -177,7 +177,7 @@ const Dispatch = () => {
 
                                                     // Dispatch Send Data Post 
                                                     // ===========================================
-                                                    fetch("https://server.trustereocourier.com.bd/DispatchAllRequestWithTrackingMessage/AdminDispatchRequestSend", {
+                                                    fetch("http://localhost:5000/DispatchAllRequestWithTrackingMessage/AdminDispatchRequestSend", {
                                                         method: "POST",
                                                         headers: {
                                                             "Content-Type": "application/json"
@@ -189,7 +189,7 @@ const Dispatch = () => {
                                                             if (data.insertedId) {
                                                                 // Dispatch Tracking Data Post 
                                                                 // ===========================================
-                                                                fetch("https://server.trustereocourier.com.bd/DispatchAllRequestWithTrackingMessage/AdminTrackingRequestSentOfDispatch", {
+                                                                fetch("http://localhost:5000/DispatchAllRequestWithTrackingMessage/AdminTrackingRequestSentOfDispatch", {
                                                                     method: "POST",
                                                                     headers: {
                                                                         "Content-Type": "application/json"
@@ -309,7 +309,7 @@ const Dispatch = () => {
                                                                         // Hub request data insert 
                                                                         // =================================
                                                                         try {
-                                                                            let res = await fetch(`https://server.trustereocourier.com.bd/DispatchAllRequestWithTrackingMessage/AdminDeleteDispatchData/${SentData?._id}`, {
+                                                                            let res = await fetch(`http://localhost:5000/DispatchAllRequestWithTrackingMessage/AdminDeleteDispatchData/${SentData?._id}`, {
                                                                                 method: "DELETE",
                                                                             })
                                                                             let result = await res.json()
@@ -411,7 +411,7 @@ const Dispatch = () => {
 
                                                 // Dispatch Send Data Post 
                                                 // ===========================================
-                                                fetch("https://server.trustereocourier.com.bd/DispatchAllRequestWithTrackingMessage/AdminDispatchRequestSend", {
+                                                fetch("http://localhost:5000/DispatchAllRequestWithTrackingMessage/AdminDispatchRequestSend", {
                                                     method: "POST",
                                                     headers: {
                                                         "Content-Type": "application/json"
@@ -423,7 +423,7 @@ const Dispatch = () => {
                                                         if (data.insertedId) {
                                                             // Dispatch Tracking Data Post 
                                                             // ===========================================
-                                                            fetch("https://server.trustereocourier.com.bd/DispatchAllRequestWithTrackingMessage/AdminTrackingRequestSentOfDispatch", {
+                                                            fetch("http://localhost:5000/DispatchAllRequestWithTrackingMessage/AdminTrackingRequestSentOfDispatch", {
                                                                 method: "POST",
                                                                 headers: {
                                                                     "Content-Type": "application/json"
@@ -543,7 +543,7 @@ const Dispatch = () => {
                                                                         // Hub request data insert 
                                                                         // =================================
                                                                         try {
-                                                                            let res = await fetch(`https://server.trustereocourier.com.bd/DispatchAllRequestWithTrackingMessage/AdminDeleteDispatchData/${ReceivedData?._id}`, {
+                                                                            let res = await fetch(`http://localhost:5000/DispatchAllRequestWithTrackingMessage/AdminDeleteDispatchData/${ReceivedData?._id}`, {
                                                                                 method: "DELETE",
                                                                             })
                                                                             let result = await res.json()

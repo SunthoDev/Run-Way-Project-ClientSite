@@ -13,7 +13,7 @@ const CreateRider = () => {
 
     // user data all find use tenStack query 
     let { refetch, data: adminAllUsers = [] } = useQuery(["users"], async () => {
-        let res = await fetch("https://server.trustereocourier.com.bd/users")
+        let res = await fetch("http://localhost:5000/users")
         return res.json()
 
     })
@@ -29,7 +29,7 @@ const CreateRider = () => {
 
     // user role Change Click User
     let handleUser = (id) => {
-        fetch(`https://server.trustereocourier.com.bd/AdminUpdateRoleUserToCreateRider/${id}`, {
+        fetch(`http://localhost:5000/AdminUpdateRoleUserToCreateRider/${id}`, {
             method: "PATCH",
         })
             .then(res => res.json())
@@ -50,7 +50,7 @@ const CreateRider = () => {
     // user role Change Click Rider
     let HandleRider = (id) => {
 
-        fetch(`https://server.trustereocourier.com.bd/AdminUpdateRoleRider/${id}`, {
+        fetch(`http://localhost:5000/AdminUpdateRoleRider/${id}`, {
             method: "PUT",
         })
             .then(res => res.json())
@@ -81,7 +81,7 @@ const CreateRider = () => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                fetch(`https://server.trustereocourier.com.bd/AdminDeleteUsers/${id}`, {
+                fetch(`http://localhost:5000/AdminDeleteUsers/${id}`, {
                     method: "DELETE",
                 })
                     .then(res => res.json())

@@ -30,7 +30,7 @@ const CreateRiderDataSee = ({ allUser, handleUser, HandleRider, HandleDelete, re
     // Created All Hub Find
     // =====================================================
     let { data: AllHubFind = [] } = useQuery(["HubManageAdminCreateOrUpdatePs_CreatedHubFind"], async () => {
-        let res = await fetch("https://server.trustereocourier.com.bd/HubManageAdminCreateOrUpdatePs/CreatedHubFind")
+        let res = await fetch("http://localhost:5000/HubManageAdminCreateOrUpdatePs/CreatedHubFind")
         return res.json()
     })
     // console.log(AllHubFind)
@@ -91,7 +91,7 @@ const CreateRiderDataSee = ({ allUser, handleUser, HandleRider, HandleDelete, re
                                     HubNameUp,
                                 }
 
-                                fetch(`https://server.trustereocourier.com.bd/AdminUpdateRiderHubName/${activeUser?._id}`, {
+                                fetch(`http://localhost:5000/AdminUpdateRiderHubName/${activeUser?._id}`, {
                                     method: "PATCH",
                                     headers: {
                                         "content-type": "application/json"

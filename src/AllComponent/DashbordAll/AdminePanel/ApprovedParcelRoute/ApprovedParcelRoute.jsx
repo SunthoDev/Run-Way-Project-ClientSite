@@ -10,7 +10,7 @@ const ApprovedParcelRoute = () => {
     // Admin all standard delivery data find 
     // ===========================================================
     let { refetch, data: AllParcelData = [] } = useQuery(["AdminAllStandardDeliveryDataFind"], async () => {
-        let res = await fetch("https://server.trustereocourier.com.bd/AdminAllStandardDeliveryDataFind")
+        let res = await fetch("http://localhost:5000/AdminAllStandardDeliveryDataFind")
         return res.json()
 
     })
@@ -25,7 +25,7 @@ const ApprovedParcelRoute = () => {
     // Created All Hub Find
     // =====================================================
     let { data: AllHubFind = [] } = useQuery(["HubManageAdminCreateOrUpdatePs_CreatedHubFind"], async () => {
-        let res = await fetch("https://server.trustereocourier.com.bd/HubManageAdminCreateOrUpdatePs/CreatedHubFind")
+        let res = await fetch("http://localhost:5000/HubManageAdminCreateOrUpdatePs/CreatedHubFind")
         return res.json()
     })
     // console.log(AllHubFind)
@@ -145,7 +145,7 @@ const ApprovedParcelRoute = () => {
                                                             </Link>
                                                             <br />
                                                             <button onClick={() => {
-                                                                fetch(`https://server.trustereocourier.com.bd/AdminApprovedParcelStandardDataYesPayment/${ParcelAll?._id}`, {
+                                                                fetch(`http://localhost:5000/AdminApprovedParcelStandardDataYesPayment/${ParcelAll?._id}`, {
                                                                     method: "PATCH",
                                                                 })
                                                                     .then(res => res.json())
@@ -167,7 +167,7 @@ const ApprovedParcelRoute = () => {
                                                             </button>
                                                             <br />
                                                             <button onClick={() => {
-                                                                fetch(`https://server.trustereocourier.com.bd/AdminApprovedParcelDataBackToPendingStatus/${ParcelAll?._id}`, {
+                                                                fetch(`http://localhost:5000/AdminApprovedParcelDataBackToPendingStatus/${ParcelAll?._id}`, {
                                                                     method: "PATCH",
                                                                 })
                                                                     .then(res => res.json())
