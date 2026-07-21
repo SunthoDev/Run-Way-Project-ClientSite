@@ -13,7 +13,7 @@ const StandardDelivery = () => {
     let { user, setStandardParcelId } = useContext(AuthContext)
     let navigate = useNavigate()
     const [roles] = useRole()
-    // console.log(user)
+    // console.log(roles)
 
     // ==============================================================================
     // find all police station 
@@ -58,9 +58,30 @@ const StandardDelivery = () => {
 
 
     // ==============================================================================
-    //  User Parcel Send Function to database 
+    // This parcel create use to user (APi key and Secret Key).
+    // Then (Parcel Data) and (Tracking Data) save from server.   
     // ==============================================================================
-    let handleStandardParcel = (event) => {
+    // ==========================================================================
+    // (StandardDeliveryData and TrackingMessagePost) will be save from server !!
+    // ==========================================================================
+    // let StandardDeliveryData = {
+    //     ParcelEntryFirstName: roles?.name,
+    //     ParcelEntryLastName: roles?.LastName,
+    //     ParcelEntryAddress: roles?.Address,
+    //     ParcelEntryPhone: roles?.Phone,
+    //     StandardEmailUser: roles?.email,
+    //     MyHub: MyHub?.HubName ? MyHub?.HubName : "No Hub",
+    //     StandardParcelId, date, time,
+    //     DeliveryCharge: "60", status: "Review", Payment: "No", ParcelCategory: "Regular", AssignRider: "No",
+    // }
+    // let TrackingMessagePost = {
+    //     userOrderIdTracking: StandardParcelId,
+    //     TrackingMessage,
+    //     TrackingDate: date,
+    //     TrackingTime: time
+    // };
+
+    let handleStandardParcel = async (event) => {
         event.preventDefault()
         let name = event.target.name.value
         let address = event.target.address.value
@@ -78,58 +99,67 @@ const StandardDelivery = () => {
         let time = moment().format("hh:mm A")
         let TrackingMessage = `Your parcel has been created successfully`
 
-        let TrackingMessagePost = {
-            userOrderIdTracking: StandardParcelId,
-            TrackingMessage,
-            TrackingDate: date,
-            TrackingTime: time
-        };
-
         let StandardDeliveryData = {
-            ParcelEntryFirstName: roles?.name, ParcelEntryLastName: roles?.LastName, ParcelEntryAddress: roles?.Address,
-            ParcelEntryPhone: roles?.Phone,
-            deliveryType, name, address, District, policeStation, AlternativePhone, RecipientEmail, number, CodAmount, Invoice, ItemDescription, note, weight, StandardEmailUser: user?.email, StandardParcelId, date, time, DeliveryCharge: "60", status: "Review", Payment: "No", ParcelCategory: "Regular", MyHub: MyHub?.HubName, AssignRider: "No"
+            // ================================================= 
+            // This data will be send from front-end !!
+            // ================================================= 
+            deliveryType, name, address, District, policeStation, AlternativePhone, RecipientEmail, number, CodAmount, Invoice, ItemDescription, note, weight,
         }
 
-        // console.log(StandardDeliveryData)
+        try {
+            const response = await fetch('http://localhost:5000/api/create_order', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'api-key': roles?.Api?.ApiKey,   // 🔑 API Key
+                    'secret-key': roles?.Api?.SecretKey       // 🔒 Secret Key
+                },
+                body: JSON.stringify(StandardDeliveryData)
+            });
 
-        fetch("http://localhost:5000/StandardDeliveryData", {
-            method: "POST",
-            headers: {
-                "content-type": "application/json"
-            },
-            body: JSON.stringify(StandardDeliveryData)
-        })
-            .then(res => res.json())
-            .then(data => {
-                navigate("/dashboard/StandardDelivery/StandardSucessInvoice")
-                if (data.insertedId) {
+            // রেসপন্স JSON-এ কনভার্ট করা
+            const data = await response.json();
 
-                    // tracking Message Send For Create Parcel
-                    // ====================================================
-                    fetch("http://localhost:5000/AdminAllAssignParcelHere/AdminTrackingRequestSentOfAssignRider", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify(TrackingMessagePost)
-                    })
-                        .then(res => res.json())
-                        .then(data => {
-                            // console.log(data)
-                            if (data.insertedId) {
-                                Swal.fire({
-                                    position: 'top-end',
-                                    icon: 'success',
-                                    title: 'Standard Delivery Success',
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                })
-                                setStandardParcelId(StandardParcelId)
-                            }
-                        })
-                }
-            })
+            // 🎯 ১. যদি রেসপন্স সাকসেস (200 OK) হয়
+            if (response.ok && data.success) {
+
+                // SweetAlert সাকসেস পপ-আপ
+                await Swal.fire({
+                    icon: 'success',
+                    title: 'Parcel Created!',
+                    text: data?.message || 'Your parcel has been created successfully.',
+                    timer: 2000,
+                    showConfirmButton: false,
+                    timerProgressBar: true
+                });
+
+                // পার্সেল আইডি স্টেটে সেভ করা
+                setStandardParcelId(data?.parcelId);
+
+                // ইনভয়েস পেজে নেভিগেট করা
+                navigate("/dashboard/StandardDelivery/StandardSucessInvoice");
+
+            } else {
+                // ❌ ২. ব্যাকেন্ড থেকে কোনো এরর আসলে (যেমন: 401, 403, 500)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Creation Failed',
+                    text: data?.message || 'Failed to create parcel. Please try again.',
+                    confirmButtonColor: '#d33'
+                });
+            }
+
+        } catch (err) {
+            // 🌐 ৩. নেটওয়ার্ক এরর বা সার্ভার ডাউন থাকলে
+            console.error("Network or Server Error:", err.message);
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Network Error',
+                text: 'Unable to connect to the server. Please check your internet connection.',
+                confirmButtonColor: '#d33'
+            });
+        }
     }
 
 
@@ -151,7 +181,6 @@ const StandardDelivery = () => {
             {/* =================================================== */}
 
             <div className='StandardDeliveryParent px-[12px] md:px-4 my-4'>
-
                 <div className="StandardMain bg-white rounded-[8px] p-[28px]">
 
                     <h2 className='text-black font-[600] text-[20px]'>Add New Parcel (Regular Service)</h2>
@@ -195,16 +224,16 @@ const StandardDelivery = () => {
 
                                 </div>
                                 <div className="grid grid-cols-6 mt-[18px] gap-2  items-center">
-                                    <h4 className='col-span-2 text-[16px] font-[500] '>Name</h4>
-                                    <input className='col-span-4  w-[100%]' type="text" name='name' />
+                                    <h4 className='col-span-2 text-[16px] font-[500] '>Name <span className="text-red-800">*</span></h4>
+                                    <input required placeholder="Enter your full name" className='col-span-4  w-[100%]' type="text" name='name' />
                                 </div>
                                 <div className="grid grid-cols-6 mt-[18px] gap-2  items-center">
-                                    <h4 className='col-span-2 text-[16px] font-[500] '>Address</h4>
-                                    <input className='col-span-4  w-[100%]' type="text" name='address' />
+                                    <h4 className='col-span-2 text-[16px] font-[500] '>Address <span className="text-red-800">*</span></h4>
+                                    <input required placeholder="Enter your full address" className='col-span-4  w-[100%]' type="text" name='address' />
                                 </div>
                                 <div className="grid grid-cols-6 mt-[18px] gap-2  items-center">
-                                    <h4 className='col-span-2 text-[16px] font-[500] '>District</h4>
-                                    <select onBlur={handleDistrictData} className="col-span-4 bg-white select select-bordered  text-black text-[14px] font-[600] rounded-[6px]  w-[100%]">
+                                    <h4 className='col-span-2 text-[16px] font-[500] '>District <span className="text-red-800">*</span></h4>
+                                    <select required onBlur={handleDistrictData} className="col-span-4 bg-white select select-bordered  text-black text-[14px] font-[600] rounded-[6px]  w-[100%]">
                                         <option disabled selected>Selected District</option>
                                         <option>Bogra</option>
                                         <option>Habiganj</option>
@@ -273,22 +302,22 @@ const StandardDelivery = () => {
                                     </select>
                                 </div>
                                 <div className="grid grid-cols-6 mt-[18px] gap-2  items-center">
-                                    <h4 className='col-span-2 text-[16px] font-[500] '>Thana</h4>
+                                    <h4 className='col-span-2 text-[16px] font-[500] '>Thana <span className="text-red-800">*</span></h4>
                                     <select name='policeStation' className="col-span-4 bg-white  select select-bordered  text-black text-[14px] font-[600] rounded-[6px]  w-[100%]">
-                                        <option disabled selected>Selected Police Station</option>
+                                        <option required disabled selected>Selected Police Station</option>
                                         {
-                                            DistrictAllPoliceStation.map(PoliceStationAll => <option>{PoliceStationAll.AddPoliceStation}</option>)
+                                            DistrictAllPoliceStation?.map(PoliceStationAll => <option>{PoliceStationAll.AddPoliceStation}</option>)
                                         }
                                     </select>
                                 </div>
                                 {/* <p className='text-green-600 py-[6px]'>Disable District Field</p> */}
                                 <div className="grid grid-cols-6 gap-2  items-center">
-                                    <h4 className='col-span-2 text-[16px] font-[500] '>Alternative <br /> Phone</h4>
-                                    <input className='col-span-4  w-[100%]' type="text" name='AlternativePhone' />
+                                    <h4 className='col-span-2 text-[16px] font-[500] '>Alternative <br /> Phone <span className="text-red-800">*</span></h4>
+                                    <input required placeholder="Enter your alternative phone number" className='col-span-4  w-[100%]' type="text" name='AlternativePhone' />
                                 </div>
                                 <div className="grid grid-cols-6 mt-[18px] gap-2  items-center">
                                     <h4 className='col-span-2 text-[16px] font-[500] '>Recipient <br /> Email</h4>
-                                    <input className='col-span-4  w-[100%]' type="text" name='RecipientEmail' />
+                                    <input placeholder="Enter your Recipient Email" className='col-span-4  w-[100%]' type="text" name='RecipientEmail' />
                                 </div>
 
                             </div>
@@ -297,28 +326,28 @@ const StandardDelivery = () => {
 
                             <div className="">
                                 <div className="grid grid-cols-6 mt-[18px] gap-2  items-center">
-                                    <h4 className='col-span-2 text-[16px] font-[500] '>Phone</h4>
-                                    <input className='col-span-4  w-[100%]' type="number" name='number' />
+                                    <h4 className='col-span-2 text-[16px] font-[500] '>Phone <span className="text-red-800">*</span></h4>
+                                    <input required placeholder="Enter your phone number" className='col-span-4  w-[100%]' type="number" name='number' />
                                 </div>
                                 <div className="grid grid-cols-6 mt-[18px] gap-2  items-center">
-                                    <h4 className='col-span-2 text-[16px] font-[500] '>COD <br /> Amount</h4>
-                                    <input className='col-span-4  w-[100%]' type="text" name='CodAmount' />
+                                    <h4 className='col-span-2 text-[16px] font-[500] '>COD <br /> Amount <span className="text-red-800">*</span></h4>
+                                    <input required placeholder="Enter your Cod amount" className='col-span-4  w-[100%]' type="text" name='CodAmount' />
                                 </div>
                                 <div className="grid grid-cols-6 mt-[18px] gap-2  items-center">
                                     <h4 className='col-span-2 text-[16px] font-[500] '>Invoice#</h4>
-                                    <input className='col-span-4  w-[100%]' type="text" name='Invoice' />
+                                    <input placeholder="Enter your invoice" className='col-span-4  w-[100%]' type="text" name='Invoice' />
                                 </div>
                                 <div className="grid grid-cols-6 mt-[18px] gap-2  items-center">
                                     <h4 className='col-span-2 text-[16px] font-[500] '>Item <br /> Description</h4>
-                                    <input className='col-span-4  w-[100%]' type="text" name='ItemDescription' />
+                                    <input placeholder="Enter your description" className='col-span-4  w-[100%]' type="text" name='ItemDescription' />
                                 </div>
                                 <div className="grid grid-cols-6 mt-[18px] gap-2  items-center">
                                     <h4 className='col-span-2 text-[16px] font-[500] '>Note</h4>
-                                    <input className='col-span-4  w-[100%]' type="text" name='note' />
+                                    <input placeholder="Enter your Note" className='col-span-4  w-[100%]' type="text" name='note' />
                                 </div>
                                 <div className="grid grid-cols-6 mt-[18px] gap-2  items-center">
-                                    <h4 className='col-span-2 text-[16px] font-[500] '>Wight(KG)</h4>
-                                    <input className='col-span-4  w-[100%]' type="number" name='weight' />
+                                    <h4 className='col-span-2 text-[16px] font-[500] '>Wight(KG) <span className="text-red-800">*</span></h4>
+                                    <input required placeholder="Enter your weight" className='col-span-4  w-[100%]' type="number" name='weight' />
                                 </div>
                                 <div className="grid grid-cols-6 mt-[18px] gap-2  items-center">
                                     <h4 className='col-span-2 text-[16px] font-[500] '>Exchange</h4>
@@ -334,7 +363,6 @@ const StandardDelivery = () => {
                     </form>
 
                 </div>
-
             </div>
 
         </div>

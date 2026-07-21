@@ -9,6 +9,7 @@ const API = () => {
     let { user } = useContext(AuthContext)
     const [loading, setLoading] = useState(false);
     const [roles, refetch] = useRole()
+    // console.log(roles
     const {
         _id, status, name, LastName, BusinessName, Address, RoutePasswordDetails,
         Phone, email, photo, userId, role, Districts, PoliceStations, date
@@ -367,10 +368,6 @@ const API = () => {
 
                                 </div>
                             </div>
-
-
-
-
 
                         </div>
                     )}
