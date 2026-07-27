@@ -12,7 +12,7 @@ const DeliveryMonitoring = () => {
     // User All Category Parcel Data Find
     // =======================================================================
     let { refetch, data: UserAllParcelDataFind = [] } = useQuery(["AdminAllStandardDeliveryDataFindAmountChange"], async () => {
-        let res = await fetch(`http://localhost:5000/AdminAllStandardDeliveryDataFindAmountChange`)
+        let res = await fetch(`https://server.trustereocourier.com.bd/AdminAllStandardDeliveryDataFindAmountChange`)
         return res.json()
 
     })

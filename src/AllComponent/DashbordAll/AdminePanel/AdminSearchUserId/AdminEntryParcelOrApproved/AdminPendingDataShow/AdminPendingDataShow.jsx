@@ -16,7 +16,7 @@ const AdminPendingDataShow = ({ ReviewDataSee, refetch }) => {
 
     // Coverage All Police Station Data Find
     let { data: AllCoveragesPoliceStation = [] } = useQuery(["CoveragesPoliceStationAll"], async () => {
-        let res = await fetch("http://localhost:5000/CoveragesPoliceStationAll")
+        let res = await fetch("https://server.trustereocourier.com.bd/CoveragesPoliceStationAll")
         return res.json()
 
     })
@@ -40,7 +40,7 @@ const AdminPendingDataShow = ({ ReviewDataSee, refetch }) => {
         let UpdateUserOrder = { district, PoliceStation, Weight }
         // console.log(UpdateUserOrder)
 
-        fetch(`http://localhost:5000/AdminUpdateUserStandardData/${_id}`, {
+        fetch(`https://server.trustereocourier.com.bd/AdminUpdateUserStandardData/${_id}`, {
             method: "PATCH",
             headers: {
                 "content-type": "application/json"
@@ -68,7 +68,7 @@ const AdminPendingDataShow = ({ ReviewDataSee, refetch }) => {
     let handlePendingData = (id) => {
         let ApprovedData = { ApprovedOffice: "Corporate office", ApprovedName: roles?.name, PendingDate: moment().format("MM/DD/YY , hh:mm A"), AssignRider: "No" }
 
-        fetch(`http://localhost:5000/AdminApprovedUserStandardData/${id}`, {
+        fetch(`https://server.trustereocourier.com.bd/AdminApprovedUserStandardData/${id}`, {
             method: "PUT",
             headers: {
                 "content-type": "application/json"

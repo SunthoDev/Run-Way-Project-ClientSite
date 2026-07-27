@@ -153,7 +153,7 @@ const API = () => {
                                                     setLoading(true);
                                                     try {
                                                         // আপনার মার্চেন্ট বা ইউজারের আইডি roles._id থেকে আসবে
-                                                        const response = await fetch(`http://localhost:5000/api/create_key/${roles?._id}`, {
+                                                        const response = await fetch(`https://server.trustereocourier.com.bd/api/create_key/${roles?._id}`, {
                                                             method: 'PUT', // যেহেতু প্রতিবার আপডেট বা ক্রিয়েট হচ্ছে, PUT/PATCH বেস্ট
                                                             headers: {
                                                                 'Content-Type': 'application/json',
@@ -246,7 +246,7 @@ const API = () => {
                                                         setLoading(true);
                                                         try {
                                                             // আপনার মার্চেন্ট বা ইউজারের আইডি roles._id থেকে আসবে
-                                                            const response = await fetch(`http://localhost:5000/api/create_key/${roles?._id}`, {
+                                                            const response = await fetch(`https://server.trustereocourier.com.bd/api/create_key/${roles?._id}`, {
                                                                 method: 'PUT', // যেহেতু প্রতিবার আপডেট বা ক্রিয়েট হচ্ছে, PUT/PATCH বেস্ট
                                                                 headers: {
                                                                     'Content-Type': 'application/json',

@@ -18,7 +18,7 @@ const RiderDashboard = () => {
     // Assign Parcel All Data Find Here !!  (PARCEL) (PICKUP) (RETURN)
     // =======================================================================
     let { refetch, data: RiderAssignDataAll = [] } = useQuery(["AdminAllAssignParcelHere_AllAssignParcelFindToHere"], async () => {
-        let res = await fetch(`http://localhost:5000/AdminAllAssignParcelHere/AllAssignParcelFindToHere`)
+        let res = await fetch(`https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/AllAssignParcelFindToHere`)
         return res.json()
 
     })

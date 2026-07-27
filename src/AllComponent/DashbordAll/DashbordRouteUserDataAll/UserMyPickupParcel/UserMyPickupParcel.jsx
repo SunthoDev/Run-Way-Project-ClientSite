@@ -39,7 +39,7 @@ const UserMyPickupParcel = () => {
 
     // TODO: Data lode problems late 
     let { refetch, data: UserPickupRequestData = [] } = useQuery(["PickupRequestWithManegeAdminUsers_PickupRequestAllDataFindByEmail"], async () => {
-        let res = await fetch(`http://localhost:5000/PickupRequestWithManegeAdminUsers/PickupRequestAllDataFindByEmail?email=${user?.email}`)
+        let res = await fetch(`https://server.trustereocourier.com.bd/PickupRequestWithManegeAdminUsers/PickupRequestAllDataFindByEmail?email=${user?.email}`)
         return res.json()
     })
 

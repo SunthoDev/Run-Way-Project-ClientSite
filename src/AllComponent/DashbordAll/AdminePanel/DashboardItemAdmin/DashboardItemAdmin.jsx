@@ -151,7 +151,7 @@ const DashboardItemAdmin = () => {
                     let allMessageValue = { mes1, mes2, mes3, mes4, mes5, mes6, mes7, mes8, mes9, mes10, mes11, mes12, mes13, mes14, mes15, mes16, mes17, mes18, TrackingMessage, TrackingDate }
                     // console.log(allMessageValue)
 
-                    fetch("http://localhost:5000/AdminTrackingSendMessage", {
+                    fetch("https://server.trustereocourier.com.bd/AdminTrackingSendMessage", {
                         method: "POST",
                         headers: {
                             "content-type": "application/json"

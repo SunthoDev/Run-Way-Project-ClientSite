@@ -16,7 +16,7 @@ const ParcelInfoOfRider = () => {
     // Rider Send Parcel COD all Amount Request Data Find Here
     // =======================================================================
     let { refetch, data: RiderSendParcelCODReqAll = [] } = useQuery(["AdminAllAssignParcelHere_ParcelCollectCODRequestAllDataFind"], async () => {
-        let res = await fetch(`http://localhost:5000/AdminAllAssignParcelHere/ParcelCollectCODRequestAllDataFind`)
+        let res = await fetch(`https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/ParcelCollectCODRequestAllDataFind`)
         return res.json()
     })
     // console.log(RiderSendParcelCODReqAll)
@@ -73,7 +73,7 @@ const ParcelInfoOfRider = () => {
                                         // ===================================================
                                         // Parcel Total Cod Amount Request Send  to Rider
                                         // ===================================================
-                                        fetch("http://localhost:5000/AdminAllAssignParcelHere/ParcelCollectAllCodRequestSend", {
+                                        fetch("https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/ParcelCollectAllCodRequestSend", {
                                             method: "POST",
                                             headers: {
                                                 "Content-Type": "application/json"
@@ -87,7 +87,7 @@ const ParcelInfoOfRider = () => {
                                                     // ============================================================
                                                     // Rider When Send a COD Request then his COD balance will be 0 
                                                     // ============================================================
-                                                    fetch(`http://localhost:5000/AdminAllAssignParcelHere/RiderParcelCODAmountWillBeZero/${roles?.email}`, {
+                                                    fetch(`https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/RiderParcelCODAmountWillBeZero/${roles?.email}`, {
                                                         method: "PATCH",
                                                     })
                                                         .then(res => res.json())

@@ -14,7 +14,7 @@ const AdminViewPaymentRequestAll = () => {
 
     // user data all find use tenStack query 
     let { refetch, data: PaymentRequestDataAll = [] } = useQuery(["AdminAllPaymentRequestData"], async () => {
-        let res = await fetch("http://localhost:5000/AdminAllPaymentRequestData")
+        let res = await fetch("https://server.trustereocourier.com.bd/AdminAllPaymentRequestData")
         return res.json()
 
     })
@@ -132,7 +132,7 @@ const AdminViewPaymentRequestAll = () => {
                                                                         let paidDetails = {
                                                                             PaidDate, PaidTime, PaidPersonName: roles?.name
                                                                         }
-                                                                        fetch(`http://localhost:5000/AdminPaidUserPaymentRequestData/${Payment?._id}`, {
+                                                                        fetch(`https://server.trustereocourier.com.bd/AdminPaidUserPaymentRequestData/${Payment?._id}`, {
                                                                             method: "PUT",
                                                                             headers: {
                                                                                 "content-type": "application/json"

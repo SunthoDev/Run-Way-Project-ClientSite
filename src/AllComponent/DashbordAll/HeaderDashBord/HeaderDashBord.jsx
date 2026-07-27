@@ -35,7 +35,7 @@ const HeaderDashBord = () => {
     // Admin Send All Notice Data Find
     // ============================================================
     let { refetch, data: AllNotice = [] } = useQuery(["NoticeMessageSendAdminToAllUser_AllNoticeData"], async () => {
-        let res = await fetch(`http://localhost:5000/NoticeMessageSendAdminToAllUser/AllNoticeData`)
+        let res = await fetch(`https://server.trustereocourier.com.bd/NoticeMessageSendAdminToAllUser/AllNoticeData`)
         return res.json()
     })
     // console.log(AllNotice)
@@ -127,7 +127,7 @@ const HeaderDashBord = () => {
                     let time = moment().format("hh:mm A")
                     let allInfo = { ID, Message, date, time }
                     try {
-                        let res = await fetch("http://localhost:5000/NoticeMessageSendAdminToAllUser/AdminSendNoticeMessage", {
+                        let res = await fetch("https://server.trustereocourier.com.bd/NoticeMessageSendAdminToAllUser/AdminSendNoticeMessage", {
                             method: "POST",
                             headers: {
                                 "content-type": "application/json"

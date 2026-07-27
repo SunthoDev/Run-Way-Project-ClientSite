@@ -321,7 +321,7 @@ const UserProfile = () => {
 
                                         try {
                                             // 🚀 Fetch API ব্যবহার করে PUT রিকোয়েস্ট পাঠানো হচ্ছে
-                                            const response = await fetch(`http://localhost:5000/MerchantProfileAllWorkHere/UserRoutePasswordUpdate/${_id}`, {
+                                            const response = await fetch(`https://server.trustereocourier.com.bd/MerchantProfileAllWorkHere/UserRoutePasswordUpdate/${_id}`, {
                                                 method: 'PUT',
                                                 headers: {
                                                     'Content-Type': 'application/json'
@@ -479,7 +479,7 @@ const UserProfile = () => {
 
                                                         try {
                                                             // 🚀 Axios এর পরিবর্তে নেটিভ fetch ব্যবহার করা হলো
-                                                            const response = await fetch(`http://localhost:5000/MerchantProfileAllWorkHere/UserRoutePasswordUpdate/${_id}`, {
+                                                            const response = await fetch(`https://server.trustereocourier.com.bd/MerchantProfileAllWorkHere/UserRoutePasswordUpdate/${_id}`, {
                                                                 method: 'PUT',
                                                                 headers: {
                                                                     'Content-Type': 'application/json'

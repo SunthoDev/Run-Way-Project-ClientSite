@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 
 const UserAllData = ({ allUser, HandleAdmin, handleUser, HandleRider, HandleSubAdmin, HandleDelete, refetch }) => {
     // console.log(allUser)
-    let { photo, name, LastName, role, email, _id } = allUser
+    let { photo, name, LastName, role, email, userUid, _id } = allUser
 
 
 
@@ -58,7 +58,7 @@ const UserAllData = ({ allUser, HandleAdmin, handleUser, HandleRider, HandleSubA
                     <button onClick={() => handleAccessClick(allUser)}>Access Route</button>
                 }
                 <br />
-                <button onClick={() => HandleDelete(_id)}>Delete</button>
+                <button onClick={() => HandleDelete(userUid)}>Delete</button>
             </td>
 
             {/* ========================================================== */}
@@ -114,7 +114,7 @@ const UserAllData = ({ allUser, HandleAdmin, handleUser, HandleRider, HandleSubA
                                     Rider_CODAmount_Request_Access,
                                 }
 
-                                fetch(`http://localhost:5000/AdminSentRoutAccessToSubAdmin/${activeUser?._id}`, {
+                                fetch(`https://server.trustereocourier.com.bd/AdminSentRoutAccessToSubAdmin/${activeUser?._id}`, {
                                     method: "PATCH",
                                     headers: {
                                         "content-type": "application/json"

@@ -31,7 +31,7 @@ const UserBankDetailsAdd = () => {
         let allBankInformationData = { BankName, AccountName, AccountNumber, BranchName, RoutingNo, BakashNo, RocketNo, NagadNo }
         // console.log(allBankInformationData)
 
-        fetch(`http://localhost:5000/UserBankDetailsAddAndUpdate/${_id}`, {
+        fetch(`https://server.trustereocourier.com.bd/UserBankDetailsAddAndUpdate/${_id}`, {
             method: "PUT",
             headers: {
                 "content-type": "application/json"

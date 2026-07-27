@@ -37,7 +37,7 @@ const AdminSearchStandardParcelUser = () => {
     // =============================================
     // Admin is get all tracking data 
     let { refetch, data: AllTrackingData = [] } = useQuery(["AllTrackingData"], async () => {
-        let res = await fetch("http://localhost:5000/AllTrackingData")
+        let res = await fetch("https://server.trustereocourier.com.bd/AllTrackingData")
         return res.json()
 
     })
@@ -298,7 +298,7 @@ const AdminSearchStandardParcelUser = () => {
 
                                         let ApprovedData = { ApprovedOffice: "Corporate office", PendingDate: moment().format("MM/DD/YY , hh:mm A"), AssignRider: "No" }
 
-                                        fetch(`http://localhost:5000/AdminApprovedUserStandardData/${InVoiceData?._id}`, {
+                                        fetch(`https://server.trustereocourier.com.bd/AdminApprovedUserStandardData/${InVoiceData?._id}`, {
                                             method: "PUT",
                                             headers: {
                                                 "content-type": "application/json"
@@ -312,7 +312,7 @@ const AdminSearchStandardParcelUser = () => {
                                                     // Parcel status update to pending from Review.
                                                     // tracking message send. 
                                                     // ===========================================
-                                                    fetch("http://localhost:5000/AdminAllAssignParcelHere/AdminTrackingRequestSentOfAssignRider", {
+                                                    fetch("https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/AdminTrackingRequestSentOfAssignRider", {
                                                         method: "POST",
                                                         headers: {
                                                             "Content-Type": "application/json"

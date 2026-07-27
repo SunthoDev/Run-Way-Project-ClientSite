@@ -17,7 +17,7 @@ const CurrentBalanceDetails = () => {
     // User Information find for payment Request !!
     // ===================================================
     let { refetch, data: userInformationForPayment = [] } = useQuery(["userRoleCheck"], async () => {
-        let res = await fetch(`http://localhost:5000/userRoleCheck/${email}`)
+        let res = await fetch(`https://server.trustereocourier.com.bd/userRoleCheck/${email}`)
         return res.json()
 
     })
@@ -72,7 +72,7 @@ const CurrentBalanceDetails = () => {
     // All Police Station data. which is add Hub
     // =====================================================
     let { data: AllStationOfHub = [] } = useQuery(["HubManageAdminCreateOrUpdatePs_PoliceStationWithOfHub"], async () => {
-        let res = await fetch("http://localhost:5000/HubManageAdminCreateOrUpdatePs/PoliceStationWithOfHub")
+        let res = await fetch("https://server.trustereocourier.com.bd/HubManageAdminCreateOrUpdatePs/PoliceStationWithOfHub")
         return res.json()
     })
     // console.log(AllStationOfHub)
@@ -160,7 +160,7 @@ const CurrentBalanceDetails = () => {
         }
 
 
-        fetch(`http://localhost:5000/UserPaymentRequestUpdateAllData/${userInformationForPayment?.email}`, {
+        fetch(`https://server.trustereocourier.com.bd/UserPaymentRequestUpdateAllData/${userInformationForPayment?.email}`, {
             method: "PUT",
             headers: {
                 "content-type": "application/json"
@@ -171,7 +171,7 @@ const CurrentBalanceDetails = () => {
             .then(data => {
                 if (data.modifiedCount > 0) {
                     // Post Data  Start
-                    fetch("http://localhost:5000/UserPaymentRequest", {
+                    fetch("https://server.trustereocourier.com.bd/UserPaymentRequest", {
                         method: "POST",
                         headers: {
                             "content-type": "application/json"

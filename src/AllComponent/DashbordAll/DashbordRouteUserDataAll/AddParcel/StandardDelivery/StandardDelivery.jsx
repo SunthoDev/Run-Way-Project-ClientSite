@@ -25,7 +25,7 @@ const StandardDelivery = () => {
     }
     // Coverage All Police Station Data Find
     let { refetch, data: AllCoveragesPoliceStation = [] } = useQuery(["CoveragesPoliceStationAll"], async () => {
-        let res = await fetch("http://localhost:5000/CoveragesPoliceStationAll")
+        let res = await fetch("https://server.trustereocourier.com.bd/CoveragesPoliceStationAll")
         return res.json()
     })
     let DistrictAllPoliceStation = AllCoveragesPoliceStation.filter(PoliceStationAll => PoliceStationAll?.AddDistrict == District)
@@ -45,7 +45,7 @@ const StandardDelivery = () => {
     // All Police Station data. which is add Hub
     // =====================================================
     let { data: AllStationOfHub = [] } = useQuery(["HubManageAdminCreateOrUpdatePs_PoliceStationWithOfHub"], async () => {
-        let res = await fetch("http://localhost:5000/HubManageAdminCreateOrUpdatePs/PoliceStationWithOfHub")
+        let res = await fetch("https://server.trustereocourier.com.bd/HubManageAdminCreateOrUpdatePs/PoliceStationWithOfHub")
         return res.json()
     })
     // console.log(AllStationOfHub)
@@ -107,7 +107,7 @@ const StandardDelivery = () => {
         }
 
         try {
-            const response = await fetch('http://localhost:5000/api/create_order', {
+            const response = await fetch('https://server.trustereocourier.com.bd/api/create_order', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

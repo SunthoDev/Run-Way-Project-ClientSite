@@ -54,7 +54,7 @@ const UserPendingConsignment = ({ ReviewUserData, refetch }) => {
                                 confirmButtonText: "Yes, delete it!"
                             }).then((result) => {
                                 if (result.isConfirmed) {
-                                    fetch(`http://localhost:5000/AdminAndUserDeleteReviewParcel/${ReviewUserData?.StandardParcelId}`, {
+                                    fetch(`https://server.trustereocourier.com.bd/AdminAndUserDeleteReviewParcel/${ReviewUserData?.StandardParcelId}`, {
                                         method: "DELETE",
                                     })
                                         .then(res => res.json())

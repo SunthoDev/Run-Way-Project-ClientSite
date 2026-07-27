@@ -21,7 +21,7 @@ const AdminEditUserInformation = () => {
     // Coverage All Police Station Data Find
     // ==================================================
     let { data: AllCoveragesPoliceStation = [] } = useQuery(["CoveragesPoliceStationAll"], async () => {
-        let res = await fetch("http://localhost:5000/CoveragesPoliceStationAll")
+        let res = await fetch("https://server.trustereocourier.com.bd/CoveragesPoliceStationAll")
         return res.json()
     })
     let DistrictAllPoliceStation = AllCoveragesPoliceStation.filter(PoliceStationAll => PoliceStationAll?.AddDistrict === Districts)
@@ -55,7 +55,7 @@ const AdminEditUserInformation = () => {
                             let allInfo = { nameUP, LastNameUP, BusinessNameUP, AddressUP, PhoneUP, statusUP, DistrictUP, PoliceStationsUP: PoliceStationsUP === "" ? PoliceStations : PoliceStationsUP}
                             // console.log(allInfo)
 
-                            fetch(`http://localhost:5000/AdminUserInformationUpdate/${userInformation?._id}`, {
+                            fetch(`https://server.trustereocourier.com.bd/AdminUserInformationUpdate/${userInformation?._id}`, {
                                 method: "PATCH",
                                 headers: {
                                     "content-type": "application/json"

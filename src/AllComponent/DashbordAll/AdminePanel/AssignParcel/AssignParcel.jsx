@@ -15,7 +15,7 @@ const AssignParcel = () => {
     // User All Category Parcel Data Find
     // =======================================================================
     let { refetch, data: UserAllParcelDataFind = [] } = useQuery(["AdminAllStandardDeliveryDataFindAmountChange"], async () => {
-        let res = await fetch(`http://localhost:5000/AdminAllStandardDeliveryDataFindAmountChange`)
+        let res = await fetch(`https://server.trustereocourier.com.bd/AdminAllStandardDeliveryDataFindAmountChange`)
         return res.json()
 
     })
@@ -35,7 +35,7 @@ const AssignParcel = () => {
     // Created All Hub Find
     // =====================================================
     let { data: AllHubFind = [] } = useQuery(["HubManageAdminCreateOrUpdatePs_CreatedHubFind"], async () => {
-        let res = await fetch("http://localhost:5000/HubManageAdminCreateOrUpdatePs/CreatedHubFind")
+        let res = await fetch("https://server.trustereocourier.com.bd/HubManageAdminCreateOrUpdatePs/CreatedHubFind")
         return res.json()
     })
     // console.log(AllHubFind)
@@ -57,7 +57,7 @@ const AssignParcel = () => {
     // =============================================
     // user data all find use tenStack query 
     let { data: adminAllUsers = [] } = useQuery(["users"], async () => {
-        let res = await fetch("http://localhost:5000/users")
+        let res = await fetch("https://server.trustereocourier.com.bd/users")
         return res.json()
     })
     let [searchHubName, setSearchHubName] = useState("")
@@ -482,7 +482,7 @@ const AssignParcel = () => {
                                                                     confirmButtonText: "Yes, delete it!"
                                                                 }).then((result) => {
                                                                     if (result.isConfirmed) {
-                                                                        fetch(`http://localhost:5000/AdminAndUserDeleteReviewParcel/${AllData?.StandardParcelId}`, {
+                                                                        fetch(`https://server.trustereocourier.com.bd/AdminAndUserDeleteReviewParcel/${AllData?.StandardParcelId}`, {
                                                                             method: "DELETE",
                                                                         })
                                                                             .then(res => res.json())
@@ -576,7 +576,7 @@ const AssignParcel = () => {
 
                                                 //  Parcel assign to rider data insert!!
                                                 // ==============================================
-                                                fetch("http://localhost:5000/AdminAllAssignParcelHere/InsertAssignParcelToRider", {
+                                                fetch("https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/InsertAssignParcelToRider", {
                                                     method: "POST",
                                                     headers: {
                                                         "Content-Type": "application/json"
@@ -588,7 +588,7 @@ const AssignParcel = () => {
                                                         if (data.insertedId) {
                                                             // Parcel assign Tracking Data Post 
                                                             // ===========================================
-                                                            fetch("http://localhost:5000/AdminAllAssignParcelHere/AdminTrackingRequestSentOfAssignRider", {
+                                                            fetch("https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/AdminTrackingRequestSentOfAssignRider", {
                                                                 method: "POST",
                                                                 headers: {
                                                                     "Content-Type": "application/json"
@@ -601,7 +601,7 @@ const AssignParcel = () => {
                                                                     if (data.insertedId) {
                                                                         // Parcel Assign Rider status up (Yes)
                                                                         // =======================================
-                                                                        fetch(`http://localhost:5000/AdminAllAssignParcelHere/ParcelAssignStatusUpdateYes/${ParcelId}`, {
+                                                                        fetch(`https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/ParcelAssignStatusUpdateYes/${ParcelId}`, {
                                                                             method: "PUT",
                                                                             headers: {
                                                                                 "Content-Type": "application/json"
@@ -711,7 +711,7 @@ const AssignParcel = () => {
                                                 }
                                                 //  Parcel assign to rider data insert!!
                                                 // ==============================================
-                                                fetch("http://localhost:5000/AdminAllAssignParcelHere/InsertAssignParcelToRiderMultiple", {
+                                                fetch("https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/InsertAssignParcelToRiderMultiple", {
                                                     method: "POST",
                                                     headers: {
                                                         "Content-Type": "application/json"
@@ -726,7 +726,7 @@ const AssignParcel = () => {
                                                             console.log(data)
                                                             // Return tracking data post!!
                                                             // ===========================================
-                                                            fetch("http://localhost:5000/AdminAllAssignParcelHere/AdminTrackingRequestSentOfAssignRiderMultiple", {
+                                                            fetch("https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/AdminTrackingRequestSentOfAssignRiderMultiple", {
                                                                 method: "POST",
                                                                 headers: {
                                                                     "Content-Type": "application/json"
@@ -739,7 +739,7 @@ const AssignParcel = () => {
                                                                     if (data.insertedCount > 0) {
                                                                         // Parcel Assign Rider status up (Yes)
                                                                         // =======================================
-                                                                        fetch("http://localhost:5000/AdminAllAssignParcelHere/ParcelAssignStatusUpdateYesMultiple", {
+                                                                        fetch("https://server.trustereocourier.com.bd/AdminAllAssignParcelHere/ParcelAssignStatusUpdateYesMultiple", {
                                                                             method: "PUT",
                                                                             headers: {
                                                                                 "Content-Type": "application/json",

@@ -17,7 +17,7 @@ const ParcelInvoiceOfRider = () => {
     // =============================================
     // Admin is get all tracking data 
     let { refetch, data: AllTrackingData = [] } = useQuery(["AllTrackingData"], async () => {
-        let res = await fetch("http://localhost:5000/AllTrackingData")
+        let res = await fetch("https://server.trustereocourier.com.bd/AllTrackingData")
         return res.json()
 
     })

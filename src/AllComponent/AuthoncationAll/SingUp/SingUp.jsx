@@ -39,11 +39,11 @@ const SingUp = () => {
     }
     // user data all find use tenStack query 
     let { refetch, data: AllCoveragesPoliceStation = [] } = useQuery(["CoveragesPoliceStationAll"], async () => {
-        let res = await fetch("http://localhost:5000/CoveragesPoliceStationAll")
+        let res = await fetch("https://server.trustereocourier.com.bd/CoveragesPoliceStationAll")
         return res.json()
 
     })
-    let DistrictAllPoliceStation = AllCoveragesPoliceStation.filter(PoliceStationAll => PoliceStationAll?.AddDistrict === District)
+    let DistrictAllPoliceStation = AllCoveragesPoliceStation?.filter(PoliceStationAll => PoliceStationAll?.AddDistrict === District)
 
     // console.log(AllCoveragesPoliceStation)
     // console.log(District)
@@ -81,9 +81,13 @@ const SingUp = () => {
         let allData = { BusinessName, FirstName, LastName, Districts, PoliceStations, Address, Phone, Email, Password, confirmPassword, date }
         // console.log(allData)
 
+        let firebaseUser = null; // ইউজারকে ট্র্যাক করার জন্য
+        // console.log(firebaseUser)
+
         createUser(Email, Password)
             .then(result => {
                 let createUser = result.user
+                firebaseUser = result.user; // ইউজার রেফারেন্স সেভ করে রাখা হলো
 
                 setSuccess(" Your SingUp Successfully ")
 
@@ -92,12 +96,12 @@ const SingUp = () => {
                 // user Update 
                 updateProfile(createUser, { displayName: FirstName })
                     .then(() => {
-                        let saveUser = { name: createUser.displayName, LastName: LastName, BusinessName, Address, Phone, Password, email: createUser.email, photo: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?auto=format&fit=crop&q=80&w=1480&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", userId: Math.round(Math.random() * 99999999).toString(), role: "user", status: "pending", Districts, PoliceStations, date }
+                        let saveUser = { userUid: createUser?.uid, name: createUser.displayName, LastName: LastName, BusinessName, Address, Phone, Password, email: createUser.email, photo: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?auto=format&fit=crop&q=80&w=1480&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", userId: Math.round(Math.random() * 99999999).toString(), role: "user", status: "pending", Districts, PoliceStations, date }
 
                         // console.log(saveUser)
 
                         // save user DB 
-                        fetch("http://localhost:5000/users", {
+                        fetch("https://server.trustereocourier.com.bd/users", {
                             method: "POST",
                             headers: {
                                 "content-type": "application/json"
@@ -124,9 +128,22 @@ const SingUp = () => {
                     .catch(error => {
                     })
             })
-            .catch(error => {
-                console.log(error)
-                setError(error.message)
+            .catch(async (error) => {
+                console.error("Database Save Failed:", error);
+                setError(error.message);
+
+                if (firebaseUser) {
+                    try {
+                        // 🎯 await দিয়ে নিশ্চিত হওয়া হচ্ছে যে ইউজার ডিলিট সম্পন্ন হয়েছে
+                        await firebaseUser.delete();
+                        console.log("Firebase user deleted due to database failure.");
+                    } catch (deleteError) {
+                        console.error("Failed to delete Firebase user:", deleteError);
+                    }
+                }
+
+                // 🎯 সব প্রসেস শেষ হওয়ার পর লোডিং বন্ধ হবে
+                setIsLoading(false);
             })
     }
 

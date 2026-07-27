@@ -29,7 +29,7 @@ const UserPendingConsignmentInvoiceUpdate = () => {
 
         let UserConsignmentPendingInvoiceUpdate = { number, name, address, district, policeStation, CodAmount, Invoice, note, weight }
 
-        fetch(`http://localhost:5000/UserConsignmentPendingInvoiceUpdateData/${_id}`, {
+        fetch(`https://server.trustereocourier.com.bd/UserConsignmentPendingInvoiceUpdateData/${_id}`, {
             method: "PATCH",
             headers: {
                 "content-type": "application/json"

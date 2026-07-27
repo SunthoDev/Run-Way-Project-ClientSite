@@ -22,7 +22,7 @@ const UserCancelParcelAll = () => {
 
     // TODO: Data lode problems late 
     let { refetch, data: AllCancelData = [] } = useQuery(["UseAllCancelStandardData"], async () => {
-        let res = await fetch(`http://localhost:5000/UseAllCancelStandardData?email=${user?.email}`)
+        let res = await fetch(`https://server.trustereocourier.com.bd/UseAllCancelStandardData?email=${user?.email}`)
         return res.json()
     })
     // console.log(AllCancelData)
