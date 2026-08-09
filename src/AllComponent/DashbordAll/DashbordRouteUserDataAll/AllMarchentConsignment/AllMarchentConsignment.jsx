@@ -42,33 +42,33 @@ const AllMarchentConsignment = () => {
     // ===========================
     // All  data filter bellow
     // ===========================
-    let ConsignmentAllData = AllConsignmentData.filter(approved => approved?.status == "Pending" || approved?.Payment == "Yes" && approved?.status == "Delivered" || approved?.Payment == "Yes" && approved?.status == "PartiallyDelivered" || approved?.Payment == "Yes" && approved?.status == "Cancel")
+    let ConsignmentAllData = AllConsignmentData?.filter(approved => approved?.status == "Pending" || approved?.Payment == "Yes" && approved?.status == "Delivered" || approved?.Payment == "Yes" && approved?.status == "PartiallyDelivered" || approved?.Payment == "Yes" && approved?.status == "Cancel")
 
     // console.log(ConsignmentAllData)
 
 
     // pending data find 
-    let ReviewData = AllConsignmentData.filter(Review => Review?.status === "Review")
+    let ReviewData = AllConsignmentData?.filter(Review => Review?.status === "Review")
     // console.log(PendingData)
 
     // approved data find 
-    let PendingData = AllConsignmentData.filter(Pending => Pending?.status == "Pending")
+    let PendingData = AllConsignmentData?.filter(Pending => Pending?.status == "Pending")
     // console.log(ApprovedData)
 
     // Approved PendingData data find 
-    let ApprovedPendingData = AllConsignmentData.filter(approved => approved?.Payment == "No" && approved?.status == "Delivered" || approved?.Payment == "No" && approved?.status == "PartiallyDelivered" || approved?.Payment == "No" && approved?.status == "Cancel")
+    let ApprovedPendingData = AllConsignmentData?.filter(approved => approved?.Payment == "No" && approved?.status == "Delivered" || approved?.Payment == "No" && approved?.status == "PartiallyDelivered" || approved?.Payment == "No" && approved?.status == "Cancel")
     // console.log(ApprovedPendingData)
 
     // Delivered data find 
-    let DeliveredData = AllConsignmentData.filter(approved => approved?.status == "Delivered" && approved?.Payment == "Yes")
+    let DeliveredData = AllConsignmentData?.filter(approved => approved?.status == "Delivered" && approved?.Payment == "Yes")
     // console.log(ApprovedPendingData)
 
     // Partially Delivered data find 
-    let PartiallyDelivered = AllConsignmentData.filter(approved => approved?.status == "PartiallyDelivered" && approved?.Payment == "Yes")
+    let PartiallyDelivered = AllConsignmentData?.filter(approved => approved?.status == "PartiallyDelivered" && approved?.Payment == "Yes")
     // console.log(ApprovedPendingData)
 
     // Partially Delivered data find 
-    let CancelData = AllConsignmentData.filter(Cancel => Cancel?.status == "Cancel" && Cancel?.Payment == "Yes")
+    let CancelData = AllConsignmentData?.filter(Cancel => Cancel?.status == "Cancel" && Cancel?.Payment == "Yes")
     // console.log(ApprovedPendingData)
 
 
@@ -144,7 +144,8 @@ const AllMarchentConsignment = () => {
                         </div>
                     ) :
                         <div className="AllMarchentConsignment p-6 mt-20 md:mt-8 mb-8 mx-8 bg-white rounded-[8px]">
-                            {/* Merchant all parcel by number */}
+                            {/* ============================================================== */}
+                            {/* Merchant all parcel (Search) by number !! */}
                             {/* ============================================================== */}
                             <div className="w-full max-w-md mx-auto mb-4">
                                 <form onSubmit={(event) => {
@@ -168,7 +169,8 @@ const AllMarchentConsignment = () => {
                                 </form>
                             </div>
 
-                            {/* All status parcel show bellow for see merchant */}
+                            {/* ============================================================== */}
+                            {/* All status parcel show bellow for check merchant !! */}
                             {/* ============================================================== */}
                             <Tabs>
                                 <TabList>
@@ -182,7 +184,7 @@ const AllMarchentConsignment = () => {
                                 </TabList>
                                 <TabPanel>
                                     <div className="AllDataConsignment">
-
+                                        <h4 classname="text-[16px] font-[600] text-left text-black">Parcel total data: {ConsignmentAllData?.length}</h4>
                                         <div className="overflow-x-auto p-4">
                                             <table className="table w-full rounded-xl shadow-md">
                                                 <thead className="bg-base-200 text-base-content">
@@ -210,7 +212,7 @@ const AllMarchentConsignment = () => {
                                 </TabPanel>
                                 <TabPanel>
                                     <div className="AllDataConsignment">
-
+                                        <h4 classname="text-[16px] font-[600] text-left text-black">Parcel total data: {PendingData?.length}</h4>
                                         <div className="overflow-x-auto p-4">
                                             <table className="table w-full rounded-xl shadow-md">
                                                 <thead className="bg-base-200 text-base-content">
@@ -238,7 +240,7 @@ const AllMarchentConsignment = () => {
                                 </TabPanel>
                                 <TabPanel>
                                     <div className="AllDataConsignment">
-
+                                        <h4 classname="text-[16px] font-[600] text-left text-black">Parcel total data: {ApprovedPendingData?.length}</h4>
                                         <div className="overflow-x-auto p-4">
                                             <table className="table w-full rounded-xl shadow-md">
                                                 <thead className="bg-base-200 text-base-content">
@@ -265,6 +267,7 @@ const AllMarchentConsignment = () => {
                                 </TabPanel>
                                 <TabPanel>
                                     <div className="AllDataConsignment">
+                                        <h4 classname="text-[16px] font-[600] text-left text-black">Parcel total data: {DeliveredData?.length}</h4>
                                         <div className="overflow-x-auto p-4">
                                             <table className="table w-full rounded-xl shadow-md">
                                                 <thead className="bg-base-200 text-base-content">
@@ -292,6 +295,7 @@ const AllMarchentConsignment = () => {
                                 </TabPanel>
                                 <TabPanel>
                                     <div className="AllDataConsignment">
+                                        <h4 classname="text-[16px] font-[600] text-left text-black">Parcel total data: {PartiallyDelivered?.length}</h4>
                                         <div className="overflow-x-auto p-4">
                                             <table className="table w-full rounded-xl shadow-md">
                                                 <thead className="bg-base-200 text-base-content">
@@ -319,6 +323,7 @@ const AllMarchentConsignment = () => {
                                 </TabPanel>
                                 <TabPanel>
                                     <div className="AllDataConsignment">
+                                        <h4 classname="text-[16px] font-[600] text-left text-black">Parcel total data: {CancelData?.length}</h4>
                                         <div className="overflow-x-auto p-4">
                                             <table className="table w-full rounded-xl shadow-md">
                                                 <thead className="bg-base-200 text-base-content">
@@ -346,6 +351,7 @@ const AllMarchentConsignment = () => {
                                 </TabPanel>
                                 <TabPanel>
                                     <div className="AllDataConsignment">
+                                        <h4 classname="text-[16px] font-[600] text-left text-black">Parcel total data: {ReviewData?.length}</h4>
                                         <div className="overflow-x-auto p-4">
                                             <table className="table  w-full rounded-xl shadow-md">
                                                 <thead className="bg-base-200 text-base-content">

@@ -42,7 +42,7 @@ const CurrentBalanceDetails = () => {
     // ===============================================================
 
     // All Delivered & PartiallyDelivered payment data find
-    let CodAmountPaymentData = PaymentBalance.filter(PaymentAll => PaymentAll?.Payment == "Yes" && PaymentAll?.status == "Delivered" || PaymentAll?.Payment == "Yes" && PaymentAll?.status == "PartiallyDelivered")
+    let CodAmountPaymentData = PaymentBalance?.filter(PaymentAll => PaymentAll?.Payment == "Yes" && PaymentAll?.status == "Delivered" || PaymentAll?.Payment == "Yes" && PaymentAll?.status == "PartiallyDelivered")
 
     // console.log(CodAmountPaymentData)
 
@@ -75,7 +75,7 @@ const CurrentBalanceDetails = () => {
         let res = await fetch("https://server.trustereocourier.com.bd/HubManageAdminCreateOrUpdatePs/PoliceStationWithOfHub")
         return res.json()
     })
-    // console.log(AllStationOfHub)
+    // console.log(AllStationOfHub)z
 
     // Find my hub to match my police station with hub police station !!
     // =======================================================================

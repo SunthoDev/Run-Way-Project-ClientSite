@@ -4,8 +4,7 @@ import "./CurrentBalanceDetailsAllData.css"
 const CurrentBalanceDetailsAllData = ({ AmountPaymentDataAll }) => {
 
     let {_id,AmountChangeAdminStatus,AmountChangeDate,ApprovedName,ApprovedOffice,CodAmount,DeliveryCharge,Invoice,Payment,StandardEmailUser,StandardParcelId,address,date,district,name,note,number,policeStation,status,weight,ApprovedDate }=AmountPaymentDataAll
-
-    console.log(AmountPaymentDataAll)
+    // console.log(AmountPaymentDataAll)
 
     return (
         <tr className='CurrentBalanceDetailsAllData'>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import "./Dashboard.css"
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import { FaWallet, FaShoppingCart, FaCalendarAlt, FaHome, FaHeadSideVirus } from 'react-icons/fa';
-// import logo from "../../../assets/logo.png"
+import LogoUser from "../../../assets/logo/UserImage.jpeg"
 import useRole from '../../../Hook/useRole';
 import { useContext } from 'react';
 import { AuthContext } from '../../AuthoncationAll/AuthProvider/AuthProvider';
@@ -52,7 +52,7 @@ const Dashboard = () => {
                             <div className='NameInformation mb-[14px]'>
 
                                 <div className="img ">
-                                    <img className="w-full" src={photo} alt="img" />
+                                    <img className="w-full" src={LogoUser} alt="img" />
                                 </div>
 
                                 <h3 className="text-[16px] font-[600] text-black text-center pt-[14px] leading-[26px]">
@@ -66,7 +66,7 @@ const Dashboard = () => {
                             <div className='NameInformation mb-[14px]'>
 
                                 <div className="img ">
-                                    <img className="w-full" src={photo} alt="img" />
+                                    <img className="w-full" src={LogoUser} alt="img" />
                                 </div>
 
                                 <h3 className="text-[16px] font-[600] text-black text-center pt-[14px] leading-[26px]">
@@ -81,8 +81,8 @@ const Dashboard = () => {
                     {/* ==================================================== */}
 
                     {
-                        // Admin Panel & Sub-Admin Panel (Admin Panel) all Route 
-                        // ======================================================================
+                        // Admin Panel & Sub-Admin Panel (Admin Panel || Sub-Admin Panel) all Route 
+                        // ==============================================================================
                         ad || subAdmin ? <div className='RouteAllParent'>
                             <li className='Dashboard'> <Link to="/dashboard/AdminDashboard">Dashboard</Link></li>
 
@@ -248,7 +248,6 @@ const Dashboard = () => {
                                                 <i className="fa fa-angle-down text-sm" aria-hidden="true"></i>
                                             </span>
                                         </button>
-
                                         {/* 📜 সাব-মেনু অপশনস (নিচে নিচে এবং সুন্দর গ্যাপে সাজানো) */}
                                         <div
                                             className={`flex flex-col pl-4 space-y-1 overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-36 opacity-100 mt-1.5' : 'max-h-0 opacity-0 pointer-events-none'
@@ -268,6 +267,19 @@ const Dashboard = () => {
                                                 <span>Profile</span>
                                             </NavLink>
 
+                                            {/* ২. অ্যাড ব্যাংক ডিটেইলস অপশন */}
+                                            <NavLink
+                                                to={`/dashboard/CheckBalanceDetailsMerchant`}
+                                                className={({ isActive }) =>
+                                                    `flex items-center justify-start gap-2.5 w-full py-2 px-3 rounded-xl text-xs font-bold transition-all ${isActive
+                                                        ? 'bg-black text-white'
+                                                        : 'text-black/60 hover:text-black hover:bg-black/5'
+                                                    }`
+                                                }
+                                            >
+                                                <span className="w-4 text-left"><i className="fa fa-bank" aria-hidden="true"></i></span>
+                                                <span>Check balance Details</span>
+                                            </NavLink>
                                             {/* ২. অ্যাড ব্যাংক ডিটেইলস অপশন */}
                                             <NavLink
                                                 to={`/dashboard/UserAddBankDetails/${roles?.userId}`}
@@ -295,7 +307,7 @@ const Dashboard = () => {
                 </ul>
 
             </div>
-        </div >
+        </div>
 
 
     );

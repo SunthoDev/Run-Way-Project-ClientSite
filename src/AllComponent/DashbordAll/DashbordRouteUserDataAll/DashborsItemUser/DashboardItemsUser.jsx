@@ -263,7 +263,7 @@ const DashboardItemsUser = () => {
 
     return (
         <div className='bg-[#F6F6F6]'>
-            <div className='DashboardItems px-[12px] md:px-4 my-4'>
+            <div className='DashboardItems px-[12px] md:px-4 my-4 pt-[80px] md:pt-0'>
 
                 {/* ============================================= */}
                 {/* First Information All */}

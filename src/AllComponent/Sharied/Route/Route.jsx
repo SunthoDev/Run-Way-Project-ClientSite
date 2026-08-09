@@ -66,6 +66,7 @@ import AdminEditUserInformation from "../../DashbordAll/AdminePanel/AdminSearchU
 import UserStatementOfParcel from "../../DashbordAll/DashbordRouteUserDataAll/UserStatementOfParcel/UserStatementOfParcel";
 import UserSearchParcelByNumber from "../../DashbordAll/DashbordRouteUserDataAll/AllMarchentConsignment/UserSearchParcelByNumber/UserSearchParcelByNumber";
 import UserProfile from "../../DashbordAll/DashbordRouteUserDataAll/UserProfile/UserProfile";
+import CheckBalanceDetailsMerchant from "../../DashbordAll/DashbordRouteUserDataAll/CheckBalanceDetailsMerchant/CheckBalanceDetailsMerchant";
 
 
 let route = createBrowserRouter([
@@ -150,6 +151,10 @@ let route = createBrowserRouter([
          {
             path: "UserAllCancelParcel",
             element: <UserCancelParcelAll></UserCancelParcelAll>
+         },
+         {
+            path: "CheckBalanceDetailsMerchant",
+            element: <CheckBalanceDetailsMerchant></CheckBalanceDetailsMerchant>
          },
          {
             path: "UserAddBankDetails/:id",
