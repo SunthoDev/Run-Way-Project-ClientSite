@@ -70,7 +70,8 @@ const Dashboard = () => {
                                 </div>
 
                                 <h3 className="text-[16px] font-[600] text-black text-center pt-[14px] leading-[26px]">
-                                    This is {name}<br />Company ID: {userId}
+                                    {/* This is {name}<br /> */}
+                                    Merchant ID: {userId}
                                 </h3>
 
                                 <div className="horizontalRole h-[1px] mt-[18px] w-[100%] bg-[#EEEEEE]"></div>
