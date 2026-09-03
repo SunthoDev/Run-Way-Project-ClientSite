@@ -10,32 +10,15 @@ const ParcelTrackingDataShow = () => {
 
     let InVoiceData = useLoaderData()
     let [isLoading, setIsLoading] = useState(false)
-    // console.log(InVoiceData)
     let {
         ParcelEntryFirstName, ParcelEntryLastName, ParcelEntryAddress, ParcelEntryPhone,
-        AlternativePhone, CodAmount, DeliveryCharge, District, Invoice, ItemDescription, ParcelCategory, Payment, RecipientEmail, StandardEmailUser, StandardParcelId, address, date, deliveryType, name, note, number, policeStation, status, weight, _id } = InVoiceData
-
-    // =============================================
-    // Tracking Work
-    // =============================================
-    // Admin is get all tracking data 
-    let { refetch, data: AllTrackingData = [] } = useQuery(["AllTrackingData"], async () => {
-        let res = await fetch("https://server.trustereocourier.com.bd/AllTrackingData")
-        return res.json()
-
-    })
-    // console.log(AllTrackingData)
-
-    let adminSendTrackingAllMessage = AllTrackingData.filter(TrackingMes => TrackingMes.userOrderIdTracking == StandardParcelId)
-    // console.log(adminSendTrackingAllMessage)
-
-
+        AlternativePhone, CodAmount, DeliveryCharge, District, Invoice, ItemDescription, ParcelCategory, Payment, RecipientEmail, StandardEmailUser, StandardParcelId, address, date, deliveryType, name, note, number, policeStation, status, weight, _id } = InVoiceData?.ParcelInfo
 
 
     return (
         <div className='UserTemporeryInvoiceAllStandardData bg-white min-h-screen px-4 md:px-10 py-6'>
 
-            {!InVoiceData ?
+            {!InVoiceData?.ParcelInfo ?
                 <div className="flex items-center justify-center min-h-screen">
                     <div className="flex items-center gap-3 border border-red-300 bg-red-50 rounded-lg p-4 shadow-sm">
                         <i className="fa fa-exclamation-triangle text-red-500 text-xl"></i>
@@ -63,7 +46,7 @@ const ParcelTrackingDataShow = () => {
 
                             {/* Right Side Info */}
                             <div className="text-right text-gray-800 space-y-1">
-                                <p><strong>Approved at:</strong> {InVoiceData?.ApprovedDate ? InVoiceData?.ApprovedDate : "N/A"}</p>
+                                <p><strong>Approved at:</strong> {InVoiceData?.ParcelInfo?.ApprovedDate ? InVoiceData?.ParcelInfo?.ApprovedDate : "N/A"}</p>
                                 {/* <p><strong>Weight:</strong> {weight}KG</p> */}
                                 {/* <p><strong>Total Lot:</strong> 1</p> */}
                                 <p><strong className="text-xl font-bold">COD: ৳ {CodAmount}</strong></p>
@@ -94,21 +77,21 @@ const ParcelTrackingDataShow = () => {
                             {/* Assign Rider Information Show */}
                             {/* ========================================== */}
                             {
-                                InVoiceData?.status === "Pending" && InVoiceData?.AssignRider === "No" ||
-                                    InVoiceData?.status === "Review" && InVoiceData?.AssignRider === "No" ?
+                                InVoiceData?.ParcelInfo?.status === "Pending" && InVoiceData?.ParcelInfo?.AssignRider === "No" ||
+                                    InVoiceData?.ParcelInfo?.status === "Review" && InVoiceData?.ParcelInfo?.AssignRider === "No" ?
                                     <h2 className="text-center text-base font-medium text-orange-500">
                                         Your parcel is currently pending assignment to a rider. Please wait.
                                     </h2>
                                     :
-                                    // InVoiceData?.status === "Pending" && InVoiceData?.AssignRider === "Yes" ?
+                                    // InVoiceData?.ParcelInfo?.status === "Pending" && InVoiceData?.ParcelInfo?.AssignRider === "Yes" ?
 
                                     <div className="py-4 px-4">
-                                        <h4 className="font-semibold text-gray-800 text-base text-center md:text-left">Assigned to - {InVoiceData?.RiderName}</h4>
+                                        <h4 className="font-semibold text-gray-800 text-base text-center md:text-left">Assigned to - {InVoiceData?.ParcelInfo?.RiderName}</h4>
                                         <div className="flex flex-col md:flex-row items-center gap-4 mt-3 md:justify-start justify-center">
                                             <img src="https://i.ibb.co/kX7XnCQ/avatar.png" alt="staff" className="w-12 h-12 rounded-full border border-gray-300 shadow-sm" />
                                             <div className="text-center md:text-left">
-                                                <p className="text-black font-semibold text-sm">Rider Name: {InVoiceData?.RiderName}</p>
-                                                <p className="text-gray-800 font-bold text-sm">📞 {InVoiceData?.RiderPhone}</p>
+                                                <p className="text-black font-semibold text-sm">Rider Name: {InVoiceData?.ParcelInfo?.RiderName}</p>
+                                                <p className="text-gray-800 font-bold text-sm">📞 {InVoiceData?.ParcelInfo?.RiderPhone}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -133,7 +116,7 @@ const ParcelTrackingDataShow = () => {
                             {/* parcel tracking import here from another component for easy method */}
                             {/* ======================================================================== */}
                             {
-                                adminSendTrackingAllMessage?.slice().reverse().map(messageAll => <AdminSendAllTrackingMessageTemporery key={messageAll._id} messageAllData={messageAll}></AdminSendAllTrackingMessageTemporery>)
+                                InVoiceData?.ParcelTrackingMessage?.slice().reverse().map(messageAll => <AdminSendAllTrackingMessageTemporery key={messageAll._id} messageAllData={messageAll}></AdminSendAllTrackingMessageTemporery>)
                             }
 
                         </div>

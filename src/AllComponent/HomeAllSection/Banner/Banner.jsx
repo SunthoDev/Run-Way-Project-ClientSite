@@ -1,49 +1,169 @@
 import React from 'react';
 import "./Banner.css"
 import bannerPhoto from "../../../assets/BannerImage/bannerPhoto.png"
+import { Link } from 'react-router-dom';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, EffectFade, Pagination } from 'swiper/modules';
+import { FaPlay } from 'react-icons/fa';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/effect-fade';
+import 'swiper/css/pagination';
+
+// Static Data matching your provided HTML slider
+const sliderData = [
+    {
+        id: 1,
+        bgImage: "https://react-nextjs-flowtrack.mnsithub.com/assets/slider-1-3-B2bMxtk8.jpg",
+        subTitle: "SAFETY, QUALITY, PROFESSIONALISM",
+        title: <>LOGISTIC & CARGO <br />SOLUTION PROVIDERS</>,
+        btnText: "DISCOVER MORE",
+        btnLink: "/about",
+        videoText: "Showreel",
+        videoLink: "#"
+    },
+    {
+        id: 2,
+        bgImage: "https://react-nextjs-flowtrack.mnsithub.com/assets/slider-1-2-DUOBzSUm.jpg",
+        subTitle: "SAFETY, QUALITY, PROFESSIONALISM",
+        title: <>LOGISTIC & CARGO <br />SOLUTION PROVIDERS</>,
+        btnText: "DISCOVER MORE",
+        btnLink: "/about",
+        videoText: "Showreel",
+        videoLink: "#"
+    },
+    {
+        id: 3,
+        bgImage: "https://react-nextjs-flowtrack.mnsithub.com/assets/slider-1-1-CZlw59x4.jpg",
+        subTitle: "SAFETY, QUALITY, PROFESSIONALISM",
+        title: <>LOGISTIC & CARGO <br />SOLUTION PROVIDERS</>,
+        btnText: "DISCOVER MORE",
+        btnLink: "/about",
+        videoText: "Showreel",
+        videoLink: "#"
+    }
+];
 
 const Banner = () => {
 
     return (
-        <div className="banner">
+        <section className="relative w-full h-screen min-h-[650px] overflow-hidden bg-black font-sans" id="home">
 
-            <div className="px-2 md:px-24  relative pt-48">
+            {/* Custom Ripple Animation Style for Video Icon */}
+            <style>{`
+                @keyframes customRipple {
+                0% {
+                    transform: scale(0.8);
+                    opacity: 1;
+                }
+                100% {
+                    transform: scale(2.2);
+                    opacity: 0;
+                }
+                }
+                .animate-ripple {
+                animation: customRipple 1.8s infinite ease-out;
+                }
+                .hero-pagination .swiper-pagination-bullet {
+                background: #ffffff;
+                opacity: 0.5;
+                width: 10px;
+                height: 10px;
+                margin: 8px 0 !important;
+                transition: all 0.3s ease;
+                display: block;
+                }
+                .hero-pagination .swiper-pagination-bullet-active {
+                opacity: 1;
+                background: #00A3FF;
+                height: 24px;
+                border-radius: 5px;
+                }
+            `}</style>
 
-                <div className="grid grid-cols-1 md:grid-cols-7 gap-5 items-center">
+            {/* Swiper Container */}
+            <Swiper
+                modules={[Autoplay, EffectFade, Pagination]}
+                effect="fade"
+                speed={1000}
+                autoplay={{
+                    delay: 5000,
+                    disableOnInteraction: false,
+                }}
+                pagination={{
+                    clickable: true,
+                    el: '.hero-pagination',
+                }}
+                loop={true}
+                className="w-full h-full"
+            >
+                {sliderData.map((slide) => (
+                    <SwiperSlide key={slide.id} className="relative w-full h-full">
 
-                    <div className=" bannerText  col-span-4 order-2 md:order-1">
-                        <h1 className='text-3xl'>test</h1>
-                        <h2 className="text-white font-[700] text-[44px]">Runwaya Parcel Delivered</h2>
-                        <h2 className="text-white font-[700] leading-[44px] text-[44px]">On Time With No Hassle</h2>
-                        <p className='text-[16px] text-white font-[400] pt-[24px]'>Easily track your courier, Get courier within hours. Efficient & safe delivery for Runwaya.</p>
-                        <button className='text-[#22afa3] bg-white py-[10px] px-[20px] rounded-[6px] text-[16px] mt-[8px] font-[600] text-center '>GON NOW MERCHANT</button>
-                    </div>
+                        {/* Background Image with Dark Overlay */}
+                        <div
+                            className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-1000 transform scale-105"
+                            style={{ backgroundImage: `url(${slide.bgImage})` }}
+                        >
+                            {/* Image Gradient Dark Overlay for exact look */}
+                            <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-transparent" />
+                        </div>
 
-                    <div className="img col-span-3 order-1 md:order-2 w-[100%]">
-                        <img className='w-[100%] h-[100%]' src={bannerPhoto} alt="img" />
-                    </div>
-                </div>
+                        {/* Main Content Area */}
+                        <div className="relative z-10 container mx-auto h-full px-6 md:px-12 flex items-center">
+                            <div className="max-w-2xl text-white pt-16">
 
-                <div className="trackLocations bg-white rounded-[7px] mx-[0px] lg:mx-[180px] md:my-[114px] mb-[144px]">
-                    <div className="md:flex gap-5 mb-2">
-                        <h3 className='text-[16px] font-[700]'>TRACK YOUR CONSIGNMENT</h3>
-                        <h4 className='text-[14px] font-[400]'>Now you can easily track your consignment</h4>
-                    </div>
+                                {/* Subtitle */}
+                                <p className="text-[#FFC107] font-bold text-xs sm:text-sm uppercase tracking-widest mb-3">
+                                    {slide.subTitle}
+                                </p>
 
-                    <div className="flex gap-4 items-center">
-                        
-                        <input placeholder='Enter Your  Tracking Code' className='text-black rounded-[3px] text-[16px] font-[500] w-[145%]' type="text" />
+                                {/* Title */}
+                                <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold uppercase leading-tight tracking-wide mb-8">
+                                    {slide.title}
+                                </h1>
 
-                        <i className="bg-[#38B6FF] text-center  py-[14px] w-[100%] rounded-[6px] text-white text-[16px] fa fa-search" aria-hidden="true"></i>
-                    </div>
+                                {/* Action Buttons & Video Play */}
+                                <div className="flex flex-wrap items-center gap-6 sm:gap-8">
 
-                </div>
+                                    {/* Yellow CTA Button */}
+                                    <Link
+                                        to={slide.btnLink}
+                                        className="bg-[#FFC107] hover:bg-[#e0a800] text-black font-bold text-xs sm:text-sm uppercase px-8 py-4 rounded-sm transition-all duration-300 shadow-lg tracking-wider"
+                                    >
+                                        {slide.btnText}
+                                    </Link>
 
+                                    {/* Video Play Button with Ripple */}
+                                    <div className="flex items-center gap-3">
+                                        <a
+                                            href={slide.videoLink}
+                                            className="relative w-12 h-12 rounded-full bg-[#E53935] flex items-center justify-center text-white hover:bg-red-700 transition-all duration-300 shadow-md group"
+                                        >
+                                            {/* Ripple Wave Effect */}
+                                            <span className="absolute inset-0 rounded-full bg-[#E53935] opacity-75 animate-ripple pointer-events-none" />
+                                            <FaPlay className="text-xs ml-0.5 relative z-10" />
+                                        </a>
 
+                                        <span className="text-white font-semibold text-sm sm:text-base">
+                                            {slide.videoText}
+                                        </span>
+                                    </div>
 
-            </div>
+                                </div>
 
-        </div>
+                            </div>
+                        </div>
+
+                    </SwiperSlide>
+                ))}
+            </Swiper>
+
+            {/* Left Vertical Pagination Dots (Matches Image Exactly) */}
+            <div className="hero-pagination absolute left-6 top-1/2 -translate-y-1/2 z-20 hidden md:flex flex-col items-center"></div>
+
+        </section>
     );
 };
 

@@ -89,7 +89,7 @@ let route = createBrowserRouter([
          {
             path: "/ParcelTrackingDataShow/:id",
             element: <ParcelTrackingDataShow></ParcelTrackingDataShow>,
-            loader: ({ params }) => fetch(`https://server.trustereocourier.com.bd/StandardDeliveryDataTemporory?StandardParcelId=${params.id}`)
+            loader: ({ params }) => fetch(`https://server.trustereocourier.com.bd/api/parcelStatus/${params.id}`)
          },
       ]
    },

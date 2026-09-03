@@ -132,6 +132,7 @@ const StandardDelivery = () => {
                     showConfirmButton: false,
                     timerProgressBar: true
                 });
+                // console.log(data)
 
                 // পার্সেল আইডি স্টেটে সেভ করা
                 setStandardParcelId(data?.parcelId);
