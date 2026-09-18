@@ -1,0 +1,58 @@
+.AboutUsParent {}
+
+.AboutUsParent .Paralax {
+    background-image: url("https://i.ibb.co.com/r9j5rKF/about-us-banner1.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 600px;
+}
+
+.AboutUsParent .CompanyBackground .Right h2 {
+    font-size: 34px;
+    font-weight: 800;
+    margin-bottom: 28px;
+}
+
+.AboutUsParent .CompanyBackground .Right p {
+    color: black;
+    font-family: sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    text-align: left;
+    margin-top: 18px;
+    text-align: justify;
+}
+
+.AboutUsParent .OurMission .Left .mission h2 {
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: sans-serif;
+    /* text-decoration: underline; */
+    margin-bottom: 12px;
+}
+
+.AboutUsParent .OurMission .Left .mission .underUse {
+    text-decoration: 1px underline;
+}
+
+.AboutUsParent .OurMission .Left .Vision h2 {
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: sans-serif;
+    margin-top: 46px;
+    margin-bottom: 10px;
+}
+
+.AboutUsParent .OurMission .Left .Value h2 {
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: sans-serif;
+    margin-top: 46px;
+    margin-bottom: 10px;
+}

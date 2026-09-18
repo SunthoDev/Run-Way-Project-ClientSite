@@ -15,18 +15,17 @@ import Licensed from '../HomeAllSection/Licensed/Licensed';
 const Home = () => {
     return (
         <div>
+
             {/* <VideoSlider /> */}
-            
             <Banner />
             {/* <Hero />   Test Component */}
             {/* <ServicesDetails /> Test Component */}
-
             <ParcelTracking />
             <HeroSection />  
-            {/* <OurServices /> */}
-            {/* <Licensed /> Run hove laste !! */}
-            {/* <ExperienceSection />  */}
-            {/* <ContactSection /> */}
+            <OurServices />
+            <Licensed /> 
+            <ExperienceSection /> 
+            <ContactSection />
 
         </div>
     );

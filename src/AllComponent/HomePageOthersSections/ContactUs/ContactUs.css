@@ -1,0 +1,64 @@
+.ContactUsParent .Paralax {
+    background-image: url("");
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 600px;
+}
+
+.title {
+    text-align: center;
+}
+.title p {
+    color: #d99904;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 14px;
+}
+.title h3 {
+    border-top: 3px solid #E8E8E8;
+    border-bottom: 3px solid #E8E8E8;
+    font-size: 26px;
+    font-weight: 600;
+    padding: 12px 0;
+}
+
+.card {
+    border: 1px solid #F3F3F3;
+    border-radius: 0;
+    box-shadow: 1px 1px 5px 0px rgba(48, 48, 48, 0.5);
+}
+
+.contactAllParent .ButtonSucces {
+    border: 1px solid black;
+    width: 100%;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    margin-top: 8px;
+    padding: 8px 0;
+    color: black;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .4s;
+    box-shadow: rgba(0, 0, 0, 0.15) -0.6px 2.4px 22.2px;
+}
+
+.contactAllParent .ButtonSucces:hover{
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+}
+
+.contactAll p {
+    color: black;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 12px 0;
+}
+
+.Map .Iframe {
+    object-fit: cover;
+}

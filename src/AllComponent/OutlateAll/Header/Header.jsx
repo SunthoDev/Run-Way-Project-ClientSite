@@ -1,22 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { 
-  FaMapMarkerAlt, 
-  FaEnvelope, 
-  FaFacebookF, 
-  FaInstagram, 
-  FaGooglePlusG, 
-  FaTwitter, 
-  FaBars, 
-  FaTimes, 
-  FaSearch, 
-  FaShoppingBag 
-} from 'react-icons/fa';
+import { FaMapMarkerAlt, FaEnvelope, FaFacebookF, FaInstagram, FaTwitter, FaBars, FaTimes, FaSearch, FaShoppingBag, FaPhoneAlt } from 'react-icons/fa';
 import logo from "../../../assets/logo/Logo.png";
 import { AuthContext } from '../../AuthoncationAll/AuthProvider/AuthProvider';
 import useRole from '../../../Hook/useRole';
 
 const Header = () => {
+
   const { user, logOutUser } = useContext(AuthContext);
   const [roles] = useRole();
   const ad = roles?.role === "admin";
@@ -26,7 +16,7 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 30) {
+      if (window.scrollY > 20) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
@@ -36,255 +26,165 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Common NavLink styling class with active state
   const navLinkStyles = ({ isActive }) =>
-    `relative py-1 font-medium transition-colors duration-200 ${
-      isActive 
-        ? 'text-[#00A3FF] font-semibold after:content-[""] after:absolute after:bottom-[-2px] after:left-0 after:w-full after:h-[2px] after:bg-[#00A3FF]' 
-        : isScrolled ? 'text-gray-700 hover:text-[#00A3FF]' : 'text-gray-200 hover:text-[#00A3FF]'
+    `relative py-2 font-medium transition-all duration-300 text-sm tracking-wide ${isActive
+      ? 'text-[#c084fc] font-semibold after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-gradient-to-r after:from-purple-500 after:to-indigo-500'
+      : isScrolled ? 'text-gray-700 hover:text-purple-600' : 'text-purple-100 hover:text-white'
     }`;
 
+
   return (
-    <header className="w-full fixed top-0 left-0 z-50 font-sans">
-      
-      {/* ================= Top Bar (Contact & Social) ================= */}
-      <div 
-        className={`bg-[#091527] text-gray-300 text-xs border-b border-gray-800 transition-all duration-300 ${
-          isScrolled ? 'hidden md:block' : 'block'
-        }`}
-      >
-        <div className="container mx-auto px-4 py-2 flex flex-col md:flex-row justify-between items-center gap-2">
-          
-          {/* Address & Email */}
-          <div className="flex flex-wrap items-center gap-6">
-            <div className="flex items-center gap-2 text-gray-300">
-              <FaMapMarkerAlt className="text-[#00A3FF]" />
-              <span>465 NT Road. North West, England</span>
+    <div>
+
+      <header className="w-full fixed top-0 left-0 z-50 font-sans">
+        {/* ================= Top Bar ================= */}
+        <div className={`hidden md:block bg-[#0b0514]/95 backdrop-blur-md text-purple-200/80 text-xs border-b border-white/10 transition-all duration-300 ${isScrolled ? 'hidden md:block' : 'block'}`}>
+          <div className="container mx-auto px-6 py-2.5 flex flex-col md:flex-row justify-between items-center gap-2">
+            <div className="flex flex-wrap items-center gap-6">
+              <div className="flex items-center gap-2">
+                <span className="text-purple-400"><FaMapMarkerAlt /></span>
+                <span>465 NT Road. North West, England</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-purple-400"><FaEnvelope /></span>
+                <a href="mailto:needhelpflowtrack@gmail.com" className="hover:text-white transition-colors">
+                  needhelpflowtrack@gmail.com
+                </a>
+              </div>
             </div>
-            <div className="flex items-center gap-2 text-gray-300">
-              <FaEnvelope className="text-[#00A3FF]" />
-              <a href="mailto:needhelpflowtrack@gmail.com" className="hover:text-[#00A3FF] transition-colors">
-                needhelpflowtrack@gmail.com
-              </a>
+
+            <div className="flex items-center gap-3">
+              <span className="text-purple-300/60 font-medium">Follow us:</span>
+              <div className="flex items-center gap-2">
+                <a href="/" className="w-7 h-7 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-purple-600 hover:text-white transition-all text-xs text-purple-200"><FaFacebookF /></a>
+                <a href="/" className="w-7 h-7 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-purple-600 hover:text-white transition-all text-xs text-purple-200"><FaInstagram /></a>
+                <a href="/" className="w-7 h-7 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-purple-600 hover:text-white transition-all text-xs text-purple-200"><FaTwitter /></a>
+              </div>
             </div>
           </div>
-
-          {/* Social Links */}
-          <div className="flex items-center gap-3">
-            <span className="text-gray-400">Follow us:</span>
-            <div className="flex items-center gap-2">
-              <a href="#" className="w-6 h-6 rounded bg-[#16253b] flex items-center justify-center hover:bg-[#00A3FF] hover:text-white transition-all text-xs">
-                <FaFacebookF />
-              </a>
-              <a href="#" className="w-6 h-6 rounded bg-[#16253b] flex items-center justify-center hover:bg-[#00A3FF] hover:text-white transition-all text-xs">
-                <FaInstagram />
-              </a>
-              <a href="#" className="w-6 h-6 rounded bg-[#16253b] flex items-center justify-center hover:bg-[#00A3FF] hover:text-white transition-all text-xs">
-                <FaGooglePlusG />
-              </a>
-              <a href="#" className="w-6 h-6 rounded bg-[#16253b] flex items-center justify-center hover:bg-[#00A3FF] hover:text-white transition-all text-xs">
-                <FaTwitter />
-              </a>
-            </div>
-          </div>
-
         </div>
-      </div>
 
-      {/* ================= Main Navbar ================= */}
-      <nav 
-        className={`w-full transition-all duration-300 ${
-          isScrolled 
-            ? 'bg-white shadow-lg py-3 text-gray-800' 
-            : 'bg-[#0d1b2a] text-white py-4'
-        }`}
-      >
-        <div className="container mx-auto px-4 flex items-center justify-between">
-          
-          {/* Brand Logo */}
-          <Link to="/" className="flex items-center">
-            <img 
-              src={logo} 
-              alt="Logo" 
-              className="h-9 md:h-11 w-auto object-contain"
-            />
-          </Link>
+        {/* ================= Main Navbar with Glassmorphism ================= */}
+        <nav className={`w-full transition-all duration-500 ${isScrolled ?
+          'bg-white/85 backdrop-blur-xl shadow-lg py-3 border-b border-gray-200/50' :
+          'bg-[#100622]/80 backdrop-blur-2xl border-b border-white/10 py-4 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]'
+          }`}>
+          <div className="container mx-auto px-6 flex items-center justify-between">
 
-          {/* Desktop Navigation Links (NavLinks Only, No Scroll) */}
-          <div className="hidden lg:flex items-center space-x-8 text-[15px]">
-            <NavLink to="/" className={navLinkStyles}>
-              Home
-            </NavLink>
-
-            <NavLink to="/services" className={navLinkStyles}>
-              Services
-            </NavLink>
-
-            <NavLink to="/track-package" className={navLinkStyles}>
-              Track Package
-            </NavLink>
-
-            <NavLink to="/about" className={navLinkStyles}>
-              About Us
-            </NavLink>
-
-            <NavLink to="/contact" className={navLinkStyles}>
-              Contact
-            </NavLink>
-
-            {/* Dynamic Dashboard / Register Route */}
-            {user ? (
-              <NavLink 
-                to={ad ? "/dashboard/AdminDashboard" : "/dashboard/dashboard"}
-                className={navLinkStyles}
-              >
-                Dashboard
-              </NavLink>
-            ) : (
-              <NavLink to="/singUp" className={navLinkStyles}>
-                Register
-              </NavLink>
-            )}
-          </div>
-
-          {/* Right Action Icons & Button */}
-          <div className="hidden lg:flex items-center space-x-5">
-            
-            {/* Search Input Box */}
-            <div className="relative">
-              <input 
-                type="text" 
-                placeholder="Search...." 
-                className={`py-1.5 pl-3 pr-8 rounded text-xs focus:outline-none transition-all ${
-                  isScrolled 
-                    ? 'bg-gray-100 text-gray-800 border border-gray-300 focus:border-[#00A3FF]' 
-                    : 'bg-[#16253b] text-white placeholder-gray-400 focus:bg-[#1a2d47]'
-                }`}
-              />
-              <button className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#00A3FF]">
-                <FaSearch className="text-xs" />
-              </button>
-            </div>
-
-            {/* Shopping Cart Icon */}
-            <Link to="/cart" className="relative p-2 hover:text-[#00A3FF] transition-colors">
-              <FaShoppingBag className="text-lg" />
+            {/* Logo */}
+            <Link to="/" className="flex items-center">
+              <img src={logo} alt="Logo" className="h-9 md:h-10 w-auto object-contain" />
             </Link>
 
-            {/* Authentication Action Button */}
-            {!user ? (
-              <Link 
-                to="/login"
-                className="bg-[#00A3FF] hover:bg-blue-600 text-white text-xs font-semibold px-5 py-2.5 rounded transition-all uppercase tracking-wider"
-              >
-                LOGIN
-              </Link>
-            ) : (
-              <button 
-                onClick={logOutUser}
-                className="bg-red-500 hover:bg-red-600 text-white text-xs font-semibold px-5 py-2.5 rounded transition-all uppercase tracking-wider"
-              >
-                LOGOUT
-              </button>
-            )}
-          </div>
-
-          {/* Mobile Menu Toggle Button */}
-          <button 
-            className="lg:hidden p-2 text-2xl focus:outline-none text-gray-300"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
-          </button>
-
-        </div>
-
-        {/* ================= Mobile Navigation Drawer ================= */}
-        {isMobileMenuOpen && (
-          <div className={`lg:hidden border-t border-gray-800 ${isScrolled ? 'bg-white text-gray-800' : 'bg-[#091527] text-white'}`}>
-            <div className="container mx-auto px-4 py-4 flex flex-col space-y-3 font-medium text-sm">
-              <NavLink 
-                to="/" 
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="hover:text-[#00A3FF] py-1"
-              >
-                Home
-              </NavLink>
-
-              <NavLink 
-                to="/services" 
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="hover:text-[#00A3FF] py-1"
-              >
-                Services
-              </NavLink>
-
-              <NavLink 
-                to="/track-package" 
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="hover:text-[#00A3FF] py-1"
-              >
-                Track Package
-              </NavLink>
-
-              <NavLink 
-                to="/about" 
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="hover:text-[#00A3FF] py-1"
-              >
-                About Us
-              </NavLink>
-
-              <NavLink 
-                to="/contact" 
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="hover:text-[#00A3FF] py-1"
-              >
-                Contact
-              </NavLink>
+            {/* Nav Links */}
+            <div className="hidden lg:flex items-center space-x-8">
+              <NavLink to="/" className={navLinkStyles}>Home</NavLink>
+              <NavLink to="/services" className={navLinkStyles}>Services</NavLink>
+              <NavLink to="/track-package" className={navLinkStyles}>Track Package</NavLink>
+              <NavLink to="/aboutus" className={navLinkStyles}>About Us</NavLink>
+              <NavLink to="/contactus" className={navLinkStyles}>Contact</NavLink>
 
               {user ? (
-                <NavLink 
-                  to={ad ? "/dashboard/AdminDashboard" : "/dashboard/dashboard"}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="hover:text-[#00A3FF] py-1"
-                >
+                <NavLink to={ad ? "/dashboard/AdminDashboard" : "/dashboard/dashboard"} className={navLinkStyles}>
                   Dashboard
                 </NavLink>
               ) : (
-                <NavLink 
-                  to="/singUp"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="hover:text-[#00A3FF] py-1"
-                >
-                  Register
-                </NavLink>
+                <NavLink to="/singUp" className={navLinkStyles}>Register</NavLink>
               )}
+            </div>
+
+            {/* Right Actions */}
+            <div className="hidden lg:flex items-center space-x-4">
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  className={`py-2 pl-3.5 pr-9 rounded-xl text-xs focus:outline-none transition-all duration-300 ${isScrolled
+                    ? 'bg-gray-100 text-gray-800 border border-gray-200 focus:border-purple-500'
+                    : 'bg-white/5 text-white placeholder-purple-300/50 border border-white/15 focus:border-purple-400 focus:bg-white/10'
+                    }`}
+                />
+                <a className="cursor-pointer absolute right-3 top-1/2 -translate-y-1/2 text-purple-300/70 hover:text-white">
+                  <FaSearch className="text-xs" />
+                </a>
+              </div>
+
+              <Link to="/cart" className={`p-2.5 rounded-xl transition-all ${isScrolled ? 'hover:bg-purple-50 text-gray-700' : 'hover:bg-white/10 text-purple-200 hover:text-white'}`}>
+                <FaShoppingBag className="text-base" />
+              </Link>
 
               {!user ? (
-                <Link 
+                <Link
                   to="/login"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="inline-block text-center bg-[#00A3FF] text-white py-2 rounded font-semibold mt-2"
+                  className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-bold px-5 py-2.5 rounded-xl shadow-lg shadow-purple-600/30 transition-all uppercase tracking-wider"
                 >
                   Login
                 </Link>
               ) : (
-                <button 
-                  onClick={() => { logOutUser(); setIsMobileMenuOpen(false); }}
-                  className="w-full text-center bg-red-500 text-white py-2 rounded font-semibold mt-2"
+                <a
+                  onClick={logOutUser}
+                  className="cursor-pointer bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 text-white text-xs font-bold px-5 py-2.5 rounded-xl shadow-lg shadow-rose-600/30 transition-all uppercase tracking-wider cursor-pointer"
                 >
                   Logout
-                </button>
+                </a>
               )}
             </div>
-          </div>
-        )}
-      </nav>
 
-    </header>
+            {/* Mobile Toggle */}
+            <a
+              className={`cursor-pointer lg:hidden p-2.5 rounded-xl text-lg ${isScrolled ? 'text-gray-800 bg-gray-100' : 'text-white bg-white/10'}`}
+              onClick={() => setIsMobileMenuOpen(true)}
+            >
+              <FaBars />
+            </a>
+
+          </div>
+        </nav>
+      </header>
+
+      {/* ================= Mobile Drawer ================= */}
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 z-50">
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={() => setIsMobileMenuOpen(false)} />
+          <div className="absolute inset-y-0 left-0 max-w-xs w-full bg-[#100622] border-r border-white/10 shadow-2xl flex flex-col p-6">
+            <div className="flex items-center justify-between pb-6 border-b border-white/10">
+              <img src={logo} alt="Logo" className="h-8 w-auto" />
+              <a onClick={() => setIsMobileMenuOpen(false)} className="cursor-pointer w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-white">
+                <FaTimes />
+              </a>
+            </div>
+
+            <div className="flex-1 overflow-y-auto py-6 space-y-3 font-medium text-sm">
+              <NavLink to="/" onClick={() => setIsMobileMenuOpen(false)} className="block py-2 px-3 rounded-lg text-purple-200 hover:bg-white/10">Home</NavLink>
+              <NavLink to="/services" onClick={() => setIsMobileMenuOpen(false)} className="block py-2 px-3 rounded-lg text-purple-200 hover:bg-white/10">Services</NavLink>
+              <NavLink to="/track-package" onClick={() => setIsMobileMenuOpen(false)} className="block py-2 px-3 rounded-lg text-purple-200 hover:bg-white/10">Track Package</NavLink>
+              <NavLink to="/aboutus" onClick={() => setIsMobileMenuOpen(false)} className="block py-2 px-3 rounded-lg text-purple-200 hover:bg-white/10">About Us</NavLink>
+              <NavLink to="/contactus" onClick={() => setIsMobileMenuOpen(false)} className="block py-2 px-3 rounded-lg text-purple-200 hover:bg-white/10">Contact</NavLink>
+              {user ? (
+                <NavLink to={ad ? "/dashboard/AdminDashboard" : "/dashboard/dashboard"} onClick={() => setIsMobileMenuOpen(false)} className="block py-2 px-3 rounded-lg text-purple-200 hover:bg-white/10">Dashboard</NavLink>
+              ) : (
+                <NavLink to="/singUp" onClick={() => setIsMobileMenuOpen(false)} className="block py-2 px-3 rounded-lg text-purple-200 hover:bg-white/10">Register</NavLink>
+              )}
+
+              <div className="pt-6 border-t border-white/10 space-y-3 text-xs text-purple-200">
+                <div className="flex items-center gap-2"><FaEnvelope className="text-purple-400" /> needhelpflowtrack@gmail.com</div>
+                <div className="flex items-center gap-2"><FaPhoneAlt className="text-purple-400" /> 666 888 0000</div>
+              </div>
+
+              <div className="pt-4">
+                {!user ? (
+                  <Link to="/login" onClick={() => setIsMobileMenuOpen(false)} className="block text-center bg-purple-600 text-white py-3 rounded-xl font-bold text-xs uppercase">Login</Link>
+                ) : (
+                  <a onClick={() => { logOutUser(); setIsMobileMenuOpen(false); }} className="cursor-pointer w-full bg-rose-600 text-white py-3 rounded-xl font-bold text-xs uppercase">Logout</a>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+    </div>
   );
 };
-
 
 export default Header;

@@ -67,6 +67,8 @@ import UserStatementOfParcel from "../../DashbordAll/DashbordRouteUserDataAll/Us
 import UserSearchParcelByNumber from "../../DashbordAll/DashbordRouteUserDataAll/AllMarchentConsignment/UserSearchParcelByNumber/UserSearchParcelByNumber";
 import UserProfile from "../../DashbordAll/DashbordRouteUserDataAll/UserProfile/UserProfile";
 import CheckBalanceDetailsMerchant from "../../DashbordAll/DashbordRouteUserDataAll/CheckBalanceDetailsMerchant/CheckBalanceDetailsMerchant";
+import AboutUs from "../../HomePageOthersSections/AboutUs/AboutUs";
+import ContactUs from "../../HomePageOthersSections/ContactUs/ContactUs";
 
 
 let route = createBrowserRouter([
@@ -81,6 +83,14 @@ let route = createBrowserRouter([
          {
             path: "/login",
             element: <Login></Login>
+         },
+         {
+            path: "/aboutus",
+            element: <AboutUs></AboutUs>
+         },
+         {
+            path: "/contactus",
+            element: <ContactUs></ContactUs>
          },
          {
             path: "/singUp",
