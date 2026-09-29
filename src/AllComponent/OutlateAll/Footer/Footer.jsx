@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { FaFacebook, FaInstagram, FaTwitter, FaLinkedin, FaPaperPlane } from 'react-icons/fa';
-import logo from "../../../assets/Footer/logo/Logo.png";
+import logo from "../../../assets/Footer/Logo.png";
 import google from "../../../assets/Footer/Google.png";
 
 const Footer = () => {
