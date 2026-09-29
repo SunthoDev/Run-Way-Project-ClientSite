@@ -17,7 +17,6 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
 
-
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 20) {
@@ -164,10 +163,6 @@ const Header = () => {
                 </a>
               </div>
 
-              <Link to="/cart" className={`p-2.5 rounded-xl transition-all ${isScrolled ? 'hover:bg-purple-50 text-gray-700' : 'hover:bg-white/10 text-purple-200 hover:text-white'}`}>
-                <FaShoppingBag className="text-base" />
-              </Link>
-
               {!user ? (
                 <Link
                   to="/login"
@@ -211,21 +206,8 @@ const Header = () => {
 
             <div className="flex-1 overflow-y-auto py-6 space-y-3 font-medium text-sm">
               <NavLink to="/" onClick={() => { setIsMobileMenuOpen(false); setActiveSection(''); }} className="block py-2 px-3 rounded-lg text-purple-200 hover:bg-white/10">Home</NavLink>
-              
-              <button 
-                onClick={() => handleScrollToSection('services')} 
-                className="w-full text-left py-2 px-3 rounded-lg text-purple-200 hover:bg-white/10 cursor-pointer bg-transparent border-none font-medium text-sm"
-              >
-                Services
-              </button>
-
-              <button 
-                onClick={() => handleScrollToSection('track')} 
-                className="w-full text-left py-2 px-3 rounded-lg text-purple-200 hover:bg-white/10 cursor-pointer bg-transparent border-none font-medium text-sm"
-              >
-                Track Package
-              </button>
-
+              <NavLink onClick={() => { handleScrollToSection('service'); setActiveSection(''); }} className="block py-2 px-3 rounded-lg text-purple-200 hover:bg-white/10">Services</NavLink>
+              <NavLink onClick={() => { handleScrollToSection('track'); setActiveSection(''); }} className="block py-2 px-3 rounded-lg text-purple-200 hover:bg-white/10">Track Package</NavLink>
               <NavLink to="/pricing" onClick={() => { setIsMobileMenuOpen(false); setActiveSection(''); }} className="block py-2 px-3 rounded-lg text-purple-200 hover:bg-white/10">Pricing</NavLink>
               <NavLink to="/aboutus" onClick={() => { setIsMobileMenuOpen(false); setActiveSection(''); }} className="block py-2 px-3 rounded-lg text-purple-200 hover:bg-white/10">About Us</NavLink>
               <NavLink to="/contactus" onClick={() => { setIsMobileMenuOpen(false); setActiveSection(''); }} className="block py-2 px-3 rounded-lg text-purple-200 hover:bg-white/10">Contact</NavLink>
