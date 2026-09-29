@@ -42,7 +42,7 @@ const LicensedAndPartners = () => {
                     </h2>
                   </div>
                 </div>
-
+x
                 <div className="py-6 flex justify-center">
                   <div className="w-40 h-40 md:w-48 md:h-48 bg-gradient-to-br from-[#5b1696]/10 via-[#7136B0]/5 to-[#D4AF37]/10 rounded-2xl flex items-center justify-center border border-gray-100 shadow-inner">
                     <img

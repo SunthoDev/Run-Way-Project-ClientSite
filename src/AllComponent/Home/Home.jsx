@@ -17,13 +17,13 @@ const Home = () => {
         <div>
 
             {/* <VideoSlider /> */}
-            <Banner />
-            {/* <Hero />   Test Component */}
+            {/* <Banner /> */}
+            <Hero />
             {/* <ServicesDetails /> Test Component */}
             <ParcelTracking />
             <HeroSection />  
             <OurServices />
-            <Licensed /> 
+            {/* <Licensed /> Next will be open  */}
             <ExperienceSection /> 
             <ContactSection />
 

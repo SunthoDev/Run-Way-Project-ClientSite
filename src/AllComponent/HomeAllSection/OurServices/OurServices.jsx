@@ -44,7 +44,7 @@ const OurServices = () => {
   ];
   
   return (
-    <section id="services" className="relative py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50/60 to-white overflow-hidden font-sans">
+    <section id="service" className="relative py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50/60 to-white overflow-hidden font-sans">
 
       <div className="container mx-auto max-w-7xl relative z-10">
         {/* Header Section */}
@@ -130,12 +130,12 @@ const OurServices = () => {
                 Fast, Reliable & Nationwide — Trustereo Courier is Always On Time. Partner with us today and scale your business effortlessly.
               </p>
 
-              <a
-                href="/"
+              <Link
+                href="/singUp"
                 className="inline-block bg-gradient-to-r from-[#D4AF37] to-[#e6be32] hover:from-[#c29c29] hover:to-[#D4AF37] text-black font-extrabold text-sm sm:text-base uppercase tracking-wider px-10 py-4 rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95"
               >
                 Become a Merchant
-              </a>
+              </Link>
             </div>
           </div>
         </div>

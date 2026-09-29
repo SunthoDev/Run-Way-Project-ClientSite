@@ -7,9 +7,8 @@ const ParcelTracking = () => {
     let navigate = useNavigate();
 
     return (
-        <div
-            id="searchConsignment"
-            className="relative overflow-hidden flex flex-col items-center justify-center py-24 px-4 bg-gradient-to-b from-[#1c0830] via-[#2a0b49] to-[#120420] text-white font-sans"
+        <div className="relative overflow-hidden flex flex-col items-center justify-center py-24 px-4 bg-gradient-to-b from-[#1c0830] via-[#2a0b49] to-[#120420] text-white font-sans"
+            id="track"
         >
             {/* Background Glowing Orbs */}
             <div className="absolute -top-24 -left-24 w-96 h-96 bg-[#7136B0]/40 rounded-full blur-3xl pointer-events-none"></div>
@@ -19,16 +18,13 @@ const ParcelTracking = () => {
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none"></div>
 
             <div className="relative z-10 w-full max-w-2xl flex flex-col items-center">
-
                 {/* Title */}
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-3 text-center tracking-tight uppercase">
                     Track Your <span className="bg-gradient-to-r from-[#D4AF37] to-[#FFD700] bg-clip-text text-transparent drop-shadow-md">Consignment</span>
                 </h2>
-
                 <p className="text-purple-200/80 mb-10 text-center text-sm sm:text-base max-w-md font-light">
                     Where is your parcel? Find out with just one click!
                 </p>
-
                 {/* Search Box Form */}
                 <form
                     onSubmit={(event) => {
@@ -52,7 +48,6 @@ const ParcelTracking = () => {
                         <i className="fa fa-search"></i> Search
                     </button>
                 </form>
-
             </div>
         </div>
     );

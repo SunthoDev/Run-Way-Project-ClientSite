@@ -9,7 +9,6 @@ import { FaArrowRight, FaShieldAlt, FaShippingFast } from 'react-icons/fa';
 // Swiper React Components এবং Modules ইমপোর্ট করুন
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade } from 'swiper/modules';
-// Swiper-এর প্রয়োজনীয় CSS ফাইলগুলো ইমপোর্ট করুন
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 
@@ -61,18 +60,18 @@ const AboutUs = () => {
 
     const ownersData = [
         {
-            name: "Sourov Borman",
+            name: "S. Shanto",
             designation: "Chairman & Founder",
-            phone: "+880 1750 050088",
-            email: "sourov.borman@flowtrack.com",
-            imgUrl: "https://html.kodesolution.com/2026/realest-html/images/resource/about1-1.jpg"
+            phone: "09611-049234",
+            email: "infotrustereocourier@gmail.com",
+            imgUrl: "https://i.ibb.co.com/NgwcKBr3/Logo.png"
         },
         {
-            name: "Sourov Borman",
-            designation: "Managing Director",
-            phone: "+880 1750 050088",
-            email: "chairman@flowtrack.com",
-            imgUrl: "https://moongates.com.sa/wp-content/uploads/2024/06/about-us-img.png"
+            name: "S. Shanto",
+            designation: "Chairman & Founder",
+            phone: "09611-049234",
+            email: "infotrustereocourier@gmail.com",
+            imgUrl: "https://i.ibb.co.com/NgwcKBr3/Logo.png"
         }
     ];
 
@@ -149,12 +148,14 @@ const AboutUs = () => {
 
                             {/* MAIN TITLE */}
                             <h2 className="text-3xl md:text-[42px] lg:text-[46px] font-black text-white leading-[1.15] tracking-tight mb-6 max-w-2xl">
-                                Fast, Secure & Reliable <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400">Parcel Delivery</span> Across The Country
+                                Fast, Secure & Reliable <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400">Parcel Delivery</span> Across The Bangladesh
                             </h2>
 
                             {/* DESCRIPTION */}
                             <p className="text-purple-200/80 text-sm md:text-[15px] leading-relaxed max-w-2xl mb-8">
-                                FlowTrack is your trusted logistics partner, offering end-to-end parcel delivery, real-time package tracking, secure warehousing, and express shipping services. With our commitment to speed, safety, and absolute customer satisfaction, we ensure your packages reach their destination safely and on time.
+                                Trustereo Courier is your trusted delivery partner for fast, secure and reliable parcel
+                                delivery across Bangladesh. We provide nationwide coverage, real-time parcel tracking and safe
+                                doorstep delivery—ensuring your packages reach their destination on time.
                             </p>
 
                             {/* BLOCKS SECTION (FEATURES) */}
@@ -166,8 +167,8 @@ const AboutUs = () => {
                                         <FaShippingFast className="text-xl" />
                                     </div>
                                     <div>
-                                        <h4 className="text-lg font-bold text-white mb-1">Real-Time Tracking</h4>
-                                        <p className="text-purple-200/70 text-sm leading-relaxed">Monitor your shipments live at every stage from dispatch to doorstep delivery with complete precision.</p>
+                                        <h4 className="text-lg font-bold text-white mb-1">Nationwide Delivery</h4>
+                                        <p className="text-purple-200/70 text-sm leading-relaxed">Delivering parcels safely and efficiently across Bangladesh, from major cities to remote areas.</p>
                                     </div>
                                 </div>
 
@@ -177,15 +178,15 @@ const AboutUs = () => {
                                         <FaShieldAlt className="text-xl" />
                                     </div>
                                     <div>
-                                        <h4 className="text-lg font-bold text-white mb-1">Secure & Safe Delivery</h4>
-                                        <p className="text-purple-200/70 text-sm leading-relaxed">We handle every fragile and valuable package with utmost care, ensuring zero damage and total safety.</p>
+                                        <h4 className="text-lg font-bold text-white mb-1">Fast & Secure Service</h4>
+                                        <p className="text-purple-200/70 text-sm leading-relaxed">We handle every parcel with care and provide reliable delivery with a strong focus on safety and customer satisfaction.</p>
                                     </div>
                                 </div>
 
                             </div>
 
                             {/* BOTTOM BOX: BUTTON & PHONE CALL */}
-                            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-6 pt-6 border-t border-white/10">
+                            <div className="hidden flex flex-col sm:flex-row items-stretch sm:items-center gap-6 ppt-6 border-t border-white/10">
 
                                 {/* PREMIUM READ MORE BUTTON */}
                                 <div>
@@ -258,22 +259,17 @@ const AboutUs = () => {
                             {/* CHAIRMAN'S MESSAGE BODY */}
                             <div className="text-purple-200/90 text-sm md:text-base leading-relaxed space-y-4 max-w-2xl mb-8 font-medium">
                                 <p className="italic text-white text-base md:text-lg font-semibold border-l-4 border-purple-400 pl-4 my-4 bg-purple-950/30 py-2 rounded-r-xl">
-                                    “Building a fast, trustworthy, and tech-driven logistics network to connect every corner seamlessly.”
+                                    “Building a fast, secure, and trusted courier network to connect every corner of Bangladesh.”
                                 </p>
                                 <p className="text-justify">
-                                    Sourov Borman, the esteemed Chairman of our organization, is
-                                    renowned for his strategic acumen and extensive
-                                    industry experience in supply chain and digital transformation. With a distinguished background in strategic management, he has been
-                                    instrumental in steering the company towards
-                                    significant growth, reliability, and innovation.
+                                    S. Shanto, Managing Director of Trustereo Courier, is committed to building a
+                                    reliable and customer-focused delivery network across Bangladesh.
+                                    Our goal is to make parcel delivery faster, safer, and more convenient for individuals and businesses.
                                 </p>
                                 <p className="text-justify">
-                                    His leadership is marked by a commitment to
-                                    fostering collaboration, empowering teams, and
-                                    cultivating a forward-thinking vision. Under his
-                                    guidance, we have achieved numerous
-                                    milestones, establishing ourselves as a premier leader in the
-                                    courier and delivery industry.
+                                    With a strong focus on timely delivery, parcel security,
+                                    and customer satisfaction, Trustereo Courier continues to expand
+                                    its nationwide delivery service and provide dependable logistics solutions.
                                 </p>
                             </div>
 
@@ -392,11 +388,11 @@ const AboutUs = () => {
                                                     <div className="w-44 h-44 rounded-full border-[5px] border-purple-500/40 bg-[#1e0c3a] flex items-center justify-center shadow-[0_15px_45px_rgba(0,0,0,0.6)]">
 
                                                         {/* IMAGE */}
-                                                        <div className="w-[150px] h-[150px] rounded-full overflow-hidden border-[4px] border-purple-300/20 bg-white shadow-2xl">
+                                                        <div className="rounded-full overflow-hidden border-[4px] border-purple-300/20 bg-white shadow-2xl">
                                                             <img
                                                                 src={owner.imgUrl}
                                                                 alt={owner.name}
-                                                                className="w-full h-full object-cover object-top scale-[1.08]"
+                                                                className="w-full h-11 object-cover"
                                                             />
                                                         </div>
 
@@ -479,19 +475,19 @@ const AboutUs = () => {
                             {
                                 id: 1,
                                 title: "Mission",
-                                description: "At Blesslife Limited, our mission is to deliver tailored solutions that enhance growth, productivity, and efficiency, enabling businesses to achieve their full potential. We are committed to providing value-added services that help our clients meet and exceed their goals within the competitive business landscape.",
+                                description: "At Trustereo Courier, our mission is to provide fast, secure, and reliable parcel delivery services across Bangladesh. We are committed to connecting people and businesses through efficient logistics, timely delivery, and dependable customer service.",
                                 image: "https://i.ibb.co.com/Myf4SKzZ/Screenshot-16.png",
                             },
                             {
                                 id: 2,
                                 title: "Vision",
-                                description: "TO be the global leader in providing integrated business solutions, setting the standard for excellence, innovation, and client satisfaction across all industries we serve",
+                                description: "Our vision is to build a trusted nationwide courier network where every parcel is delivered safely, efficiently, and on time—making delivery easier and more convenient for everyone.",
                                 image: "https://i.ibb.co.com/3wS45pJ/Screenshot-17.png",
                             },
                             {
                                 id: 3,
                                 title: "Accountability",
-                                description: "We are caring—with a deep concern for and kindness to one another. We believe in the boundless potential of all people and feel a great responsibility to uplift one another and our families, and positively impact our communities.",
+                                description: "Reliability — We keep our promises and deliver with responsibility.Speed — We value your time and focus on timely delivery. Security — Every parcel is handled with care and attention. Customer First — Customer satisfaction is at the heart of our service. Trust — We believe every successful delivery begins with trust.",
                                 image: "https://i.ibb.co.com/Z66TsLqP/Courier-11.png",
                             },
                         ]?.map((value, index) => {
@@ -620,7 +616,7 @@ const AboutUs = () => {
                 <div className="text-center mt-12 md:mt-16">
                     <div className="inline-block">
                         <Link
-                            to="/ourWork"
+                            to="/"
                             className="group flex items-center bg-[#ffeb00] text-neutral-950 font-black text-sm tracking-wider uppercase pr-0 overflow-hidden shadow-md transition-transform duration-300 hover:scale-[1.02]"
                         >
                             {/* বাটনের বামদিকের টেক্সট পার্ট */}
@@ -712,11 +708,13 @@ const AboutUs = () => {
                             </div>
 
                             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-black text-white tracking-tight leading-tight mb-4">
-                                Ready to Get Started?
+                                Get Started Today !!
                             </h2>
 
                             <p className="text-emerald-100/80 text-sm md:text-base lg:text-[17px] leading-relaxed max-w-2xl mb-8 font-normal mx-auto lg:mx-0">
-                                Create your account and submit your first project request in minutes. Our team of expert engineers is ready to turn your vision into reality.
+                                Create your account and send your first parcel with ease.
+                                Trustereo Courier provides reliable delivery services across Bangladesh,
+                                helping you deliver your packages safely, quickly, and conveniently.
                             </p>
 
                             {/* PREMIUM BUTTON */}

@@ -16,16 +16,16 @@ const ExperienceSection = () => {
   return (
     <section id="aboutUs" className="experience-section bg-white py-20 px-4 sm:px-6 lg:px-8 overflow-hidden font-sans">
       <div className="max-w-7xl mx-auto">
-        
+
         {/* Main Grid Section */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
+
           {/* ================= LEFT SIDE: Image + 24 Hours Service Box ================= */}
           <div className="lg:col-span-6 relative">
             <div className="relative rounded-3xl overflow-hidden shadow-xl border border-gray-100 bg-gray-900 group">
-              
+
               {/* Background Image / Delivery Scene */}
-              <div 
+              <div
                 className="absolute inset-0 bg-cover bg-center opacity-75 group-hover:scale-105 transition-transform duration-700"
                 style={{ backgroundImage: `url("https://i.ibb.co/dsqF7dMN/Trustereo-Courier-Delivery-Scene.png")` }}
               ></div>
@@ -62,33 +62,35 @@ const ExperienceSection = () => {
 
           {/* ================= RIGHT SIDE: Content, Progress & Features ================= */}
           <div className="lg:col-span-6 space-y-8">
-            
+
             <div className="space-y-3">
               <span className="inline-block px-4 py-1.5 bg-[#7136B0]/10 text-[#7136B0] rounded-full text-xs font-extrabold uppercase tracking-widest">
                 WHY YOU CHOOSE US
               </span>
               <h2 className="text-3xl sm:text-4xl font-black text-gray-900 tracking-tight leading-tight">
-                We Provide clients <span className="text-[#7136B0]">Best Logistics Services</span>
+                We Provide Fast & <span className="text-[#7136B0]">Reliable Logistics Services Across Bangladesh.</span>
               </h2>
             </div>
 
             <p className="text-gray-600 text-base leading-relaxed">
-              Arki features minimal and stylish design. The theme is well crafted for all the modern architect and interior design website. With Arki, it makes your website look even more attractive and impressive to
+              We provide fast, secure and reliable courier services across Bangladesh.
+              From parcel pickup to final delivery, we ensure safe handling, timely delivery and
+              convenient tracking for every shipment.
             </p>
 
             {/* Progress Bars (Shipping & Management) */}
             <div className="space-y-5 pt-2">
-              
+
               {/* Shipping Progress */}
               <div className="space-y-2">
                 <div className="flex justify-between text-sm font-bold text-gray-800">
-                  <span>Shipping</span>
-                  <span className="text-[#7136B0]">80%</span>
+                  <span>Delivery Service</span>
+                  <span className="text-[#7136B0]">95%</span>
                 </div>
                 <div className="h-3 w-full bg-gray-100 rounded-full overflow-hidden p-0.5 border border-gray-200">
-                  <div 
+                  <div
                     className="h-full bg-gradient-to-r from-[#5b1696] via-[#7136B0] to-[#8c46d3] rounded-full transition-all duration-1000"
-                    style={{ width: isVisible ? '80%' : '0%' }}
+                    style={{ width: isVisible ? '95%' : '0%' }}
                   ></div>
                 </div>
               </div>
@@ -96,13 +98,13 @@ const ExperienceSection = () => {
               {/* Management Progress */}
               <div className="space-y-2">
                 <div className="flex justify-between text-sm font-bold text-gray-800">
-                  <span>Managment</span>
-                  <span className="text-[#7136B0]">80%</span>
+                  <span>Customer Satisfaction</span>
+                  <span className="text-[#7136B0]">90%</span>
                 </div>
                 <div className="h-3 w-full bg-gray-100 rounded-full overflow-hidden p-0.5 border border-gray-200">
-                  <div 
+                  <div
                     className="h-full bg-gradient-to-r from-[#5b1696] via-[#7136B0] to-[#8c46d3] rounded-full transition-all duration-1000"
-                    style={{ width: isVisible ? '80%' : '0%' }}
+                    style={{ width: isVisible ? '90%' : '0%' }}
                   ></div>
                 </div>
               </div>
@@ -116,7 +118,7 @@ const ExperienceSection = () => {
                   <Globe className="w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-gray-900 text-sm">International Shipping</h4>
+                  <h4 className="font-bold text-gray-900 text-sm">Nationwide Delivery</h4>
                   <p className="text-xs text-gray-500">Global reach & solutions</p>
                 </div>
               </div>

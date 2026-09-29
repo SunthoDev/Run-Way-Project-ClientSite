@@ -69,6 +69,7 @@ import UserProfile from "../../DashbordAll/DashbordRouteUserDataAll/UserProfile/
 import CheckBalanceDetailsMerchant from "../../DashbordAll/DashbordRouteUserDataAll/CheckBalanceDetailsMerchant/CheckBalanceDetailsMerchant";
 import AboutUs from "../../HomePageOthersSections/AboutUs/AboutUs";
 import ContactUs from "../../HomePageOthersSections/ContactUs/ContactUs";
+import Pricing from "../../HomePageOthersSections/Pricing/Pricing";
 
 
 let route = createBrowserRouter([
@@ -100,6 +101,10 @@ let route = createBrowserRouter([
             path: "/ParcelTrackingDataShow/:id",
             element: <ParcelTrackingDataShow></ParcelTrackingDataShow>,
             loader: ({ params }) => fetch(`https://server.trustereocourier.com.bd/api/parcelStatus/${params.id}`)
+         },
+         {
+            path: "/pricing",
+            element: <Pricing></Pricing>
          },
       ]
    },

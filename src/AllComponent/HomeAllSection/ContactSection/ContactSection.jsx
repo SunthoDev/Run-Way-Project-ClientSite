@@ -156,7 +156,7 @@ const ContactSection = () => {
               </span>
             </div>
             <h2 className="section-title__title text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 leading-tight">
-              We Aim to Contribute Well to Your Company
+              HOW OUR COURIER SERVICE WORKS
             </h2>
           </div>
 
@@ -184,7 +184,8 @@ const ContactSection = () => {
                   </span>
                 </div>
                 <p className="work-steps-one__text text-lg font-bold text-gray-900">
-                  <a href="/about" className="hover:text-red-600 transition-colors">Replenishment &amp; Picking</a>
+                  <a href="/about" className="hover:text-red-600 transition-colors">Parcel Booking</a> <br />
+                  <span className="text-center text-[14px]">Book your parcel easily.</span>
                 </p>
               </li>
 
@@ -203,7 +204,8 @@ const ContactSection = () => {
                   </span>
                 </div>
                 <p className="work-steps-one__text text-lg font-bold text-gray-900">
-                  <a href="/about" className="hover:text-red-600 transition-colors">Packaging &amp; Distribution</a>
+                  <a href="/about" className="hover:text-red-600 transition-colors">Pickup & Processing</a> <br />
+                  <span className="text-center text-[14px]">We collect and process your parcel with care.</span>
                 </p>
               </li>
 
@@ -222,7 +224,8 @@ const ContactSection = () => {
                   </span>
                 </div>
                 <p className="work-steps-one__text text-lg font-bold text-gray-900">
-                  <a href="/about" className="hover:text-red-600 transition-colors">Transportation Process</a>
+                  <a href="/about" className="hover:text-red-600 transition-colors">Doorstep Delivery</a> <br />
+                  <span className="text-center text-[14px]">We deliver your parcel safely and on time.</span>
                 </p>
               </li>
 

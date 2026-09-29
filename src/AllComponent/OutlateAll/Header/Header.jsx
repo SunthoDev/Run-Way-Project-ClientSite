@@ -1,18 +1,22 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import { FaMapMarkerAlt, FaEnvelope, FaFacebookF, FaInstagram, FaTwitter, FaBars, FaTimes, FaSearch, FaShoppingBag, FaPhoneAlt } from 'react-icons/fa';
+import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
+import { FaMapMarkerAlt, FaEnvelope, FaFacebookF, FaInstagram, FaTwitter, FaBars, FaTimes, FaSearch, FaShoppingBag } from 'react-icons/fa';
 import logo from "../../../assets/logo/Logo.png";
 import { AuthContext } from '../../AuthoncationAll/AuthProvider/AuthProvider';
 import useRole from '../../../Hook/useRole';
 
 const Header = () => {
-
+  
+  const navigate = useNavigate();
+  const location = useLocation();
   const { user, logOutUser } = useContext(AuthContext);
   const [roles] = useRole();
   const ad = roles?.role === "admin";
 
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,16 +30,53 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Standard NavLink active style
   const navLinkStyles = ({ isActive }) =>
-    `relative py-2 font-medium transition-all duration-300 text-sm tracking-wide ${isActive
-      ? 'text-[#c084fc] font-semibold after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-gradient-to-r after:from-purple-500 after:to-indigo-500'
-      : isScrolled ? 'text-gray-700 hover:text-purple-600' : 'text-purple-100 hover:text-white'
+    `relative py-2 font-medium transition-all duration-300 text-sm tracking-wide ${
+      isActive && location.pathname !== '/'
+        ? 'text-[#c084fc] font-semibold after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-gradient-to-r after:from-purple-500 after:to-indigo-500'
+        : isScrolled
+        ? 'text-gray-700 hover:text-purple-600'
+        : 'text-purple-100 hover:text-white'
     }`;
 
+  // Custom style for Services / Track Package buttons to show active indicator
+  const customSectionBtnStyle = (sectionName) => {
+    const isActive = activeSection === sectionName && location.pathname === '/';
+    return `relative py-2 font-medium transition-all duration-300 text-sm tracking-wide cursor-pointer bg-transparent border-none ${
+      isActive
+        ? 'text-[#c084fc] font-semibold after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-gradient-to-r after:from-purple-500 after:to-indigo-500'
+        : isScrolled
+        ? 'text-gray-700 hover:text-purple-600'
+        : 'text-purple-100 hover:text-white'
+    }`;
+  };
+
+  // Handle section click from any page
+  const handleScrollToSection = (sectionId) => {
+    setIsMobileMenuOpen(false);
+    setActiveSection(sectionId);
+
+    if (location.pathname !== '/') {
+      // Jodi home page-e na thake, tobe prothome home page-e navigate korbe, tarpor scroll korbe
+      navigate('/');
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      // Jodi already home page-e thake, shudhu smooth scroll hobe
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
 
   return (
     <div>
-
       <header className="w-full fixed top-0 left-0 z-50 font-sans">
         {/* ================= Top Bar ================= */}
         <div className={`hidden md:block bg-[#0b0514]/95 backdrop-blur-md text-purple-200/80 text-xs border-b border-white/10 transition-all duration-300 ${isScrolled ? 'hidden md:block' : 'block'}`}>
@@ -43,12 +84,12 @@ const Header = () => {
             <div className="flex flex-wrap items-center gap-6">
               <div className="flex items-center gap-2">
                 <span className="text-purple-400"><FaMapMarkerAlt /></span>
-                <span>465 NT Road. North West, England</span>
+                <span>N/17, Mirpur Dhaka</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-purple-400"><FaEnvelope /></span>
-                <a href="mailto:needhelpflowtrack@gmail.com" className="hover:text-white transition-colors">
-                  needhelpflowtrack@gmail.com
+                <a href="mailto:infotrustereocourier@gmail.com" className="hover:text-white transition-colors">
+                  infotrustereocourier@gmail.com
                 </a>
               </div>
             </div>
@@ -72,24 +113,38 @@ const Header = () => {
           <div className="container mx-auto px-6 flex items-center justify-between">
 
             {/* Logo */}
-            <Link to="/" className="flex items-center">
+            <Link to="/" className="flex items-center" onClick={() => setActiveSection('')}>
               <img src={logo} alt="Logo" className="h-9 md:h-10 w-auto object-contain" />
             </Link>
 
             {/* Nav Links */}
             <div className="hidden lg:flex items-center space-x-8">
-              <NavLink to="/" className={navLinkStyles}>Home</NavLink>
-              <NavLink to="/services" className={navLinkStyles}>Services</NavLink>
-              <NavLink to="/track-package" className={navLinkStyles}>Track Package</NavLink>
-              <NavLink to="/aboutus" className={navLinkStyles}>About Us</NavLink>
-              <NavLink to="/contactus" className={navLinkStyles}>Contact</NavLink>
+              <NavLink to="/" className={navLinkStyles} onClick={() => setActiveSection('')}>Home</NavLink>
+              
+              <a 
+                onClick={() => handleScrollToSection('service')} 
+                className={customSectionBtnStyle('services')}
+              >
+                Services
+              </a>
+
+              <a 
+                onClick={() => handleScrollToSection('track')} 
+                className={customSectionBtnStyle('track')}
+              >
+                Track Package
+              </a>
+
+              <NavLink to="/pricing" className={navLinkStyles} onClick={() => setActiveSection('')}>Pricing</NavLink>
+              <NavLink to="/aboutus" className={navLinkStyles} onClick={() => setActiveSection('')}>About Us</NavLink>
+              <NavLink to="/contactus" className={navLinkStyles} onClick={() => setActiveSection('')}>Contact</NavLink>
 
               {user ? (
                 <NavLink to={ad ? "/dashboard/AdminDashboard" : "/dashboard/dashboard"} className={navLinkStyles}>
                   Dashboard
                 </NavLink>
               ) : (
-                <NavLink to="/singUp" className={navLinkStyles}>Register</NavLink>
+                <NavLink to="/singUp" className={navLinkStyles} onClick={() => setActiveSection('')}>Register</NavLink>
               )}
             </div>
 
@@ -123,7 +178,7 @@ const Header = () => {
               ) : (
                 <a
                   onClick={logOutUser}
-                  className="cursor-pointer bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 text-white text-xs font-bold px-5 py-2.5 rounded-xl shadow-lg shadow-rose-600/30 transition-all uppercase tracking-wider cursor-pointer"
+                  className="cursor-pointer bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 text-white text-xs font-bold px-5 py-2.5 rounded-xl shadow-lg shadow-rose-600/30 transition-all uppercase tracking-wider"
                 >
                   Logout
                 </a>
@@ -155,34 +210,43 @@ const Header = () => {
             </div>
 
             <div className="flex-1 overflow-y-auto py-6 space-y-3 font-medium text-sm">
-              <NavLink to="/" onClick={() => setIsMobileMenuOpen(false)} className="block py-2 px-3 rounded-lg text-purple-200 hover:bg-white/10">Home</NavLink>
-              <NavLink to="/services" onClick={() => setIsMobileMenuOpen(false)} className="block py-2 px-3 rounded-lg text-purple-200 hover:bg-white/10">Services</NavLink>
-              <NavLink to="/track-package" onClick={() => setIsMobileMenuOpen(false)} className="block py-2 px-3 rounded-lg text-purple-200 hover:bg-white/10">Track Package</NavLink>
-              <NavLink to="/aboutus" onClick={() => setIsMobileMenuOpen(false)} className="block py-2 px-3 rounded-lg text-purple-200 hover:bg-white/10">About Us</NavLink>
-              <NavLink to="/contactus" onClick={() => setIsMobileMenuOpen(false)} className="block py-2 px-3 rounded-lg text-purple-200 hover:bg-white/10">Contact</NavLink>
+              <NavLink to="/" onClick={() => { setIsMobileMenuOpen(false); setActiveSection(''); }} className="block py-2 px-3 rounded-lg text-purple-200 hover:bg-white/10">Home</NavLink>
+              
+              <button 
+                onClick={() => handleScrollToSection('services')} 
+                className="w-full text-left py-2 px-3 rounded-lg text-purple-200 hover:bg-white/10 cursor-pointer bg-transparent border-none font-medium text-sm"
+              >
+                Services
+              </button>
+
+              <button 
+                onClick={() => handleScrollToSection('track')} 
+                className="w-full text-left py-2 px-3 rounded-lg text-purple-200 hover:bg-white/10 cursor-pointer bg-transparent border-none font-medium text-sm"
+              >
+                Track Package
+              </button>
+
+              <NavLink to="/pricing" onClick={() => { setIsMobileMenuOpen(false); setActiveSection(''); }} className="block py-2 px-3 rounded-lg text-purple-200 hover:bg-white/10">Pricing</NavLink>
+              <NavLink to="/aboutus" onClick={() => { setIsMobileMenuOpen(false); setActiveSection(''); }} className="block py-2 px-3 rounded-lg text-purple-200 hover:bg-white/10">About Us</NavLink>
+              <NavLink to="/contactus" onClick={() => { setIsMobileMenuOpen(false); setActiveSection(''); }} className="block py-2 px-3 rounded-lg text-purple-200 hover:bg-white/10">Contact</NavLink>
+              
               {user ? (
                 <NavLink to={ad ? "/dashboard/AdminDashboard" : "/dashboard/dashboard"} onClick={() => setIsMobileMenuOpen(false)} className="block py-2 px-3 rounded-lg text-purple-200 hover:bg-white/10">Dashboard</NavLink>
               ) : (
-                <NavLink to="/singUp" onClick={() => setIsMobileMenuOpen(false)} className="block py-2 px-3 rounded-lg text-purple-200 hover:bg-white/10">Register</NavLink>
+                <NavLink to="/singUp" onClick={() => { setIsMobileMenuOpen(false); setActiveSection(''); }} className="block py-2 px-3 rounded-lg text-purple-200 hover:bg-white/10">Register</NavLink>
               )}
-
-              <div className="pt-6 border-t border-white/10 space-y-3 text-xs text-purple-200">
-                <div className="flex items-center gap-2"><FaEnvelope className="text-purple-400" /> needhelpflowtrack@gmail.com</div>
-                <div className="flex items-center gap-2"><FaPhoneAlt className="text-purple-400" /> 666 888 0000</div>
-              </div>
 
               <div className="pt-4">
                 {!user ? (
                   <Link to="/login" onClick={() => setIsMobileMenuOpen(false)} className="block text-center bg-purple-600 text-white py-3 rounded-xl font-bold text-xs uppercase">Login</Link>
                 ) : (
-                  <a onClick={() => { logOutUser(); setIsMobileMenuOpen(false); }} className="cursor-pointer w-full bg-rose-600 text-white py-3 rounded-xl font-bold text-xs uppercase">Logout</a>
+                  <a onClick={() => { logOutUser(); setIsMobileMenuOpen(false); }} className="cursor-pointer w-full bg-rose-600 text-white py-3 rounded-xl font-bold text-xs uppercase text-center block">Logout</a>
                 )}
               </div>
             </div>
           </div>
         </div>
       )}
-
     </div>
   );
 };

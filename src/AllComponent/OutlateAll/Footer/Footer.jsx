@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { FaFacebook, FaInstagram, FaTwitter, FaLinkedin, FaPaperPlane } from 'react-icons/fa';
-import logo from "../../../assets/Footer/logo.png";
+import logo from "../../../assets/Footer/logo/Logo.png";
 import google from "../../../assets/Footer/Google.png";
 
 const Footer = () => {
@@ -63,7 +63,7 @@ const Footer = () => {
                                         <img 
                                             src={logo} 
                                             alt="Trustereo Logo" 
-                                            className="max-w-56 object-contain"
+                                            className="h-9 md:h-10 w-auto object-contain"
                                         />
                                     </a>
                                 </div>

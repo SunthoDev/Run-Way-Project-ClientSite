@@ -42,6 +42,8 @@ const HeroSection = () => {
 
   return (
     <div className="">
+
+      {/* About Our Company  ||  We Provide Full Range Global Trusted Transport Logistic Company */}
       <section className="relative bg-white py-20 px-4 sm:px-6 lg:px-8 overflow-hidden font-sans" id="about">
 
         {/* Dynamic Rotational Animation for Curved Text */}
@@ -128,15 +130,15 @@ const HeroSection = () => {
 
               {/* Main Section Title */}
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight uppercase mb-6">
-                We Provide Full Range Global <span className="text-[#7136B0]">Trusted Transport Logistic Company</span>
+                WE PROVIDE FAST & RELIABLE <span className="text-[#7136B0]">COURIER SERVICES ACROSS BANGLADESH</span>
               </h2>
 
               {/* Paragraph Description */}
               <p className="text-gray-600 text-sm sm:text-base leading-relaxed mb-8">
-                Trustereo Courier is a dynamic and customer-centric courier and logistics company based in Bangladesh.
-                We are committed to providing fast, secure, and reliable delivery solutions tailored to meet the unique needs of both individuals and businesses.
-                Leveraging modern technology and a dedicated team,
-                we ensure that every package reaches its destination promptly and safely.
+                Trustereo Courier is a customer-focused courier and logistics company based in Bangladesh.
+                We provide fast, secure, and reliable parcel delivery solutions for individuals and businesses across the country.
+                With a dedicated team and modern technology,
+                we aim to make every delivery simple, convenient, and dependable.
               </p>
 
               {/* Features Bullet List Section */}
@@ -148,10 +150,10 @@ const HeroSection = () => {
                     <CreditCard className="w-7 h-7" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-gray-900 mb-1">Affordable Cost</h3>
+                    <h3 className="text-lg font-bold text-gray-900 mb-1">Safe & Secure Delivery</h3>
                     <p className="text-gray-500 text-sm leading-snug">
-                      Nullam eu nibh vitae est tempor molestie<br />
-                      Quisque dignissim maximus ipsum
+                      Every parcel is handled with care<br />
+                      from pickup to final delivery.
                     </p>
                   </div>
                 </div>
@@ -162,10 +164,10 @@ const HeroSection = () => {
                     <Truck className="w-7 h-7" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-gray-900 mb-1">On Time Delivery</h3>
+                    <h3 className="text-lg font-bold text-gray-900 mb-1">Easy Parcel Tracking</h3>
                     <p className="text-gray-500 text-sm leading-snug">
-                      Nullam eu nibh vitae est tempor molestie<br />
-                      Quisque dignissim maximus ipsum
+                      Track your parcel status conveniently<br />
+                      throughout the delivery process.
                     </p>
                   </div>
                 </div>
@@ -173,7 +175,7 @@ const HeroSection = () => {
               </div>
 
               {/* Action Button & Client Profile Signature */}
-              <div className="flex flex-wrap items-center gap-6 pt-4 border-t border-gray-100">
+              <div className="hidden flex flex-wrap items-center gap-6 pt-4 border-t border-gray-100">
 
                 {/* CTA Explore Button */}
                 <a
@@ -209,14 +211,15 @@ const HeroSection = () => {
         </div>
       </section>
 
-      <section className="relative bg-gray-50/50 py-20 px-4 sm:px-6 lg:px-8 overflow-hidden font-sans" id="services">
+      {/* OUR SERVICES    ||||    Logistics Special Services */}
+      <section className="hidden relative bg-gray-50/50 py-20 px-4 sm:px-6 lg:px-8 overflow-hidden font-sans" id="services">
 
         {/* Decorative Background Shape */}
         <div className="absolute top-10 left-5 pointer-events-none opacity-40 animate-pulse">
           <img src="https://i.ibb.co.com/bjTmH3PQ/services-one-bg-shape-BTKiye-DQ.png" alt="Shape" className="w-24 md:w-36 filter hue-rotate-30" />
         </div>
 
-        {/* Consistent Max-Width Container for All Screens */}
+        {/* OUR SERVICES || Logistics Special Services */}
         <div className="container mx-auto max-w-7xl relative z-10">
 
           {/* Section Header */}
@@ -297,6 +300,7 @@ const HeroSection = () => {
 
         </div>
       </section>
+
     </div>
   );
 };
